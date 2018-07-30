@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context="com.linkerpad.linkerpad.MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/headerImg"
+        android:background="@drawable/back3"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
