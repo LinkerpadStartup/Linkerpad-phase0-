@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<android.support.design.widget.TextInputLayout
-    android:layout_width="match_parent"
-    android:id="@+id/inputLayoutEmail"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:layout_margin="20dp">
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ایمیل"
-        android:id="@+id/emailEdt"
-        android:inputType="textEmailAddress"/>
-</android.support.design.widget.TextInputLayout>
+    android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutEmail"
         android:layout_width="match_parent"
-        android:id="@+id/inputLayoutEmail2"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_margin="20dp">
+
         <EditText
+            android:id="@+id/emailEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emailEdt2"
-            android:hint="رمز عبور"
+            android:hint="ایمیل"
             android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <EditText
+            android:id="@+id/passwordEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="رمز عبور"
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView

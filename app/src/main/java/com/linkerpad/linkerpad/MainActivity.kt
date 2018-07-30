@@ -1,15 +1,9 @@
 package com.linkerpad.linkerpad
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
-import com.linkerpad.linkerpad.Adapters.RegLoginPagerAdapter
-import com.linkerpad.linkerpad.LoginRegisterFragments.LoginFragment
-import com.linkerpad.linkerpad.LoginRegisterFragments.RegisterFragment
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,20 +12,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
+
+        registerBtn.setOnClickListener {
+
+            var intent = Intent(this@MainActivity , RegLoginHolder::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.faidin, R.anim.faidout)
+
+            registerBtn.visibility = View.INVISIBLE
+            loginBtn.visibility = View.INVISIBLE
+        }
+        loginBtn.setOnClickListener {
+
+            var intent = Intent(this@MainActivity , RegLoginHolder::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.faidin, R.anim.faidout)
+            registerBtn.visibility = View.INVISIBLE
+            loginBtn.visibility = View.INVISIBLE
+        }
 
 
-        setupViewPager(container)
-        tabs.setupWithViewPager(container)
+        }
 
-    }
 
-    private fun setupViewPager(viewPager: ViewPager) {
-        val adapter = RegLoginPagerAdapter(supportFragmentManager)
-        adapter.addFragment(LoginFragment(), "ورود")
-        adapter.addFragment(RegisterFragment(), "ثبت نام")
-        viewPager.adapter = adapter
-    }
 
 
 }
