@@ -1,15 +1,16 @@
 package com.linkerpad.linkerpad
 
-import android.content.Intent
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.linkerpad.linkerpad.Adapters.RegLoginPagerAdapter
-import com.linkerpad.linkerpad.LoginRegisterFragments.LoginFragment
-import com.linkerpad.linkerpad.LoginRegisterFragments.RegisterFragment
+import com.linkerpad.linkerpad.Fragments.LoginFragment
+import com.linkerpad.linkerpad.Fragments.RegisterFragment
 import kotlinx.android.synthetic.main.reg_login_holder_layout.*
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class RegLoginHolder : AppCompatActivity() {
 
@@ -72,5 +73,9 @@ class RegLoginHolder : AppCompatActivity() {
         adapter.addFragment(LoginFragment(), "ورود")
         adapter.addFragment(RegisterFragment(), "ثبت نام")
         viewPager.adapter = adapter
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 }

@@ -3,10 +3,6 @@ package com.linkerpad.linkerpad.Adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.app.FragmentStatePagerAdapter
-import com.linkerpad.linkerpad.LoginRegisterFragments.LoginFragment
-import com.linkerpad.linkerpad.LoginRegisterFragments.RegisterFragment
-import java.text.FieldPosition
 
 /**
  * Created by alihajiloo on 7/30/18.
