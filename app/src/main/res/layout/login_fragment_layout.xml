@@ -53,5 +53,21 @@
             android:clickable="true"
             android:text="رمز عبورم را فراموش کرده ام"
             android:textColor="@android:color/holo_blue_dark" />
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/holo_blue_dark"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="ثبت نام"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
     </LinearLayout>
 </LinearLayout>
