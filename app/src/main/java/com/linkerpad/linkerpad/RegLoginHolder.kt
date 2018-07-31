@@ -18,7 +18,7 @@ class RegLoginHolder : AppCompatActivity() {
         setContentView(R.layout.reg_login_holder_layout)
 
         setupViewPager(container)
-         tabs.setupWithViewPager(container)
+        tabs.setupWithViewPager(container)
 
         registerBtn.setOnClickListener {
 
@@ -28,8 +28,12 @@ class RegLoginHolder : AppCompatActivity() {
             appbar.startAnimation(slideTopAnimation)
             container.startAnimation(slideTopAnimation)
 
+            val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, android.R.anim.fade_out)
+
             registerBtn.visibility = View.INVISIBLE
             loginBtn.visibility = View.INVISIBLE
+            introTv.startAnimation(fadeOutAnimation)
+            introTv.visibility = View.INVISIBLE
         }
         loginBtn.setOnClickListener {
 
@@ -39,8 +43,12 @@ class RegLoginHolder : AppCompatActivity() {
             appbar.startAnimation(slideTopAnimation)
             container.startAnimation(slideTopAnimation)
 
+            val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, android.R.anim.fade_out)
+
             registerBtn.visibility = View.INVISIBLE
             loginBtn.visibility = View.INVISIBLE
+            introTv.startAnimation(fadeOutAnimation)
+            introTv.visibility = View.INVISIBLE
         }
 
 
