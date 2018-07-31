@@ -22,27 +22,40 @@ class RegLoginHolder : AppCompatActivity() {
 
         registerBtn.setOnClickListener {
 
+            //Visibilities
             container.visibility = View.VISIBLE
             appbar.visibility = View.VISIBLE
             val slideTopAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, R.anim.faidin)
             appbar.startAnimation(slideTopAnimation)
             container.startAnimation(slideTopAnimation)
 
+
+            //inVisibilities
             val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, android.R.anim.fade_out)
 
             registerBtn.visibility = View.INVISIBLE
             loginBtn.visibility = View.INVISIBLE
             introTv.startAnimation(fadeOutAnimation)
             introTv.visibility = View.INVISIBLE
+
+            //changing
+            val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder,R.anim.scale_big)
+            //logoLinkerpad.startAnimation(scaleBigAnimation)
+            logoLinkerpad.setPadding(40,40,40,40)
+
+
         }
         loginBtn.setOnClickListener {
 
+            //Visibilities
             container.visibility = View.VISIBLE
             appbar.visibility = View.VISIBLE
             val slideTopAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, R.anim.faidin)
             appbar.startAnimation(slideTopAnimation)
             container.startAnimation(slideTopAnimation)
 
+
+            //inVisibilities
             val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, android.R.anim.fade_out)
 
             registerBtn.visibility = View.INVISIBLE

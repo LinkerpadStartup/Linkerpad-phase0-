@@ -96,6 +96,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:gravity="center"
+        android:textColor="#000"
         android:text="اولین اپلیکشین \nمدیریت ساخت \nپروژه های عمرانی"
         android:textSize="30dp" />
 

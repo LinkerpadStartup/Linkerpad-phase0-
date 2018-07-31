@@ -11,8 +11,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:orientation="vertical"
         android:background="#4D000000"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <android.support.design.widget.TextInputLayout
@@ -26,8 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="ایمیل"
-                android:textColor="#fff"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="#fff" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -55,7 +55,7 @@
             android:textColor="@android:color/holo_blue_dark" />
 
         <Button
-            android:id="@+id/registerBtn"
+            android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -63,9 +63,10 @@
             android:layout_marginTop="50dp"
             android:background="@android:color/holo_blue_dark"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="ثبت نام"
+            android:text="ورود"
             android:textColor="#fff"
             android:textSize="20dp" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="40dp" />
