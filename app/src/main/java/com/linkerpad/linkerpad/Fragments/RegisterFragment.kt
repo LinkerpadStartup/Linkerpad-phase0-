@@ -1,4 +1,4 @@
-package com.linkerpad.linkerpad.LoginRegisterFragments
+package com.linkerpad.linkerpad.Fragments
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
