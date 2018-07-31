@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2"
+    android:background="@drawable/back2cb"
     tools:context="com.linkerpad.linkerpad.MainActivity">
 
     <!-- <ImageView
@@ -17,6 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#4Dffffff"
         android:orientation="vertical">
 
 
@@ -41,6 +42,7 @@
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:text="لینکرپد"
+                android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="25dp" />
         </LinearLayout>
@@ -51,6 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:clickable="true"
             android:focusable="true"
             android:theme="@style/AppTheme.AppBarOverlay"
@@ -97,6 +101,8 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:textColor="#000"
+        android:textStyle="bold"
+       android:lineSpacingExtra="10dp"
         android:text="اولین اپلیکشین \nمدیریت ساخت \nپروژه های عمرانی"
         android:textSize="30dp" />
 

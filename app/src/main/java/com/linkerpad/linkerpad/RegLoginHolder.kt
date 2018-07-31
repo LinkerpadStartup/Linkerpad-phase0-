@@ -41,7 +41,7 @@ class RegLoginHolder : AppCompatActivity() {
             //changing
             val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder,R.anim.scale_big)
             //logoLinkerpad.startAnimation(scaleBigAnimation)
-            logoLinkerpad.setPadding(40,40,40,40)
+            logoLinkerpad.setPadding(50,50,50,50)
 
 
         }
