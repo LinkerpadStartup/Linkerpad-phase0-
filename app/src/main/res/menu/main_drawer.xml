@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/accountInfoMenu"
+            android:icon="@drawable/ic_account_circle"
+            android:title="اطلاعات حساب کاربری" />
+        <item
+            android:id="@+id/exitMenu"
+            android:title="خروج"
+            android:icon="@drawable/ic_exit_to_app"/>
+
+    </group>
+
+    <item android:title=" ">
+        <menu>
+
+            <item
+                android:id="@+id/strongSettingMenu"
+                android:title="تنظیمات"
+                android:icon="@drawable/ic_settings"/>
+
+            <item
+                android:id="@+id/commentsMenu"
+                android:title="ارسال نظرات"
+                android:icon="@drawable/ic_comment"/>
+
+            <item
+                android:id="@+id/giudMenu"
+                android:title="راهنما"
+                android:icon="@drawable/ic_help"/>
+            <item
+                android:id="@+id/aboutUs"
+                android:title="درباره ما"
+                android:icon="@drawable/ic_info_outline"/>
+
+        </menu>
+
+    </item>
+
+</menu>
