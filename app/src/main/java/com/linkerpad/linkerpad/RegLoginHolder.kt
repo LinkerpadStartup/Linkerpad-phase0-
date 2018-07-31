@@ -40,9 +40,9 @@ class RegLoginHolder : AppCompatActivity() {
             introTv.visibility = View.INVISIBLE
 
             //changing
-            val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder,R.anim.scale_big)
+            val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, R.anim.scale_big)
             //logoLinkerpad.startAnimation(scaleBigAnimation)
-            logoLinkerpad.setPadding(50,50,50,50)
+            logoLinkerpad.setPadding(50, 50, 50, 50)
 
 
         }
@@ -70,8 +70,8 @@ class RegLoginHolder : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = RegLoginPagerAdapter(supportFragmentManager)
-        adapter.addFragment(LoginFragment(), "ورود")
         adapter.addFragment(RegisterFragment(), "ثبت نام")
+        adapter.addFragment(LoginFragment(), "ورود")
         viewPager.adapter = adapter
     }
 
