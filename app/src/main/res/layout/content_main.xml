@@ -74,6 +74,8 @@
         android:src="@drawable/ic_add"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         />
