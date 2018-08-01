@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import com.linkerpad.linkerpad.Adapters.RegLoginPagerAdapter
-import com.linkerpad.linkerpad.Fragments.LoginFragment
 import com.linkerpad.linkerpad.Fragments.ProjectsFragment
 import com.linkerpad.linkerpad.Fragments.RegisterFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.accountInfoMenu -> {
 
-                var intent = Intent(this@MainActivity , RegLoginHolder::class.java)
+                var intent = Intent(this@MainActivity , RegLoginHolderActivity::class.java)
                 startActivity(intent)
             }
 

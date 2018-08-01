@@ -12,7 +12,7 @@ import com.linkerpad.linkerpad.Fragments.RegisterFragment
 import kotlinx.android.synthetic.main.reg_login_holder_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
-class RegLoginHolder : AppCompatActivity() {
+class RegLoginHolderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,13 +26,13 @@ class RegLoginHolder : AppCompatActivity() {
             //Visibilities
             container.visibility = View.VISIBLE
             appbar.visibility = View.VISIBLE
-            val slideTopAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, R.anim.faidin)
+            val slideTopAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.faidin)
             appbar.startAnimation(slideTopAnimation)
             container.startAnimation(slideTopAnimation)
 
 
             //inVisibilities
-            val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, android.R.anim.fade_out)
+            val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, android.R.anim.fade_out)
 
             registerBtn.visibility = View.INVISIBLE
             loginBtn.visibility = View.INVISIBLE
@@ -40,7 +40,7 @@ class RegLoginHolder : AppCompatActivity() {
             introTv.visibility = View.INVISIBLE
 
             //changing
-            val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, R.anim.scale_big)
+            val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.scale_big)
             //logoLinkerpad.startAnimation(scaleBigAnimation)
             logoLinkerpad.setPadding(50, 50, 50, 50)
 
@@ -51,13 +51,13 @@ class RegLoginHolder : AppCompatActivity() {
             //Visibilities
             container.visibility = View.VISIBLE
             appbar.visibility = View.VISIBLE
-            val slideTopAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, R.anim.faidin)
+            val slideTopAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.faidin)
             appbar.startAnimation(slideTopAnimation)
             container.startAnimation(slideTopAnimation)
 
 
             //inVisibilities
-            val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolder, android.R.anim.fade_out)
+            val fadeOutAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, android.R.anim.fade_out)
 
             registerBtn.visibility = View.INVISIBLE
             loginBtn.visibility = View.INVISIBLE

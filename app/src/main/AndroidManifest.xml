@@ -19,13 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".RegLoginHolder"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:name=".RegLoginHolderActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".AccountInfoActivity"></activity>
     </application>
 
 </manifest>
