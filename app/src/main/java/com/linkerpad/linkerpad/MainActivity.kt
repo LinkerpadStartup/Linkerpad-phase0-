@@ -2,6 +2,7 @@ package com.linkerpad.linkerpad
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setupViewPager(mainPager)
         tabs.setupWithViewPager(mainPager)
+        mainPager.setCurrentItem(1 , true)
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         adapter.addFragment(RegisterFragment(), "داشبورد")
         adapter.addFragment(ProjectsFragment(), "پروژه ها")
         viewPager.adapter = adapter
+
     }
 
 
@@ -48,6 +51,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.accountInfoMenu -> {
 
+                var intent = Intent(this@MainActivity , AccountInfoActivity::class.java)
+                startActivity(intent)
+
+
+            }
+            R.id.exitMenu ->{
                 var intent = Intent(this@MainActivity , RegLoginHolderActivity::class.java)
                 startActivity(intent)
             }
