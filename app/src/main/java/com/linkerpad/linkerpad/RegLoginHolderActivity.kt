@@ -42,8 +42,9 @@ class RegLoginHolderActivity : AppCompatActivity() {
             //changing
             val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.scale_big)
             //logoLinkerpad.startAnimation(scaleBigAnimation)
-            logoLinkerpad.setPadding(50, 50, 50, 50)
+           // logoLinkerpad.setPadding(30, 30, 30, 30)
 
+            container.setCurrentItem(1 , true)
 
         }
         loginBtn.setOnClickListener {
@@ -63,6 +64,13 @@ class RegLoginHolderActivity : AppCompatActivity() {
             loginBtn.visibility = View.INVISIBLE
             introTv.startAnimation(fadeOutAnimation)
             introTv.visibility = View.INVISIBLE
+
+            //changing
+            val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.scale_big)
+            //logoLinkerpad.startAnimation(scaleBigAnimation)
+            //logoLinkerpad.setPadding(30, 30, 30, 30)
+
+            container.setCurrentItem(0 , true)
         }
 
 

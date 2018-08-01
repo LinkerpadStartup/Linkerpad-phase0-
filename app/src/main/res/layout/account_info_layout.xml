@@ -9,17 +9,6 @@
     tools:context="com.linkerpad.linkerpad.AccountInfoActivity">
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_camera_alt"
-        android:translationX="50dp"
-        android:translationZ="1dp" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -29,11 +18,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_camera_alt"
+                android:translationY="170dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:translationX="50dp"
+                android:translationZ="1dp" />
+
             <ImageView
                 android:id="@+id/accountPicImg"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_marginTop="10dp"
+
                 android:src="@drawable/ic_account_circle_blue" />
 
 

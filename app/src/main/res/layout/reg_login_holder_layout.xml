@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back2cb"
+    android:background="@drawable/back90"
     tools:context="com.linkerpad.linkerpad.MainActivity">
 
     <!-- <ImageView
@@ -17,7 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4Dffffff"
+
         android:paddingTop="60dp"
         android:orientation="vertical">
 
@@ -31,9 +31,10 @@
 
             <ImageView
                 android:id="@+id/logoLinkerpad"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
                 android:padding="0dp"
                 android:src="@drawable/logo" />
 
@@ -103,11 +104,11 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:paddingTop="50dp"
+        android:paddingTop="150dp"
         android:lineSpacingExtra="3sp"
-        android:text="اولین اپلیکیشین \nمدیریت ساخت \nپروژه های عمرانی"
-        android:textColor="#121D30"
-        android:textSize="30sp"
+        android:text="اولـین اپلیکیشین \nمـدیریت ساخـت \nپروژه‌های عمرانی"
+        android:textColor="#fff"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
     <LinearLayout

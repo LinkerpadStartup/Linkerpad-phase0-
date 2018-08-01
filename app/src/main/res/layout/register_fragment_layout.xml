@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#99ffffff"
+            android:background="#66000000"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -24,6 +24,8 @@
                 android:id="@+id/inputLayoutName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/white"
+                android:textColorHint="@color/gray300"
                 android:layout_margin="20dp">
 
                 <EditText
@@ -31,6 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="نام و نام خانوادگی"
+                    android:backgroundTint="@color/white"
                     android:inputType="text"
                     android:maxLength="100"
                     android:textColor="#fff" />
@@ -42,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="20dp"
+                android:textColorHint="@color/gray300"
                 android:layout_marginRight="20dp">
 
                 <EditText
@@ -49,6 +53,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ایمیل"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
@@ -66,6 +72,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:paddingTop="10dp"
+                    android:textColor="@color/gray300"
                     android:text="+98"
                     android:textSize="18dp" />
 
@@ -73,6 +80,7 @@
                     android:id="@+id/inputLayoutPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/gray300"
                     android:layout_marginLeft="5dp">
 
                     <EditText
@@ -81,6 +89,8 @@
                         android:layout_height="wrap_content"
                         android:hint="تلفن"
                         android:inputType="phone"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/white"
                         android:maxLength="10"
                         android:textSize="18dp" />
                 </android.support.design.widget.TextInputLayout>
@@ -91,7 +101,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColorHint="@color/gray300"
                 android:layout_marginRight="20dp"
+                android:backgroundTint="@color/white"
                 android:layout_marginTop="20dp">
 
                 <EditText
@@ -99,6 +111,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="سازمان/شرکت"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"
                     android:maxLength="100" />
             </android.support.design.widget.TextInputLayout>
 
@@ -108,6 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColorHint="@color/gray300"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp">
 
@@ -116,6 +131,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="رمز عبور"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
@@ -126,7 +143,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="50dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/round_btn_primary"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="ثبت نام"
                 android:textColor="#fff"

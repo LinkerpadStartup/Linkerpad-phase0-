@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = RegLoginPagerAdapter(supportFragmentManager)
-        adapter.addFragment(RegisterFragment(), "داشبورد")
+        adapter.addFragment(ProjectsFragment(), "داشبورد")
         adapter.addFragment(ProjectsFragment(), "پروژه ها")
         viewPager.adapter = adapter
 
