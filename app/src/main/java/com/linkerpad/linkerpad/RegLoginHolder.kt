@@ -70,8 +70,8 @@ class RegLoginHolder : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = RegLoginPagerAdapter(supportFragmentManager)
-        adapter.addFragment(RegisterFragment(), "ثبت نام")
         adapter.addFragment(LoginFragment(), "ورود")
+        adapter.addFragment(RegisterFragment(), "ثبت نام")
         viewPager.adapter = adapter
     }
 

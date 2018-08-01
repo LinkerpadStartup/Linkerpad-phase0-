@@ -20,10 +20,20 @@
             android:layoutDirection="rtl"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_autorenew"/>
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabIndicatorColor="#fff"
                 android:clickable="true"
                 android:layoutDirection="ltr"
                 android:focusable="true">

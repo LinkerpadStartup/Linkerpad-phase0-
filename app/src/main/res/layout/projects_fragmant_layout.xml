@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/projetcs_items"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/projectsRecyclerView"
@@ -15,11 +16,13 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
+        android:visibility="invisible"
         android:text="با عرض پوزش \n لیست پروژه ها خالی می باشد" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:visibility="invisible"
         android:layout_above="@id/emptyProjListTv"
         android:src="@drawable/ic_refresh"/>
 </RelativeLayout>

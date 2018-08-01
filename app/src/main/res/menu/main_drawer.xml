@@ -10,35 +10,34 @@
             android:title="اطلاعات حساب کاربری" />
         <item
             android:id="@+id/exitMenu"
-            android:title="خروج"
-            android:icon="@drawable/ic_exit_to_app"/>
+            android:icon="@drawable/ic_exit_to_app"
+            android:title="خروج" />
 
     </group>
 
-    <item android:title="">
-        <menu>
 
-            <item
-                android:id="@+id/strongSettingMenu"
-                android:title="تنظیمات"
-                android:icon="@drawable/ic_settings"/>
+<item android:title=" ">
+    <menu>
 
-            <item
-                android:id="@+id/commentsMenu"
-                android:title="ارسال نظرات"
-                android:icon="@drawable/ic_comment"/>
+        <item
+            android:id="@+id/strongSettingMenu"
+            android:icon="@drawable/ic_settings"
+            android:title="تنظیمات" />
 
-            <item
-                android:id="@+id/giudMenu"
-                android:title="راهنما"
-                android:icon="@drawable/ic_help"/>
-            <item
-                android:id="@+id/aboutUs"
-                android:title="درباره ما"
-                android:icon="@drawable/ic_info_outline"/>
+        <item
+            android:id="@+id/commentsMenu"
+            android:icon="@drawable/ic_comment"
+            android:title="ارسال نظرات" />
 
-        </menu>
+        <item
+            android:id="@+id/giudMenu"
+            android:icon="@drawable/ic_help"
+            android:title="راهنما" />
+        <item
+            android:id="@+id/aboutUs"
+            android:icon="@drawable/ic_info_outline"
+            android:title="درباره ما" />
 
-    </item>
 
+    </menu></item>
 </menu>

@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1976D2</color>
-    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="colorPrimary">#1E88E5</color>
+    <color name="colorPrimaryDark">#1565C0</color>
     <color name="colorAccent">#2962FF</color>
+
+    <color name="lightBlue400">#29B6F6</color>
+    <color name="pink400">#EC407A</color>
+    <color name="yellow400">#FFEE58</color>
+    <color name="purple400">#7E57C2</color>
+
+    <color name="orange100">#FFCCBC</color>
+    <color name="orange200">#FFAB91</color>
+    <color name="orange300">#FF8A65</color>
+    <color name="orange400">#FF7043</color>
+    <color name="orangeA400">#FF3D00</color>
+
+    <color name="lightBlue300">#4FC3F7</color>
+    <color name="pink300">#F06292</color>
+    <color name="yellow300">#FFF176</color>
+    <color name="purple300">#BA68C8</color>
+    <color name="white">#ffffff</color>
+
+    <color name="lightBlue200">#81D4FA</color>
+    <color name="pink200">#F48FB1</color>
+    <color name="yellow200">#FFF59D</color>
+    <color name="purple200">#CE93D8</color>
+
+    <color name="gray600">#757575</color>
+    <color name="gray400">#BDBDBD</color>
+    <color name="gray900">#212121</color>
+    <color name="gray1">#4D4D4D</color>
+    <color name="gray800">#424242</color>
+    <color name="gray300">#E0E0E0</color>
+    <color name="gray200">#EEEEEE</color>
+    <color name="black">#000</color>
+
+    <color name="greenA700">#00C853</color>
+    <color name="blue800">#1565C0</color>
+    <color name="redA700">#d50000</color>
+    <color name="red900">#b71c1c</color>
+
+    <color name="blueA400">#2979FF</color>
+    <color name="blueA200">#448AFF</color>
+    <color name="blue400">#42A5F5</color>
+    <color name="blue500">#2196F3</color>
+    <color name="light_blueA700">#0091EA</color>
+    <color name="light_blue700">#0288D1</color>
+    <color name="light_blue600">#039BE5</color>
+
+    <color name="teal800">#00695C</color>
+    <color name="teal500">#009688</color>
+    <color name="teal400">#26A69A</color>
+
+
+
+
+
+
+    <color name="blue_gray700">#455A64</color>
+    <color name="blue_gray800">#37474F</color>
+    <color name="blue_gray900">#263238</color>
+
+    <color name="green400">#00E676</color>
+    <color name="green800">#2E7D32</color>
+
+    <color name="indgoBule800">#283593</color>
+    <color name="indgoBlue900">#1A237E</color>
+    <color name="deepPurple700">#512DA8</color>
+
+
+    <color name="pink700">#C2185B</color>
 </resources>

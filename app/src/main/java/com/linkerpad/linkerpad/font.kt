@@ -17,7 +17,7 @@ class font : Application() {
         super.onCreate()
 
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
-                .setDefaultFontPath("Vazir-Bold.ttf")
+                .setDefaultFontPath("IRANSansWeb(FaNum).ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build())
 

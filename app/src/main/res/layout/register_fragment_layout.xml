@@ -109,17 +109,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1">
+                android:layout_marginTop="20dp">
 
                 <EditText
                     android:id="@+id/passwordEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="رمز عبور"
-                    android:inputType="textPassword" />
+                    android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
-
 
             <Button
                 android:id="@+id/registerBtn"
@@ -128,7 +126,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="50dp"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimary"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="ثبت نام"
                 android:textColor="#fff"

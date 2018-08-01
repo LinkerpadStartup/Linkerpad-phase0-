@@ -78,6 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                app:tabIndicatorColor="#fff"
+                android:layoutDirection="ltr"
                 android:focusable="true">
 
 
@@ -104,7 +106,7 @@
         android:paddingTop="50dp"
         android:lineSpacingExtra="3sp"
         android:text="اولین اپلیکیشین \nمدیریت ساخت \nپروژه های عمرانی"
-        android:textColor="#000"
+        android:textColor="#121D30"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -112,20 +114,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layoutDirection="ltr"
         android:orientation="horizontal">
 
-
-        <Button
-            android:id="@+id/registerBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="ثبت نام"
-            android:textColor="#fff" />
 
         <Button
             android:id="@+id/loginBtn"
@@ -138,6 +129,18 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:text="ورود"
             android:textColor="@color/colorPrimary" />
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="ثبت نام"
+            android:textColor="#fff" />
+
 
     </LinearLayout>
 </RelativeLayout>
