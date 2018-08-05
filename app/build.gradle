@@ -20,6 +20,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    allprojects {
+        repositories {
+            maven { url "https://jitpack.io" }
+        }
+    }
 }
 
 dependencies {
@@ -32,4 +38,8 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0-alpha3'
 
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+   // compile project(':persiancalendar')
+    implementation 'com.github.roojin:persian-calendar-view:1.2.2'
+
 }

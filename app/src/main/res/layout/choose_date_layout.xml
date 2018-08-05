@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.linkerpad.linkerpad.ChooseDateActivity">
+
+    <TextView
+        android:id="@+id/monthTVpcv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <ir.mirrajabi.persiancalendar.PersianCalendarView
+        android:id="@+id/persian_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        app:pcv_colorBackground="@color/white"
+        app:pcv_colorDayName="@color/gray600"
+        app:pcv_colorHoliday="@color/redA700"
+        app:pcv_colorHolidaySelected="@color/white"
+        app:pcv_colorNormalDay="@color/gray800"
+        app:pcv_colorNormalDaySelected="@color/white"
+        app:pcv_eventUnderlineColor="@android:color/transparent"
+        app:pcv_fontSize="16sp"
+        app:pcv_headersFontSize="14sp"
+        app:pcv_selectedDayBackground="@drawable/circle_back"
+        app:pcv_todayBackground="@drawable/outline_cirlce_back" />
+
+
+</LinearLayout>

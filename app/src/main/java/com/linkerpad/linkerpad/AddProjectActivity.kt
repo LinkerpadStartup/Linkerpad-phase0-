@@ -13,8 +13,10 @@ class AddProjectActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_project_layout)
 
-         
-
+        startDateCalender.setOnClickListener {
+            var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
+            startActivity(intent)
+        }
 
 
         //back click

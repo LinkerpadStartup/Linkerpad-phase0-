@@ -31,6 +31,9 @@
         <activity
             android:name=".AddProjectActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".ChooseDateActivity"
+            android:theme="@style/AppTheme.NoActionBar.Dialog"/>
     </application>
 
 </manifest>
