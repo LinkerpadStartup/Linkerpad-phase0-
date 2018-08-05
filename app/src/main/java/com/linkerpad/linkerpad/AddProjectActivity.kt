@@ -18,6 +18,11 @@ class AddProjectActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        endDateCalender.setOnClickListener {
+            var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
+            startActivity(intent)
+        }
+
 
         //back click
         addProjectBackIcon.setOnClickListener {
