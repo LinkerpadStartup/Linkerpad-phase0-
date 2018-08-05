@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
+import android.widget.Toast
 import com.linkerpad.linkerpad.Adapters.RegLoginPagerAdapter
 import com.linkerpad.linkerpad.Fragments.ProjectsFragment
 import com.linkerpad.linkerpad.Fragments.RegisterFragment
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelectedListener*/ {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +29,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setupViewPager(mainPager)
         tabs.setupWithViewPager(mainPager)
-        mainPager.setCurrentItem(1 , true)
+        mainPager.setCurrentItem(1, true)
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+
+        onNavigationItemSelected()
+        /*  nav_view.setNavigationItemSelectedListener(this)*/
 
     }
 
@@ -46,8 +49,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    fun onNavigationItemSelected() {
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        accountInfoMenu.setOnClickListener {
+            var intent = Intent(this@MainActivity, AccountInfoActivity::class.java)
+            startActivity(intent)
+        }
+
+        exitMenu.setOnClickListener {
+            var intent = Intent(this@MainActivity, RegLoginHolderActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+
+    /*override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.accountInfoMenu -> {
 
@@ -66,7 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-
+*/
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
