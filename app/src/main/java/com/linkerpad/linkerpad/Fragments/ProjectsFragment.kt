@@ -1,5 +1,6 @@
 package com.linkerpad.linkerpad.Fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,8 @@ import android.view.ViewGroup
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.projects_fragmant_layout.view.*
 import android.support.v4.os.HandlerCompat.postDelayed
+import com.linkerpad.linkerpad.ProjectHolder
+import kotlinx.android.synthetic.main.projetcs_items.view.*
 
 
 /**
@@ -27,7 +30,11 @@ class ProjectsFragment : Fragment() {
 
         var view: View = inflater.inflate(R.layout.projects_fragmant_layout, container, false)
 
-        
+        view.cardTestClick.setOnClickListener {
+            var intent = Intent(context , ProjectHolder::class.java)
+            startActivity(intent)
+        }
+
         view.projectsRefreshLayout.setColorSchemeColors(Color.parseColor("#1E88E5"))
         view.projectsRefreshLayout.setOnRefreshListener {
             Handler().postDelayed(Runnable { view.projectsRefreshLayout.setRefreshing(false) }, 2000)
