@@ -2,7 +2,6 @@ package com.linkerpad.linkerpad
 
 import android.content.Context
 import android.content.Intent
-import android.icu.util.LocaleData
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -34,8 +33,8 @@ class AddProjectActivity : AppCompatActivity() {
 
         //back click
         addProjectBackIcon.setOnClickListener {
-            var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
-            startActivity(intent)
+           /* var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
+            startActivity(intent)*/
             this@AddProjectActivity.finish()
         }
     }

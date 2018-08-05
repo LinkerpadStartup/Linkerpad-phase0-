@@ -5,14 +5,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.linkerpad.linkerpad.ProjectHolder
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.projects_fragmant_layout.view.*
-import android.support.v4.os.HandlerCompat.postDelayed
-import com.linkerpad.linkerpad.ProjectHolder
 import kotlinx.android.synthetic.main.projetcs_items.view.*
 
 
