@@ -74,6 +74,7 @@
         android:src="@drawable/ic_add"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:id="@+id/addProjectFab"
         android:clickable="true"
         android:backgroundTint="@color/colorPrimary"
         android:focusable="true"

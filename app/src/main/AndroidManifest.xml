@@ -19,17 +19,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".RegLoginHolderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".AccountInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".SendCommentsActivity"
+        <activity
+            android:name=".SendCommentsActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
+        <activity
+            android:name=".AddProjectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

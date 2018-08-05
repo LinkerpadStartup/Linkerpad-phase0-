@@ -36,6 +36,11 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
 
+        addProjectFab.setOnClickListener {
+            var intent = Intent(this@MainActivity, AddProjectActivity::class.java)
+            startActivity(intent)
+        }
+
         onNavigationItemSelected()
         /*  nav_view.setNavigationItemSelectedListener(this)*/
 

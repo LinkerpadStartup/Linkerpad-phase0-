@@ -25,11 +25,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:translationX="8dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:translationX="8dp">
 
                 <ImageView
-                    android:id="@+id/accountInfoBackIcon"
+                    android:id="@+id/addProjectBackIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -45,7 +45,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="اطلاعات حساب کاربری"
+                    android:text="افزودن پروژه"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -80,60 +80,25 @@
                 android:id="@+id/accountPicImg"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-
                 android:src="@drawable/ic_account_circle_blue" />
 
 
-            <!--<ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:translationZ="1dp"
-                android:translationY="-50dp"
-                android:layout_marginLeft="40dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/ic_camera_alt"/>-->
-            <!--     <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center"
-                     android:background="@drawable/rounded_back"
-                     android:clickable="true"
-                     android:focusable="true"
-                     android:foreground="?android:attr/selectableItemBackground"
-                     android:paddingBottom="4dp"
-                     android:paddingLeft="8dp"
-                     android:paddingRight="8dp"
-                     android:paddingTop="4dp"
-                     android:text="تغییر تصویر"
-                     android:textColor="@color/white" />-->
-
-            <!--
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:gravity="right"
-                            android:padding="8dp"
-                            android:text="نام و نام خانوادگی" />-->
-
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputLayoutName"
+                android:id="@+id/inputLayoutُTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusedByDefault="true">
 
                 <EditText
-                    android:id="@+id/nameEdt"
+                    android:id="@+id/projectTitleEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:background="@color/white"
-                    android:hint="نام و نام خانوادگی"
+                    android:hint="عنوان پروژه"
                     android:inputType="text"
-                    android:maxLength="100"
-                    android:padding="8dp"
-                    android:text="میلاد" />
+                    android:maxLength="20"
+                    android:padding="8dp" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -142,24 +107,24 @@
                 android:background="@color/gray400" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputLayoutEmail"
+                android:id="@+id/inputLayoutCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:focusedByDefault="true">
 
                 <EditText
-                    android:id="@+id/emailEdt"
+                    android:id="@+id/projectCodeEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@color/white"
-                    android:enabled="false"
-                    android:hint="ایمیل"
-                    android:inputType="textEmailAddress"
-                    android:padding="8dp"
-                    android:text="milad@email.com" />
+                    android:hint="کد پروژه"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:padding="8dp" />
             </android.support.design.widget.TextInputLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -167,21 +132,20 @@
                 android:background="@color/gray400" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputLayoutCo"
+                android:id="@+id/inputLayoutAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
                 <EditText
-                    android:id="@+id/coEdt"
+                    android:id="@+id/projectAddressEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:background="@color/white"
-                    android:hint="سازمان/شرکت"
-                    android:maxLength="100"
-                    android:padding="8dp"
-                    android:text="لینکرپد" />
+                    android:hint="آدرس"
+                    android:maxLength="200"
+                    android:padding="8dp" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -189,69 +153,106 @@
                 android:layout_height="0.8dp"
                 android:background="@color/gray400" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputLayoutRule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
-
-                <EditText
-                    android:id="@+id/ruleEdt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:background="@color/white"
-                    android:hint="سمت"
-                    android:maxLength="100"
-                    android:padding="8dp"
-                    android:text="سرپرست" />
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:background="@color/gray400" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:layoutDirection="ltr"
+                android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="+98"
-                    android:textSize="18dp" />
-
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/inputLayoutPhone"
+                    android:id="@+id/inputLayoutStartDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="8dp"
                     android:layout_weight="1">
 
                     <EditText
-                        android:id="@+id/phoneEdt"
+                        android:id="@+id/projectStartDateEdt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
                         android:background="@color/white"
-                        android:hint="تلفن"
-                        android:inputType="phone"
+                        android:hint="تاریخ شروع"
+                        android:inputType="date"
                         android:maxLength="10"
-                        android:padding="8dp"
-                        android:text="9123456789"
-                        android:textSize="18dp" />
-
-
+                        android:padding="8dp" />
                 </android.support.design.widget.TextInputLayout>
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:paddingTop="8dp"
+                    android:id="@+id/startDateCalender"
+                    android:paddingLeft="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_date_range" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/inputLayoutEndtDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/projectEndDateEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:background="@color/white"
+                        android:hint="تاریخ پایان"
+                        android:inputType="date"
+                        android:maxLength="10"
+                        android:padding="8dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="0.2"
+                    android:paddingTop="8dp"
+                    android:id="@+id/endDateCalender"
+                    android:paddingLeft="4dp"
+                    android:src="@drawable/ic_date_range" />
+
+
+
+
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="14dp"
+                    android:background="@color/gray400" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="14dp"
+                    android:background="@color/gray400" />
+
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
         </LinearLayout>
     </ScrollView>
 
