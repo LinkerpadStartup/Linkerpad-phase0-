@@ -3,7 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/projectsRefreshLayout">
+
+
     <include layout="@layout/projetcs_items"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/projectsRecyclerView"
@@ -25,4 +32,6 @@
         android:visibility="invisible"
         android:layout_above="@id/emptyProjListTv"
         android:src="@drawable/ic_refresh"/>
+
+
 </RelativeLayout>
