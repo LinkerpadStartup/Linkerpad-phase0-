@@ -29,7 +29,7 @@ class ChooseDateActivity : AppCompatActivity() {
         monthTVpcv.text = calender.getMonthName(today) + " " + today!!.year
 
         calender.setOnMonthChangedListener(
-                OnMonthChangedListener { date -> monthTVpcv.text = calender.getMonthName(date) + " " + today!!.year })
+                OnMonthChangedListener { date -> monthTVpcv.text = calender.getMonthName(date) + " " + date.year })
 
         var selectedDay: Int = 0
         var selectedMonth: Int = 0

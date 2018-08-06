@@ -3,23 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/reportsNv"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="گزارشات" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/documentsNv"
         android:icon="@drawable/ic_insert_drive_file"
         android:title="مدارک" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/dataRequestNv"
         android:icon="@drawable/ic_attachment"
         android:title="درخواست دیتا" />
 
 
     <item
-        android:id="@+id/navigation_more"
+        android:id="@+id/moreNv"
         android:icon="@drawable/ic_more_vert"
         tools:ignore="MenuTitle" />
 

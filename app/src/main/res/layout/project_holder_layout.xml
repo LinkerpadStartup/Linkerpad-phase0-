@@ -1,34 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.linkerpad.linkerpad.ProjectHolder">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/projectsFrameLayout"
-        android:layout_weight="1">
-
-     <!--   <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/projectsFragment"/>-->
-
-    </FrameLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:layoutDirection="rtl"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/moreNvll"
+        android:visibility="invisible"
+        android:background="@drawable/rounded_back_primary"
+        android:padding="8dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_comment_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="گفتگو"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_history_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="تاریخچه"
+                android:textColor="@color/white"
+                android:textSize="8sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_group_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="تیم"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_camera_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="آلبوم"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/projectsFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!--   <fragment
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:id="@+id/projectsFragment"/>-->
+
+        </FrameLayout>
+
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:background="?android:attr/windowBackground"
+            android:layoutDirection="rtl"
+            app:menu="@menu/navigation" />
+    </LinearLayout>
+</RelativeLayout>

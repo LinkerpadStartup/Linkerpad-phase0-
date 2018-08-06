@@ -97,7 +97,7 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:layout_gravity="center"
-                     android:background="@drawable/rounded_back"
+                     android:background="@drawarounded_back_grayback"
                      android:clickable="true"
                      android:focusable="true"
                      android:foreground="?android:attr/selectableItemBackground"
