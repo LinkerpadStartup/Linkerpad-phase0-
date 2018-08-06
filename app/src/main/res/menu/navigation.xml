@@ -15,12 +15,13 @@
     <item
         android:id="@+id/dataRequestNv"
         android:icon="@drawable/ic_attachment"
-        android:title="درخواست دیتا" />
+        android:title="درخواست اطلاعات" />
 
 
     <item
         android:id="@+id/moreNv"
         android:icon="@drawable/ic_more_vert"
         tools:ignore="MenuTitle" />
+
 
 </menu>

@@ -36,7 +36,8 @@
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".ProjectHolder"
-            android:label="@string/title_activity_project_holder"></activity>
+            android:label="بیمارستان آتیه ۲"
+            android:theme="@style/AppTheme.White.Accent"/>
     </application>
 
 </manifest>

@@ -7,22 +7,23 @@
     tools:context="com.linkerpad.linkerpad.ProjectHolder">
 
     <RelativeLayout
+        android:id="@+id/moreNvll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="60dp"
         android:layout_marginLeft="16dp"
-        android:id="@+id/moreNvll"
-        android:visibility="invisible"
         android:background="@drawable/rounded_back_primary"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+
+            android:padding="2dp">
 
             <ImageView
                 android:layout_width="25dp"
@@ -30,6 +31,7 @@
                 android:layout_gravity="center"
                 android:clickable="true"
                 android:focusable="true"
+                android:layout_marginTop="2dp"
                 app:srcCompat="@drawable/ic_comment_white" />
 
             <TextView
@@ -39,14 +41,15 @@
                 android:gravity="center"
                 android:text="گفتگو"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:clickable="true"
+
                 android:focusable="true"
                 app:srcCompat="@drawable/ic_history_white" />
 
@@ -57,13 +60,13 @@
                 android:gravity="center"
                 android:text="تاریخچه"
                 android:textColor="@color/white"
-                android:textSize="8sp" />
+                android:textSize="11sp" />
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:srcCompat="@drawable/ic_group_white" />
@@ -75,13 +78,13 @@
                 android:gravity="center"
                 android:text="تیم"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:srcCompat="@drawable/ic_camera_white" />
@@ -93,7 +96,7 @@
                 android:gravity="center"
                 android:text="آلبوم"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -122,8 +125,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="0dp"
             android:layout_marginStart="0dp"
-            android:background="?android:attr/windowBackground"
+            android:background="@color/colorPrimary"
             android:layoutDirection="rtl"
+            app:itemIconTint="@color/white"
+            app:labelVisibilityMode="selected"
+            app:itemTextColor="@color/white"
             app:menu="@menu/navigation" />
     </LinearLayout>
 </RelativeLayout>

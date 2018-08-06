@@ -26,7 +26,12 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/ic_assignment" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -37,12 +42,7 @@
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/ic_assignment" />
+
             </LinearLayout>
 
 
@@ -56,6 +56,12 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/ic_info_outline" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -66,12 +72,6 @@
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/ic_info_outline" />
             </LinearLayout>
 
 
@@ -84,7 +84,13 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:text=" 🏗 "
+                    android:textSize="18sp" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -95,13 +101,7 @@
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:text=" 🏗 "
-                    android:textSize="18sp" />
+
             </LinearLayout>
 
 
@@ -114,7 +114,13 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:text=" ⛏ "
+                    android:textSize="18sp" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -125,13 +131,7 @@
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:text=" ⛏ "
-                    android:textSize="18sp" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -141,10 +141,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_back_primary"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/outline_btn_primary"
         android:padding="8dp"
         android:text="نمایش/تایید گزارش روزانه"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
 </RelativeLayout>
