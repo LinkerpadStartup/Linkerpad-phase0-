@@ -19,8 +19,8 @@ class AccountInfoActivity : AppCompatActivity() {
 
         //back click
         accountInfoBackIcon.setOnClickListener {
-            var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
-            startActivity(intent)
+            /*var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
+            startActivity(intent)*/
             this@AccountInfoActivity.finish()
         }
     }
