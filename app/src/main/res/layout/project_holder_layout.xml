@@ -11,13 +11,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:id="@+id/projectsFrameLayout"
         android:layout_weight="1">
 
-        <fragment
+     <!--   <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.linkerpad.linkerpad.Fragments.ReportsFragment"
-            android:id="@+id/projectsFragment"/>
+            android:id="@+id/projectsFragment"/>-->
 
     </FrameLayout>
 
