@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.linkerpad.linkerpad.ProjectHolder
+import com.linkerpad.linkerpad.ProjectHolderActivity
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.projects_fragmant_layout.view.*
 import kotlinx.android.synthetic.main.projetcs_items.view.*
@@ -29,7 +29,7 @@ class ProjectsFragment : Fragment() {
         var view: View = inflater.inflate(R.layout.projects_fragmant_layout, container, false)
 
         view.cardTestClick.setOnClickListener {
-            var intent = Intent(context , ProjectHolder::class.java)
+            var intent = Intent(context , ProjectHolderActivity::class.java)
             startActivity(intent)
         }
 

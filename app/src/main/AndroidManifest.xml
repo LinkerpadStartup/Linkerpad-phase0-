@@ -35,12 +35,13 @@
             android:name=".ChooseDateActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
-            android:name=".ProjectHolder"
+            android:name=".ProjectHolderActivity"
             android:label="بیمارستان آتیه ۲"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddDataRequestActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EditDataRequestAcivity"></activity>
     </application>
 
 </manifest>

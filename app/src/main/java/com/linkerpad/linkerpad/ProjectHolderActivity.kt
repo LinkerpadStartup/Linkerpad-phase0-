@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
@@ -15,10 +14,9 @@ import com.linkerpad.linkerpad.Fragments.DocumentsFragment
 import com.linkerpad.linkerpad.Fragments.ReportsFragment
 import kotlinx.android.synthetic.main.project_holder_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import android.widget.Toast
 
 
-class ProjectHolder : AppCompatActivity() {
+class ProjectHolderActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +29,7 @@ class ProjectHolder : AppCompatActivity() {
         fragmentTransaction.replace(R.id.projectsFrameLayout, ReportsFragment()).commit()
 
         addReqDataIcon.setOnClickListener {view ->
-            var intent = Intent(this@ProjectHolder , AddDataRequestActivity::class.java)
+            var intent = Intent(this@ProjectHolderActivity , AddDataRequestActivity::class.java)
             startActivity(intent)
         }
 
@@ -70,7 +68,7 @@ class ProjectHolder : AppCompatActivity() {
                 }
 
                 if (moreCount == 1){
-                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolder, R.anim.abc_slide_out_bottom)
+                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.INVISIBLE
 
@@ -105,7 +103,7 @@ class ProjectHolder : AppCompatActivity() {
                 }
 
                 if (moreCount == 1){
-                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolder, R.anim.abc_slide_out_bottom)
+                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.INVISIBLE
 
@@ -140,7 +138,7 @@ class ProjectHolder : AppCompatActivity() {
                 }
 
                 if (moreCount == 1){
-                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolder, R.anim.abc_slide_out_bottom)
+                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.INVISIBLE
 
@@ -150,13 +148,13 @@ class ProjectHolder : AppCompatActivity() {
             }
             R.id.moreNv -> {
                 if (moreCount == 0) {
-                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolder, R.anim.abc_slide_in_bottom)
+                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_in_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.VISIBLE
 
                     moreCount = 1
                 } else {
-                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolder, R.anim.abc_slide_out_bottom)
+                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.INVISIBLE
 
