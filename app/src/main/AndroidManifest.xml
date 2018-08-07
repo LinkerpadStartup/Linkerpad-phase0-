@@ -41,7 +41,10 @@
         <activity
             android:name=".AddDataRequestActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditDataRequestAcivity"></activity>
+        <activity
+            android:name=".EditDataRequestAcivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TeamActivity"></activity>
     </application>
 
 </manifest>

@@ -37,7 +37,7 @@
                         android:translationX="8dp">
 
                         <ImageView
-                            android:id="@+id/addDataReqBackIcon"
+                            android:id="@+id/editDataReqBackIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -53,7 +53,7 @@
                             android:layout_marginRight="8dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="درخواست اطلاعات"
+                            android:text="ویرایش اطلاعات"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -367,4 +367,5 @@
         </LinearLayout>
     </ScrollView>
 
+    
 </RelativeLayout>

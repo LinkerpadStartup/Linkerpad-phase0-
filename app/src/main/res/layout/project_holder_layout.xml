@@ -51,7 +51,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="6dp"
                 android:clickable="true"
-
                 android:focusable="true"
                 app:srcCompat="@drawable/ic_history_white" />
 
@@ -71,6 +70,7 @@
                 android:layout_marginTop="6dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:id="@+id/teamImv"
                 app:srcCompat="@drawable/ic_group_white" />
 
             <TextView

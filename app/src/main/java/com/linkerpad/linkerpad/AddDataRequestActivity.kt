@@ -19,6 +19,8 @@ class AddDataRequestActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         setContentView(R.layout.add_data_request_layout)
 
 
+        setSupportActionBar(toolbar)
+
         creatDateCalender.setOnClickListener {
             var intent = Intent(this@AddDataRequestActivity, ChooseDateActivity::class.java)
             intent.putExtra("startOrEndDate", 1)

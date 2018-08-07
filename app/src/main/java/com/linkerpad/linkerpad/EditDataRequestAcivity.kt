@@ -16,7 +16,9 @@ class EditDataRequestAcivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_data_request_layout)
+        setContentView(R.layout.edit_data_request_layout)
+
+        setSupportActionBar(toolbar)
 
 
         creatDateCalender.setOnClickListener {
@@ -35,7 +37,7 @@ class EditDataRequestAcivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         spinnerSetup()
 
         //back click
-        addDataReqBackIcon.setOnClickListener { this@EditDataRequestAcivity.finish() }
+        editDataReqBackIcon.setOnClickListener { this@EditDataRequestAcivity.finish() }
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

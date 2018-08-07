@@ -28,8 +28,14 @@ class ProjectHolderActivity : AppCompatActivity() {
         var fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.projectsFrameLayout, ReportsFragment()).commit()
 
-        addReqDataIcon.setOnClickListener {view ->
-            var intent = Intent(this@ProjectHolderActivity , AddDataRequestActivity::class.java)
+
+        addReqDataIcon.setOnClickListener { view ->
+            var intent = Intent(this@ProjectHolderActivity, AddDataRequestActivity::class.java)
+            startActivity(intent)
+        }
+
+        teamImv.setOnClickListener {
+            var intent = Intent(this@ProjectHolderActivity, TeamActivity::class.java)
             startActivity(intent)
         }
 
@@ -47,7 +53,7 @@ class ProjectHolderActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.reportsNv -> {
 
-                searchDocIcon.visibility  = View.INVISIBLE
+                searchDocIcon.visibility = View.INVISIBLE
                 searchReqDataIcon.visibility = View.INVISIBLE
                 filterReqDataIcon.visibility = View.INVISIBLE
                 sortReqDataIcon.visibility = View.INVISIBLE
@@ -67,7 +73,7 @@ class ProjectHolderActivity : AppCompatActivity() {
                     nvPosition = 1
                 }
 
-                if (moreCount == 1){
+                if (moreCount == 1) {
                     var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.INVISIBLE
@@ -102,7 +108,7 @@ class ProjectHolderActivity : AppCompatActivity() {
                     nvPosition = 2
                 }
 
-                if (moreCount == 1){
+                if (moreCount == 1) {
                     var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.INVISIBLE
@@ -114,7 +120,7 @@ class ProjectHolderActivity : AppCompatActivity() {
             }
             R.id.dataRequestNv -> {
 
-                searchDocIcon.visibility  = View.INVISIBLE
+                searchDocIcon.visibility = View.INVISIBLE
                 searchReqDataIcon.visibility = View.VISIBLE
                 filterReqDataIcon.visibility = View.VISIBLE
                 sortReqDataIcon.visibility = View.VISIBLE
@@ -137,7 +143,7 @@ class ProjectHolderActivity : AppCompatActivity() {
                     nvPosition = 3
                 }
 
-                if (moreCount == 1){
+                if (moreCount == 1) {
                     var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
                     moreNvll.startAnimation(slideTopAnimaiton)
                     moreNvll.visibility = View.INVISIBLE
