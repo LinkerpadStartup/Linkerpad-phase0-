@@ -71,7 +71,7 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/ic_camera_alt"
+                app:srcCompat="@drawable/ic_camera_alt"
                 android:translationX="50dp"
                 android:translationY="170dp"
                 android:translationZ="1dp" />
@@ -80,42 +80,8 @@
                 android:id="@+id/accountPicImg"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                app:srcCompat="@drawable/ic_account_circle_blue" />
 
-                android:src="@drawable/ic_account_circle_blue" />
-
-
-            <!--<ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:translationZ="1dp"
-                android:translationY="-50dp"
-                android:layout_marginLeft="40dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/ic_camera_alt"/>-->
-            <!--     <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center"
-                     android:background="@drawarounded_back_grayback"
-                     android:clickable="true"
-                     android:focusable="true"
-                     android:foreground="?android:attr/selectableItemBackground"
-                     android:paddingBottom="4dp"
-                     android:paddingLeft="8dp"
-                     android:paddingRight="8dp"
-                     android:paddingTop="4dp"
-                     android:text="تغییر تصویر"
-                     android:textColor="@color/white" />-->
-
-            <!--
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:gravity="right"
-                            android:padding="8dp"
-                            android:text="نام و نام خانوادگی" />-->
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/inputLayoutName"
