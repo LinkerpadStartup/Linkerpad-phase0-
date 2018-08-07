@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.linkerpad.linkerpad.ProjectHolder">
 
+
+
+
     <RelativeLayout
         android:id="@+id/moreNvll"
         android:layout_width="wrap_content"
@@ -22,16 +25,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-
             android:padding="2dp">
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="2dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginTop="2dp"
                 app:srcCompat="@drawable/ic_comment_white" />
 
             <TextView
@@ -105,16 +107,122 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:layoutDirection="rtl"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:translationX="8dp">
+
+                        <TextView
+                            android:id="@+id/projectTitleTv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="بیمارستان آتیه ۲"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/searchReqDataIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/ic_search_white" />
+
+                        <ImageView
+                            android:id="@+id/filterReqDataIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/ic_filter_list_white" />
+
+                        <ImageView
+                            android:id="@+id/sortReqDataIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/ic_sort_white" />
+
+                        <ImageView
+                            android:id="@+id/addReqDataIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/ic_add" />
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/searchDocIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/ic_search_white" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+        
         <FrameLayout
             android:id="@+id/projectsFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
-            <!--   <fragment
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:id="@+id/projectsFragment"/>-->
 
         </FrameLayout>
 
@@ -128,8 +236,8 @@
             android:background="@color/colorPrimary"
             android:layoutDirection="rtl"
             app:itemIconTint="@color/white"
-            app:labelVisibilityMode="selected"
             app:itemTextColor="@color/white"
+            app:labelVisibilityMode="selected"
             app:menu="@menu/navigation" />
     </LinearLayout>
 </RelativeLayout>

@@ -31,6 +31,7 @@ class ProjectHolder : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.project_holder_layout)
+        setSupportActionBar(toolbar)
 
         var fragmentManager: FragmentManager = supportFragmentManager
         var fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -79,6 +80,8 @@ class ProjectHolder : AppCompatActivity() {
             }
             R.id.documentsNv -> {
 
+                searchDocIcon.visibility = View.VISIBLE
+
                 if (nvPosition == 1) {
                     fragmentTransaction.remove(ReportsFragment())
                     fragmentTransaction.hide(ReportsFragment())
@@ -107,6 +110,13 @@ class ProjectHolder : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.dataRequestNv -> {
+
+                searchDocIcon.visibility  = View.INVISIBLE
+                searchReqDataIcon.visibility = View.VISIBLE
+                filterReqDataIcon.visibility = View.VISIBLE
+                sortReqDataIcon.visibility = View.VISIBLE
+                addReqDataIcon.visibility = View.VISIBLE
+
                 if (nvPosition == 1) {
                     fragmentTransaction.remove(ReportsFragment())
                     fragmentTransaction.hide(ReportsFragment())
