@@ -37,7 +37,10 @@
         <activity
             android:name=".ProjectHolder"
             android:label="بیمارستان آتیه ۲"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddDataRequestActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
