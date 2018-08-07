@@ -217,7 +217,7 @@
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
-        
+
         <FrameLayout
             android:id="@+id/projectsFrameLayout"
             android:layout_width="match_parent"

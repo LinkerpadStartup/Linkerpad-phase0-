@@ -54,6 +54,12 @@ class ProjectHolder : AppCompatActivity() {
         when (item.itemId) {
             R.id.reportsNv -> {
 
+                searchDocIcon.visibility  = View.INVISIBLE
+                searchReqDataIcon.visibility = View.INVISIBLE
+                filterReqDataIcon.visibility = View.INVISIBLE
+                sortReqDataIcon.visibility = View.INVISIBLE
+                addReqDataIcon.visibility = View.INVISIBLE
+
                 if (nvPosition == 1) {
                     /*fragmentTransaction.replace(R.id.projectsFrameLayout, ReportsFragment()).commit()*/
                 } else if (nvPosition == 2) {
@@ -81,6 +87,10 @@ class ProjectHolder : AppCompatActivity() {
             R.id.documentsNv -> {
 
                 searchDocIcon.visibility = View.VISIBLE
+                searchReqDataIcon.visibility = View.INVISIBLE
+                filterReqDataIcon.visibility = View.INVISIBLE
+                sortReqDataIcon.visibility = View.INVISIBLE
+                addReqDataIcon.visibility = View.INVISIBLE
 
                 if (nvPosition == 1) {
                     fragmentTransaction.remove(ReportsFragment())
@@ -157,7 +167,7 @@ class ProjectHolder : AppCompatActivity() {
 
                     moreCount = 0
                 }
-
+                
             }
 
         }
