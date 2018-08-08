@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.linkerpad.linkerpad.GalleryActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -60,6 +60,7 @@
         layout="@layout/gallery_items"
         android:layout_width="160dp"
         android:layout_height="120dp"
+        android:transitionName="image"
         android:layout_below="@id/appbar"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp" />
