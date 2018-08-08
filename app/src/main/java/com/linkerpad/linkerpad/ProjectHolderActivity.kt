@@ -39,6 +39,11 @@ class ProjectHolderActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        galleryImv.setOnClickListener {
+            var intent = Intent(this@ProjectHolderActivity, GalleryActivity::class.java)
+            startActivity(intent)
+        }
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 

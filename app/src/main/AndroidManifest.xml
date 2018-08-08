@@ -49,7 +49,9 @@
         <activity
             android:name=".TeamActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GallaryActivity"></activity>
+        <activity
+            android:name=".GalleryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

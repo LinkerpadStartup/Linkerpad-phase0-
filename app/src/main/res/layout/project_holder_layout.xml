@@ -7,8 +7,6 @@
     tools:context="com.linkerpad.linkerpad.ProjectHolderActivity">
 
 
-
-
     <RelativeLayout
         android:id="@+id/moreNvll"
         android:layout_width="wrap_content"
@@ -64,13 +62,13 @@
                 android:textSize="11sp" />
 
             <ImageView
+                android:id="@+id/teamImv"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="6dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:id="@+id/teamImv"
                 app:srcCompat="@drawable/ic_group_white" />
 
             <TextView
@@ -83,6 +81,7 @@
                 android:textSize="11sp" />
 
             <ImageView
+                android:id="@+id/galleryImv"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
@@ -235,8 +234,8 @@
             android:layout_marginStart="0dp"
             android:background="@color/colorPrimary"
             android:layoutDirection="rtl"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
+            app:itemIconTint="@drawable/nav_item_color"
+            app:itemTextColor="@drawable/nav_item_color"
             app:labelVisibilityMode="selected"
             app:menu="@menu/navigation" />
     </LinearLayout>
