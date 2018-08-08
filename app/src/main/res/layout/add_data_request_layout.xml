@@ -108,10 +108,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="bottom"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="16dp">
 
                     <Spinner
-                        android:id="@+id/reqDataSpn"
+                        android:id="@+id/situationReqDataSpn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -128,37 +129,27 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingTop="16dp">
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/inputLayoutName"
+                    <Spinner
+                        android:id="@+id/responsibleReqDataSpn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:focusedByDefault="true">
-
-                        <EditText
-                            android:id="@+id/nameEdt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:background="@color/white"
-                            android:hint="مرتبط با"
-                            android:inputType="text"
-                            android:maxLength="100"
-                            android:padding="8dp" />
-                    </android.support.design.widget.TextInputLayout>
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="8dp"
+                        android:gravity="bottom" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0.8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
                         android:background="@color/gray400" />
-
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -322,22 +313,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal"
                 android:padding="8dp">
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="ویرایش ممنوع" />
-
                 <ImageView
+                    android:id="@+id/lockEditReqDataImv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="4dp"
+                    app:srcCompat="@drawable/ic_lock_open" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="4dp"
-                    app:srcCompat="@drawable/ic_lock_gray" />
+                    android:text="ویرایش ممنوع"
+                    android:textColor="@color/gray900" />
 
 
             </LinearLayout>
@@ -345,7 +340,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginRight="8dp"
+                android:padding="8dp"
                 android:text="منابع"
                 android:textColor="@color/gray900"
                 android:textSize="18sp" />

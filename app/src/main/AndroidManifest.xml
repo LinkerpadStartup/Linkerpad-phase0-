@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.linkerpad.linkerpad">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:name=".font"
         android:allowBackup="true"
@@ -44,7 +46,10 @@
         <activity
             android:name=".EditDataRequestAcivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TeamActivity"></activity>
+        <activity
+            android:name=".TeamActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GallaryActivity"></activity>
     </application>
 
 </manifest>

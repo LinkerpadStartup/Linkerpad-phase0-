@@ -33,6 +33,17 @@ class EditDataRequestAcivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             startActivityForResult(intent, 1)
         }
 
+        var i: Int = 0
+        lockEditReqDataImv.setOnClickListener {
+            if (i == 0) {
+                lockEditReqDataImv.setImageResource(R.drawable.ic_lock_gray)
+                i = 1
+            } else {
+                lockEditReqDataImv.setImageResource(R.drawable.ic_lock_open)
+                i = 0
+            }
+        }
+
 
         spinnerSetup()
 
@@ -50,12 +61,18 @@ class EditDataRequestAcivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     fun spinnerSetup() {
 
-        val reqDataList = arrayOf("بایگانی", "تست", "تست۲")
-        val reqDataSpnAdapter = ArrayAdapter(this@EditDataRequestAcivity, android.R.layout.simple_spinner_item, reqDataList)
-        reqDataSpnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        reqDataSpn.adapter = reqDataSpnAdapter
+        val situationReqDataList = arrayOf("وضعیت", "باز", "دردست اقدادم", "معلق", "بسته")
+        val situationReqDataSpnAdapter = ArrayAdapter(this@EditDataRequestAcivity, android.R.layout.simple_spinner_item, situationReqDataList)
+        situationReqDataSpnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        situationReqDataSpn.adapter = situationReqDataSpnAdapter
 
-        reqDataSpn.onItemSelectedListener = this
+        val responsibleReqDataList = arrayOf("مسئول", "test", "test2")
+        val responsibleReqDataSpnAdapter = ArrayAdapter(this@EditDataRequestAcivity, android.R.layout.simple_spinner_item, responsibleReqDataList)
+        responsibleReqDataSpnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        responsibleReqDataSpn.adapter = responsibleReqDataSpnAdapter
+
+        responsibleReqDataSpn.onItemSelectedListener = this
+        situationReqDataSpn.onItemSelectedListener = this
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

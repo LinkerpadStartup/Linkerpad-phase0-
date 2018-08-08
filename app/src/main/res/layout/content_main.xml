@@ -59,8 +59,8 @@
             android:id="@+id/mainPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layoutDirection="ltr"
-            android:layout_weight="0.8" />
+            android:layout_weight="0.8"
+            android:layoutDirection="ltr" />
 
 
         <Space
@@ -70,15 +70,14 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:src="@drawable/ic_add"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:id="@+id/addProjectFab"
-        android:clickable="true"
-        android:backgroundTint="@color/colorPrimary"
-        android:focusable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@drawable/ic_add" />
 </RelativeLayout>

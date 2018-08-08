@@ -47,6 +47,7 @@
                     android:textSize="18sp" />
 
                 <ImageView
+                    android:id="@+id/emailTeamImv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -56,6 +57,7 @@
                     app:srcCompat="@drawable/ic_email_primary" />
 
                 <ImageView
+                    android:id="@+id/callTeamImv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
