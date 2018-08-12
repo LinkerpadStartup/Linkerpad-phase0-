@@ -6,4 +6,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="aboutUS">
+
+        لینکرپد بستری برای مدیریت فرآیندها و گزارشات پروژه های عمرانی در فضای ابری می باشد. هدف لینکرپد ایجاد یک اپلیکیشن مدیریت ساخت بوده به گونه ای که کلیه فرآیند های روزانه متخصصان در بستر آن انجام پذیرد. با لینکرپد در هر کجا و هر زمان به میز کار شخصی خود دسترسی خواهید داشت.
+
+    </string>
 </resources>

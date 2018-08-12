@@ -55,6 +55,8 @@
         <activity
             android:name=".GalleryItemDetailsActivity"
             android:theme="@style/Theme.AppCompat.Translucent" />
+        <activity android:name=".AboutUSActivity"
+           android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

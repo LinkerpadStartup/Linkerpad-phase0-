@@ -80,8 +80,7 @@
                 android:id="@+id/accountPicImg"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:srcCompat="@drawable/ic_account_circle_blue" />
-
+                app:srcCompat="@drawable/ic_account_circle_blue"/>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/inputLayoutName"

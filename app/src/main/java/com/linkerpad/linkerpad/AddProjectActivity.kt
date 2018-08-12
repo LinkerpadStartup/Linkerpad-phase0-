@@ -6,6 +6,7 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import com.linkerpad.linkerpad.Data.ProjectDateType
 import kotlinx.android.synthetic.main.add_project_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.time.LocalDate
@@ -20,35 +21,35 @@ class AddProjectActivity : AppCompatActivity() {
 
         startDateCalender.setOnClickListener {
             var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
-            intent.putExtra("startOrEndDate", 1)
-            startActivityForResult(intent, 1)
+               intent.putExtra("startOrEndDate", ProjectDateType.ProjectStartDate.value)
+            startActivityForResult(intent, ProjectDateType.ProjectStartDate.value)
         }
 
         endDateCalender.setOnClickListener {
             var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
-            intent.putExtra("startOrEndDate", 2)
-            startActivityForResult(intent, 1)
+             intent.putExtra("startOrEndDate", ProjectDateType.ProjectEndDate.value)
+            startActivityForResult(intent, ProjectDateType.ProjectEndDate.value)
         }
 
 
         //back click
         addProjectBackIcon.setOnClickListener {
-           /* var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
-            startActivity(intent)*/
+            /* var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
+             startActivity(intent)*/
             this@AddProjectActivity.finish()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-
-        if (resultCode == 1)
+        val projectDateType = ProjectDateType.fromInt(resultCode)
+        if (projectDateType!!.value == ProjectDateType.ProjectStartDate.value)
             projectStartDateEdt.setText(data?.getStringExtra("date"))
         else
             projectEndDateEdt.setText(data?.getStringExtra("date"))
 
 
-        super.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, projectDateType!!.value, data)
     }
 
 
