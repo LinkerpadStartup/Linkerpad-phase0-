@@ -65,6 +65,11 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
             var intent = Intent(this@MainActivity, SendCommentsActivity::class.java)
             startActivity(intent)
         }
+
+        aboutUs.setOnClickListener {
+            var intent = Intent(this@MainActivity, AboutUSActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

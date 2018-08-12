@@ -2,16 +2,11 @@ package com.linkerpad.linkerpad
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import com.linkerpad.linkerpad.Data.ProjectDateType
+import com.linkerpad.linkerpad.Data.DateType
 import kotlinx.android.synthetic.main.add_project_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class AddProjectActivity : AppCompatActivity() {
 
@@ -21,14 +16,14 @@ class AddProjectActivity : AppCompatActivity() {
 
         startDateCalender.setOnClickListener {
             var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
-               intent.putExtra("startOrEndDate", ProjectDateType.ProjectStartDate.value)
-            startActivityForResult(intent, ProjectDateType.ProjectStartDate.value)
+               intent.putExtra("startOrEndDate", DateType.StartDate.value)
+            startActivityForResult(intent, DateType.StartDate.value)
         }
 
         endDateCalender.setOnClickListener {
             var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
-             intent.putExtra("startOrEndDate", ProjectDateType.ProjectEndDate.value)
-            startActivityForResult(intent, ProjectDateType.ProjectEndDate.value)
+             intent.putExtra("startOrEndDate", DateType.EndDate.value)
+            startActivityForResult(intent, DateType.EndDate.value)
         }
 
 
@@ -42,8 +37,8 @@ class AddProjectActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        val projectDateType = ProjectDateType.fromInt(resultCode)
-        if (projectDateType!!.value == ProjectDateType.ProjectStartDate.value)
+        val projectDateType = DateType.fromInt(resultCode)
+        if (projectDateType!!.value == DateType.StartDate.value)
             projectStartDateEdt.setText(data?.getStringExtra("date"))
         else
             projectEndDateEdt.setText(data?.getStringExtra("date"))

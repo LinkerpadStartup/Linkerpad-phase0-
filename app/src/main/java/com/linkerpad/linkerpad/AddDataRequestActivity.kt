@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.linkerpad.linkerpad.Data.DateType
 import kotlinx.android.synthetic.main.add_data_request_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -77,8 +78,9 @@ class AddDataRequestActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+        var ReqDateDateType = DateType.fromInt(resultCode)
 
-        if (resultCode == 1)
+        if (ReqDateDateType!!.value == DateType.StartDate.value)
             createReqDataDateEdt.setText(data?.getStringExtra("date"))
         else
             finishReqDataDateEdt.setText(data?.getStringExtra("date"))
