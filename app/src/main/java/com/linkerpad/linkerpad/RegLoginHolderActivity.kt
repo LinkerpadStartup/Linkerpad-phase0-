@@ -44,6 +44,10 @@ class RegLoginHolderActivity : AppCompatActivity() {
             //val scaleBigAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.scale_big)
             //logoLinkerpad.startAnimation(scaleBigAnimation)
             // logoLinkerpad.setPadding(30, 30, 30, 30)
+            val slideTopAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_top_2)
+            logoHolderll2.startAnimation(slideTopAnimation2)
+            logoHolderll2.visibility = View.VISIBLE
+            logoHolderll1.visibility = View.INVISIBLE
 
             container.setCurrentItem(1, true)
 
@@ -73,10 +77,15 @@ class RegLoginHolderActivity : AppCompatActivity() {
             //logoLinkerpad.startAnimation(scaleBigAnimation)
             //logoLinkerpad.setPadding(30, 30, 30, 30)
 
+            val slideTopAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_top_2)
+            logoHolderll2.startAnimation(slideTopAnimation2)
+            logoHolderll2.visibility = View.VISIBLE
+            logoHolderll1.visibility = View.INVISIBLE
+
             container.setCurrentItem(0, true)
         }
 
-        logoHolderll.setOnClickListener {
+        logoHolderll2.setOnClickListener {
 
             //go out
             val slideDownAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_down)
@@ -94,6 +103,13 @@ class RegLoginHolderActivity : AppCompatActivity() {
             introTv.visibility = View.VISIBLE
             registerBtn.visibility = View.VISIBLE
             loginBtn.visibility = View.VISIBLE
+
+            val slideDownAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_down_2)
+            logoHolderll2.startAnimation(slideDownAnimation2)
+            logoHolderll2.visibility = View.INVISIBLE
+            fadeInAnimation.startOffset = 700
+            logoHolderll1.startAnimation(fadeInAnimation)
+            logoHolderll1.visibility = View.VISIBLE
 
         }
 
