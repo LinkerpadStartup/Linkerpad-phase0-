@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="20dp"
     android:orientation="vertical">
 
     <ScrollView
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#99ffffff"
+        android:background="#66000000"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -22,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:textColorHint="@color/gray800"
+            android:textColorHint="@color/black"
             android:layout_marginLeft="20dp">
 
             <EditText
@@ -30,6 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="ایمیل"
+                android:textSize="14sp"
+                android:textColor="@color/white"
                 android:inputType="textEmailAddress">
                 <requestFocus/>
             </EditText>
@@ -40,7 +43,7 @@
             android:id="@+id/inputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray800"
+            android:textColorHint="@color/black"
             android:layout_margin="20dp">
 
             <EditText
@@ -48,7 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="رمز عبور"
-                android:inputType="textEmailAddress" />
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -60,7 +65,7 @@
             android:layout_marginRight="20dp"
             android:clickable="true"
             android:text="رمز عبورم را فراموش کرده ام"
-            android:textColor="@android:color/holo_blue_dark" />
+            android:textColor="#80D8FF" />
 
         <Button
             android:id="@+id/loginBtn"
@@ -77,7 +82,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="250dp" />
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

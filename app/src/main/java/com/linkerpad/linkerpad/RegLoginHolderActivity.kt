@@ -1,6 +1,7 @@
 package com.linkerpad.linkerpad
 
 import android.content.Context
+import android.inputmethodservice.Keyboard
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
@@ -11,6 +12,11 @@ import com.linkerpad.linkerpad.Fragments.LoginFragment
 import com.linkerpad.linkerpad.Fragments.RegisterFragment
 import kotlinx.android.synthetic.main.reg_login_holder_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import android.app.Activity
+import android.support.v4.content.ContextCompat.getSystemService
+import android.view.inputmethod.InputMethodManager
+
+
 
 class RegLoginHolderActivity : AppCompatActivity() {
 
@@ -23,6 +29,9 @@ class RegLoginHolderActivity : AppCompatActivity() {
 
         /** register btn click **/
         registerBtn.setOnClickListener {
+
+            setupViewPager(container)
+            tabs.setupWithViewPager(container)
 
             //Visibilities
             container.visibility = View.VISIBLE
@@ -45,9 +54,10 @@ class RegLoginHolderActivity : AppCompatActivity() {
             //logoLinkerpad.startAnimation(scaleBigAnimation)
             // logoLinkerpad.setPadding(30, 30, 30, 30)
             val slideTopAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_top_2)
-            logoHolderll2.startAnimation(slideTopAnimation2)
-            logoHolderll2.visibility = View.VISIBLE
-            logoHolderll1.visibility = View.INVISIBLE
+            logoHolderll1.startAnimation(slideTopAnimation2)
+          //  logoHolderll2.visibility = View.VISIBLE
+          //  logoHolderll1.visibility = View.INVISIBLE
+            logoHolderll1.isClickable = true
 
             container.setCurrentItem(1, true)
 
@@ -55,6 +65,9 @@ class RegLoginHolderActivity : AppCompatActivity() {
 
         /** login btn click **/
         loginBtn.setOnClickListener {
+
+            setupViewPager(container)
+            tabs.setupWithViewPager(container)
 
             //Visibilities
             container.visibility = View.VISIBLE
@@ -78,14 +91,17 @@ class RegLoginHolderActivity : AppCompatActivity() {
             //logoLinkerpad.setPadding(30, 30, 30, 30)
 
             val slideTopAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_top_2)
-            logoHolderll2.startAnimation(slideTopAnimation2)
-            logoHolderll2.visibility = View.VISIBLE
-            logoHolderll1.visibility = View.INVISIBLE
+            logoHolderll1.startAnimation(slideTopAnimation2)
+            //  logoHolderll2.visibility = View.VISIBLE
+            //  logoHolderll1.visibility = View.INVISIBLE
+            logoHolderll1.isClickable = true
 
             container.setCurrentItem(0, true)
         }
 
-        logoHolderll2.setOnClickListener {
+
+
+        logoClickDownll.setOnClickListener {
 
             //go out
             val slideDownAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_down)
@@ -105,12 +121,20 @@ class RegLoginHolderActivity : AppCompatActivity() {
             loginBtn.visibility = View.VISIBLE
 
             val slideDownAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_down_2)
-            logoHolderll2.startAnimation(slideDownAnimation2)
-            logoHolderll2.visibility = View.INVISIBLE
-            fadeInAnimation.startOffset = 700
+            logoHolderll1.startAnimation(slideDownAnimation2)
+            //  logoHolderll2.visibility = View.INVISIBLE
+            /*fadeInAnimation.startOffset = 700
             logoHolderll1.startAnimation(fadeInAnimation)
-            logoHolderll1.visibility = View.VISIBLE
+            logoHolderll1.visibility = View.VISIBLE*/
+            logoHolderll1.isClickable =false
 
+            val view = this.currentFocus
+            if (view != null) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+
+            container.removeAllViews()
         }
 
 

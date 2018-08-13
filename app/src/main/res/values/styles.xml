@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-       <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
 
         <item name="android:windowActivityTransitions" tools:ignore="NewApi">true</item>
     </style>
@@ -27,11 +27,13 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
-    <style name="AppTheme.White.Accent" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.White.Accent.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/white</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.Light.NoActionBar">

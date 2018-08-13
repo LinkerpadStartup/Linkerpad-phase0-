@@ -24,18 +24,20 @@
                 android:id="@+id/inputLayoutName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:textColorHint="@color/gray300">
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/black">
 
                 <EditText
                     android:id="@+id/nameEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
                     android:hint="نام و نام خانوادگی"
                     android:inputType="text"
                     android:maxLength="100"
-                    android:textColor="#fff">
+                    android:textColor="#fff"
+                    android:textSize="14dp">
 
                     <requestFocus />
                 </EditText>
@@ -47,17 +49,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:textColorHint="@color/gray300">
+                android:textColorHint="@color/black">
 
                 <EditText
                     android:id="@+id/emailEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
                     android:hint="ایمیل"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -65,36 +68,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layoutDirection="ltr"
                 android:orientation="horizontal">
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:paddingTop="10dp"
                     android:text="+98"
                     android:textColor="@color/gray300"
-                    android:textSize="18dp" />
+                    android:textSize="14dp" />-->
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/inputLayoutPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textColorHint="@color/gray300">
+                    android:textColorHint="@color/black">
 
                     <EditText
                         android:id="@+id/phoneEdt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
                         android:hint="تلفن"
                         android:inputType="phone"
                         android:maxLength="10"
                         android:textColor="@color/white"
-                        android:textSize="18dp" />
+                        android:textSize="14dp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -104,18 +106,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/white"
-                android:textColorHint="@color/gray300">
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/black">
 
                 <EditText
                     android:id="@+id/coEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
                     android:hint="سازمان/شرکت"
                     android:maxLength="100"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -125,17 +126,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:textColorHint="@color/gray300">
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/black">
 
                 <EditText
                     android:id="@+id/passwordEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
                     android:hint="رمز عبور"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
@@ -153,6 +154,7 @@
 
             <Space
                 android:layout_width="match_parent"
+                android:id="@+id/registerSpace"
                 android:layout_height="30dp" />
         </LinearLayout>
     </ScrollView>

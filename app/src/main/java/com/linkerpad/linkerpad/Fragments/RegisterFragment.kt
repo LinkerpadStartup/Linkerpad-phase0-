@@ -1,11 +1,15 @@
 package com.linkerpad.linkerpad.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IUserLogic
@@ -141,6 +145,23 @@ class RegisterFragment : Fragment() {
             }
         }
 
+
+        view.nameEdt.setOnClickListener {  var layoutParam : LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT , 1000)
+            view.registerSpace.layoutParams=layoutParam }
+
+        /*if (view != null) {
+            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            if (imm.isAcceptingText){
+                var layoutParam : LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT , 1000)
+                view.registerSpace.layoutParams=layoutParam
+            }else{
+                var layoutParam : LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT , 30)
+               view.registerSpace.layoutParams=layoutParam
+            }
+
+        }*/
+
         return view
     }
+
 }
