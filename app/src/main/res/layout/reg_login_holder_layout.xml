@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back90"
+    android:background="@drawable/back61back"
     tools:context="com.linkerpad.linkerpad.MainActivity">
 
     <!-- <ImageView
@@ -17,14 +17,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
             android:id="@+id/logoHolderll"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="90dp"
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
@@ -32,8 +34,8 @@
                 android:id="@+id/logoLinkerpad"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
                 android:padding="0dp"
                 android:src="@drawable/logo" />
 
@@ -47,6 +49,7 @@
                 android:textSize="35sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
@@ -77,9 +80,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                app:tabIndicatorColor="#fff"
+                android:focusable="true"
                 android:layoutDirection="ltr"
-                android:focusable="true">
+                app:tabIndicatorColor="#fff">
 
 
             </android.support.design.widget.TabLayout>
@@ -103,11 +106,12 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:gravity="center"
+        android:visibility="visible"
         android:paddingTop="150dp"
-        android:lineSpacingExtra="3sp"
-        android:text="اولـین اپلیکیشین \nمـدیریت ساخـت \nپروژه‌های عمرانی"
-        android:textColor="#fff"
-        android:textSize="28sp"
+        android:lineSpacingExtra="2sp"
+        android:text="اولـین اپلیکیشین مـدیریت\n ساخـت پروژه‌های عمرانی"
+        android:textColor="#000"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <LinearLayout
