@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.linkerpad.linkerpad.Adapters.SpinnerAdapter
 import kotlinx.android.synthetic.main.edit_data_request_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -61,16 +62,22 @@ class EditDataRequestAcivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
 
     fun spinnerSetup() {
 
-        val situationReqDataList = arrayOf("وضعیت", "باز", "دردست اقدادم", "معلق", "بسته")
-        val situationReqDataSpnAdapter = ArrayAdapter(this@EditDataRequestAcivity, android.R.layout.simple_spinner_item, situationReqDataList)
-        situationReqDataSpnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val situationReqDataList = arrayOf("وضعیت","چرکنویس", "باز", "دردست اقدام", "معلق", "بسته")
+        val situationSpinnerColor:IntArray = intArrayOf(
+                0 ,
+                R.drawable.rounded_back_red,
+                R.drawable.rounded_back_green ,
+                R.drawable.rounded_back_primary ,
+                R.drawable.rounded_back_yellow ,
+                R.drawable.rounded_back_gray
+        )
+        val situationReqDataSpnAdapter = SpinnerAdapter(this@EditDataRequestAcivity, situationSpinnerColor, situationReqDataList)
         situationReqDataSpn.adapter = situationReqDataSpnAdapter
 
         val responsibleReqDataList = arrayOf("مسئول", "test", "test2")
-        val responsibleReqDataSpnAdapter = ArrayAdapter(this@EditDataRequestAcivity, android.R.layout.simple_spinner_item, responsibleReqDataList)
-        responsibleReqDataSpnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val responsibleSpinnerColor = intArrayOf(0,0,0)
+        val responsibleReqDataSpnAdapter = SpinnerAdapter(this@EditDataRequestAcivity, responsibleSpinnerColor, responsibleReqDataList)
         responsibleReqDataSpn.adapter = responsibleReqDataSpnAdapter
-
         responsibleReqDataSpn.onItemSelectedListener = this
         situationReqDataSpn.onItemSelectedListener = this
     }

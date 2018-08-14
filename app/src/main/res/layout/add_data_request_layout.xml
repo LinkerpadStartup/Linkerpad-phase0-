@@ -331,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="4dp"
-                    android:text="ویرایش ممنوع"
+                    android:text="قابل ویرایش"
                     android:textColor="@color/gray900" />
 
 
