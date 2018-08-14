@@ -13,6 +13,7 @@ import com.linkerpad.linkerpad.Fragments.RegisterFragment
 import kotlinx.android.synthetic.main.reg_login_holder_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.app.Activity
+import android.graphics.Typeface
 import android.support.v4.content.ContextCompat.getSystemService
 import android.view.inputmethod.InputMethodManager
 
@@ -26,6 +27,11 @@ class RegLoginHolderActivity : AppCompatActivity() {
 
         setupViewPager(container)
         tabs.setupWithViewPager(container)
+
+        logoTv.setTypeface(Typeface.createFromAsset(assets,"Vazir-Bold.ttf"))
+        introTv.setTypeface(Typeface.createFromAsset(assets,"Vazir-Bold.ttf"))
+        loginBtn.setTypeface(Typeface.createFromAsset(assets,"IRANSansWeb(FaNum)_Bold.ttf"))
+        registerBtn.setTypeface(Typeface.createFromAsset(assets,"IRANSansWeb(FaNum)_Bold.ttf"))
 
         /** register btn click **/
         registerBtn.setOnClickListener {
@@ -98,8 +104,6 @@ class RegLoginHolderActivity : AppCompatActivity() {
 
             container.setCurrentItem(0, true)
         }
-
-
 
         logoClickDownll.setOnClickListener {
 
