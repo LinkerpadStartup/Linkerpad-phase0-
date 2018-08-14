@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat.getSystemService
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
 import javax.security.auth.callback.Callback
+import android.view.KeyEvent.KEYCODE_BACK
 
 
 /**
@@ -47,7 +49,7 @@ class RegisterFragment : Fragment() {
          userLogic!!.Register(UsersData("","","","","",""))*/
         var view: View = inflater.inflate(R.layout.register_fragment_layout, container, false)
 
-      /*  val service:IUserApi = IWebApi.Factory.create()*/
+        /*  val service:IUserApi = IWebApi.Factory.create()*/
 
         val retrofit = retrofit2.Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -56,7 +58,7 @@ class RegisterFragment : Fragment() {
                 .baseUrl("http://31.184.132.134/")
                 .build()
 
-        var service:IUserApi = retrofit.create(IUserApi::class.java)
+        var service: IUserApi = retrofit.create(IUserApi::class.java)
 
         view.registerBtn.setOnClickListener {
             if (!nameEdt.text.contains(" ")) {
@@ -108,7 +110,7 @@ class RegisterFragment : Fragment() {
 
                 //  val call = service.register("info@gmaill.com" , "kljlksdf")
                 // val call = service.register(userData)
-                 val call = service.register("Ali", "haeiloo", "elin3kerpad", "989123981288", "alijaj34iloo@gmail.com", "123Jhg_987654")
+                val call = service.register("Ali", "haeiloo", "elin3kerpad", "989123981288", "alijaj34iloo@gmail.com", "123Jhg_987654")
                 //val call = service.register(userDataHashed)
                 try {
                     call.enqueue(object : retrofit2.Callback<RegisterResponse> {
@@ -136,9 +138,9 @@ class RegisterFragment : Fragment() {
                         }
                     })
                 } catch (e: Exception) {
-                   Toast.makeText(context ,"${e.printStackTrace().toString()}",Toast.LENGTH_LONG ).show()
-                    Toast.makeText(context ,"${e.printStackTrace().toString()}",Toast.LENGTH_LONG ).show()
-                    Toast.makeText(context ,"${e.printStackTrace().toString()}",Toast.LENGTH_LONG ).show()
+                    Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
                 }
 
 
@@ -146,9 +148,12 @@ class RegisterFragment : Fragment() {
         }
 
 
-        view.nameEdt.setOnClickListener {  var layoutParam : LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT , 1000)
-            view.registerSpace.layoutParams=layoutParam }
-
+     /*   view.nameEdt.setOnClickListener {
+            Toast.makeText(context , "edit" , Toast.LENGTH_SHORT).show()
+            var layoutParam: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 3000)
+            view.registerSpace.layoutParams=layoutParam
+        }
+*/
         /*if (view != null) {
             val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             if (imm.isAcceptingText){
@@ -161,7 +166,9 @@ class RegisterFragment : Fragment() {
 
         }*/
 
+
         return view
     }
+
 
 }
