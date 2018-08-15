@@ -13,15 +13,16 @@ import retrofit2.http.*
 interface IUserApi {
 
 
-    /* abstract fun register(@Body usersData: HashMap<String , String>):Call<RegisterResponse>*/
-    @FormUrlEncoded
+    @POST("api/account/register")
+    abstract fun register(@Body usersData: UsersData):Call<RegisterResponse>
+   /* @FormUrlEncoded
     @POST("api/account/register")
     abstract fun register(@Field("FirstName") FirstName: String,
                           @Field("LastName") LastName: String,
                           @Field("Company") Company: String,
                           @Field("MobileNumber") MobileNumber: String,
                           @Field("EmailAddress") EmailAddress: String,
-                          @Field("Password") Password: String): Call<RegisterResponse>
+                          @Field("Password") Password: String): Call<RegisterResponse>*/
     // abstract fun register(@Field("email")  email:String , @Field("password") password:String ): Call<RegisterResponse>
 
 

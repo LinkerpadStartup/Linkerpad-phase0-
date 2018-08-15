@@ -3,86 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="20dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#66000000"
-        android:orientation="vertical"
-        android:padding="10dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/inputLayoutEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:textColorHint="@color/black"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#66000000"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <EditText
-                android:id="@+id/emailEdt"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ایمیل"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                android:inputType="textEmailAddress">
-                <requestFocus/>
-            </EditText>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColorHint="@color/black">
+
+                <EditText
+                    android:id="@+id/emailEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ایمیل"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/white"
+                    android:textSize="14sp">
+
+                    <requestFocus />
+                </EditText>
+            </android.support.design.widget.TextInputLayout>
 
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/inputLayoutPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/black"
-            android:layout_margin="20dp">
-
-            <EditText
-                android:id="@+id/passwordEdt"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="رمز عبور"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_margin="20dp"
+                android:textColorHint="@color/black">
+
+                <EditText
+                    android:id="@+id/passwordEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="رمز عبور"
+                    android:inputType="textPassword"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/forgetPasswordTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:clickable="true"
+                android:text="رمز عبورم را فراموش کرده ام"
+                android:textColor="#80D8FF" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:clickable="true"
-            android:text="رمز عبورم را فراموش کرده ام"
-            android:textColor="#80D8FF" />
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/round_btn_primary"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="ورود"
+                android:textColor="#fff"
+                android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/round_btn_primary"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="ورود"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="250dp" />
-    </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

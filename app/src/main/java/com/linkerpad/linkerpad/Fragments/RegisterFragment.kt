@@ -1,5 +1,6 @@
 package com.linkerpad.linkerpad.Fragments
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -30,14 +31,49 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
 import javax.security.auth.callback.Callback
 import android.view.KeyEvent.KEYCODE_BACK
+import android.widget.EditText
+import butterknife.BindView
+import com.mobsandgeeks.saripaar.ValidationError
+import com.mobsandgeeks.saripaar.Validator
+import com.mobsandgeeks.saripaar.annotation.Email
+import com.mobsandgeeks.saripaar.annotation.NotEmpty
+import com.mobsandgeeks.saripaar.annotation.Password
+import com.mobsandgeeks.saripaar.annotation.Pattern
 
 
 /**
  * Created by alihajiloo on 7/30/18.
  */
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(), Validator.ValidationListener {
 
     private var userLogic: IUserLogic? = null
+
+    @NotEmpty
+    @BindView(R.id.nameEdt)
+    lateinit var nameEdt: EditText
+
+    @NotEmpty
+    @BindView(R.id.lastNameEdt)
+    lateinit var lastNameEdt: EditText
+
+    @NotEmpty
+    @Email
+    @BindView(R.id.emailEdt)
+    lateinit var emailEdt: EditText
+
+    @NotEmpty
+    @Pattern(regex = "^[09][0-9]{10}$")
+    @BindView(R.id.phoneEdt)
+    lateinit var phoneEdt: EditText
+
+    @BindView(R.id.companyEdt)
+    lateinit var companyEdt: EditText
+
+    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC)
+    @BindView(R.id.passwordEdt)
+    lateinit var passwordEdt: EditText
+
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,115 +81,29 @@ class RegisterFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+
         /* userLogic=UserLogic(IUserApi.Factory.create());
          userLogic!!.Register(UsersData("","","","","",""))*/
         var view: View = inflater.inflate(R.layout.register_fragment_layout, container, false)
+        initialize(view)
 
-        /*  val service:IUserApi = IWebApi.Factory.create()*/
-
-        val retrofit = retrofit2.Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://31.184.132.134/")
-                .build()
-
-        var service: IUserApi = retrofit.create(IUserApi::class.java)
+        var validator = Validator(this@RegisterFragment)
+        validator.setValidationListener(this@RegisterFragment)
 
         view.registerBtn.setOnClickListener {
-            if (!nameEdt.text.contains(" ")) {
-                Snackbar.make(view, "نام خانوادگی را وارد کنید!", Snackbar.LENGTH_LONG).show()
-            } else {
-                /*var iUserApi: IUserApi? = null
-                iUserApi = IWebApi.apiService
-                iUserApi!!.register(UsersData("Ali", "hajiloo", "linkerpad", "989123832387", "email@gmail.com", "1234567"))
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe ({
-                            result ->
-                            Toast.makeText(context, "There are ${result.toString()} Java developers in Lagos", Toast.LENGTH_SHORT).show()
-                        }, { error ->
-                            error.printStackTrace()
-                        })*/
 
-                var userData = UsersData("Ali", "hajiloo", "linkerpad", "989133832387", "emwr3ail@gmail.com", "123454367")
-                /* userData.FirstName ="ali"
-                 userData.LastName = "hashemi"
-                 userData.EmailAddress = "al234i@gmail.com"
-                 userData.Company= "Linkerpad323"
-                 userData.MobileNumber = "989149879899"
-                 userData.Password = "flia332f03"*/
+            validator.validate()
 
 
-                var userDataHashed = HashMap<String, String>()
-                userDataHashed.put("FirstName", "hossein")
-                userDataHashed.put("LastName", "Hosseinjaafl")
-                userDataHashed.put("Company", "Hossein3")
-                userDataHashed.put("MobileNumber", "989123456780")
-                userDataHashed.put("EmailAddress", "Hos6se3ein@gmail.com")
-                userDataHashed.put("Password", "Hosd23sein")
-
-
-                try {
-
-                } catch (e: JSONException) {
-
-                }
-                var jsonObject: JSONObject = JSONObject()
-                jsonObject.put("FirstName", "hossein")
-                jsonObject.put("LastName", "Hosinjaafl")
-                jsonObject.put("Company", "Hossein3")
-                jsonObject.put("MobileNumber", "989123456780")
-                jsonObject.put("EmailAddress", "Hos87sein@gmail.com")
-                jsonObject.put("Password", "Hosd23sein")
-
-
-                //  val call = service.register("info@gmaill.com" , "kljlksdf")
-                // val call = service.register(userData)
-                val call = service.register("Ali", "haeiloo", "elin3kerpad", "989123981288", "alijaj34iloo@gmail.com", "123Jhg_987654")
-                //val call = service.register(userDataHashed)
-                try {
-                    call.enqueue(object : retrofit2.Callback<RegisterResponse> {
-                        override fun onFailure(call: Call<RegisterResponse>?, t: Throwable?) {
-                            Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
-                            Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
-                        }
-
-                        override fun onResponse(call: Call<RegisterResponse>?, response: Response<RegisterResponse>?) {
-
-                            Toast.makeText(context, "body(token): ${response!!.body().toString()} -" +
-                                    " message: ${response.message()} - raw: ${response.raw()} -" +
-                                    " code:${response.code()} -header:  - error:${response.errorBody().toString()} - " +
-                                    "success:${response.isSuccessful}", Toast.LENGTH_LONG).show()
-                            Toast.makeText(context, "body(token): ${response!!.body().toString()} -" +
-                                    " message: ${response.message()} - raw: ${response.raw()} -" +
-                                    " code:${response.code()} -header:  - error:${response.errorBody().toString()} - " +
-                                    "success:${response.isSuccessful}", Toast.LENGTH_LONG).show()
-                            Toast.makeText(context, "body(token): ${response!!.body().toString()} -" +
-                                    " message: ${response.message()} - raw: ${response.raw()} -" +
-                                    " code:${response.code()} -header:  - error:${response.errorBody().toString()} - " +
-                                    "success:${response.isSuccessful}", Toast.LENGTH_LONG).show()
-
-                        }
-                    })
-                } catch (e: Exception) {
-                    Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
-                    Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
-                    Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
-                }
-
-
-            }
         }
 
 
-     /*   view.nameEdt.setOnClickListener {
-            Toast.makeText(context , "edit" , Toast.LENGTH_SHORT).show()
-            var layoutParam: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 3000)
-            view.registerSpace.layoutParams=layoutParam
-        }
-*/
+        /*   view.nameEdt.setOnClickListener {
+               Toast.makeText(context , "edit" , Toast.LENGTH_SHORT).show()
+               var layoutParam: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 3000)
+               view.registerSpace.layoutParams=layoutParam
+           }
+   */
         /*if (view != null) {
             val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             if (imm.isAcceptingText){
@@ -168,6 +118,102 @@ class RegisterFragment : Fragment() {
 
 
         return view
+    }
+
+    private fun initialize(view: View) {
+        nameEdt = view.findViewById(R.id.nameEdt) as EditText
+        lastNameEdt = view.findViewById(R.id.lastNameEdt) as EditText
+        emailEdt = view.findViewById(R.id.emailEdt) as EditText
+        phoneEdt = view.findViewById(R.id.phoneEdt) as EditText
+        companyEdt = view.findViewById(R.id.companyEdt) as EditText
+        passwordEdt = view.findViewById(R.id.passwordEdt) as EditText
+
+    }
+
+
+    private fun setupProgress() {
+        progressDialog = ProgressDialog(context)
+        progressDialog.setMessage("لطفا شکیبا باشید")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+    }
+
+    override fun onValidationFailed(errors: MutableList<ValidationError>?) {
+        for (error: ValidationError in errors!!) {
+            val view: View = error.view
+            val message = error.getCollatedErrorMessage(context)
+
+            if (view == nameEdt) {
+                nameEdt.error = "اجباری"
+            } else if (view == lastNameEdt) {
+                lastNameEdt.error = "نام خانوادگی اجباری"
+            } else if (view == emailEdt) {
+                if (emailEdt.text.toString() == "")
+                    emailEdt.error = "اجباری"
+                else
+                    emailEdt.error = "فرمت نادرست"
+            } else if (view == phoneEdt) {
+                phoneEdt.error = "فرمت نادرست"
+
+            } else if (view == companyEdt) {
+
+            } else if (view == passwordEdt) {
+                passwordEdt.error = "حداقل ۶ کاراکتر"
+            }
+        }
+
+
+    }
+
+    override fun onValidationSucceeded() {
+
+        setupProgress()
+
+        var userData = UsersData(nameEdt.text.toString(),
+                lastNameEdt.text.toString(),
+                companyEdt.text.toString(),
+                "98" + phoneEdt.text.toString().substring(1),
+                emailEdt.text.toString(),
+                passwordEdt.text.toString())
+
+        Toast.makeText(context, "98" + phoneEdt.text.toString().substring(1), Toast.LENGTH_SHORT).show()
+        val service: IUserApi = IWebApi.Factory.create()
+        val call = service.register(userData)
+
+        try {
+            call.enqueue(object : retrofit2.Callback<RegisterResponse> {
+                override fun onFailure(call: Call<RegisterResponse>?, t: Throwable?) {
+                    progressDialog.dismiss()
+                    Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<RegisterResponse>?, response: Response<RegisterResponse>?) {
+                    progressDialog.dismiss()
+
+                    if (response!!.code() == 200) {
+                        nameEdt.text.clear()
+                        lastNameEdt.text.clear()
+                        emailEdt.text.clear()
+                        phoneEdt.text.clear()
+                        companyEdt.text.clear()
+                        passwordEdt.text.clear()
+
+                     /*   var registerResponse: RegisterResponse? = response.body()
+                        Toast.makeText(context, "${registerResponse!!.message}", Toast.LENGTH_LONG).show()*/
+
+                    } else if (response!!.code() == 409) {
+                        Toast.makeText(context, "خطا، ایمیل شما تکراری است.", Toast.LENGTH_LONG).show()
+                    } else if (response!!.code() == 400) {
+                        Toast.makeText(context, "خطا، مقادیر ارسالی صحیح نمی باشد.", Toast.LENGTH_LONG).show()
+                    }
+
+
+                }
+            })
+        } catch (e: Exception) {
+            Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
+        }
+
     }
 
 
