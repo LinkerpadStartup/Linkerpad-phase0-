@@ -15,8 +15,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.app.Activity
 import android.graphics.Typeface
 import android.support.v4.content.ContextCompat.getSystemService
+import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
-
+import android.widget.TextView
+import kotlinx.android.synthetic.main.custom_tab.*
+import kotlinx.android.synthetic.main.custom_tab.view.*
 
 
 class RegLoginHolderActivity : AppCompatActivity() {
@@ -141,6 +144,11 @@ class RegLoginHolderActivity : AppCompatActivity() {
             container.removeAllViews()
         }
 
+        var view:View = LayoutInflater.from(this@RegLoginHolderActivity).inflate(R.layout.custom_tab,tabs , false)
+        view.tabTv.setTypeface(Typeface.createFromAsset(assets , "IRANSansWeb(FaNum)_Light.ttf"))
+        tabs.getTabAt(0)!!.setCustomView(view.tabTv)
+
+        tabs.getTabAt(1)!!.setCustomView(view.tabTv)
 
     }
 
