@@ -2,6 +2,7 @@ package com.linkerpad.linkerpad.Fragments
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.linkerpad.linkerpad.Data.RegisterResponse
 import com.linkerpad.linkerpad.Data.UsersData
 import com.linkerpad.linkerpad.Data.UsersDataLogin
 import com.linkerpad.linkerpad.ForgetPasswordActivity
+import com.linkerpad.linkerpad.MainActivity
 import com.linkerpad.linkerpad.R
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
@@ -130,6 +132,20 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         passwordEdt.text.clear()
 
                         var loginResponse: LoginResponse? = response.body()
+
+                        var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
+                        var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+                        sharedPreferencesEditor.putString("token", loginResponse!!.responseObject.token)
+                        sharedPreferencesEditor.putString("username", loginResponse!!.responseObject.userInformationViewModel.emailAddress)
+                        sharedPreferencesEditor.apply()
+                        sharedPreferencesEditor.commit()
+
+                        var intent = Intent(context, MainActivity::class.java)
+                        intent.putExtra("firstName", loginResponse!!.responseObject.userInformationViewModel.firstName)
+                        intent.putExtra("lastName", loginResponse!!.responseObject.userInformationViewModel.lastName)
+                        intent.putExtra("email", loginResponse!!.responseObject.userInformationViewModel.emailAddress)
+                        startActivity(intent)
+
 
                     } else if (response!!.code() == 409) {
                         Toast.makeText(context, "خطا، ایمیل شما تکراری است.", Toast.LENGTH_LONG).show()

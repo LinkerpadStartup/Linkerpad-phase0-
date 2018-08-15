@@ -12,6 +12,7 @@ import com.linkerpad.linkerpad.Fragments.ProjectsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelectedListener*/ {
@@ -25,6 +26,11 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         setupViewPager(mainPager)
         tabs.setupWithViewPager(mainPager)
         mainPager.setCurrentItem(1, true)
+
+
+
+        headerNameTv.setText(intent.getStringExtra("firstName")+" "+intent.getStringExtra("lastName"))
+        headerEmailTv.setText(intent.getStringExtra("email")+"")
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
