@@ -1,7 +1,11 @@
 package com.linkerpad.linkerpad.Data
 
+import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.linkerpad.linkerpad.Models.ResponseObject
+import org.json.JSONObject
+import java.io.Reader
 import java.util.*
 
 /**
@@ -43,6 +47,5 @@ class LoginResponse {
     var message: String = ""
 
     @SerializedName("responseObject")
-    var responseObject: Objects? = null
+    lateinit var responseObject:ResponseObject
 }
-
