@@ -3,8 +3,13 @@ package com.linkerpad.linkerpad.Fragments
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.ColorFilter
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +19,11 @@ import butterknife.BindView
 import com.google.gson.Gson
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
-import com.linkerpad.linkerpad.Data.LoginResponse
-import com.linkerpad.linkerpad.Data.RegisterResponse
-import com.linkerpad.linkerpad.Data.UsersData
-import com.linkerpad.linkerpad.Data.UsersDataLogin
+import com.linkerpad.linkerpad.Data.*
 import com.linkerpad.linkerpad.ForgetPasswordActivity
 import com.linkerpad.linkerpad.MainActivity
 import com.linkerpad.linkerpad.R
+import com.linkerpad.linkerpad.RegLoginHolderActivity
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
@@ -72,6 +75,17 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
             startActivity(intent)
         }
 
+        var visibility = Visibility.InVisible
+        passwordEdt.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        view.seePasswordImv.setOnClickListener {
+            if (visibility == Visibility.InVisible) {
+                passwordEdt.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                visibility = Visibility.Visible
+            } else {
+                passwordEdt.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                visibility = Visibility.InVisible
+            }
+        }
 
 
         return view
@@ -81,6 +95,8 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
         progressDialog = ProgressDialog(context)
         progressDialog.setMessage("لطفا شکیبا باشید")
         progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate = true
+        progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
         progressDialog.show()
     }
 
@@ -120,7 +136,8 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
             call.enqueue(object : retrofit2.Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>?, t: Throwable?) {
                     progressDialog.dismiss()
-                    Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(this@LoginFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
@@ -136,21 +153,23 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
                         var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
                         sharedPreferencesEditor.putString("token", loginResponse!!.responseObject.token)
-                        sharedPreferencesEditor.putString("username", loginResponse!!.responseObject.userInformationViewModel.emailAddress)
+                        sharedPreferencesEditor.putString("username", loginResponse.responseObject.userInformationViewModel.emailAddress)
                         sharedPreferencesEditor.apply()
                         sharedPreferencesEditor.commit()
 
                         var intent = Intent(context, MainActivity::class.java)
-                        intent.putExtra("firstName", loginResponse!!.responseObject.userInformationViewModel.firstName)
-                        intent.putExtra("lastName", loginResponse!!.responseObject.userInformationViewModel.lastName)
-                        intent.putExtra("email", loginResponse!!.responseObject.userInformationViewModel.emailAddress)
+                        intent.putExtra("firstName", loginResponse.responseObject.userInformationViewModel.firstName)
+                        intent.putExtra("lastName", loginResponse.responseObject.userInformationViewModel.lastName)
+                        intent.putExtra("email", loginResponse.responseObject.userInformationViewModel.emailAddress)
                         startActivity(intent)
 
 
-                    } else if (response!!.code() == 409) {
-                        Toast.makeText(context, "خطا، ایمیل شما تکراری است.", Toast.LENGTH_LONG).show()
-                    } else if (response!!.code() == 400) {
-                        Toast.makeText(context, "خطا، مقادیر ارسالی صحیح نمی باشد.", Toast.LENGTH_LONG).show()
+                    } else if (response.code() == 409) {
+                        Snackbar.make(this@LoginFragment.view!!, "خطا، ایمیل شما تکراری است.", Snackbar.LENGTH_LONG).show()
+                      //  Toast.makeText(context, "خطا، ایمیل شما تکراری است.", Toast.LENGTH_LONG).show()
+                    } else if (response.code() == 400) {
+                        Snackbar.make(this@LoginFragment.view!!, "خطا، مقادیر ارسالی صحیح نمی باشد.", Snackbar.LENGTH_LONG).show()
+                      //  Toast.makeText(context, "خطا، مقادیر ارسالی صحیح نمی باشد.", Toast.LENGTH_LONG).show()
                     }
 
 

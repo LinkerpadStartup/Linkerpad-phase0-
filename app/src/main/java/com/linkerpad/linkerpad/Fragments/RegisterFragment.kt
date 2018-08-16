@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat.getSystemService
+import android.support.v7.app.AlertDialog
+import android.text.InputType
+import android.text.InputType.TYPE_CLASS_TEXT
+import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +37,7 @@ import javax.security.auth.callback.Callback
 import android.view.KeyEvent.KEYCODE_BACK
 import android.widget.EditText
 import butterknife.BindView
+import com.linkerpad.linkerpad.Data.Visibility
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
@@ -94,7 +99,19 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
 
             validator.validate()
 
+        }
 
+
+        var visibility = Visibility.InVisible
+        passwordEdt.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        view.seePasswordImv.setOnClickListener {
+            if (visibility == Visibility.InVisible) {
+                passwordEdt.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                visibility = Visibility.Visible
+            } else {
+                passwordEdt.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                visibility = Visibility.InVisible
+            }
         }
 
 
@@ -135,6 +152,8 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
         progressDialog = ProgressDialog(context)
         progressDialog.setMessage("لطفا شکیبا باشید")
         progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate = true
+        progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
         progressDialog.show()
     }
 
@@ -184,7 +203,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
             call.enqueue(object : retrofit2.Callback<RegisterResponse> {
                 override fun onFailure(call: Call<RegisterResponse>?, t: Throwable?) {
                     progressDialog.dismiss()
-                    Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(this@RegisterFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<RegisterResponse>?, response: Response<RegisterResponse>?) {
@@ -198,13 +217,20 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
                         companyEdt.text.clear()
                         passwordEdt.text.clear()
 
-                     /*   var registerResponse: RegisterResponse? = response.body()
-                        Toast.makeText(context, "${registerResponse!!.message}", Toast.LENGTH_LONG).show()*/
+                        AlertDialog.Builder(context!!)
+                                .setMessage("ثبت نام با موفقیت انجام شد.هم اکنون میتوانید با ایمیل خود وارد شوید!")
+                                .setPositiveButton("باشه",{dialog , view ->
+                                    dialog.dismiss()
+                                })
+                                .create()
+                                .show()
+                        /*   var registerResponse: RegisterResponse? = response.body()
+                           Toast.makeText(context, "${registerResponse!!.message}", Toast.LENGTH_LONG).show()*/
 
-                    } else if (response!!.code() == 409) {
-                        Toast.makeText(context, "خطا، ایمیل شما تکراری است.", Toast.LENGTH_LONG).show()
-                    } else if (response!!.code() == 400) {
-                        Toast.makeText(context, "خطا، مقادیر ارسالی صحیح نمی باشد.", Toast.LENGTH_LONG).show()
+                    } else if (response.code() == 409) {
+                        Snackbar.make(this@RegisterFragment.view!!, "خطا، ایمیل شما تکراری است.", Snackbar.LENGTH_LONG).show()
+                    } else if (response.code() == 400) {
+                        Snackbar.make(this@RegisterFragment.view!!, "خطا، مقادیر ارسالی صحیح نمی باشد.", Snackbar.LENGTH_LONG).show()
                     }
 
 

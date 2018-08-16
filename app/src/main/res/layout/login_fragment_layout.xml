@@ -41,22 +41,41 @@
             </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputLayoutPassword"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:textColorHint="@color/black">
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/passwordEdt"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/inputLayoutPassword"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="رمز عبور"
-                    android:inputType="textPassword"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:textColorHint="@color/black">
+
+                    <EditText
+                        android:id="@+id/passwordEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:hint="رمز عبور"
+                        android:textColor="@color/white"
+                        android:textSize="14dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/seePasswordImv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    app:srcCompat="@drawable/eye_gray" />
+
+            </LinearLayout>
 
 
             <TextView

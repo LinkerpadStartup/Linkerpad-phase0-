@@ -25,3 +25,11 @@ enum class DateType(val value: Int) {
         }
     }
 }
+
+enum class Visibility(val value: Int) {
+    Visible(0),
+    InVisible(1);
+}
+
+
+

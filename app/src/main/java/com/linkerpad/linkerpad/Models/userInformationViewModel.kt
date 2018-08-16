@@ -4,7 +4,7 @@ import com.linkerpad.linkerpad.Data.UsersData
 import java.util.*
 
 
-data class userInformationViewModel(var firstName: String, var lastName: String, var profilePicture: Base64?, var emailAddress: String, var mobileNumber: String, var company: String)
+data class userInformationViewModel(var firstName: String, var lastName: String, var profilePicture: Any?=null, var emailAddress: String, var mobileNumber: String, var company: String)
 /**
  * Created by alihajiloo on 7/31/18.
  */
