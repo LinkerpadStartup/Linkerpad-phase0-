@@ -44,6 +44,7 @@ import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Password
 import com.mobsandgeeks.saripaar.annotation.Pattern
+import kotlinx.android.synthetic.main.reg_login_holder_layout.*
 
 
 /**
@@ -195,7 +196,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
                 emailEdt.text.toString(),
                 passwordEdt.text.toString())
 
-        Toast.makeText(context, "98" + phoneEdt.text.toString().substring(1), Toast.LENGTH_SHORT).show()
+       // Toast.makeText(context, "98" + phoneEdt.text.toString().substring(1), Toast.LENGTH_SHORT).show()
         val service: IUserApi = IWebApi.Factory.create()
         val call = service.register(userData)
 
@@ -217,13 +218,17 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
                         companyEdt.text.clear()
                         passwordEdt.text.clear()
 
-                        AlertDialog.Builder(context!!)
+                        AlertDialog.Builder(context!!, R.style.AlertDialogTheme)
                                 .setMessage("ثبت نام با موفقیت انجام شد.هم اکنون میتوانید با ایمیل خود وارد شوید!")
                                 .setPositiveButton("باشه",{dialog , view ->
                                     dialog.dismiss()
+
                                 })
                                 .create()
                                 .show()
+
+                        // change view pager within fragment
+                        activity!!.container.setCurrentItem(0)
                         /*   var registerResponse: RegisterResponse? = response.body()
                            Toast.makeText(context, "${registerResponse!!.message}", Toast.LENGTH_LONG).show()*/
 

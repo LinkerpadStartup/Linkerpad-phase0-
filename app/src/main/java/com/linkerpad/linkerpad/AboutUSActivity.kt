@@ -17,12 +17,10 @@ class AboutUSActivity : AppCompatActivity() {
 
         logoTv.setTypeface(Typeface.createFromAsset(assets,"Vazir-Bold.ttf"))
 
+
         //back click
         aboutUsBackIcon.setOnClickListener { this@AboutUSActivity.finish()}
     }
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
-    }
 
 }

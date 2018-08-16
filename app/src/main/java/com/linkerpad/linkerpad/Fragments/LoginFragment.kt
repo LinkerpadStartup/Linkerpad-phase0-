@@ -157,11 +157,15 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         sharedPreferencesEditor.apply()
                         sharedPreferencesEditor.commit()
 
+                        activity!!.finish()
+
                         var intent = Intent(context, MainActivity::class.java)
                         intent.putExtra("firstName", loginResponse.responseObject.userInformationViewModel.firstName)
                         intent.putExtra("lastName", loginResponse.responseObject.userInformationViewModel.lastName)
                         intent.putExtra("email", loginResponse.responseObject.userInformationViewModel.emailAddress)
                         startActivity(intent)
+
+
 
 
                     } else if (response.code() == 409) {

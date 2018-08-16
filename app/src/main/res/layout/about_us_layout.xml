@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.linkerpad.linkerpad.AboutUSActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -44,6 +44,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/iransans_web_light"
                     android:gravity="center_vertical"
                     android:text="درباره لینکرپد"
                     android:textColor="@color/white"
@@ -83,10 +84,11 @@
                     android:src="@drawable/logo" />
 
                 <TextView
+                    android:id="@+id/logoTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/vazir_bold"
                     android:gravity="center"
-                    android:id="@+id/logoTv"
                     android:paddingBottom="5dp"
                     android:text="لینکِرپَد"
                     android:textColor="#000"
@@ -97,6 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/iransans_web_light"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:text="نسخه ۲.۱.۷"
@@ -109,28 +112,29 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_web_light"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:padding="16dp"
                 android:text="@string/aboutUS"
                 android:textColor="@color/gray900"
-                android:textSize="16sp"
-                android:padding="16dp"
-                android:lineSpacingExtra="4dp"
-                android:gravity="center" />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="با لینکرپد پروژه همیشه در دستان شماست"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:padding="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/rounded_back_primary"
                 android:layout_marginBottom="40dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
                 android:layout_marginTop="24dp"
-                android:gravity="center" />
-
+                android:fontFamily="@font/vazir_bold"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="با لینکرپد پروژه همیشه در دستان شماست"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
