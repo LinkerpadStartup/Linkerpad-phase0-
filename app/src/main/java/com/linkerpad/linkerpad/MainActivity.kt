@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
 
 
-        headerNameTv.setText(intent.getStringExtra("firstName")+" "+intent.getStringExtra("lastName"))
-        headerEmailTv.setText(intent.getStringExtra("email")+"")
+        headerNameTv.setText(intent.getStringExtra("firstName") + " " + intent.getStringExtra("lastName"))
+        headerEmailTv.setText(intent.getStringExtra("email") + "")
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = RegLoginPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ProjectsFragment(), "داشبورد")
+        /**phase-1**/  /* adapter.addFragment(ProjectsFragment(), "داشبورد")*/
         adapter.addFragment(ProjectsFragment(), "پروژه ها")
         viewPager.adapter = adapter
 

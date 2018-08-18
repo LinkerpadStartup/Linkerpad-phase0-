@@ -17,7 +17,10 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegLoginHolderActivity"
@@ -25,11 +28,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.White.Accent.NoActionBar"
             android:windowSoftInputMode="adjustNothing|stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AccountInfoActivity"

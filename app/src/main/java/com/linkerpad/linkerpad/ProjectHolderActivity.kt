@@ -123,7 +123,7 @@ class ProjectHolderActivity : AppCompatActivity() {
 
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.dataRequestNv -> {
+           /* R.id.dataRequestNv -> {
 
                 searchDocIcon.visibility = View.INVISIBLE
                 searchReqDataIcon.visibility = View.VISIBLE
@@ -142,9 +142,9 @@ class ProjectHolderActivity : AppCompatActivity() {
                     fragmentTransaction.replace(R.id.projectsFrameLayout, DataRequestFragment()).commit()
                     nvPosition = 3
                 } else if (nvPosition == 3) {
-                    /*fragmentTransaction.remove(DataRequestFragment())
+                    *//*fragmentTransaction.remove(DataRequestFragment())
                     fragmentTransaction.hide(DataRequestFragment())
-                    fragmentTransaction.replace(R.id.projectsFrameLayout, DataRequestFragment()).commit()*/
+                    fragmentTransaction.replace(R.id.projectsFrameLayout, DataRequestFragment()).commit()*//*
                     nvPosition = 3
                 }
 
@@ -172,7 +172,7 @@ class ProjectHolderActivity : AppCompatActivity() {
                     moreCount = 0
                 }
 
-            }
+            }*/
 
         }
         false

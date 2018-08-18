@@ -17,11 +17,14 @@ import android.widget.EditText
 import android.widget.Toast
 import butterknife.BindView
 import com.google.gson.Gson
+import com.linkerpad.linkerpad.ApiData.input.LoginBody
+import com.linkerpad.linkerpad.ApiData.output.LoginResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Data.*
 import com.linkerpad.linkerpad.ForgetPasswordActivity
 import com.linkerpad.linkerpad.MainActivity
+import com.linkerpad.linkerpad.Models.UserInformationViewModel
 import com.linkerpad.linkerpad.R
 import com.linkerpad.linkerpad.RegLoginHolderActivity
 import com.mobsandgeeks.saripaar.ValidationError
@@ -48,7 +51,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
     lateinit var emailEdt: EditText
 
     @NotEmpty
-    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC)
+    @Password(min = 6, scheme = Password.Scheme.NUMERIC)
     @BindView(R.id.passwordEdt)
     lateinit var passwordEdt: EditText
 
@@ -125,18 +128,18 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
 
         setupProgress()
 
-        var usersDataLogin = UsersDataLogin(
+        var loginBody: LoginBody = UserInformationViewModel.setUsernamePassword(
                 emailEdt.text.toString(),
                 passwordEdt.text.toString())
 
         val service: IUserApi = IWebApi.Factory.create()
-        val call = service.login(usersDataLogin)
+        val call = service.login(loginBody = loginBody)
 
         try {
             call.enqueue(object : retrofit2.Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>?, t: Throwable?) {
                     progressDialog.dismiss()
-                  //  Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
+                    //  Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
                     Snackbar.make(this@LoginFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
                 }
 
@@ -150,30 +153,39 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
 
                         var loginResponse: LoginResponse? = response.body()
 
+
+
+                        val loginOutputData = UserInformationViewModel.getUserInformation(LoginOutputData(
+                                loginResponse!!.status,
+                                loginResponse.message,
+                                loginResponse.responseObject.token,
+                                loginResponse.responseObject.expirationDate,
+                                loginResponse.responseObject.userInformationViewModel
+                        ))
+                        Toast.makeText(context, loginOutputData.status + "", Toast.LENGTH_LONG).show()
+
                         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
                         var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-                        sharedPreferencesEditor.putString("token", loginResponse!!.responseObject.token)
-                        sharedPreferencesEditor.putString("username", loginResponse.responseObject.userInformationViewModel.emailAddress)
+                        sharedPreferencesEditor.putString("token", loginOutputData.token)
+                        sharedPreferencesEditor.putString("username", loginOutputData.emailAddress)
                         sharedPreferencesEditor.apply()
                         sharedPreferencesEditor.commit()
 
                         activity!!.finish()
 
                         var intent = Intent(context, MainActivity::class.java)
-                        intent.putExtra("firstName", loginResponse.responseObject.userInformationViewModel.firstName)
-                        intent.putExtra("lastName", loginResponse.responseObject.userInformationViewModel.lastName)
-                        intent.putExtra("email", loginResponse.responseObject.userInformationViewModel.emailAddress)
+                        intent.putExtra("firstName", loginOutputData.firstName)
+                        intent.putExtra("lastName", loginOutputData.lastName)
+                        intent.putExtra("email", loginOutputData.emailAddress)
                         startActivity(intent)
-
-
 
 
                     } else if (response.code() == 409) {
                         Snackbar.make(this@LoginFragment.view!!, "خطا، ایمیل شما تکراری است.", Snackbar.LENGTH_LONG).show()
-                      //  Toast.makeText(context, "خطا، ایمیل شما تکراری است.", Toast.LENGTH_LONG).show()
+                        //  Toast.makeText(context, "خطا، ایمیل شما تکراری است.", Toast.LENGTH_LONG).show()
                     } else if (response.code() == 400) {
                         Snackbar.make(this@LoginFragment.view!!, "خطا، مقادیر ارسالی صحیح نمی باشد.", Snackbar.LENGTH_LONG).show()
-                      //  Toast.makeText(context, "خطا، مقادیر ارسالی صحیح نمی باشد.", Toast.LENGTH_LONG).show()
+                        //  Toast.makeText(context, "خطا، مقادیر ارسالی صحیح نمی باشد.", Toast.LENGTH_LONG).show()
                     }
 
 

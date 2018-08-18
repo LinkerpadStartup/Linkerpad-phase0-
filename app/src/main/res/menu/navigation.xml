@@ -9,6 +9,12 @@
 
     <item
         android:id="@+id/documentsNv"
+        android:icon="@drawable/ic_group"
+        android:title="تیم" />
+
+
+   <!-- phase-1 <item
+        android:id="@+id/documentsNv"
         android:icon="@drawable/ic_insert_drive_file"
         android:title="مدارک" />
 
@@ -21,7 +27,7 @@
     <item
         android:id="@+id/moreNv"
         android:icon="@drawable/ic_more_vert"
-        tools:ignore="MenuTitle" />
+        tools:ignore="MenuTitle" /-->>
 
 
 </menu>

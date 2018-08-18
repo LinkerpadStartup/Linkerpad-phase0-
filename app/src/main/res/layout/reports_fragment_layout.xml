@@ -26,12 +26,14 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="8dp"
                     app:srcCompat="@drawable/ic_assignment" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -62,6 +64,7 @@
                     android:layout_gravity="center"
                     android:padding="8dp"
                     app:srcCompat="@drawable/ic_info_outline" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -84,13 +87,15 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="8dp"
-                    android:text=" 🏗 "
+                    android:text="🏗 "
                     android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -114,6 +119,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -121,6 +127,7 @@
                     android:padding="8dp"
                     android:text=" ⛏ "
                     android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -133,6 +140,38 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:textSize="18sp"
+                    app:srcCompat="@drawable/ic_edit" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="یادداشت، اتفاقات"
+                    android:textColor="@color/gray900"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

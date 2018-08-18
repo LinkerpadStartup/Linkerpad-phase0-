@@ -18,10 +18,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.linkerpad.linkerpad.Business.IUserApi
-import com.linkerpad.linkerpad.Business.IUserLogic
 import com.linkerpad.linkerpad.Business.IWebApi
-import com.linkerpad.linkerpad.Data.RegisterResponse
-import com.linkerpad.linkerpad.Data.UsersData
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.register_fragment_layout.*
 import kotlinx.android.synthetic.main.register_fragment_layout.view.*
@@ -37,7 +34,11 @@ import javax.security.auth.callback.Callback
 import android.view.KeyEvent.KEYCODE_BACK
 import android.widget.EditText
 import butterknife.BindView
+import com.linkerpad.linkerpad.ApiData.input.RegisterBody
+import com.linkerpad.linkerpad.ApiData.output.RegisterResponse
+import com.linkerpad.linkerpad.Data.UserRegisterData
 import com.linkerpad.linkerpad.Data.Visibility
+import com.linkerpad.linkerpad.Models.UserInformationViewModel
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
@@ -52,7 +53,7 @@ import kotlinx.android.synthetic.main.reg_login_holder_layout.*
  */
 class RegisterFragment : Fragment(), Validator.ValidationListener {
 
-    private var userLogic: IUserLogic? = null
+    /* private var userLogic: IUserLogic? = null*/
 
     @NotEmpty
     @BindView(R.id.nameEdt)
@@ -75,7 +76,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
     @BindView(R.id.companyEdt)
     lateinit var companyEdt: EditText
 
-    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC)
+    @Password(min = 6, scheme = Password.Scheme.NUMERIC)
     @BindView(R.id.passwordEdt)
     lateinit var passwordEdt: EditText
 
@@ -189,16 +190,24 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
 
         setupProgress()
 
-        var userData = UsersData(nameEdt.text.toString(),
-                lastNameEdt.text.toString(),
-                companyEdt.text.toString(),
-                "98" + phoneEdt.text.toString().substring(1),
-                emailEdt.text.toString(),
-                passwordEdt.text.toString())
+         var registerBody:RegisterBody = UserInformationViewModel.setRegisterInformation(UserInformationViewModel(
+                 firstName = nameEdt.text.toString(),
+                 lastName = lastNameEdt.text.toString(),
+                 company = companyEdt.text.toString(),
+                 mobileNumber = "98" + phoneEdt.text.toString().substring(1),
+                 emailAddress = emailEdt.text.toString(),
+                 token = "",
+                 profilePicture = null,
+                 expirationDate = "",
+                 message = "",
+                 status = "",
+                 password = passwordEdt.text.toString()))
 
-       // Toast.makeText(context, "98" + phoneEdt.text.toString().substring(1), Toast.LENGTH_SHORT).show()
+
+
+        // Toast.makeText(context, "98" + phoneEdt.text.toString().substring(1), Toast.LENGTH_SHORT).show()
         val service: IUserApi = IWebApi.Factory.create()
-        val call = service.register(userData)
+        val call = service.register(registerBody = registerBody)
 
         try {
             call.enqueue(object : retrofit2.Callback<RegisterResponse> {
@@ -220,7 +229,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
 
                         AlertDialog.Builder(context!!, R.style.AlertDialogTheme)
                                 .setMessage("ثبت نام با موفقیت انجام شد.هم اکنون میتوانید با ایمیل خود وارد شوید!")
-                                .setPositiveButton("باشه",{dialog , view ->
+                                .setPositiveButton("باشه", { dialog, view ->
                                     dialog.dismiss()
 
                                 })

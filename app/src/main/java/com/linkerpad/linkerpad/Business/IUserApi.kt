@@ -1,10 +1,10 @@
 package com.linkerpad.linkerpad.Business
 
-import com.linkerpad.linkerpad.Data.LoginResponse
-import com.linkerpad.linkerpad.Data.RegisterResponse
-import com.linkerpad.linkerpad.Data.UsersData
-import com.linkerpad.linkerpad.Data.UsersDataLogin
-import org.json.JSONObject
+
+import com.linkerpad.linkerpad.ApiData.input.LoginBody
+import com.linkerpad.linkerpad.ApiData.input.RegisterBody
+import com.linkerpad.linkerpad.ApiData.output.LoginResponse
+import com.linkerpad.linkerpad.ApiData.output.RegisterResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -15,10 +15,10 @@ import retrofit2.http.*
 interface IUserApi {
 
     @POST("api/account/register")
-    abstract fun register(@Body usersData: UsersData): Call<RegisterResponse>
+    fun register(@Body registerBody: RegisterBody): Call<RegisterResponse>
 
     @POST("api/account/Login")
-    abstract fun login(@Body usersDataLogin: UsersDataLogin): Call<LoginResponse>
+    fun login(@Body loginBody: LoginBody): Call<LoginResponse>
 
     /* @FormUrlEncoded
      @POST("api/account/register")
