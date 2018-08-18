@@ -27,9 +27,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.White.Accent.NoActionBar"
-            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
         <activity
             android:name=".AccountInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -64,8 +62,27 @@
         <activity
             android:name=".AboutUSActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ForgetPasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar.Dialog"/>
+        <activity
+            android:name=".ForgetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar.Dialog" />
+        <activity
+            android:name=".DoneActivitiesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddDoneActivitiesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditDoneActivitiesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MachineryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddMachineryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditMachineryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

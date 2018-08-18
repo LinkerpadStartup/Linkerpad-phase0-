@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import com.linkerpad.linkerpad.Fragments.DataRequestFragment
 import com.linkerpad.linkerpad.Fragments.DocumentsFragment
 import com.linkerpad.linkerpad.Fragments.ReportsFragment
+import com.linkerpad.linkerpad.Fragments.TeamFragment
 import kotlinx.android.synthetic.main.project_holder_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -58,17 +59,17 @@ class ProjectHolderActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.reportsNv -> {
 
-                searchDocIcon.visibility = View.INVISIBLE
+               /*phase-1 searchDocIcon.visibility = View.INVISIBLE
                 searchReqDataIcon.visibility = View.INVISIBLE
                 filterReqDataIcon.visibility = View.INVISIBLE
                 sortReqDataIcon.visibility = View.INVISIBLE
-                addReqDataIcon.visibility = View.INVISIBLE
+                addReqDataIcon.visibility = View.INVISIBLE*/
 
                 if (nvPosition == 1) {
                     /*fragmentTransaction.replace(R.id.projectsFrameLayout, ReportsFragment()).commit()*/
                 } else if (nvPosition == 2) {
-                    fragmentTransaction.remove(DocumentsFragment())
-                    fragmentTransaction.hide(DocumentsFragment())
+                    fragmentTransaction.remove(TeamFragment())
+                    fragmentTransaction.hide(TeamFragment())
                     fragmentTransaction.replace(R.id.projectsFrameLayout, ReportsFragment()).commit()
                     nvPosition = 1
                 } else if (nvPosition == 3) {
@@ -90,16 +91,16 @@ class ProjectHolderActivity : AppCompatActivity() {
             }
             R.id.documentsNv -> {
 
-                searchDocIcon.visibility = View.VISIBLE
+               /*phase-1 searchDocIcon.visibility = View.VISIBLE
                 searchReqDataIcon.visibility = View.INVISIBLE
                 filterReqDataIcon.visibility = View.INVISIBLE
                 sortReqDataIcon.visibility = View.INVISIBLE
-                addReqDataIcon.visibility = View.INVISIBLE
+                addReqDataIcon.visibility = View.INVISIBLE*/
 
                 if (nvPosition == 1) {
                     fragmentTransaction.remove(ReportsFragment())
                     fragmentTransaction.hide(ReportsFragment())
-                    fragmentTransaction.replace(R.id.projectsFrameLayout, DocumentsFragment()).commit()
+                    fragmentTransaction.replace(R.id.projectsFrameLayout, TeamFragment()).commit()
                     nvPosition = 2
                 } else if (nvPosition == 2) {
                     /*  fragmentTransaction.remove(DocumentsFragment())
@@ -109,7 +110,7 @@ class ProjectHolderActivity : AppCompatActivity() {
                 } else if (nvPosition == 3) {
                     fragmentTransaction.remove(DataRequestFragment())
                     fragmentTransaction.hide(DataRequestFragment())
-                    fragmentTransaction.replace(R.id.projectsFrameLayout, DocumentsFragment()).commit()
+                    fragmentTransaction.replace(R.id.projectsFrameLayout, TeamFragment()).commit()
                     nvPosition = 2
                 }
 
@@ -123,7 +124,7 @@ class ProjectHolderActivity : AppCompatActivity() {
 
                 return@OnNavigationItemSelectedListener true
             }
-           /* R.id.dataRequestNv -> {
+           /*phase-1 R.id.dataRequestNv -> {
 
                 searchDocIcon.visibility = View.INVISIBLE
                 searchReqDataIcon.visibility = View.VISIBLE
@@ -178,31 +179,6 @@ class ProjectHolderActivity : AppCompatActivity() {
         false
     }
 
-/*
-    internal object BottomNavigationViewHelper {
-
-        @SuppressLint("RestrictedApi")
-        fun removeShiftMode(view: BottomNavigationView) {
-            val menuView = view.getChildAt(0) as BottomNavigationMenuView
-            try {
-                val shiftingMode = menuView.javaClass.getDeclaredField("mShiftingMode")
-                shiftingMode.isAccessible = true
-                shiftingMode.setBoolean(menuView, false)
-                shiftingMode.isAccessible = false
-                for (i in 0 until menuView.childCount) {
-                    val item = menuView.getChildAt(i) as BottomNavigationItemView
-                    item.setShiftingMode(false)
-                    if (item.isSelected)
-                        item.setTextColor(ColorStateList(arrayOf<IntArray>(intArrayOf(Color.GRAY,Color.GRAY)), intArrayOf(Color.GRAY)))
-                    // set once again checked value, so view will be updated
-                    item.setChecked(item.itemData.isChecked)
-                }
-            } catch (e: NoSuchFieldException) {
-            } catch (e: IllegalAccessException) {
-            }
-
-        }
-    }*/
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
