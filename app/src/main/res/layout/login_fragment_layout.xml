@@ -32,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ایمیل"
+                    android:text="ali@mail.com"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/white"
                     android:textSize="14sp">
@@ -63,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iransans_web_light"
                         android:hint="رمز عبور"
+                        android:text="123456"
                         android:textColor="@color/white"
                         android:textSize="14dp" />
                 </android.support.design.widget.TextInputLayout>

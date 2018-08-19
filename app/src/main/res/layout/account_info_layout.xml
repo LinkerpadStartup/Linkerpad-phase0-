@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:id="@+id/dummy_layout_for_snackbar"
     android:orientation="vertical"
     tools:context="com.linkerpad.linkerpad.AccountInfoActivity">
 
@@ -97,29 +98,81 @@
                 android:layout_height="180dp"
                 app:srcCompat="@drawable/ic_account_circle_blue" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputLayoutName"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusedByDefault="true">
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/nameEdt"
-                    android:layout_width="match_parent"
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:background="@color/white"
-                    android:hint="نام و نام خانوادگی"
-                    android:inputType="text"
-                    android:maxLength="100"
-                    android:padding="8dp"
-                    android:text="میلاد" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:background="@color/gray400" />
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/inputLayoutName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusedByDefault="true">
+
+                        <EditText
+                            android:id="@+id/nameEdt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:background="@color/white"
+                            android:hint="نام"
+                            android:inputType="text"
+                            android:maxLength="100"
+                            android:padding="8dp"
+                            android:text="درحال بارگذاری..." />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@color/gray400" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/inputLayoutLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusedByDefault="true">
+
+                        <EditText
+                            android:id="@+id/lastNameEdt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:background="@color/white"
+                            android:hint="نام خانوادگی"
+                            android:inputType="text"
+                            android:maxLength="100"
+                            android:padding="8dp"
+                            android:text="درحال بارگذاری..." />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginRight="12dp"
+                        android:background="@color/gray400" />
+                </LinearLayout>
+
+            </LinearLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/inputLayoutEmail"
@@ -138,7 +191,7 @@
                     android:hint="ایمیل"
                     android:inputType="textEmailAddress"
                     android:padding="8dp"
-                    android:text="milad@email.com" />
+                    android:text="درحال بارگذاری..." />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -153,7 +206,7 @@
                 android:layout_marginTop="8dp">
 
                 <EditText
-                    android:id="@+id/coEdt"
+                    android:id="@+id/companyEdt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
@@ -161,7 +214,7 @@
                     android:hint="سازمان/شرکت"
                     android:maxLength="100"
                     android:padding="8dp"
-                    android:text="لینکرپد" />
+                    android:text="درحال بارگذاری..." />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -169,28 +222,6 @@
                 android:layout_height="0.8dp"
                 android:background="@color/gray400" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/inputLayoutRule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
-
-                <EditText
-                    android:id="@+id/ruleEdt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:background="@color/white"
-                    android:hint="سمت"
-                    android:maxLength="100"
-                    android:padding="8dp"
-                    android:text="سرپرست" />
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:background="@color/gray400" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -225,7 +256,7 @@
                         android:inputType="phone"
                         android:maxLength="10"
                         android:padding="8dp"
-                        android:text="9123456789"
+                        android:text="درحال بارگذاری..."
                         android:textSize="18dp" />
 
 

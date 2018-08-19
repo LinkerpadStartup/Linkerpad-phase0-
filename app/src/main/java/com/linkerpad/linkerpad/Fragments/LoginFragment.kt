@@ -167,15 +167,15 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
                         sharedPreferencesEditor.putString("token", loginOutputData.token)
                         sharedPreferencesEditor.putString("username", loginOutputData.emailAddress)
+                        sharedPreferencesEditor.putString("firstName", loginOutputData.firstName)
+                        sharedPreferencesEditor.putString("lastName", loginOutputData.lastName)
+                        sharedPreferencesEditor.putString("email", loginOutputData.emailAddress)
                         sharedPreferencesEditor.apply()
                         sharedPreferencesEditor.commit()
 
                         activity!!.finish()
 
                         var intent = Intent(context, MainActivity::class.java)
-                        intent.putExtra("firstName", loginOutputData.firstName)
-                        intent.putExtra("lastName", loginOutputData.lastName)
-                        intent.putExtra("email", loginOutputData.emailAddress)
                         startActivity(intent)
 
 

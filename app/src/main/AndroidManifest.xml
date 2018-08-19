@@ -17,18 +17,20 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".RegLoginHolderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.White.Accent.NoActionBar"
-            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AccountInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -83,6 +85,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditMachineryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MaterialsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddMaterialsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditMaterialsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

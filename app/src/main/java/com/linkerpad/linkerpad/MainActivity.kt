@@ -2,6 +2,7 @@ package com.linkerpad.linkerpad
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
@@ -29,8 +30,8 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
 
 
-        headerNameTv.setText(intent.getStringExtra("firstName") + " " + intent.getStringExtra("lastName"))
-        headerEmailTv.setText(intent.getStringExtra("email") + "")
+        headerNameTv.setText(getNameLastName())
+        headerEmailTv.setText(getEmail())
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -45,6 +46,16 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         onNavigationItemSelected()
         /*  nav_view.setNavigationItemSelectedListener(this)*/
 
+    }
+
+    private fun getNameLastName(): String {
+        var sharedPreferences: SharedPreferences = this@MainActivity.getSharedPreferences("userInformation", 0)
+        return "${sharedPreferences.getString("firstName", null)} ${sharedPreferences.getString("lastName",null)}"
+    }
+
+    private fun getEmail(): String {
+        var sharedPreferences: SharedPreferences = this@MainActivity.getSharedPreferences("userInformation", 0)
+        return "${sharedPreferences.getString("email", null)}"
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
@@ -98,6 +109,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 */
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

@@ -1,8 +1,10 @@
 package com.linkerpad.linkerpad.Business
 
 
+import com.linkerpad.linkerpad.ApiData.input.EditUserBody
 import com.linkerpad.linkerpad.ApiData.input.LoginBody
 import com.linkerpad.linkerpad.ApiData.input.RegisterBody
+import com.linkerpad.linkerpad.ApiData.output.EditUserResponse
 import com.linkerpad.linkerpad.ApiData.output.LoginResponse
 import com.linkerpad.linkerpad.ApiData.output.RegisterResponse
 import com.linkerpad.linkerpad.ApiData.output.GetUserInformationResponse
@@ -21,17 +23,10 @@ interface IUserApi {
     @POST("api/account/Login")
     fun login(@Body loginBody: LoginBody): Call<LoginResponse>
 
-     @GET("api/account/GetUserInformation")
-     fun getUserInformation(@Header("authorization") authorization: String): Call<GetUserInformationResponse>
-    /* @FormUrlEncoded
-     @POST("api/account/register")
-     abstract fun register(@Field("FirstName") FirstName: String,
-                           @Field("LastName") LastName: String,
-                           @Field("Company") Company: String,
-                           @Field("MobileNumber") MobileNumber: String,
-                           @Field("EmailAddress") EmailAddress: String,
-                           @Field("Password") Password: String): Call<RegisterResponse>*/
-    // abstract fun register(@Field("email")  email:String , @Field("password") password:String ): Call<RegisterResponse>
+    @GET("api/account/GetUserInformation")
+    fun getUserInformation(@Header("authorization") authorization: String): Call<GetUserInformationResponse>
 
+    @POST("api/account/EditUserInformation")
+    fun editUserInformation(@Header("authorization") authorization: String, @Body editUserBody: EditUserBody): Call<EditUserResponse>
 
 }

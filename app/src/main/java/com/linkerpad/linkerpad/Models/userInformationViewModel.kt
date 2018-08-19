@@ -1,11 +1,9 @@
 package com.linkerpad.linkerpad.Models
 
+import com.linkerpad.linkerpad.ApiData.input.EditUserBody
 import com.linkerpad.linkerpad.ApiData.input.LoginBody
 import com.linkerpad.linkerpad.ApiData.input.RegisterBody
-import com.linkerpad.linkerpad.Data.LoginInputData
-import com.linkerpad.linkerpad.Data.LoginOutputData
-import com.linkerpad.linkerpad.Data.UserInformationOutputData
-import com.linkerpad.linkerpad.Data.UserRegisterData
+import com.linkerpad.linkerpad.Data.*
 import ir.mirrajabi.persiancalendar.core.models.PersianDate
 import java.sql.Date
 
@@ -35,6 +33,10 @@ data class UserInformationViewModel(var status: String, var message: String, var
 
         fun getUserInformation(userInformationOutputData: UserInformationOutputData): UserInformationViewModel {
             return UserInformationViewModel(userInformationOutputData.status, userInformationOutputData.message, firstName = userInformationOutputData.responseObject.firstName, lastName = userInformationOutputData.responseObject.lastName, profilePicture = userInformationOutputData.responseObject.profilePicture, emailAddress = userInformationOutputData.responseObject.emailAddress, mobileNumber = userInformationOutputData.responseObject.mobileNumber, company = userInformationOutputData.responseObject.company, expirationDate = "", token = "", password = "")
+        }
+
+        fun setUserEditedInformation(firstName: String , lastName: String , company: String , mobileNumber: String): EditUserBody {
+            return EditUserData.setEditedUserData(EditUserData(firstName, lastName,company, mobileNumber))
         }
 
     }
