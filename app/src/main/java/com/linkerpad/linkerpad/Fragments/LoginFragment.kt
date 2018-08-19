@@ -154,7 +154,6 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         var loginResponse: LoginResponse? = response.body()
 
 
-
                         val loginOutputData = UserInformationViewModel.getUserInformation(LoginOutputData(
                                 loginResponse!!.status,
                                 loginResponse.message,
@@ -186,6 +185,9 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                     } else if (response.code() == 400) {
                         Snackbar.make(this@LoginFragment.view!!, "خطا، مقادیر ارسالی صحیح نمی باشد.", Snackbar.LENGTH_LONG).show()
                         //  Toast.makeText(context, "خطا، مقادیر ارسالی صحیح نمی باشد.", Toast.LENGTH_LONG).show()
+                    } else if (response.code() == 401) {
+                        Snackbar.make(this@LoginFragment.view!!, "خطا، ایمیل یا رمز عبور صحیح نمی باشد.", Snackbar.LENGTH_LONG).show()
+
                     }
 
 

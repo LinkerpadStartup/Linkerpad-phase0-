@@ -5,6 +5,7 @@ import com.linkerpad.linkerpad.ApiData.input.LoginBody
 import com.linkerpad.linkerpad.ApiData.input.RegisterBody
 import com.linkerpad.linkerpad.ApiData.output.LoginResponse
 import com.linkerpad.linkerpad.ApiData.output.RegisterResponse
+import com.linkerpad.linkerpad.ApiData.output.GetUserInformationResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,6 +21,8 @@ interface IUserApi {
     @POST("api/account/Login")
     fun login(@Body loginBody: LoginBody): Call<LoginResponse>
 
+     @GET("api/account/GetUserInformation")
+     fun getUserInformation(@Header("authorization") authorization: String): Call<GetUserInformationResponse>
     /* @FormUrlEncoded
      @POST("api/account/register")
      abstract fun register(@Field("FirstName") FirstName: String,

@@ -15,6 +15,6 @@ class LoginResponse : Response() {
 
 }
 
-data class ResponseObject(var token: String, var expirationDate: String, var userInformationViewModel: userInformationResponse)
+data class ResponseObject(var token: String, var expirationDate: String, var userInformationViewModel: userInformationResponseLogin)
 
-data class userInformationResponse(var firstName: String, var lastName: String, var profilePicture: Any? = null, var emailAddress: String, var mobileNumber: String, var company: String)
+data class userInformationResponseLogin(var firstName: String, var lastName: String, var profilePicture: Any? = null, var emailAddress: String, var mobileNumber: String, var company: String)
