@@ -20,6 +20,12 @@ class MaterialsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Add Materials
+        materialsActivityFab.setOnClickListener {
+            var intent = Intent(this@MaterialsActivity, AddMaterialsActivity::class.java)
+            startActivity(intent)
+        }
+
 
         //back clicked
         materialsBackIcon.setOnClickListener { this@MaterialsActivity.finish() }

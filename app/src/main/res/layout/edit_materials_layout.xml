@@ -54,7 +54,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/iransans_web_light"
                             android:gravity="center_vertical"
-                            android:text="افزودن مصالح"
+                            android:text="ویرایش مصالح"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -105,6 +105,7 @@
                 android:orientation="horizontal"
                 android:paddingBottom="16dp"
                 android:paddingLeft="16dp"
+                android:paddingTop="16dp"
                 android:paddingRight="16dp">
 
                 <TextView
@@ -149,7 +150,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                >
 
                 <EditText
                     android:id="@+id/descriptionMaterialsEdt"
