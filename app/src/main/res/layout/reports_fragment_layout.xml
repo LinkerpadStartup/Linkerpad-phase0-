@@ -55,6 +55,7 @@
                 android:layout_marginTop="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:id="@+id/problemesLL"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
@@ -118,6 +119,7 @@
                 android:layout_marginTop="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:id="@+id/materialsLL"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
