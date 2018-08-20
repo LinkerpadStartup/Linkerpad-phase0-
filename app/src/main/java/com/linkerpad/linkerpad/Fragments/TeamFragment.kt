@@ -17,7 +17,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.linkerpad.linkerpad.AddMemberActivity
 import com.linkerpad.linkerpad.R
+import kotlinx.android.synthetic.main.team_fragment_layout.view.*
 import kotlinx.android.synthetic.main.team_items.*
 import kotlinx.android.synthetic.main.team_items.view.*
 import kotlinx.android.synthetic.main.team_layout.*
@@ -55,13 +57,20 @@ class TeamFragment : Fragment() {
 
             startActivity(Intent.createChooser(emailIntent, "ارسال ایمیل با ..."))
         }
+
+
+        view.addMemberToProjectFab.setOnClickListener {
+
+            var intent = Intent(context, AddMemberActivity::class.java)
+            intent.putExtra("id", activity!!.intent.getStringExtra("id"))
+            context!!.startActivity(intent)
+        }
         return view
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
 
     }

@@ -17,9 +17,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".RegLoginHolderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -96,6 +94,9 @@
         <activity
             android:name=".EditMaterialsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddMemberActivity"
+            android:theme="@style/AppTheme.NoActionBar.Dialog" />
     </application>
 
 </manifest>

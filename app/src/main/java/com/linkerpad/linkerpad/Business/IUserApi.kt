@@ -1,10 +1,7 @@
 package com.linkerpad.linkerpad.Business
 
 
-import com.linkerpad.linkerpad.ApiData.input.CreateProjectBody
-import com.linkerpad.linkerpad.ApiData.input.EditUserBody
-import com.linkerpad.linkerpad.ApiData.input.LoginBody
-import com.linkerpad.linkerpad.ApiData.input.RegisterBody
+import com.linkerpad.linkerpad.ApiData.input.*
 import com.linkerpad.linkerpad.ApiData.output.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -32,4 +29,10 @@ interface IUserApi {
 
     @GET("api/project/GetProjectList")
     fun getProjectList(@Header("authorization") authorization: String): Call<ProjectListResponse>
+
+    @GET("api/project/GetProjectInformation")
+    fun getProjectInforamtion(@Header("authorization") authorization: String, @Query("projectId") projectId: String): Call<ProjectInformationResponse>
+
+    @POST("api/ProjectTeam/AddMemberToProject")
+    fun addMemberToProject(@Header("authorization") authorization: String, @Body addMemberBody: AddMemberBody): Call<AddMemberResponse>
 }
