@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.linkerpad.linkerpad.AddProjectActivity
 import com.linkerpad.linkerpad.ProjectHolderActivity
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.projects_fragmant_layout.view.*
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.projetcs_items.view.*
 
 class ProjectsFragment : Fragment() {
 
+   
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -29,17 +31,26 @@ class ProjectsFragment : Fragment() {
         var view: View = inflater.inflate(R.layout.projects_fragmant_layout, container, false)
 
         view.cardTestClick.setOnClickListener {
-            var intent = Intent(context , ProjectHolderActivity::class.java)
+            var intent = Intent(context, ProjectHolderActivity::class.java)
             startActivity(intent)
         }
 
+        //on swipe to refresh
         view.projectsRefreshLayout.setColorSchemeColors(Color.parseColor("#1E88E5"))
         view.projectsRefreshLayout.setOnRefreshListener {
             Handler().postDelayed(Runnable { view.projectsRefreshLayout.setRefreshing(false) }, 2000)
 
         }
 
+        //on add button clicked
+        view.addProjectFab.setOnClickListener {
+            var intent = Intent(context, AddProjectActivity::class.java)
+            startActivity(intent)
+        }
+
         return view
 
     }
+
+
 }

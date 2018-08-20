@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dummy_layout_for_snackbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -49,6 +50,21 @@
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
+                <TextView
+                    android:id="@+id/createProjectTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="ذخیره"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
 
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
@@ -65,6 +81,7 @@
             android:orientation="vertical">
 
             <android.support.design.widget.FloatingActionButton
+                android:id="@+id/selectProjectPictureFab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -256,8 +273,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0.8dp"
-                       android:layout_marginRight="14dp"
                         android:layout_marginLeft="14dp"
+                        android:layout_marginRight="14dp"
                         android:background="@color/gray400" />
                 </LinearLayout>
 
