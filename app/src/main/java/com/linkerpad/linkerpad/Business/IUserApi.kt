@@ -29,4 +29,7 @@ interface IUserApi {
 
     @POST("api/project/CreateProject")
     fun createProject(@Header("authorization") authorization: String, @Body createProjectBody: CreateProjectBody): Call<CreateProjectResponse>
+
+    @GET("api/project/GetProjectList")
+    fun getProjectList(@Header("authorization") authorization: String): Call<ProjectListResponse>
 }
