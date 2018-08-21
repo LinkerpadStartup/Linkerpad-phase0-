@@ -25,7 +25,7 @@ class TeamActivity : AppCompatActivity() {
         setContentView(R.layout.team_layout)
         setSupportActionBar(toolbar)
 
-        var i: Int = 0
+    /*    var i: Int = 0
         cardTestClick.setOnClickListener {
             if (i == 0) {
                 showViews()
@@ -52,7 +52,7 @@ class TeamActivity : AppCompatActivity() {
                     "mailto", "abc@gmail.com", null))
 
             startActivity(Intent.createChooser(emailIntent, "ارسال ایمیل با ..."))
-        }
+        }*/
 
         //back click
         teamBackIcon.setOnClickListener { this@TeamActivity.finish() }

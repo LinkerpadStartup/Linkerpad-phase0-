@@ -35,4 +35,7 @@ interface IUserApi {
 
     @POST("api/ProjectTeam/AddMemberToProject")
     fun addMemberToProject(@Header("authorization") authorization: String, @Body addMemberBody: AddMemberBody): Call<AddMemberResponse>
+
+    @GET("api/ProjectTeam/GetProjectMemberList")
+    fun getProjectMemberList(@Header("authorization") authorization: String, @Query("projectId") projectId: String): Call<MemberListResponse>
 }

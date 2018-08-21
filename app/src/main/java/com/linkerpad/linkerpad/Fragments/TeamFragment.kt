@@ -2,45 +2,48 @@ package com.linkerpad.linkerpad.Fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.linkerpad.linkerpad.Adapters.MembersListAdapter
 import com.linkerpad.linkerpad.AddMemberActivity
+import com.linkerpad.linkerpad.ApiData.output.MemberListResponse
+import com.linkerpad.linkerpad.Business.IUserApi
+import com.linkerpad.linkerpad.Business.IWebApi
+import com.linkerpad.linkerpad.Data.MemberInformationData
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.team_fragment_layout.view.*
 import kotlinx.android.synthetic.main.team_items.*
 import kotlinx.android.synthetic.main.team_items.view.*
 import kotlinx.android.synthetic.main.team_layout.*
+import retrofit2.Call
+import retrofit2.Response
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class TeamFragment : Fragment() {
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.team_fragment_layout, container, false)
-        var i: Int = 0
-        view.cardTestClick.setOnClickListener {
-            if (i == 0) {
-                showViews()
-                i = 1
-            } else {
-                clearViews()
-                i = 0
-            }
-        }
 
-        view.callTeamImv.setOnClickListener {
+
+       /* view.callTeamImv.setOnClickListener {
 
             if (activity!!.checkCallingOrSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                 var phoneIntent: Intent = Intent(Intent.ACTION_CALL)
@@ -57,8 +60,12 @@ class TeamFragment : Fragment() {
 
             startActivity(Intent.createChooser(emailIntent, "ارسال ایمیل با ..."))
         }
+*/
+        setupProgress()
+        var projetcId = activity!!.intent.getStringExtra("id")
+        getMemberList(projetcId)
 
-
+        //add member to project activity
         view.addMemberToProjectFab.setOnClickListener {
 
             var intent = Intent(context, AddMemberActivity::class.java)
@@ -69,11 +76,44 @@ class TeamFragment : Fragment() {
         return view
     }
 
+    private fun setupProgress() {
+        progressDialog = ProgressDialog(context)
+        progressDialog.setMessage("لطفا شکیبا باشید")
+        progressDialog.setCancelable(false)
+        progressDialog.isIndeterminate = true
+        progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
+        progressDialog.show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
+    private fun getMemberList(projectId : String){
+        var service:IUserApi = IWebApi.Factory.create()
+        var call = service.getProjectMemberList(getToken(),projectId)
 
+        call.enqueue(object:retrofit2.Callback<MemberListResponse>{
+            override fun onFailure(call: Call<MemberListResponse>?, t: Throwable?) {
+                progressDialog.dismiss()
+                Snackbar.make(this@TeamFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<MemberListResponse>?, response: Response<MemberListResponse>?) {
+
+                progressDialog.dismiss()
+
+                var membersResponse = response!!.body()
+
+                var memberList = ArrayList<MemberInformationData>()
+                memberList = membersResponse!!.responseObject
+
+                view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
+                view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, memberList)
+
+            }
+
+        })
     }
 
 
@@ -92,70 +132,10 @@ class TeamFragment : Fragment() {
         }
     }
 
-    fun showViews() {
-        var llParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        firstTeamLL.layoutParams = llParams
-
-        /** company TextView **/
-        val companyTeamTv: TextView = TextView(context)
-        var companyTvParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-        companyTeamTv.layoutParams = companyTvParams
-        companyTeamTv.setText("شرکت")
-        companyTeamTv.setPadding(0, 0, 20, 0)
-        companyTeamTv.setTextSize(16f)
-        companyTeamTv.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
-        firstTeamLL.addView(companyTeamTv)
-
-        /** access level TextView **/
-        val accessLevelTv: TextView = TextView(context)
-        accessLevelTv.setText("سطح دسترسی")
-        accessLevelTv.setPadding(15, 10, 15, 10)
-        accessLevelTv.setTextSize(16f)
-        accessLevelTv.gravity = Gravity.CENTER
-        accessLevelTv.setTextColor(resources.getColor(R.color.white))
-        accessLevelTv.background = resources.getDrawable(R.drawable.rounded_back_gray)
-        accessLevelTv.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
-        firstTeamLL.addView(accessLevelTv)
-
-        /** first LinearLayout Views added 👆 **/
-
-        secondTeamLL.layoutParams = llParams
-
-        /** reseption TextView **/
-        val reseptionTv: TextView = TextView(context)
-        var reseptionTvParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-        reseptionTv.layoutParams = reseptionTvParams
-        reseptionTv.setText("مسئولیت")
-        reseptionTv.setPadding(0, 0, 20, 0)
-        reseptionTv.setTextSize(16f)
-        reseptionTv.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
-        secondTeamLL.addView(reseptionTv)
-
-        /** phone number TextView **/
-        val phoneNumberTv: TextView = TextView(context)
-        phoneNumberTv.setText("09123456789")
-        phoneNumberTv.setPadding(15, 0, 0, 0)
-        phoneNumberTv.setTextSize(16f)
-        phoneNumberTv.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
-        secondTeamLL.addView(phoneNumberTv)
-
-        /** Email TextView **/
-        emailTeamTv.layoutParams = llParams
-        emailTeamTv.setText("email@info.com")
-        emailTeamTv.setPadding(25, 0, 0, 10)
-
-
-    }
-
-    fun clearViews() {
-        var llParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0)
-        firstTeamLL.layoutParams = llParams
-        firstTeamLL.removeAllViews()
-
-        secondTeamLL.layoutParams = llParams
-        secondTeamLL.removeAllViews()
-
-        emailTeamTv.layoutParams = llParams
+    private fun getToken(): String {
+        var sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("userInformation", 0)
+        var token = sharedPreferences.getString("token", null)
+        return token
     }
 
 

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardTestClick"
+        android:id="@+id/memberCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
@@ -32,12 +32,14 @@
                 android:padding="8dp">
 
                 <ImageView
+                    android:id="@+id/userProfilePictureImv"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="@drawable/ic_account_circle" />
 
                 <TextView
+                    android:id="@+id/nameLastNameTv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -54,6 +56,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="8dp"
                     app:srcCompat="@drawable/ic_email_primary" />
 
                 <ImageView
@@ -61,10 +64,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="8dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="8dp"
                     app:srcCompat="@drawable/ic_call_primary" />
             </LinearLayout>
 

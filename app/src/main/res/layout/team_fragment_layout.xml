@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.linkerpad.linkerpad.TeamActivity">
 
-    <include
-        layout="@layout/team_items"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appbar" />
+        android:id="@+id/membersListRecyclerView"></android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addMemberToProjectFab"
