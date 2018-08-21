@@ -1,9 +1,14 @@
 package com.linkerpad.linkerpad
 
+import android.annotation.TargetApi
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.Snackbar
@@ -94,9 +99,19 @@ class ProjectHolderActivity : AppCompatActivity() {
 
             }
 
+            @TargetApi(Build.VERSION_CODES.O)
             override fun onResponse(call: Call<ProjectInformationResponse>?, response: Response<ProjectInformationResponse>?) {
                 progressDialog.dismiss()
-                projectTitleTv.setText(response!!.body()!!.responseObject.name)
+
+
+                var responseProjectInformation = response!!.body()!!.responseObject
+                if (response!!.code() == 200) {
+                    projectTitleTv.setText(response!!.body()!!.responseObject.name)
+                    if (responseProjectInformation.projectPicture != ""){
+                        drawerHeaderll.background = BitmapDrawable(BitmapFactory.decodeByteArray(java.util.Base64.getDecoder().decode(responseProjectInformation.projectPicture), 0, java.util.Base64.getDecoder().decode(responseProjectInformation.projectPicture).size))
+                        drawerImageView.visibility = View.INVISIBLE
+                    }
+                }
             }
 
         })
