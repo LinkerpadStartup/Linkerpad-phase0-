@@ -13,14 +13,19 @@ data class ProjectInformationViewModel(var status: String, var message: String, 
 
     companion object {
         fun setCreateProjectInformation(projectInformationViewModel: ProjectInformationViewModel): CreateProjectBody {
+            var startDate: String = ""
+            if (projectInformationViewModel.startDate.toString() != "") {
+                var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationViewModel.startDate.toString().split("/")[0].toInt(), projectInformationViewModel.startDate.toString().split("/")[1].toInt(), projectInformationViewModel.startDate.toString().split("/")[2].toInt())
+                var grogorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.jalaliToGregorian(jalaliStart)
+                startDate = grogorianStart.toString().replace("/", "-") + "T00:00"
 
-            var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationViewModel.startDate.toString().split("/")[0].toInt(), projectInformationViewModel.startDate.toString().split("/")[1].toInt(), projectInformationViewModel.startDate.toString().split("/")[2].toInt())
-            var jalaliEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationViewModel.endDate.toString().split("/")[0].toInt(), projectInformationViewModel.endDate.toString().split("/")[1].toInt(), projectInformationViewModel.endDate.toString().split("/")[2].toInt())
-            var grogorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.jalaliToGregorian(jalaliStart)
-            var grogorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.jalaliToGregorian(jalaliEnd)
-            var startDate: String = grogorianStart.toString().replace("/", "-") + "T00:00"
-            var endDate: String = grogorianEnd.toString().replace("/", "-") + "T00:00"
-
+            }
+            var endDate: String = ""
+            if (projectInformationViewModel.endDate.toString() != "") {
+                var jalaliEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationViewModel.endDate.toString().split("/")[0].toInt(), projectInformationViewModel.endDate.toString().split("/")[1].toInt(), projectInformationViewModel.endDate.toString().split("/")[2].toInt())
+                var grogorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.jalaliToGregorian(jalaliEnd)
+                endDate = grogorianEnd.toString().replace("/", "-") + "T00:00"
+            }
             return CreateProjectData.setCreateProjectBody(CreateProjectData(projectInformationViewModel.projectPicture, projectInformationViewModel.name, projectInformationViewModel.code, projectInformationViewModel.address, startDate, endDate))
         }
 

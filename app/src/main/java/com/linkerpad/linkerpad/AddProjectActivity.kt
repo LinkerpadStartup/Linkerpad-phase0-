@@ -11,6 +11,7 @@ import com.linkerpad.linkerpad.Data.DateType
 import kotlinx.android.synthetic.main.add_project_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.R.attr.data
+import android.annotation.TargetApi
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.SharedPreferences
@@ -18,6 +19,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
+import android.util.Base64
 import com.linkerpad.linkerpad.ApiData.output.CreateProjectResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
@@ -26,7 +28,6 @@ import retrofit2.Call
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.util.*
 import javax.security.auth.callback.Callback
 
 
@@ -133,10 +134,13 @@ class AddProjectActivity : AppCompatActivity() {
     }
 
     fun galleryIntent() {
-        var intent = Intent()
-        intent.setType("image/*")
+     /*   var intent = Intent()
+        intent.setType("image*//*")
         intent.setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(intent, "انتخاب تصویر"), SELECT_IMAGE)
+        startActivityForResult(Intent.createChooser(intent, "انتخاب تصویر"), SELECT_IMAGE)*/
+
+        val i = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(i, SELECT_IMAGE)
     }
 
 
@@ -146,7 +150,7 @@ class AddProjectActivity : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @TargetApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         val uri = data!!.getData()
@@ -164,7 +168,7 @@ class AddProjectActivity : AppCompatActivity() {
                     //  val bytes = File(uri.toString()).readBytes()
                     var outputStream = ByteArrayOutputStream()
                     fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                    convertImage = Base64.getEncoder().encodeToString(outputStream.toByteArray())
+                    convertImage = Base64.encodeToString(outputStream.toByteArray(),Base64.DEFAULT)
                 }
 
                 //  onSelectFromGallary(data)

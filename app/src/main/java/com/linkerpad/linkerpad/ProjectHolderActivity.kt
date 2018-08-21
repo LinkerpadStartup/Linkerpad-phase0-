@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Base64
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.linkerpad.linkerpad.ApiData.output.ProjectInformationResponse
@@ -108,7 +109,9 @@ class ProjectHolderActivity : AppCompatActivity() {
                 if (response!!.code() == 200) {
                     projectTitleTv.setText(response!!.body()!!.responseObject.name)
                     if (responseProjectInformation.projectPicture != ""){
-                        drawerHeaderll.background = BitmapDrawable(BitmapFactory.decodeByteArray(java.util.Base64.getDecoder().decode(responseProjectInformation.projectPicture), 0, java.util.Base64.getDecoder().decode(responseProjectInformation.projectPicture).size))
+                        val b = Base64.decode(responseProjectInformation.projectPicture, Base64.DEFAULT)
+                        val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
+                        drawerHeaderll.background = BitmapDrawable(resources,bitmap)
                         drawerImageView.visibility = View.INVISIBLE
                     }
                 }
