@@ -17,7 +17,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".RegLoginHolderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -44,7 +44,6 @@
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".ProjectHolderActivity"
-            android:label="بیمارستان آتیه ۲"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddDataRequestActivity"
@@ -97,6 +96,15 @@
         <activity
             android:name=".AddMemberActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
+        <activity
+            android:name=".NotesAndEventsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddNoteAndEventActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditNoteAndEventActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

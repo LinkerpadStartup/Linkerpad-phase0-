@@ -7,10 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.linkerpad.linkerpad.DoneActivitiesActivity
-import com.linkerpad.linkerpad.MachineryActivity
-import com.linkerpad.linkerpad.MaterialsActivity
-import com.linkerpad.linkerpad.R
+import com.linkerpad.linkerpad.*
 import kotlinx.android.synthetic.main.reports_fragment_layout.view.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -44,6 +41,10 @@ class ReportsFragment : Fragment() {
             var intent = Intent(context, MaterialsActivity::class.java)
             startActivity(intent)
 
+        }
+        view.notesAndEventsLL.setOnClickListener {
+            var intent = Intent(context, NotesAndEventsActivity::class.java)
+            startActivity(intent)
         }
         return view
     }
