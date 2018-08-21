@@ -9,6 +9,8 @@ import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -16,9 +18,11 @@ import com.linkerpad.linkerpad.ApiData.output.ProjectInformationResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Fragments.DataRequestFragment
-import com.linkerpad.linkerpad.Fragments.DocumentsFragment
 import com.linkerpad.linkerpad.Fragments.ReportsFragment
 import com.linkerpad.linkerpad.Fragments.TeamFragment
+import kotlinx.android.synthetic.main.nav_header_main.*
+import kotlinx.android.synthetic.main.project_holder_app_bar.*
+import kotlinx.android.synthetic.main.project_holder_content.*
 import kotlinx.android.synthetic.main.project_holder_layout.*
 import retrofit2.Call
 import retrofit2.Response
@@ -42,7 +46,10 @@ class ProjectHolderActivity : AppCompatActivity() {
         setupProgress()
         getProjectInformation(intent.getStringExtra("id"))
 
-        addReqDataIcon.setOnClickListener { view ->
+        headerNameTv.setText(getNameLastName())
+        headerEmailTv.setText(getEmail())
+
+/*  phase-1      addReqDataIcon.setOnClickListener { view ->
             var intent = Intent(this@ProjectHolderActivity, AddDataRequestActivity::class.java)
             startActivity(intent)
         }
@@ -55,9 +62,25 @@ class ProjectHolderActivity : AppCompatActivity() {
         galleryImv.setOnClickListener {
             var intent = Intent(this@ProjectHolderActivity, GalleryActivity::class.java)
             startActivity(intent)
-        }
+        }*/
+
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        onNavigationItemSelected()
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    }
+
+    private fun getNameLastName(): String {
+        var sharedPreferences: SharedPreferences = this@ProjectHolderActivity.getSharedPreferences("userInformation", 0)
+        return "${sharedPreferences.getString("firstName", null)} ${sharedPreferences.getString("lastName",null)}"
+    }
+
+    private fun getEmail(): String {
+        var sharedPreferences: SharedPreferences = this@ProjectHolderActivity.getSharedPreferences("userInformation", 0)
+        return "${sharedPreferences.getString("email", null)}"
     }
 
     private fun getProjectInformation(projectId: String) {
@@ -125,9 +148,9 @@ class ProjectHolderActivity : AppCompatActivity() {
                 }
 
                 if (moreCount == 1) {
-                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
-                    moreNvll.startAnimation(slideTopAnimaiton)
-                    moreNvll.visibility = View.INVISIBLE
+                    /*var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
+                    phase - 1 moreNvll . startAnimation (slideTopAnimaiton)
+                    moreNvll.visibility = View.INVISIBLE  */
 
                     moreCount = 0
                 }
@@ -160,9 +183,9 @@ class ProjectHolderActivity : AppCompatActivity() {
                 }
 
                 if (moreCount == 1) {
-                    var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
-                    moreNvll.startAnimation(slideTopAnimaiton)
-                    moreNvll.visibility = View.INVISIBLE
+                    /*phase-1         var slideTopAnimaiton = AnimationUtils.loadAnimation(this@ProjectHolderActivity, R.anim.abc_slide_out_bottom)
+                             moreNvll.startAnimation(slideTopAnimaiton)
+                             moreNvll.visibility = View.INVISIBLE*/
 
                     moreCount = 0
                 }
@@ -222,6 +245,41 @@ class ProjectHolderActivity : AppCompatActivity() {
 
         }
         false
+    }
+
+    fun onNavigationItemSelected() {
+
+        accountInfoMenu.setOnClickListener {
+            var intent = Intent(this@ProjectHolderActivity, AccountInfoActivity::class.java)
+            startActivity(intent)
+        }
+
+        exitMenu.setOnClickListener {
+            var intent = Intent(this@ProjectHolderActivity, RegLoginHolderActivity::class.java)
+            startActivity(intent)
+        }
+
+        commentsMenu.setOnClickListener {
+            var intent = Intent(this@ProjectHolderActivity, SendCommentsActivity::class.java)
+            startActivity(intent)
+        }
+
+        aboutUs.setOnClickListener {
+            var intent = Intent(this@ProjectHolderActivity, AboutUSActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+
+
+        }
+
     }
 
 

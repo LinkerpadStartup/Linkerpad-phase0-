@@ -41,6 +41,10 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
 
         submitAddMemberBtn.setOnClickListener { validator.validate() }
 
+        cancelAddMemberBtn.setOnClickListener {
+            this@AddMemberActivity.finish()
+        }
+        
         Initialize()
     }
 
@@ -58,22 +62,46 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
         progressDialog.show()
     }
 
-    private fun addMemberToProject(projectId:String){
-        var service:IUserApi = IWebApi.Factory.create()
-        var addMemberBody = MemberViewModel.setAddMemberToProject(projectId,addMemberEmailEdt.text.toString())
-        var call = service.addMemberToProject(getToken(),addMemberBody)
+    private fun addMemberToProject(projectId: String) {
+        var service: IUserApi = IWebApi.Factory.create()
+        var addMemberBody = MemberViewModel.setAddMemberToProject(projectId, addMemberEmailEdt.text.toString())
+        var call = service.addMemberToProject(getToken(), addMemberBody)
 
-        call.enqueue(object:retrofit2.Callback<AddMemberResponse>{
+        call.enqueue(object : retrofit2.Callback<AddMemberResponse> {
             override fun onFailure(call: Call<AddMemberResponse>?, t: Throwable?) {
                 progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<AddMemberResponse>?, response: Response<AddMemberResponse>?) {
-                if (response!!.code() == 200){
+                if (response!!.code() == 200) {
+                    progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
                             .setMessage("ایمیل حاوی دعوتنامه با موفقیت ارسال شد!")
                             .setPositiveButton("باشه", { dialog, view ->
+                                dialog.dismiss()
+                            })
+                            .create()
+                            .show()
+                } else if (response.code() == 400) {
+                    progressDialog.dismiss()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، ورودی نامعتبر!", Snackbar.LENGTH_LONG).show()
+                } else if (response.code() == 405) {
+                    progressDialog.dismiss()
+                    AlertDialog.Builder(this@AddMemberActivity)
+                            .setMessage("باعرض پوزش شما امکان افزودن عضو به پروژه را ندارید. از سازنده یا مدیر درخواست کنید!")
+                            .setPositiveButton("باشه", { dialog, view ->
+                                dialog.dismiss()
+                            })
+                            .create()
+                            .show()
+                } else if (response.code() == 404) {
+                    progressDialog.dismiss()
+                    AlertDialog.Builder(this@AddMemberActivity)
+                            .setMessage("ایمیل وارد شده وجود ندارد.شما میتوانید ایشان را به لینکرپد دعوت کنید!")
+                            .setPositiveButton("باشه", { dialog, view ->
+                                dialog.dismiss()
+                            }).setNegativeButton("بعداً", { dialog, view ->
                                 dialog.dismiss()
                             })
                             .create()
