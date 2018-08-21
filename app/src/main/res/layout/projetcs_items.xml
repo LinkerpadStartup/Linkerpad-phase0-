@@ -103,6 +103,7 @@
                             android:paddingRight="8dp"
                             android:paddingTop="4dp"
                             android:text="سرپرست"
+                            android:id="@+id/userRoleProjectItems"
                             android:textColor="@color/white" />
                     </LinearLayout>
 

@@ -41,7 +41,7 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
             itemView.projectNameItemTv.setText(itemModel.name)
             itemView.projectStartDateItemTv.setText(itemModel.startDate)
             itemView.projectEndDateItemTv.setText(itemModel.endDate)
-
+            itemView.userRoleProjectItems.setText(if (itemModel.userRole == 0) "مسئول" else if (itemModel.userRole == 1) "مدیر" else if (itemModel.userRole == 2) "سرپرست" else "کارشناس")
             itemView.projectPictureItemImv.setImageBitmap(BitmapFactory.decodeByteArray(java.util.Base64.getDecoder().decode(itemModel.projectPicture), 0, java.util.Base64.getDecoder().decode(itemModel.projectPicture).size))
 
             itemView.cardProjectInformation.setOnClickListener {
