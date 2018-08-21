@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.widget.EditText
+import android.widget.Toast
 import butterknife.BindView
 import com.linkerpad.linkerpad.ApiData.output.AddMemberResponse
 import com.linkerpad.linkerpad.Business.IUserApi
@@ -24,6 +25,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
 
+     var userRole: Int = 0
 
     @BindView(R.id.AddMemberEmailEdt)
     @Email
@@ -44,7 +46,17 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
         cancelAddMemberBtn.setOnClickListener {
             this@AddMemberActivity.finish()
         }
-        
+
+        addMemberRG.setOnCheckedChangeListener { radioGroup, view ->
+            if (view == R.id.adminRB) {
+                userRole = 1
+            } else if (view == R.id.powerCollaboratorRB) {
+                userRole = 2
+            } else if (view == R.id.collaboratorRB) {
+                userRole = 3
+            }
+        }
+
         Initialize()
     }
 
@@ -62,9 +74,10 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
         progressDialog.show()
     }
 
-    private fun addMemberToProject(projectId: String) {
+    private fun addMemberToProject(projectId: String, userRole: Int) {
         var service: IUserApi = IWebApi.Factory.create()
-        var addMemberBody = MemberViewModel.setAddMemberToProject(projectId, addMemberEmailEdt.text.toString())
+        Toast.makeText(this, "$userRole", Toast.LENGTH_LONG).show()
+        var addMemberBody = MemberViewModel.setAddMemberToProject(projectId, addMemberEmailEdt.text.toString(), userRole)
         var call = service.addMemberToProject(getToken(), addMemberBody)
 
         call.enqueue(object : retrofit2.Callback<AddMemberResponse> {
@@ -85,7 +98,13 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                             .show()
                 } else if (response.code() == 400) {
                     progressDialog.dismiss()
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، ورودی نامعتبر!", Snackbar.LENGTH_LONG).show()
+                    AlertDialog.Builder(this@AddMemberActivity)
+                            .setMessage("ایمیل وارد شده هم اکنون عضو تیم است!")
+                            .setPositiveButton("باشه", { dialog, view ->
+                                dialog.dismiss()
+                            })
+                            .create()
+                            .show()
                 } else if (response.code() == 405) {
                     progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
@@ -124,7 +143,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
         setupProgress()
         var id = intent.getStringExtra("id")
 
-        addMemberToProject(id)
+        addMemberToProject(id, userRole)
 
     }
 

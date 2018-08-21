@@ -47,6 +47,7 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
             itemView.cardProjectInformation.setOnClickListener {
                 var intent = Intent(context, ProjectHolderActivity::class.java)
                 intent.putExtra("id", data[position].id)
+                intent.putExtra("userRole", data[position].userRole)
                 context.startActivity(intent)
             }
         }

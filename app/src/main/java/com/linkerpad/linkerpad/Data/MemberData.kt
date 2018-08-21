@@ -5,10 +5,10 @@ import com.linkerpad.linkerpad.ApiData.input.AddMemberBody
 /**
  * Created by alihajiloo on 8/20/18.
  */
-data class MemberData(var projectId: String, var emailAddress: String){
+data class MemberData(var projectId: String, var emailAddress: String, var userRole: Int) {
     companion object {
-        fun setAddMemberBody(memberData: MemberData):AddMemberBody{
-            return AddMemberBody(memberData.projectId,memberData.emailAddress)
+        fun setAddMemberBody(memberData: MemberData): AddMemberBody {
+            return AddMemberBody(memberData.projectId, memberData.emailAddress, memberData.userRole)
         }
     }
 }

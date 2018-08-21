@@ -63,6 +63,7 @@ class TeamFragment : Fragment() {
 
             var intent = Intent(context, AddMemberActivity::class.java)
             intent.putExtra("id", activity!!.intent.getStringExtra("id"))
+            intent.putExtra("userRole", activity!!.intent.getIntExtra("userRole", 3))
             context!!.startActivity(intent)
         }
         return view

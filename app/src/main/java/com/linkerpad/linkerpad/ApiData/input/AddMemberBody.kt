@@ -13,5 +13,9 @@ data class AddMemberBody(
 
         @SerializedName("EmailAddress")
         @Expose
-        var EmailAddress: String
+        var EmailAddress: String,
+
+        @SerializedName("userRole")
+        @Expose
+        var userRole: Int
 )
