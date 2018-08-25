@@ -2,6 +2,7 @@ package com.linkerpad.linkerpad
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -28,9 +29,11 @@ class EditProjectBottomSheetActivity : AppCompatActivity() {
             val slideDownAnimation = AnimationUtils.loadAnimation(this@EditProjectBottomSheetActivity, R.anim.slide_down)
             projectBottomSheet.startAnimation(slideDownAnimation)
             projectBottomSheet.visibility = View.INVISIBLE
-            this@EditProjectBottomSheetActivity.finish()
+            Handler().postDelayed({ this@EditProjectBottomSheetActivity.finish() }, 700)
         }
 
+        ";lrq1  `" +
+                "jv z"
 
         editProjectBottomSheetll.setOnClickListener {
             var intent = Intent(this@EditProjectBottomSheetActivity, EditProjectActivity::class.java)

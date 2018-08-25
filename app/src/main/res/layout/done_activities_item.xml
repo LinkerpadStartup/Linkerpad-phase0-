@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/iransans_web_medium"
         android:padding="8dp"
+        android:id="@+id/titleDoneActivityTv"
         android:text="پیمانکار سقف"
         android:textColor="@color/gray900" />
 
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/numberOfCrewDoneActivityTv"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"
             android:text="5" />
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="4dp"
+            android:id="@+id/workHoursDoneActivityTv"
             android:fontFamily="@font/iransans_web_light"
             android:text="5" />
 
@@ -74,6 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/workLoadsDoneActivityTv"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"

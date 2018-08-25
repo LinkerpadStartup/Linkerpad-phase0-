@@ -48,5 +48,7 @@ interface IUserApi {
     @POST("api/dailyactivity/CreateDailyActivity")
     fun createDailyActivity(@Header("authorization") authorization: String, @Body createDailyActivityBody: CreateDailyActivityBody): Call<CreateDailyActivityResponse>
 
+    @GET("api/dailyactivity/GetProjectDailyActivityList")
+    fun getProjectDailyActivityList(@Header("authorization") authorization: String,@Query("ProjectId") projectId: String,@Query("ReportDate") reportDate:String): Call<DailyActivityListResponse>
 
 }

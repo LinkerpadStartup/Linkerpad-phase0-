@@ -83,7 +83,9 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
 
                     Toast.makeText(this@AddDoneActivitiesActivity, "فعالیت با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
+                    intent.putExtra("projectId",projectId)
                     startActivity(intent)
+                    this@AddDoneActivitiesActivity.finish()
 
                 } else {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، مشکلی هنگام پردازش رخ داده!", Snackbar.LENGTH_LONG).show()

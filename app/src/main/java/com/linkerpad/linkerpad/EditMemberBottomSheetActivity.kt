@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.view.View
@@ -39,7 +40,9 @@ class EditMemberBottomSheetActivity : AppCompatActivity() {
             val slideDownAnimation = AnimationUtils.loadAnimation(this@EditMemberBottomSheetActivity, R.anim.slide_down)
             memberBottomSheet.startAnimation(slideDownAnimation)
             memberBottomSheet.visibility = View.INVISIBLE
-            this@EditMemberBottomSheetActivity.finish()
+
+            Handler().postDelayed({this@EditMemberBottomSheetActivity.finish()},700)
+           //
         }
 
 

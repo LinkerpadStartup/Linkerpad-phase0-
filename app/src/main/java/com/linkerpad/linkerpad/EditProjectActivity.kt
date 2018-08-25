@@ -65,6 +65,7 @@ class EditProjectActivity : AppCompatActivity() {
         }
 
         editProjectTv.setOnClickListener {
+            setupProgress()
             editProject(intent.getStringExtra("id"))
         }
 
