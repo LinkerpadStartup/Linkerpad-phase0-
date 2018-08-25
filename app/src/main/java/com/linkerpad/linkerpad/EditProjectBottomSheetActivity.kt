@@ -26,7 +26,7 @@ class EditProjectBottomSheetActivity : AppCompatActivity() {
 
         spaceEditProjectBottomSheet.setOnClickListener {
             val slideDownAnimation = AnimationUtils.loadAnimation(this@EditProjectBottomSheetActivity, R.anim.slide_down)
-            projectBottomSheet.startAnimation(slideTopAnimation)
+            projectBottomSheet.startAnimation(slideDownAnimation)
             projectBottomSheet.visibility = View.INVISIBLE
             this@EditProjectBottomSheetActivity.finish()
         }

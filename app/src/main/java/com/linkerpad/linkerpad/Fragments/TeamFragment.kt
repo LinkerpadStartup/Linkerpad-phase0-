@@ -109,7 +109,7 @@ class TeamFragment : Fragment() {
                 memberList = membersResponse!!.responseObject
 
                 view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
-                view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, memberList)
+                view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, memberList,projectId)
 
             }
 

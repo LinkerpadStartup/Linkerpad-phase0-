@@ -16,6 +16,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.linkerpad.linkerpad.Data.MemberInformationData
 import com.linkerpad.linkerpad.Data.ProjectInformationData
+import com.linkerpad.linkerpad.EditMemberBottomSheetActivity
 import com.linkerpad.linkerpad.ProjectHolderActivity
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.projetcs_items.view.*
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.team_items.view.*
 /**
  * Created by alihajiloo on 8/20/18.
  */
-class MembersListAdapter(var context: Context, var data: ArrayList<MemberInformationData>) : RecyclerView.Adapter<MembersListAdapter.ViewHolder>() {
+class MembersListAdapter(var context: Context, var data: ArrayList<MemberInformationData>,var projectId:String) : RecyclerView.Adapter<MembersListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.team_items, viewGroup, false)
         return ViewHolder(view)
@@ -59,6 +60,16 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                         i = 0
                     }
                 }
+
+            itemView.memberCard.setOnLongClickListener {
+
+                var intent = Intent(context, EditMemberBottomSheetActivity::class.java)
+                //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
+                intent.putExtra("id", data[position].id)
+                intent.putExtra("projectId",projectId )
+                context.startActivity(intent)
+                return@setOnLongClickListener true
+            }
 
         }
 
