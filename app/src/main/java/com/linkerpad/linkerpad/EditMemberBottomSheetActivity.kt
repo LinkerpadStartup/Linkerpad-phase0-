@@ -1,6 +1,7 @@
 package com.linkerpad.linkerpad
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.linkerpad.linkerpad.Models.MemberViewModel
 import kotlinx.android.synthetic.main.edit_member_bottom_sheet_layout.*
 import retrofit2.Call
 import retrofit2.Response
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class EditMemberBottomSheetActivity : AppCompatActivity() {
 
@@ -122,6 +124,10 @@ class EditMemberBottomSheetActivity : AppCompatActivity() {
         })
     }
 
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+    }
 
 }
 

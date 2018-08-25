@@ -22,6 +22,8 @@ class DoneActivitiesActivity : AppCompatActivity() {
 
         addDoneActivitiesFab.setOnClickListener {
             var intent = Intent(this@DoneActivitiesActivity, AddDoneActivitiesActivity::class.java)
+            var projectId =getIntent().getStringExtra("projectId")
+            intent.putExtra("projectId" , projectId)
             startActivity(intent)
         }
 
