@@ -96,6 +96,8 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
 
                 var intent = Intent(context, EditProjectBottomSheetActivity::class.java)
                 //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
+                intent.putExtra("id", data[position].id)
+                intent.putExtra("userRole", data[position].userRole)
                 context.startActivity(intent)
                 return@setOnLongClickListener true
             }

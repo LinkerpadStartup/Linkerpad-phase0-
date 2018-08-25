@@ -1,5 +1,6 @@
 package com.linkerpad.linkerpad
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
@@ -28,6 +29,15 @@ class EditProjectBottomSheetActivity : AppCompatActivity() {
             projectBottomSheet.startAnimation(slideTopAnimation)
             projectBottomSheet.visibility = View.INVISIBLE
             this@EditProjectBottomSheetActivity.finish()
+        }
+
+
+        editProjectBottomSheetll.setOnClickListener {
+            var intent = Intent(this@EditProjectBottomSheetActivity, EditProjectActivity::class.java)
+            //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
+            intent.putExtra("id", getIntent().getStringExtra("id"))
+            intent.putExtra("userRole", getIntent().getStringExtra("userRole"))
+            startActivity(intent)
         }
     }
 }

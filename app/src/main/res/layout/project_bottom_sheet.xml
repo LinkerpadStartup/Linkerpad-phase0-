@@ -30,6 +30,7 @@
             android:layoutDirection="rtl"
             android:clickable="true"
             android:focusable="true"
+            android:id="@+id/editProjectBottomSheetll"
             android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal"
             android:padding="16dp">

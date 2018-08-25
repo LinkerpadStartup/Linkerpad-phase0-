@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.linkerpad.linkerpad.AddProjectActivity">
+    tools:context="com.linkerpad.linkerpad.EditProjectActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:translationX="8dp">
 
                 <ImageView
-                    android:id="@+id/addProjectBackIcon"
+                    android:id="@+id/editProjectBackIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -46,12 +46,12 @@
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="افزودن پروژه"
+                    android:text="ویرایش پروژه"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/createProjectTv"
+                    android:id="@+id/editProjectTv"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="8dp"
@@ -94,7 +94,7 @@
                 android:translationZ="1dp" />
 
             <ImageView
-                android:id="@+id/accountPicImg"
+                android:id="@+id/projectPicImg"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:src="@drawable/ic_account_circle_blue" />
