@@ -40,7 +40,13 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
         }
 
         //back clicked
-        addDoneActivitesBackIcon.setOnClickListener { this@AddDoneActivitiesActivity.finish() }
+        addDoneActivitesBackIcon.setOnClickListener {
+            var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
+            var projectId = getIntent().getStringExtra("projectId")
+            intent.putExtra("projectId", projectId)
+            startActivity(intent)
+            this@AddDoneActivitiesActivity.finish()
+        }
 
     }
 
@@ -83,7 +89,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
 
                     Toast.makeText(this@AddDoneActivitiesActivity, "فعالیت با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
-                    intent.putExtra("projectId",projectId)
+                    intent.putExtra("projectId", projectId)
                     startActivity(intent)
                     this@AddDoneActivitiesActivity.finish()
 

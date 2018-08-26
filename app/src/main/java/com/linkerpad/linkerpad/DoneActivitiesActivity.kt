@@ -39,6 +39,7 @@ class DoneActivitiesActivity : AppCompatActivity() {
             var projectId = getIntent().getStringExtra("projectId")
             intent.putExtra("projectId", projectId)
             startActivity(intent)
+            this@DoneActivitiesActivity.finish()
         }
 
         //back clicked
@@ -47,8 +48,8 @@ class DoneActivitiesActivity : AppCompatActivity() {
 
     private fun getDailyActivityList(projectId: String, reportDate: String = "2020-02-02") {
         var service: IUserApi = IWebApi.Factory.create()
-        var dailyActivityBody =DailyActivityViewModel.setDailyActivityList(projectId, reportDate)
-        var call = service.getProjectDailyActivityList(getToken(),projectId,reportDate)
+        var dailyActivityBody = DailyActivityViewModel.setDailyActivityList(projectId, reportDate)
+        var call = service.getProjectDailyActivityList(getToken(), projectId, reportDate)
 
         call.enqueue(object : retrofit2.Callback<DailyActivityListResponse> {
             override fun onFailure(call: Call<DailyActivityListResponse>?, t: Throwable?) {
@@ -66,7 +67,7 @@ class DoneActivitiesActivity : AppCompatActivity() {
                 dailyActivityList = dailyActivityListResponse!!.responseObject
 
                 dailyActivityRecyclerView.layoutManager = LinearLayoutManager(this@DoneActivitiesActivity)
-                dailyActivityRecyclerView.adapter = DailyActivityAdapter(this@DoneActivitiesActivity, dailyActivityList)
+                dailyActivityRecyclerView.adapter = DailyActivityAdapter(this@DoneActivitiesActivity, dailyActivityList, projectId)
 
             }
 

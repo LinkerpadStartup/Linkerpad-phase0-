@@ -14,3 +14,5 @@ data class DailyActivityInformationData(var id: String, var projectId: String, v
         }
     }
 }
+
+data class DailyActivityInformationOutput(var status: String, var message: String, var responseObject: DailyActivityInformationData)

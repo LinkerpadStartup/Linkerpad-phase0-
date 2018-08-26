@@ -95,7 +95,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         call.enqueue(object : Callback<EditUserResponse> {
             override fun onFailure(call: Call<EditUserResponse>?, t: Throwable?) {
                 progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditUserResponse>?, response: Response<EditUserResponse>?) {
@@ -142,6 +142,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         call.enqueue(object : Callback<GetUserInformationResponse> {
             override fun onFailure(call: Call<GetUserInformationResponse>?, t: Throwable?) {
 
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetUserInformationResponse>?, response: Response<GetUserInformationResponse>?) {

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.done_activities_item.view.*
  * Created by alihajiloo on 8/25/18.
  */
 
-class DailyActivityAdapter(var context: Context, var data: ArrayList<DailyActivityInformationData>) : RecyclerView.Adapter<DailyActivityAdapter.ViewHolder>() {
+class DailyActivityAdapter(var context: Context, var data: ArrayList<DailyActivityInformationData>, var projectId: String) : RecyclerView.Adapter<DailyActivityAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.done_activities_item, viewGroup, false)
         return ViewHolder(view)
@@ -45,6 +45,8 @@ class DailyActivityAdapter(var context: Context, var data: ArrayList<DailyActivi
             itemView.doneActivitesItemLL.setOnClickListener {
                 //item clicked
                 var intent = Intent(context, EditDoneActivitiesActivity::class.java)
+                intent.putExtra("id", itemModel.id)
+                intent.putExtra("projectId", projectId)
                 context.startActivity(intent)
 
             }

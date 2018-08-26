@@ -32,8 +32,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ایمیل"
-                    android:text="ali@mail.com"
                     android:inputType="textEmailAddress"
+                    android:text="ali3@gmail.com"
                     android:textColor="@color/white"
                     android:textSize="14sp">
 

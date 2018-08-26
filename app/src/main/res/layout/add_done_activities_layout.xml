@@ -211,7 +211,6 @@
                     android:fontFamily="@font/iransans_web_light"
                     android:gravity="center"
                     android:hint="واحد"
-                    android:inputType="text"
                     android:maxLength="15"
                     android:padding="8dp" />
             </LinearLayout>

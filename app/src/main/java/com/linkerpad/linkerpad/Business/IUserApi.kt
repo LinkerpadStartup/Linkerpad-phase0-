@@ -49,6 +49,9 @@ interface IUserApi {
     fun createDailyActivity(@Header("authorization") authorization: String, @Body createDailyActivityBody: CreateDailyActivityBody): Call<CreateDailyActivityResponse>
 
     @GET("api/dailyactivity/GetProjectDailyActivityList")
-    fun getProjectDailyActivityList(@Header("authorization") authorization: String,@Query("ProjectId") projectId: String,@Query("ReportDate") reportDate:String): Call<DailyActivityListResponse>
+    fun getProjectDailyActivityList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<DailyActivityListResponse>
+
+    @GET("api/dailyactivity/GetDailyActivity")
+    fun getDailyActivityInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("dailyActivityId") dailyActivityId: String): Call<GetDailyActivityInformationResponse>
 
 }
