@@ -7,8 +7,8 @@ import com.linkerpad.linkerpad.Data.DailyActivityInformationData
 /**
  * Created by alihajiloo on 8/26/18.
  */
-class GetDailyActivityInformationResponse:Response(){
+class GetDailyActivityInformationResponse : Response() {
     @SerializedName("responseObject")
-lateinit var responseObject:DailyActivityInformationData
+    lateinit var responseObject: DailyActivityInformationData
 }
 

@@ -29,12 +29,14 @@ class ReportsFragment : Fragment() {
         view.doneActivitiesLL.setOnClickListener {
             var intent = Intent(context, DoneActivitiesActivity::class.java)
             var projectId = activity!!.intent.getStringExtra("id")
-            intent.putExtra("projectId",projectId)
+            intent.putExtra("projectId", projectId)
             startActivity(intent)
         }
 
         view.machineryLL.setOnClickListener {
             var intent = Intent(context, MachineryActivity::class.java)
+            var projectId = activity!!.intent.getStringExtra("id")
+            intent.putExtra("projectId", projectId)
             startActivity(intent)
 
         }

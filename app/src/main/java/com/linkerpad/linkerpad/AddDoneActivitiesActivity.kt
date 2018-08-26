@@ -30,11 +30,13 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
 
-        saveDailyActivityTv.setOnClickListener {
+        saveDailyActivityTv.setOnClickListener { view ->
             if (sizeUnitDoneActivitiesEdt.text.toString() != "" && TitleDoneActivitiesEdt.text.toString() != "" && countMemberDoneActivitiesEdt.text.toString() != ""
                     && timeCountDoneActivitiesEdt.text.toString() != "" && sizeCountDoneActivitiesEdt.text.toString() != "") {
                 createDailyActivity(intent.getStringExtra("projectId"))
                 setupProgress()
+            } else {
+                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
             }
 
         }

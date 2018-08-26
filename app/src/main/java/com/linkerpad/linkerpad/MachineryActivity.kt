@@ -16,6 +16,7 @@ class MachineryActivity : AppCompatActivity() {
 
         machineryActivityFab.setOnClickListener {
             var intent = Intent(this@MachineryActivity, AddMachineryActivity::class.java)
+            intent.putExtra("projectId", getIntent().getStringExtra("projectId"))
             startActivity(intent)
         }
 

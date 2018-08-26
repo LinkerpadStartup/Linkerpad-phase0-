@@ -5,6 +5,7 @@ import com.linkerpad.linkerpad.ApiData.input.*
 import com.linkerpad.linkerpad.ApiData.output.*
 import retrofit2.Call
 import retrofit2.http.*
+import com.linkerpad.linkerpad.ApiData.output.MachineryResponse
 
 
 /**
@@ -45,6 +46,8 @@ interface IUserApi {
     @POST("api/projectTeam/RemoveMemberFromProject")
     fun removeMember(@Header("authorization") authorization: String, @Body removeMemberBody: RemoveMemberBody): Call<RemoveMemberResponse>
 
+
+    //Daily Activity
     @POST("api/dailyactivity/CreateDailyActivity")
     fun createDailyActivity(@Header("authorization") authorization: String, @Body createDailyActivityBody: CreateDailyActivityBody): Call<CreateDailyActivityResponse>
 
@@ -59,4 +62,23 @@ interface IUserApi {
 
     @POST("api/dailyactivity/EditDailyActivity")
     fun editDailyActivity(@Header("authorization") authorization: String, @Body editDailyActivityBody: EditDailyActivityBody): Call<EditDailyActivityResponse>
+
+
+    //Equipment
+    @POST("api/equipment/CreateEquipment")
+    fun createEquipment(@Header("authorization") authorization: String, @Body createMachineryBody: CreateMachineryBody): Call<MachineryResponse>
+
+    @GET("api/equipment/GetProjectEquipmentList")
+    fun getProjectEquipmentList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<MachineryListResponse>
+
+    @GET("api/equipment/GetEquipment")
+    fun getEquipmentInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("equipmentId") dailyActivityId: String): Call<GetDailyActivityInformationResponse>
+
+    @POST("api/equipment/DeleteEquipment")
+    fun deleteEquipment(@Header("authorization") authorization: String, @Body deleteMachineryBody: DeleteMachineryBody): Call<MachineryResponse>
+
+    @POST("api/equipment/EditEquipment")
+    fun editEquipment(@Header("authorization") authorization: String, @Body editMachineryBody: EditMachineryBody): Call<MachineryResponse>
+
+
 }
