@@ -1,5 +1,6 @@
 package com.linkerpad.linkerpad.Adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.linkerpad.linkerpad.Data.CreateDailyActivityData
 import com.linkerpad.linkerpad.Data.DailyActivityInformationData
+import com.linkerpad.linkerpad.DoneActivitiesActivity
 import com.linkerpad.linkerpad.EditDoneActivitiesActivity
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.done_activities_item.view.*
@@ -37,16 +39,19 @@ class DailyActivityAdapter(var context: Context, var data: ArrayList<DailyActivi
         fun onBind(itemModel: DailyActivityInformationData, position: Int) {
 
 
-            itemView.titleDoneActivityTv.setText(itemModel.title)
-            itemView.numberOfCrewDoneActivityTv.setText(itemModel.numberOfCrew.toString())
-            itemView.workHoursDoneActivityTv.setText(itemModel.workHours.toString())
-            itemView.workLoadsDoneActivityTv.setText(itemModel.workload.toString())
+            itemView.titleDoneActivityTv.text = itemModel.title
+            itemView.numberOfCrewDoneActivityTv.text = itemModel.numberOfCrew.toString()
+            itemView.workHoursDoneActivityTv.text = itemModel.workHours.toString()
+            itemView.workLoadsDoneActivityTv.text = itemModel.workload.toString()
 
             itemView.doneActivitesItemLL.setOnClickListener {
                 //item clicked
                 var intent = Intent(context, EditDoneActivitiesActivity::class.java)
                 intent.putExtra("id", itemModel.id)
                 intent.putExtra("projectId", projectId)
+
+                (context as DoneActivitiesActivity).finish()
+
                 context.startActivity(intent)
 
             }

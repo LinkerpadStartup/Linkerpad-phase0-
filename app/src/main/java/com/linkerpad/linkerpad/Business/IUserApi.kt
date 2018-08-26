@@ -54,4 +54,6 @@ interface IUserApi {
     @GET("api/dailyactivity/GetDailyActivity")
     fun getDailyActivityInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("dailyActivityId") dailyActivityId: String): Call<GetDailyActivityInformationResponse>
 
+    @POST("api/dailyactivity/DeleteDailyActivity")
+    fun deleteDailyActivity(@Header("authorization") authorization: String, @Body deleteDailyActivityBody: DeleteDailyActivityBody): Call<DeleteDailyActivityResponse>
 }

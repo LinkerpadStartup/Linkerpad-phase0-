@@ -2,10 +2,13 @@ package com.linkerpad.linkerpad
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.widget.Toast
+import com.linkerpad.linkerpad.ApiData.output.DeleteDailyActivityResponse
 import com.linkerpad.linkerpad.ApiData.output.GetDailyActivityInformationResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
@@ -40,7 +43,12 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
             deleteDailyActivity(projectId, dailyActivityId)
         }
 
-        editDoneActivitesBackIcon.setOnClickListener { this@EditDoneActivitiesActivity.finish() }
+        editDoneActivitesBackIcon.setOnClickListener {
+            var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
+            intent.putExtra("projectId", projectId)
+            startActivity(intent)
+            this@EditDoneActivitiesActivity.finish()
+        }
     }
 
     private fun getDailyActivityInformation(projectId: String, dailyActivityId: String) {
@@ -72,12 +80,48 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         })
     }
 
-    private fun deleteDailyActivity(projectId: String, dailyActivityId: String){
+    private fun deleteDailyActivity(projectId: String, dailyActivityId: String) {
+
+        var service: IUserApi = IWebApi.Factory.create()
+
+        var deleteDailyActivityBody = DailyActivityViewModel.setDeleteDailyActivity(dailyActivityId, projectId)
+
+        var call = service.deleteDailyActivity(getToken(), deleteDailyActivityBody)
+
+        call.enqueue(object : retrofit2.Callback<DeleteDailyActivityResponse> {
+            override fun onFailure(call: Call<DeleteDailyActivityResponse>?, t: Throwable?) {
+                progressDialog.dismiss()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<DeleteDailyActivityResponse>?, response: Response<DeleteDailyActivityResponse>?) {
+                progressDialog.dismiss()
+
+                if (response!!.code() == 200) {
+                    Toast.makeText(this@EditDoneActivitiesActivity, "فعالیت با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+
+                    var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
+                    intent.putExtra("projectId", projectId)
+                    startActivity(intent)
+                    this@EditDoneActivitiesActivity.finish()
+                } else if (response.code() == 404) {
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد!", Snackbar.LENGTH_LONG).show()
+
+                } else if (response.code() == 405) {
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف فعالیت را ندارید!", Snackbar.LENGTH_LONG).show()
+
+                }
+
+            }
+
+        })
 
     }
+
     private fun getToken(): String {
         var sharedPreferences: SharedPreferences = this@EditDoneActivitiesActivity.getSharedPreferences("userInformation", 0)
-        return sharedPreferences.getString("token", null)
+        var token = sharedPreferences.getString("token", null)
+        return token
     }
 
     private fun setupProgress() {

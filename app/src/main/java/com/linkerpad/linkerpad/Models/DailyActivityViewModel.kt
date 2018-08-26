@@ -1,10 +1,12 @@
 package com.linkerpad.linkerpad.Models
 
 import com.linkerpad.linkerpad.ApiData.input.CreateDailyActivityBody
+import com.linkerpad.linkerpad.ApiData.input.DeleteDailyActivityBody
 import com.linkerpad.linkerpad.ApiData.input.GetDailyActivityListBody
 import com.linkerpad.linkerpad.Data.CreateDailyActivityData
 import com.linkerpad.linkerpad.Data.DailyActivityInformationData
 import com.linkerpad.linkerpad.Data.DailyActivityInformationOutput
+import com.linkerpad.linkerpad.Data.DailyActivityInput
 
 /**
  * Created by alihajiloo on 8/25/18.
@@ -25,6 +27,10 @@ data class DailyActivityViewModel(var status: String, var message: String, var i
 
         fun getDailyAcivityInformation(dailyActivityInformationOutput: DailyActivityInformationOutput): DailyActivityInformationData {
             return DailyActivityInformationData(dailyActivityInformationOutput.responseObject.id, dailyActivityInformationOutput.responseObject.projectId, dailyActivityInformationOutput.responseObject.createdById, dailyActivityInformationOutput.responseObject.reportDate, dailyActivityInformationOutput.responseObject.title, dailyActivityInformationOutput.responseObject.workloadUnit, dailyActivityInformationOutput.responseObject.description, dailyActivityInformationOutput.responseObject.numberOfCrew, dailyActivityInformationOutput.responseObject.workHours, dailyActivityInformationOutput.responseObject.workload)
+        }
+
+        fun setDeleteDailyActivity(dailyActivityId: String, projectId: String): DeleteDailyActivityBody {
+            return DailyActivityInput.setDeleteDailyActivity(DailyActivityInput(dailyActivityId, projectId))
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.linkerpad.linkerpad.Data
 
+import com.linkerpad.linkerpad.ApiData.input.DeleteDailyActivityBody
 import com.linkerpad.linkerpad.ApiData.input.GetDailyActivityListBody
 
 /**
@@ -16,3 +17,12 @@ data class DailyActivityInformationData(var id: String, var projectId: String, v
 }
 
 data class DailyActivityInformationOutput(var status: String, var message: String, var responseObject: DailyActivityInformationData)
+
+data class DailyActivityInput(var dailyActivityId:String , var projectId: String){
+    companion object {
+        fun setDeleteDailyActivity(dailyActivityInput: DailyActivityInput):DeleteDailyActivityBody{
+            return DeleteDailyActivityBody(dailyActivityInput.dailyActivityId, dailyActivityInput.projectId)
+        }
+
+    }
+}
