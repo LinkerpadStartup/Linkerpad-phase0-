@@ -58,6 +58,7 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/saveEditDailyActivityTv"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
@@ -67,7 +68,6 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:padding="8dp"
-
                         android:text="ذخیره"
                         android:textColor="@color/white"
                         android:textSize="18sp" />

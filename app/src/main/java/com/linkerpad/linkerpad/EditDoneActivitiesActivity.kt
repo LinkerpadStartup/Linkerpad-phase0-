@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.widget.Toast
 import com.linkerpad.linkerpad.ApiData.output.DeleteDailyActivityResponse
+import com.linkerpad.linkerpad.ApiData.output.EditDailyActivityResponse
 import com.linkerpad.linkerpad.ApiData.output.GetDailyActivityInformationResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
@@ -41,6 +42,11 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         removeDailyActivityTv.setOnClickListener {
             setupProgress()
             deleteDailyActivity(projectId, dailyActivityId)
+        }
+
+        saveEditDailyActivityTv.setOnClickListener {
+            setupProgress()
+            editDailyActivity(projectId, dailyActivityId)
         }
 
         editDoneActivitesBackIcon.setOnClickListener {
@@ -109,6 +115,47 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
                 } else if (response.code() == 405) {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف فعالیت را ندارید!", Snackbar.LENGTH_LONG).show()
+
+                }
+
+            }
+
+        })
+
+    }
+
+    private fun editDailyActivity(projectId: String, dailyActivityId: String) {
+
+        var service: IUserApi = IWebApi.Factory.create()
+
+        var editDailyActivityBody = DailyActivityViewModel.setEditDailyActivity(dailyActivityId, projectId,
+                TitleDoneActivitiesEdt.text.toString(), sizeUnitDoneActivitiesEdt.text.toString(), desciptionDoneActivitiesEdt.text.toString(),
+                countMemberDoneActivitiesEdt.text.toString().toInt(), timeCountDoneActivitiesEdt.text.toString().toFloat(), sizeCountDoneActivitiesEdt.text.toString().toFloat()
+        )
+
+        var call = service.editDailyActivity(getToken(), editDailyActivityBody)
+
+        call.enqueue(object : retrofit2.Callback<EditDailyActivityResponse> {
+            override fun onFailure(call: Call<EditDailyActivityResponse>?, t: Throwable?) {
+                progressDialog.dismiss()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<EditDailyActivityResponse>?, response: Response<EditDailyActivityResponse>?) {
+                progressDialog.dismiss()
+
+                if (response!!.code() == 200) {
+                    Toast.makeText(this@EditDoneActivitiesActivity, "فعالیت با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
+
+                    var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
+                    intent.putExtra("projectId", projectId)
+                    startActivity(intent)
+                    this@EditDoneActivitiesActivity.finish()
+                } else if (response.code() == 404) {
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد!", Snackbar.LENGTH_LONG).show()
+
+                } else if (response.code() == 405) {
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش فعالیت را ندارید!", Snackbar.LENGTH_LONG).show()
 
                 }
 

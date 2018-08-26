@@ -7,7 +7,7 @@ import java.util.*
 /**
  * Created by alihajiloo on 8/25/18.
  */
-class EditProjectResponse : Response() {
+open class EditProjectResponse : Response() {
 
     @SerializedName("responseObject")
     lateinit var responseObject: Objects

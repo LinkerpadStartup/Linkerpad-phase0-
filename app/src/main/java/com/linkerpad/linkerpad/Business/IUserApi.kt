@@ -56,4 +56,7 @@ interface IUserApi {
 
     @POST("api/dailyactivity/DeleteDailyActivity")
     fun deleteDailyActivity(@Header("authorization") authorization: String, @Body deleteDailyActivityBody: DeleteDailyActivityBody): Call<DeleteDailyActivityResponse>
+
+    @POST("api/dailyactivity/EditDailyActivity")
+    fun editDailyActivity(@Header("authorization") authorization: String, @Body editDailyActivityBody: EditDailyActivityBody): Call<EditDailyActivityResponse>
 }
