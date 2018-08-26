@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/iransans_web_medium"
         android:padding="8dp"
+        android:id="@+id/machineryTitleTv"
         android:text="تاورکرین"
         android:textColor="@color/gray900" />
 
@@ -36,10 +37,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/activeMachineryTv"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"
             android:text="5" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_block_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="4dp"
+            android:id="@+id/deactiveMachineryTv"
+            android:fontFamily="@font/iransans_web_light"
+            android:text="40" />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,24 +77,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/workHoursTv"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"
             android:text="40" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="4dp"
-            android:fontFamily="@font/iransans_web_light"
-            android:text="فعال" />
     </LinearLayout>
 
     <TextView
