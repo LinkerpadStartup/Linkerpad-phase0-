@@ -38,7 +38,11 @@ class AddMachineryActivity : AppCompatActivity() {
 
 
         //back clicked
-        addMachineryBackIcon.setOnClickListener { this@AddMachineryActivity.finish() }
+        addMachineryBackIcon.setOnClickListener {   var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
+            var projectId = getIntent().getStringExtra("projectId")
+            intent.putExtra("projectId", projectId)
+            startActivity(intent)
+            this@AddMachineryActivity.finish() }
     }
 
     private fun getToken(): String {

@@ -43,6 +43,8 @@ class ReportsFragment : Fragment() {
 
         view.materialsLL.setOnClickListener {
             var intent = Intent(context, MaterialsActivity::class.java)
+            var projectId = activity!!.intent.getStringExtra("id")
+            intent.putExtra("projectId", projectId)
             startActivity(intent)
 
         }

@@ -72,7 +72,7 @@ interface IUserApi {
     fun getProjectEquipmentList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<MachineryListResponse>
 
     @GET("api/equipment/GetEquipment")
-    fun getEquipmentInformation(@Header("authorization") authorization: String, @Query("equipmentId") projectId: String, @Query("projectId") dailyActivityId: String): Call<GetMachineryInformationResponse>
+    fun getEquipmentInformation(@Header("authorization") authorization: String, @Query("equipmentId") projectId: String, @Query("projectId") equipmentId: String): Call<GetMachineryInformationResponse>
 
     @POST("api/equipment/DeleteEquipment")
     fun deleteEquipment(@Header("authorization") authorization: String, @Body deleteMachineryBody: DeleteMachineryBody): Call<MachineryResponse>
@@ -80,5 +80,20 @@ interface IUserApi {
     @POST("api/equipment/EditEquipment")
     fun editEquipment(@Header("authorization") authorization: String, @Body editMachineryBody: EditMachineryBody): Call<MachineryResponse>
 
+    //Material
+    @POST("api/material/CreateMaterial")
+    fun createMaterial(@Header("authorization") authorization: String, @Body createMaterialBody: CreateMaterialBody): Call<MaterialResponse>
+
+    @GET("api/material/GetProjectMaterialList")
+    fun getProjectMaterialList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<MaterialListResponse>
+
+    @GET("api/material/GetMaterial")
+    fun getMaterialInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("materialId") materialId: String): Call<GetMaterialInformationResponse>
+
+    @POST("api/material/DeleteMaterial")
+    fun deleteMaterial(@Header("authorization") authorization: String, @Body deleteMaterialBody: DeleteMaterialBody): Call<MaterialResponse>
+
+    @POST("api/material/EditMaterial")
+    fun editMaterial(@Header("authorization") authorization: String, @Body editMaterialBody: EditMaterialBody): Call<MaterialResponse>
 
 }

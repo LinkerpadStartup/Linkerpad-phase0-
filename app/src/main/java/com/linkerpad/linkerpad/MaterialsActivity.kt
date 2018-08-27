@@ -14,6 +14,8 @@ class MaterialsActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        var projectId = intent.getStringExtra("projectId")
+
         //Edit Materials
         materialsItemLL.setOnClickListener {
             var intent = Intent(this@MaterialsActivity, EditMaterialsActivity::class.java)
@@ -23,6 +25,8 @@ class MaterialsActivity : AppCompatActivity() {
         //Add Materials
         materialsActivityFab.setOnClickListener {
             var intent = Intent(this@MaterialsActivity, AddMaterialsActivity::class.java)
+            intent.putExtra("projectId", projectId)
+            startActivity(intent)
             startActivity(intent)
         }
 
