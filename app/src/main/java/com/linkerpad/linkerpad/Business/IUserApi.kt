@@ -72,7 +72,7 @@ interface IUserApi {
     fun getProjectEquipmentList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<MachineryListResponse>
 
     @GET("api/equipment/GetEquipment")
-    fun getEquipmentInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("equipmentId") dailyActivityId: String): Call<GetMachineryInformationResponse>
+    fun getEquipmentInformation(@Header("authorization") authorization: String, @Query("equipmentId") projectId: String, @Query("projectId") dailyActivityId: String): Call<GetMachineryInformationResponse>
 
     @POST("api/equipment/DeleteEquipment")
     fun deleteEquipment(@Header("authorization") authorization: String, @Body deleteMachineryBody: DeleteMachineryBody): Call<MachineryResponse>

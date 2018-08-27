@@ -37,6 +37,7 @@ class MachineryActivity : AppCompatActivity() {
             var intent = Intent(this@MachineryActivity, AddMachineryActivity::class.java)
             intent.putExtra("projectId", projectId)
             startActivity(intent)
+            this@MachineryActivity.finish()
         }
 
         //back clicked
