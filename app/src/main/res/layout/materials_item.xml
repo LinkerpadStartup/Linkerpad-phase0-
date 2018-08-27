@@ -18,6 +18,7 @@
         android:fontFamily="@font/iransans_web_medium"
         android:padding="8dp"
         android:text="آجر"
+        android:id="@+id/titleMaterialTv"
         android:textColor="@color/gray900" />
 
     <LinearLayout
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/countMaterialTv"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"
             android:text="5" />

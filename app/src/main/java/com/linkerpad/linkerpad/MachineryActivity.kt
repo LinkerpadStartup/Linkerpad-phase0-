@@ -1,6 +1,7 @@
 package com.linkerpad.linkerpad
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.machinery_item.*
 import kotlinx.android.synthetic.main.machinery_layout.*
 import retrofit2.Call
 import retrofit2.Response
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class MachineryActivity : AppCompatActivity() {
 
@@ -88,5 +90,9 @@ class MachineryActivity : AppCompatActivity() {
         var sharedPreferences: SharedPreferences = this@MachineryActivity.getSharedPreferences("userInformation", 0)
         var token = sharedPreferences.getString("token", null)
         return token
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 }
