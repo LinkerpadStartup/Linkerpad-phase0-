@@ -222,7 +222,6 @@
                         android:layout_marginRight="8dp"
                         android:fontFamily="@font/iransans_web_light"
                         android:hint="توضیحات"
-                        android:inputType="text"
                         android:maxLength="400"
                         android:padding="8dp" />
                 </android.support.design.widget.TextInputLayout>
@@ -235,7 +234,7 @@
                     android:focusable="true"
                     android:fontFamily="@font/iransans_web_medium"
                     android:padding="16dp"
-                    android:text="حذف فعالیت"
+                    android:text="حذف ماشین"
                     android:textColor="@color/redA700" />
             </LinearLayout>
         </ScrollView>

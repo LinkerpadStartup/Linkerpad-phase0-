@@ -1,6 +1,7 @@
 package com.linkerpad.linkerpad
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.edit_machinery_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class EditMachineryActivity : AppCompatActivity() {
 
@@ -185,4 +187,7 @@ class EditMachineryActivity : AppCompatActivity() {
         progressDialog.show()
     }
 
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+    }
 }

@@ -2,179 +2,185 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dummy_layout_for_snackbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.linkerpad.linkerpad.EditMaterialsActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layoutDirection="rtl"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/appbar"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
                 android:layoutDirection="rtl"
-                android:theme="@style/AppTheme.AppBarOverlay">
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    android:layoutDirection="rtl"
-                    app:popupTheme="@style/AppTheme.PopupOverlay">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:translationX="8dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/editMaterialsBackIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="15dp"
+                        app:srcCompat="@drawable/ic_arrow_forward" />
+
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:translationX="8dp">
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:gravity="center_vertical"
+                        android:text="ویرایش مصالح"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
-                        <ImageView
-                            android:id="@+id/editMaterialsBackIcon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:padding="15dp"
-                            app:srcCompat="@drawable/ic_arrow_forward" />
+                    <TextView
+                        android:id="@+id/saveMaterialTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="ذخیره"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/iransans_web_light"
-                            android:gravity="center_vertical"
-                            android:text="ویرایش مصالح"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="8dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:fontFamily="@font/iransans_web_light"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:gravity="center_vertical"
-                            android:padding="8dp"
-                            android:text="ذخیره"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
-                </android.support.v7.widget.Toolbar>
-
-            </android.support.design.widget.AppBarLayout>
+        </android.support.design.widget.AppBarLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:focusedByDefault="true">
-
-                <EditText
-                    android:id="@+id/TitleMaterialEdt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/iransans_web_light"
-                    android:hint="عنوان"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:padding="8dp" />
-            </android.support.design.widget.TextInputLayout>
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                android:paddingBottom="16dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="16dp"
-                android:paddingRight="16dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/iransans_web_medium"
-                    android:text="مقدار مصرف شده" />
-
-
-                <EditText
-                    android:id="@+id/countMaterialsEdt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/iransans_web_light"
-                    android:gravity="center"
-                    android:hint="تعداد"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:padding="8dp" />
-
-                <EditText
-                    android:id="@+id/unitMachineryEdt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/iransans_web_light"
-                    android:gravity="center"
-                    android:hint="واحد"
-                    android:inputType="text"
-                    android:maxLength="4"
-                    android:padding="8dp" />
-
-            </LinearLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <EditText
-                    android:id="@+id/descriptionMaterialsEdt"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:fontFamily="@font/iransans_web_light"
-                    android:hint="توضیحات"
-                    android:inputType="text"
-                    android:maxLength="400"
-                    android:padding="8dp" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_marginTop="16dp"
+                    android:focusedByDefault="true">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/iransans_web_medium"
-                android:padding="16dp"
-                android:text="حذف فعالیت"
-                android:textColor="@color/redA700" />
-        </LinearLayout>
-    </ScrollView>
+                    <EditText
+                        android:id="@+id/TitleMaterialEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:hint="عنوان"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:padding="8dp" />
+                </android.support.design.widget.TextInputLayout>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iransans_web_medium"
+                        android:text="مقدار مصرف شده" />
+
+
+                    <EditText
+                        android:id="@+id/countMaterialsEdt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:gravity="center"
+                        android:hint="تعداد"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:padding="8dp" />
+
+                    <EditText
+                        android:id="@+id/unitMaterialEdt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:gravity="center"
+                        android:hint="واحد"
+                        android:inputType="text"
+                        android:maxLength="4"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/descriptionMaterialsEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:hint="توضیحات"
+                        android:maxLength="400"
+                        android:padding="8dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/deleteMaterialTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/iransans_web_medium"
+                    android:padding="16dp"
+                    android:text="حذف مصالح"
+                    android:textColor="@color/redA700" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 </RelativeLayout>

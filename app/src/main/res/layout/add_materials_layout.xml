@@ -165,7 +165,6 @@
                         android:layout_marginRight="8dp"
                         android:fontFamily="@font/iransans_web_light"
                         android:hint="توضیحات"
-                        android:inputType="text"
                         android:maxLength="400"
                         android:padding="8dp" />
                 </android.support.design.widget.TextInputLayout>

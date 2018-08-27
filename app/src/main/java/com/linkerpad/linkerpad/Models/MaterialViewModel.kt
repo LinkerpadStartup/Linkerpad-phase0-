@@ -41,11 +41,11 @@ data class MaterialViewModel(
             )
         }
 
-        fun setDeleteMachinery(materialId: String, projectId: String): DeleteMaterialBody {
+        fun setDeleteMaterial(materialId: String, projectId: String): DeleteMaterialBody {
             return MaterialInput.setDeleteMaterial(MaterialInput(materialId, projectId))
         }
 
-        fun setEditMachinery(materialId: String,
+        fun setEditMaterial(materialId: String,
                              projectId: String,
                              title: String,
                              consumedQuantityUnit: String,
