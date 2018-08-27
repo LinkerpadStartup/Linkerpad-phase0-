@@ -272,10 +272,10 @@ class ProjectHolderActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        exitMenu.setOnClickListener {
+      /*  exitMenu.setOnClickListener {
             var intent = Intent(this@ProjectHolderActivity, RegLoginHolderActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         commentsMenu.setOnClickListener {
             var intent = Intent(this@ProjectHolderActivity, SendCommentsActivity::class.java)
