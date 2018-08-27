@@ -134,8 +134,8 @@ class AddProjectActivity : AppCompatActivity() {
     }
 
     fun galleryIntent() {
-     /*   var intent = Intent()
-        intent.setType("image*//*")
+        /*   var intent = Intent()
+           intent.setType("image*//*")
         intent.setAction(Intent.ACTION_GET_CONTENT)
         startActivityForResult(Intent.createChooser(intent, "انتخاب تصویر"), SELECT_IMAGE)*/
 
@@ -150,16 +150,13 @@ class AddProjectActivity : AppCompatActivity() {
     }
 
 
-    @TargetApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        val uri = data!!.getData()
-
-
 
 
         if (resultCode != Activity.RESULT_CANCELED) {
-            if (data.data != null && requestCode == SELECT_IMAGE) {
+            if (data!!.data != null && requestCode == SELECT_IMAGE) {
+
+                val uri = data.getData()
 
                 var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 accountPicImg.setImageBitmap(fixedbitmap);
@@ -168,7 +165,7 @@ class AddProjectActivity : AppCompatActivity() {
                     //  val bytes = File(uri.toString()).readBytes()
                     var outputStream = ByteArrayOutputStream()
                     fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                    convertImage = Base64.encodeToString(outputStream.toByteArray(),Base64.DEFAULT)
+                    convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
                 }
 
                 //  onSelectFromGallary(data)
@@ -183,6 +180,9 @@ class AddProjectActivity : AppCompatActivity() {
                 }
 
             }
+        } else {
+            convertImage = ""
+            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.ic_account_circle))
         }
 
 

@@ -37,7 +37,7 @@ class EditProjectActivity : AppCompatActivity() {
     private val SELECT_IMAGE: Int = 9
     private var convertImage: String = ""
     private var convertedImage: Boolean = false
-    var projectPicture = ""
+    var projectPicture:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,13 +85,10 @@ class EditProjectActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        val uri = data!!.getData()
-
-
-
-
         if (resultCode != Activity.RESULT_CANCELED) {
-            if (data.data != null && requestCode == SELECT_IMAGE) {
+            if (data!!.data != null && requestCode == SELECT_IMAGE) {
+
+                val uri = data.getData()
 
                 var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 projectPicImg.setImageBitmap(fixedbitmap);
@@ -116,6 +113,10 @@ class EditProjectActivity : AppCompatActivity() {
                 }
 
             }
+        }else{
+            convertedImage=true
+            convertImage = ""
+            projectPicImg.setImageDrawable(resources.getDrawable(R.drawable.ic_account_circle_blue))
         }
 
 

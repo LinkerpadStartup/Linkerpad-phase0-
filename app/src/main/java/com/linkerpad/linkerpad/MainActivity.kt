@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
     private fun getNameLastName(): String {
         var sharedPreferences: SharedPreferences = this@MainActivity.getSharedPreferences("userInformation", 0)
-        return "${sharedPreferences.getString("firstName", null)} ${sharedPreferences.getString("lastName",null)}"
+        return "${sharedPreferences.getString("firstName", null)} ${sharedPreferences.getString("lastName", null)}"
     }
 
     private fun getEmail(): String {
@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         exitMenu.setOnClickListener {
             var intent = Intent(this@MainActivity, RegLoginHolderActivity::class.java)
             startActivity(intent)
+            this@MainActivity.finish()
         }
 
         commentsMenu.setOnClickListener {
