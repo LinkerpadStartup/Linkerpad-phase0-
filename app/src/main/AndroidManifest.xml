@@ -112,8 +112,10 @@
         <activity
             android:name=".EditProjectActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditMemberBottomSheetActivity"
-            android:theme="@style/Theme.AppCompat.Translucent2"/>
+        <activity
+            android:name=".EditMemberBottomSheetActivity"
+            android:theme="@style/Theme.AppCompat.Translucent2" />
+        <activity android:name=".ConfirmationActivity"></activity>
     </application>
 
 </manifest>

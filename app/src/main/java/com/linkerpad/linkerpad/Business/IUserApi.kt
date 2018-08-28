@@ -96,4 +96,14 @@ interface IUserApi {
     @POST("api/material/EditMaterial")
     fun editMaterial(@Header("authorization") authorization: String, @Body editMaterialBody: EditMaterialBody): Call<MaterialResponse>
 
+    //Confirmation
+    @POST("api/confirmation/CreateConfirmation")
+    fun createConfirmation(@Header("authorization") authorization: String, @Body createConfirmationBody: CreateConfirmationBody): Call<ConfirmationResponse>
+
+    @GET("api/confirmation/GetProjectConfirmationList")
+    fun getProjectConfirmationList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<ConfirmationListResponse>
+
+    @POST("api/confirmation/DeleteConfirmation")
+    fun deleteConfirmation(@Header("authorization") authorization: String, @Body deleteConfirmationBody: DeleteConfirmationBody): Call<ConfirmationResponse>
+
 }

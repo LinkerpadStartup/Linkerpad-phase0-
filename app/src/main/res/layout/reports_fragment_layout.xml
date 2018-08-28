@@ -150,12 +150,16 @@
     </ScrollView>
 
     <TextView
+        android:id="@+id/confirmationReportTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:background="@drawable/outline_btn_primary"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:padding="8dp"
         android:text="نمایش/تایید گزارش روزانه"
         android:textColor="@color/colorPrimary"

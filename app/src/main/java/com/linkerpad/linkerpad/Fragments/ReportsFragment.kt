@@ -52,6 +52,13 @@ class ReportsFragment : Fragment() {
             var intent = Intent(context, NotesAndEventsActivity::class.java)
             startActivity(intent)
         }
+
+        view.confirmationReportTv.setOnClickListener {
+            var intent = Intent(context, ConfirmationActivity::class.java)
+            var projectId = activity!!.intent.getStringExtra("id")
+            intent.putExtra("projectId", projectId)
+            startActivity(intent)
+        }
         return view
     }
 
