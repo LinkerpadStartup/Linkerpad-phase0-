@@ -31,7 +31,6 @@ import android.util.Base64
 import com.linkerpad.linkerpad.EditProjectBottomSheetActivity
 
 
-
 /**
  * Created by alihajiloo on 8/20/18.
  */
@@ -60,6 +59,9 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
         @TargetApi(Build.VERSION_CODES.O)
         fun bindModel(itemModel: ProjectInformationData, position: Int) {
 
+            itemModel.startDate = itemModel.startDate.replace("T00:00:00", "")
+            itemModel.endDate = itemModel.endDate.replace("T00:00:00", "")
+
             itemView.projectNameItemTv.setText(itemModel.name)
             itemView.projectStartDateItemTv.setText(itemModel.startDate)
             itemView.projectEndDateItemTv.setText(itemModel.endDate)
@@ -69,8 +71,8 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
 
                 val b = Base64.decode(itemModel.projectPicture, Base64.DEFAULT)
                 val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
-              //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
-                itemView.projectPictureItemImv.setImageDrawable(BitmapDrawable(context.resources , bitmap))
+                //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
+                itemView.projectPictureItemImv.setImageDrawable(BitmapDrawable(context.resources, bitmap))
             }
 
             itemView.cardProjectInformation.setOnClickListener {

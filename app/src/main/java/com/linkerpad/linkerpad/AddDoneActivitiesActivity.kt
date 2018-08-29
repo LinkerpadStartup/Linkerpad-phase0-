@@ -107,6 +107,15 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
     }
 
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
+        var projectId = getIntent().getStringExtra("projectId")
+        intent.putExtra("projectId", projectId)
+        startActivity(intent)
+        this@AddDoneActivitiesActivity.finish()
+    }
+
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }

@@ -71,7 +71,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_shopping_basket_gray" />
+            app:srcCompat="@drawable/ic_assignment_turned_in_gray" />
 
         <TextView
             android:layout_width="wrap_content"

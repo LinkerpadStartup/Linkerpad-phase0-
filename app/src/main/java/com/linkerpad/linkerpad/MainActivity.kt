@@ -70,6 +70,17 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         }
 
         exitMenu.setOnClickListener {
+
+            var sharedPreferences: SharedPreferences = this@MainActivity.getSharedPreferences("userInformation", 0)
+            var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+            sharedPreferencesEditor.putString("token", "")
+            sharedPreferencesEditor.putString("username", "")
+            sharedPreferencesEditor.putString("firstName", "")
+            sharedPreferencesEditor.putString("lastName", "")
+            sharedPreferencesEditor.putString("email", "")
+            sharedPreferencesEditor.apply()
+            sharedPreferencesEditor.commit()
+
             var intent = Intent(this@MainActivity, RegLoginHolderActivity::class.java)
             startActivity(intent)
             this@MainActivity.finish()

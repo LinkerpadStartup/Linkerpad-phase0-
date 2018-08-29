@@ -180,6 +180,14 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         progressDialog.show()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
+        intent.putExtra("projectId", projectId)
+        startActivity(intent)
+        this@EditDoneActivitiesActivity.finish()
+    }
+
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))

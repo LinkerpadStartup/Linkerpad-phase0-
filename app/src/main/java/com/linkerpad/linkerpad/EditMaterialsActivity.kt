@@ -184,6 +184,16 @@ class EditMaterialsActivity : AppCompatActivity() {
         progressDialog.show()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
+        var projectId = getIntent().getStringExtra("projectId")
+        intent.putExtra("projectId", projectId)
+        startActivity(intent)
+        this@EditMaterialsActivity.finish()
+
+    }
+
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }

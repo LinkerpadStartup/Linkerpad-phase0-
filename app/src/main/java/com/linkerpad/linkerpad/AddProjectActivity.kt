@@ -71,8 +71,8 @@ class AddProjectActivity : AppCompatActivity() {
 
         //back click
         addProjectBackIcon.setOnClickListener {
-            /* var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
-             startActivity(intent)*/
+            var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
+            startActivity(intent)
             this@AddProjectActivity.finish()
         }
     }
@@ -188,8 +188,12 @@ class AddProjectActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
 
-    fun onSelectFromGallary(data: Intent?) {
+        var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
+        startActivity(intent)
+        this@AddProjectActivity.finish()
 
     }
 

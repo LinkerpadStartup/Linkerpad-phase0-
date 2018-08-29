@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_assignment" />
+                    app:srcCompat="@drawable/ic_assignment_turned_in_gray" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -60,13 +60,12 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="8dp"
-                    android:text="🏗 "
-                    android:textSize="18sp" />
+                    app:srcCompat="@drawable/ic_build_gray" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -93,13 +92,13 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:padding="8dp"
-                    android:text=" ⛏ "
-                    android:textSize="18sp" />
+                    app:srcCompat="@drawable/construction_and_tools" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -131,7 +130,7 @@
                     android:layout_gravity="center"
                     android:padding="8dp"
                     android:textSize="18sp"
-                    app:srcCompat="@drawable/ic_edit" />
+                    app:srcCompat="@drawable/ic_warning_gray" />
 
                 <TextView
                     android:layout_width="0dp"

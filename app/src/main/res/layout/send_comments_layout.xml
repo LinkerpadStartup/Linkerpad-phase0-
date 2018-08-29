@@ -90,6 +90,7 @@
                     android:background="@drawable/round_btn_cancel"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:text="انصراف"
+                    android:id="@+id/cancelCommentBtn"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
             </LinearLayout>

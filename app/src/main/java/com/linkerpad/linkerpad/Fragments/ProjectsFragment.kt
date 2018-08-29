@@ -20,6 +20,7 @@ import com.linkerpad.linkerpad.ApiData.output.ProjectListResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Data.ProjectInformationData
+import com.linkerpad.linkerpad.MainActivity
 import com.linkerpad.linkerpad.Models.ProjectInformationViewModel
 import com.linkerpad.linkerpad.ProjectHolderActivity
 import com.linkerpad.linkerpad.R
@@ -69,6 +70,7 @@ class ProjectsFragment : Fragment() {
         view.addProjectFab.setOnClickListener {
             var intent = Intent(context, AddProjectActivity::class.java)
             startActivity(intent)
+            activity!!.finish()
         }
 
         return view
@@ -110,6 +112,8 @@ class ProjectsFragment : Fragment() {
         progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
         progressDialog.show()
     }
+
+
 
     private fun getToken(): String {
         var sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("userInformation", 0)

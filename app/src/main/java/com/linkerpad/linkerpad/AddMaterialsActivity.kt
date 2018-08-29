@@ -104,6 +104,14 @@ class AddMaterialsActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this@AddMaterialsActivity, MaterialsActivity::class.java)
+        var projectId = getIntent().getStringExtra("projectId")
+        intent.putExtra("projectId", projectId)
+        startActivity(intent)
+        this@AddMaterialsActivity.finish()
+    }
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))

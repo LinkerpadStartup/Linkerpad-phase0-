@@ -13,6 +13,10 @@ class SendCommentsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.send_comments_layout)
 
+        cancelCommentBtn.setOnClickListener {
+            this@SendCommentsActivity.finish()
+        }
+
         sendCommentRG.setOnCheckedChangeListener { radioGroup, checkedId ->
             if (checkedId == R.id.suggestionRB){
                 Toast.makeText(this@SendCommentsActivity, "Suggestion",Toast.LENGTH_SHORT).show()

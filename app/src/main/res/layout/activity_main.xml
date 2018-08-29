@@ -227,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:paddingRight="8dp"
-                        android:text="درباره ما" />
+                        android:text="درباره لینکرپد" />
 
                 </LinearLayout>
             </LinearLayout>

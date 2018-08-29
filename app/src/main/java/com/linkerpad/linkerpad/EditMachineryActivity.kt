@@ -187,6 +187,17 @@ class EditMachineryActivity : AppCompatActivity() {
         progressDialog.show()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
+        var projectId = getIntent().getStringExtra("projectId")
+        intent.putExtra("projectId", projectId)
+        startActivity(intent)
+        this@EditMachineryActivity.finish()
+
+    }
+
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }

@@ -161,7 +161,6 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                                 loginResponse.responseObject.expirationDate,
                                 loginResponse.responseObject.userInformationViewModel
                         ))
-                        Toast.makeText(context, loginOutputData.status + "", Toast.LENGTH_LONG).show()
 
                         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
                         var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()

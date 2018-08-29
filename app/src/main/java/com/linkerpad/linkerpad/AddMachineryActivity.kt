@@ -38,11 +38,13 @@ class AddMachineryActivity : AppCompatActivity() {
 
 
         //back clicked
-        addMachineryBackIcon.setOnClickListener {   var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
+        addMachineryBackIcon.setOnClickListener {
+            var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
             var projectId = getIntent().getStringExtra("projectId")
             intent.putExtra("projectId", projectId)
             startActivity(intent)
-            this@AddMachineryActivity.finish() }
+            this@AddMachineryActivity.finish()
+        }
     }
 
     private fun getToken(): String {
@@ -98,6 +100,14 @@ class AddMachineryActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
+        var projectId = getIntent().getStringExtra("projectId")
+        intent.putExtra("projectId", projectId)
+        startActivity(intent)
+        this@AddMachineryActivity.finish()
+    }
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
