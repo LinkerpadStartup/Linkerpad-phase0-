@@ -29,10 +29,11 @@ class AddMachineryActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         var projectId = intent.getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
 
         saveMachineryTv.setOnClickListener {
             setupProgress()
-            createMachinery(projectId)
+            createMachinery(projectId, reportDate)
 
         }
 
@@ -42,6 +43,7 @@ class AddMachineryActivity : AppCompatActivity() {
             var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
             var projectId = getIntent().getStringExtra("projectId")
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@AddMachineryActivity.finish()
         }
@@ -62,13 +64,23 @@ class AddMachineryActivity : AppCompatActivity() {
         progressDialog.show()
     }
 
-    private fun createMachinery(projectId: String) {
+    private fun createMachinery(projectId: String, reportDate: String) {
 
         var service: IUserApi = IWebApi.Factory.create()
 
-        var machineryBody = MachineryViewModel.setCreateMachineryInformation(MachineryViewModel("", "", "", projectId,
-                "", "2020-02-02", TitleMachineryEdt.text.toString(), descriptionMachineryEdt.text.toString(), countActiveMachineryEdt.text.toString().toInt()
-                , countDeactiveMachineryEdt.text.toString().toInt(), timeCountMachineryEdt.text.toString().toFloat()))
+        var machineryBody = MachineryViewModel.setCreateMachineryInformation(MachineryViewModel(
+                "",
+                "",
+                "",
+                projectId,
+                "",
+                reportDate,
+                TitleMachineryEdt.text.toString(),
+                descriptionMachineryEdt.text.toString(),
+                countActiveMachineryEdt.text.toString().toInt()
+                , countDeactiveMachineryEdt.text.toString().toInt(),
+                timeCountMachineryEdt.text.toString().toFloat()
+        ))
 
         var call = service.createEquipment(getToken(), machineryBody)
 
@@ -86,6 +98,7 @@ class AddMachineryActivity : AppCompatActivity() {
                     Toast.makeText(this@AddMachineryActivity, "ماشین آلات با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@AddMachineryActivity.finish()
 
@@ -104,7 +117,9 @@ class AddMachineryActivity : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
         var projectId = getIntent().getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
         intent.putExtra("projectId", projectId)
+        intent.putExtra("reportDate", reportDate)
         startActivity(intent)
         this@AddMachineryActivity.finish()
     }

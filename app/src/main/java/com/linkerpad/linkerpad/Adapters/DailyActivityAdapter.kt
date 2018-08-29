@@ -49,6 +49,7 @@ class DailyActivityAdapter(var context: Context, var data: ArrayList<DailyActivi
                 var intent = Intent(context, EditDoneActivitiesActivity::class.java)
                 intent.putExtra("id", itemModel.id)
                 intent.putExtra("projectId", projectId)
+                intent.putExtra("reportDate",itemModel.reportDate)
 
                 (context as DoneActivitiesActivity).finish()
 

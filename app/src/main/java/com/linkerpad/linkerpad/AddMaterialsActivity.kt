@@ -26,10 +26,12 @@ class AddMaterialsActivity : AppCompatActivity() {
         setContentView(R.layout.add_materials_layout)
         setSupportActionBar(toolbar)
 
+        var reportDate = getIntent().getStringExtra("reportDate")
         var projectId = intent.getStringExtra("projectId")
+
         saveMaterialTv.setOnClickListener {
             setupProgress()
-            createMaterial(projectId)
+            createMaterial(projectId, reportDate)
         }
 
         //back clicked
@@ -37,6 +39,7 @@ class AddMaterialsActivity : AppCompatActivity() {
             var intent = Intent(this@AddMaterialsActivity, MaterialsActivity::class.java)
             var projectId = getIntent().getStringExtra("projectId")
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@AddMaterialsActivity.finish()
         }
@@ -57,7 +60,7 @@ class AddMaterialsActivity : AppCompatActivity() {
         progressDialog.show()
     }
 
-    private fun createMaterial(projectId: String) {
+    private fun createMaterial(projectId: String, reportDate: String) {
 
         var service: IUserApi = IWebApi.Factory.create()
 
@@ -67,7 +70,7 @@ class AddMaterialsActivity : AppCompatActivity() {
                 "",
                 projectId,
                 "",
-                "2020-02-02",
+                reportDate,
                 TitleMaterialEdt.text.toString(),
                 unitMaterialEdt.text.toString(),
                 descriptionMaterialsEdt.text.toString()
@@ -90,6 +93,7 @@ class AddMaterialsActivity : AppCompatActivity() {
                     Toast.makeText(this@AddMaterialsActivity, "مصالح با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@AddMaterialsActivity.finish()
 
@@ -108,7 +112,9 @@ class AddMaterialsActivity : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this@AddMaterialsActivity, MaterialsActivity::class.java)
         var projectId = getIntent().getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
         intent.putExtra("projectId", projectId)
+        intent.putExtra("reportDate", reportDate)
         startActivity(intent)
         this@AddMaterialsActivity.finish()
     }

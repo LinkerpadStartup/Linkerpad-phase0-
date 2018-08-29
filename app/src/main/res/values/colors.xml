@@ -30,6 +30,7 @@
 
     <color name="gray600">#757575</color>
     <color name="gray400">#BDBDBD</color>
+    <color name="gray700">#616161</color>
     <color name="gray900">#212121</color>
     <color name="gray1">#4D4D4D</color>
     <color name="gray800">#424242</color>
@@ -53,10 +54,6 @@
     <color name="teal800">#00695C</color>
     <color name="teal500">#009688</color>
     <color name="teal400">#26A69A</color>
-
-
-
-
 
 
     <color name="blue_gray700">#455A64</color>

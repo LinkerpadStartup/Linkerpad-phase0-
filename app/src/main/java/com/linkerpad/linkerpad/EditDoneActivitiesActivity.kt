@@ -25,6 +25,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
     var dailyActivityId = ""
     var projectId = ""
+    var reportDate = ""
 
     lateinit var progressDialog: ProgressDialog
 
@@ -35,6 +36,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
         dailyActivityId = intent.getStringExtra("id")
         projectId = intent.getStringExtra("projectId")
+        reportDate = getIntent().getStringExtra("reportDate")
 
         setupProgress()
         getDailyActivityInformation(projectId, dailyActivityId)
@@ -44,14 +46,22 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
             deleteDailyActivity(projectId, dailyActivityId)
         }
 
-        saveEditDailyActivityTv.setOnClickListener {
-            setupProgress()
-            editDailyActivity(projectId, dailyActivityId)
+        saveEditDailyActivityTv.setOnClickListener { view ->
+
+            if (sizeUnitDoneActivitiesEdt.text.toString() != "" && TitleDoneActivitiesEdt.text.toString() != "" && countMemberDoneActivitiesEdt.text.toString() != ""
+                    && timeCountDoneActivitiesEdt.text.toString() != "" && sizeCountDoneActivitiesEdt.text.toString() != "") {
+                setupProgress()
+                editDailyActivity(projectId, dailyActivityId)
+            } else {
+                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+            }
+
         }
 
         editDoneActivitesBackIcon.setOnClickListener {
             var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@EditDoneActivitiesActivity.finish()
         }
@@ -108,6 +118,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
                     var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@EditDoneActivitiesActivity.finish()
                 } else if (response.code() == 404) {
@@ -149,6 +160,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
                     var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@EditDoneActivitiesActivity.finish()
                 } else if (response.code() == 404) {
@@ -184,6 +196,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
         intent.putExtra("projectId", projectId)
+        intent.putExtra("reportDate", reportDate)
         startActivity(intent)
         this@EditDoneActivitiesActivity.finish()
     }

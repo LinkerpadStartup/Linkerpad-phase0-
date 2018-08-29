@@ -25,6 +25,8 @@ class EditMaterialsActivity : AppCompatActivity() {
 
     lateinit var progressDialog: ProgressDialog
 
+    var reportDate = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_materials_layout)
@@ -32,6 +34,7 @@ class EditMaterialsActivity : AppCompatActivity() {
 
         var materialId = intent.getStringExtra("id")
         var projectId = intent.getStringExtra("projectId")
+        reportDate = getIntent().getStringExtra("reportDate")
 
         setupProgress()
         getMaterialInformation(projectId, materialId)
@@ -52,6 +55,7 @@ class EditMaterialsActivity : AppCompatActivity() {
         editMaterialsBackIcon.setOnClickListener {
             var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@EditMaterialsActivity.finish()
         }
@@ -87,6 +91,7 @@ class EditMaterialsActivity : AppCompatActivity() {
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@EditMaterialsActivity.finish()
                 } else if (response.code() == 404) {
@@ -152,6 +157,7 @@ class EditMaterialsActivity : AppCompatActivity() {
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@EditMaterialsActivity.finish()
                 } else if (response.code() == 404) {
@@ -189,6 +195,7 @@ class EditMaterialsActivity : AppCompatActivity() {
         var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
         var projectId = getIntent().getStringExtra("projectId")
         intent.putExtra("projectId", projectId)
+        intent.putExtra("reportDate", reportDate)
         startActivity(intent)
         this@EditMaterialsActivity.finish()
 

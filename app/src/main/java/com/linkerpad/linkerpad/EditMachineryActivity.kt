@@ -24,6 +24,8 @@ class EditMachineryActivity : AppCompatActivity() {
 
     lateinit var progressDialog: ProgressDialog
 
+    var reportDate = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_machinery_layout)
@@ -32,6 +34,7 @@ class EditMachineryActivity : AppCompatActivity() {
 
         var equipmentId = intent.getStringExtra("id")
         var projectId = intent.getStringExtra("projectId")
+        reportDate = getIntent().getStringExtra("reportDate")
 
 
         //get Equipment
@@ -54,6 +57,7 @@ class EditMachineryActivity : AppCompatActivity() {
         editMachineryBackIcon.setOnClickListener {
             var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@EditMachineryActivity.finish()
         }
@@ -89,6 +93,7 @@ class EditMachineryActivity : AppCompatActivity() {
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@EditMachineryActivity.finish()
                 } else if (response.code() == 404) {
@@ -155,6 +160,7 @@ class EditMachineryActivity : AppCompatActivity() {
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@EditMachineryActivity.finish()
                 } else if (response.code() == 404) {
@@ -193,6 +199,7 @@ class EditMachineryActivity : AppCompatActivity() {
         var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
         var projectId = getIntent().getStringExtra("projectId")
         intent.putExtra("projectId", projectId)
+        intent.putExtra("reportDate", reportDate)
         startActivity(intent)
         this@EditMachineryActivity.finish()
 

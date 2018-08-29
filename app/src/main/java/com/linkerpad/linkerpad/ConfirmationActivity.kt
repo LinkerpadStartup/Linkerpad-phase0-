@@ -27,9 +27,10 @@ class ConfirmationActivity : AppCompatActivity() {
 
 
         var projectId = intent.getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
 
         setupProgress()
-        getConfirmationList(projectId)
+        getConfirmationList(projectId, reportDate)
     }
 
     private fun getConfirmationList(projectId: String, reportDate: String = "2020-02-02") {

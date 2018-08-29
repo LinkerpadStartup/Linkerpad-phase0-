@@ -14,6 +14,7 @@ import com.linkerpad.linkerpad.ApiData.output.DailyActivityListResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Data.DailyActivityInformationData
+import com.linkerpad.linkerpad.Data.JalaliCalendar
 import com.linkerpad.linkerpad.Models.DailyActivityViewModel
 import kotlinx.android.synthetic.main.done_activities_item.*
 import kotlinx.android.synthetic.main.done_activities_layout.*
@@ -29,14 +30,16 @@ class DoneActivitiesActivity : AppCompatActivity() {
         setContentView(R.layout.done_activities_layout)
         setSupportActionBar(toolbar)
 
+        var projectId = getIntent().getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
 
         setupProgress()
-        getDailyActivityList(intent.getStringExtra("projectId"))
+        getDailyActivityList(projectId, reportDate)
 
 
         addDoneActivitiesFab.setOnClickListener {
             var intent = Intent(this@DoneActivitiesActivity, AddDoneActivitiesActivity::class.java)
-            var projectId = getIntent().getStringExtra("projectId")
+            intent.putExtra("reportDate", reportDate)
             intent.putExtra("projectId", projectId)
             startActivity(intent)
             this@DoneActivitiesActivity.finish()
@@ -48,7 +51,6 @@ class DoneActivitiesActivity : AppCompatActivity() {
 
     private fun getDailyActivityList(projectId: String, reportDate: String = "2020-02-02") {
         var service: IUserApi = IWebApi.Factory.create()
-        var dailyActivityBody = DailyActivityViewModel.setDailyActivityList(projectId, reportDate)
         var call = service.getProjectDailyActivityList(getToken(), projectId, reportDate)
 
         call.enqueue(object : retrofit2.Callback<DailyActivityListResponse> {
@@ -74,6 +76,8 @@ class DoneActivitiesActivity : AppCompatActivity() {
         })
 
     }
+
+
 
     private fun setupProgress() {
         progressDialog = ProgressDialog(this@DoneActivitiesActivity)

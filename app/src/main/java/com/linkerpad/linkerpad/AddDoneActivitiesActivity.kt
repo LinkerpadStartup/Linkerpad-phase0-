@@ -29,11 +29,12 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        var reportDate = getIntent().getStringExtra("reportDate")
 
         saveDailyActivityTv.setOnClickListener { view ->
             if (sizeUnitDoneActivitiesEdt.text.toString() != "" && TitleDoneActivitiesEdt.text.toString() != "" && countMemberDoneActivitiesEdt.text.toString() != ""
                     && timeCountDoneActivitiesEdt.text.toString() != "" && sizeCountDoneActivitiesEdt.text.toString() != "") {
-                createDailyActivity(intent.getStringExtra("projectId"))
+                createDailyActivity(intent.getStringExtra("projectId"), reportDate)
                 setupProgress()
             } else {
                 Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
@@ -46,6 +47,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
             var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
             var projectId = getIntent().getStringExtra("projectId")
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@AddDoneActivitiesActivity.finish()
         }
@@ -68,13 +70,24 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
         progressDialog.show()
     }
 
-    private fun createDailyActivity(projectId: String) {
+    private fun createDailyActivity(projectId: String, reportDate: String) {
 
         var service: IUserApi = IWebApi.Factory.create()
 
-        var dailyActivityBody = DailyActivityViewModel.setCreateDailyActivityInformation(DailyActivityViewModel("", "", "", projectId,
-                "", "2020-02-02", TitleDoneActivitiesEdt.text.toString(), sizeUnitDoneActivitiesEdt.text.toString(), desciptionDoneActivitiesEdt.text.toString()
-                , countMemberDoneActivitiesEdt.text.toString().toInt(), timeCountDoneActivitiesEdt.text.toString().toFloat(), sizeCountDoneActivitiesEdt.text.toString().toFloat()))
+        var dailyActivityBody = DailyActivityViewModel.setCreateDailyActivityInformation(DailyActivityViewModel(
+                "",
+                "",
+                "",
+                projectId,
+                "",
+                reportDate,
+                TitleDoneActivitiesEdt.text.toString(),
+                sizeUnitDoneActivitiesEdt.text.toString(),
+                desciptionDoneActivitiesEdt.text.toString()
+                , countMemberDoneActivitiesEdt.text.toString().toInt(),
+                timeCountDoneActivitiesEdt.text.toString().toFloat(),
+                sizeCountDoneActivitiesEdt.text.toString().toFloat()
+        ))
 
         var call = service.createDailyActivity(getToken(), dailyActivityBody)
 
@@ -92,6 +105,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
                     Toast.makeText(this@AddDoneActivitiesActivity, "فعالیت با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)
+                    intent.putExtra("reportDate", reportDate)
                     startActivity(intent)
                     this@AddDoneActivitiesActivity.finish()
 
@@ -111,7 +125,9 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
         super.onBackPressed()
         var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
         var projectId = getIntent().getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
         intent.putExtra("projectId", projectId)
+        intent.putExtra("reportDate", reportDate)
         startActivity(intent)
         this@AddDoneActivitiesActivity.finish()
     }

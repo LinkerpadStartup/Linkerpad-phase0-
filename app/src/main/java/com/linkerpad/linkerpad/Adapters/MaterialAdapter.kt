@@ -43,6 +43,7 @@ class MaterialAdapter(var context: Context, var data: ArrayList<MaterialInformat
                 var intent = Intent(context, EditMaterialsActivity::class.java)
                 intent.putExtra("id", data[position].id)
                 intent.putExtra("projectId", projectId)
+                intent.putExtra("reportDate",itemModel.reportDate)
 
                 (context as MaterialsActivity).finish()
 

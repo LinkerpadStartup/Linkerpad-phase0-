@@ -30,14 +30,16 @@ class MaterialsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         var projectId = intent.getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
 
         setupProgress()
-        getMaterialList(projectId)
+        getMaterialList(projectId,reportDate)
 
         //Add Materials
         materialsActivityFab.setOnClickListener {
             var intent = Intent(this@MaterialsActivity, AddMaterialsActivity::class.java)
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate" , reportDate)
             startActivity(intent)
             this@MaterialsActivity.finish()
         }

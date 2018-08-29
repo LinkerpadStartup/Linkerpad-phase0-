@@ -49,6 +49,7 @@ class MachineryAdapter(var context: Context, var data: ArrayList<MachineryInform
                 var intent = Intent(context, EditMachineryActivity::class.java)
                 intent.putExtra("id", data[position].id)
                 intent.putExtra("projectId", projectId)
+                intent.putExtra("reportDate",itemModel.reportDate)
 
                 (context as MachineryActivity).finish()
 

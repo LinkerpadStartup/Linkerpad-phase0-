@@ -13,9 +13,62 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Space
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp" />
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/reportDateLL"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:textColor="@color/gray700"
+                        android:text="2"
+                        android:id="@+id/dayDateTv"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:text="1397"
+                        android:id="@+id/yearDateTv"
+                        android:fontFamily="@font/iransans_web_medium"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray800"
+                        android:gravity="center"
+                        android:text="مرداد"
+                        android:id="@+id/monthDateTv"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/doneActivitiesLL"

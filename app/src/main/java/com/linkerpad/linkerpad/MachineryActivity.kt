@@ -30,14 +30,16 @@ class MachineryActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         var projectId = intent.getStringExtra("projectId")
+        var reportDate = getIntent().getStringExtra("reportDate")
 
         setupProgress()
-        getMachineryList(projectId)
+        getMachineryList(projectId,reportDate)
 
 
         machineryActivityFab.setOnClickListener {
             var intent = Intent(this@MachineryActivity, AddMachineryActivity::class.java)
             intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate" , reportDate)
             startActivity(intent)
             this@MachineryActivity.finish()
         }
