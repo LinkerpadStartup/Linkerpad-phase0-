@@ -84,9 +84,12 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
             if (visibility == Visibility.InVisible) {
                 passwordEdt.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 visibility = Visibility.Visible
+                view.seePasswordImv.setImageDrawable(resources.getDrawable(R.drawable.ic_visibility_off_gray))
             } else {
                 passwordEdt.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                 visibility = Visibility.InVisible
+                view.seePasswordImv.setImageDrawable(resources.getDrawable(R.drawable.eye_gray))
+
             }
         }
 
@@ -115,7 +118,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
 
             if (view == emailEdt) {
                 if (emailEdt.text.toString() == "")
-                    emailEdt.error = "اجباری"
+                    emailEdt.error = "الزامی"
                 else
                     emailEdt.error = "فرمت نادرست"
             } else if (view == passwordEdt) {

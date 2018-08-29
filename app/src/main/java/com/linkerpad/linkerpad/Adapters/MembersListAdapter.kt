@@ -92,7 +92,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             val accessLevelTv: TextView = TextView(context)
             accessLevelTv.setText(if (itemModel.userRole == 0) "مسئول" else if (itemModel.userRole == 1) "مدیر" else if (itemModel.userRole == 2) "سرپرست" else "کارشناس")
             accessLevelTv.setPadding(15, 10, 15, 10)
-            accessLevelTv.setTextSize(16f)
+            accessLevelTv.setTextSize(14f)
             accessLevelTv.gravity = Gravity.CENTER
             accessLevelTv.setTextColor(context.resources.getColor(R.color.white))
             accessLevelTv.background = context.resources.getDrawable(R.drawable.rounded_back_gray)
@@ -109,7 +109,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             reseptionTv.layoutParams = reseptionTvParams
             reseptionTv.setText("")
             reseptionTv.setPadding(0, 0, 20, 0)
-            reseptionTv.setTextSize(16f)
+            reseptionTv.setTextSize(14f)
             reseptionTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
             itemView.secondTeamLL.addView(reseptionTv)
 

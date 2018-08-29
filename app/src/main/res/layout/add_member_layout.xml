@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dummy_layout_for_snackbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/dummy_layout_for_snackbar"
     tools:context="com.linkerpad.linkerpad.AddMemberActivity">
 
     <ScrollView
@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="افزودن اعضای تیم"
+                android:text="افزودن عضو به تیم"
                 android:textColor="@color/gray900"
                 android:textSize="18sp" />
 
@@ -50,10 +50,11 @@
                 android:layoutDirection="rtl">
 
                 <RadioButton
-                    android:id="@+id/adminRB"
+                    android:id="@+id/collaboratorRB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="مدیر" />
+                    android:text="کارشناس" />
+
 
                 <RadioButton
                     android:id="@+id/powerCollaboratorRB"
@@ -62,10 +63,11 @@
                     android:text="سرپرست" />
 
                 <RadioButton
-                    android:id="@+id/collaboratorRB"
+                    android:id="@+id/adminRB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="کارشناس" />
+                    android:text="مدیر" />
+
 
             </RadioGroup>
 

@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = RegLoginPagerAdapter(supportFragmentManager)
         /**phase-1**/  /* adapter.addFragment(ProjectsFragment(), "داشبورد")*/
-        adapter.addFragment(ProjectsFragment(), "پروژه ها")
+        adapter.addFragment(ProjectsFragment(), "لیست پروژه ها")
         viewPager.adapter = adapter
 
     }

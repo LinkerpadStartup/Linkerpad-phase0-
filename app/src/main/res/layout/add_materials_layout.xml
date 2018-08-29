@@ -52,7 +52,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/iransans_web_light"
                         android:gravity="center_vertical"
-                        android:text="افزودن مصالح"
+                        android:text="افزودن مواد و مصالح"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 

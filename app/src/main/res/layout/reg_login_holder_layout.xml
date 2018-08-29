@@ -145,7 +145,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:visibility="visible"
-        android:paddingTop="150dp"
+        android:paddingTop="250dp"
         android:lineSpacingExtra="2sp"
         android:text="اولـین اپلیکیشین مـدیریت\n ساخـت پروژه‌های عمرانی"
         android:textColor="#000"

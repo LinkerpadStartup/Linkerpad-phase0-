@@ -87,7 +87,7 @@ class EditMaterialsActivity : AppCompatActivity() {
                 progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMaterialsActivity, "مصالح با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMaterialsActivity, "مواد و مصالح با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -95,10 +95,10 @@ class EditMaterialsActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMaterialsActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش مصالح را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش مواد و مصالح را ندارید!", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -153,7 +153,7 @@ class EditMaterialsActivity : AppCompatActivity() {
                 progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMaterialsActivity, "مصالح با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMaterialsActivity, "مواد و مصالح با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -161,10 +161,10 @@ class EditMaterialsActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMaterialsActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف مصالح را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف مواد و مصالح را ندارید!", Snackbar.LENGTH_LONG).show()
 
                 }
 

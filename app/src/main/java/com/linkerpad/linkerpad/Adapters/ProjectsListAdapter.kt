@@ -56,15 +56,19 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
         /*@BindView(R.id.projectBottomSheet)
         lateinit var projectBottomSheet: LinearLayout*/
 
-        @TargetApi(Build.VERSION_CODES.O)
         fun bindModel(itemModel: ProjectInformationData, position: Int) {
 
-            itemModel.startDate = itemModel.startDate.replace("T00:00:00", "")
-            itemModel.endDate = itemModel.endDate.replace("T00:00:00", "")
+            try {
+                itemModel.startDate = itemModel.startDate.replace("T00:00:00", "")
+                itemModel.endDate = itemModel.endDate.replace("T00:00:00", "")
+            }catch (e:Exception){
+
+            }
+
 
             itemView.projectNameItemTv.setText(itemModel.name)
-            itemView.projectStartDateItemTv.setText(itemModel.startDate)
-            itemView.projectEndDateItemTv.setText(itemModel.endDate)
+           // itemView.projectStartDateItemTv.setText(itemModel.startDate)
+           // itemView.projectEndDateItemTv.setText(itemModel.endDate)
             itemView.userRoleProjectItems.setText(if (itemModel.userRole == 0) "مسئول" else if (itemModel.userRole == 1) "مدیر" else if (itemModel.userRole == 2) "سرپرست" else "کارشناس")
 
             if (itemModel.projectPicture != "") {

@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.custom_tab.view.*
 
 class RegLoginHolderActivity : AppCompatActivity() {
 
+    var logoPos = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reg_login_holder_layout)
@@ -31,10 +32,10 @@ class RegLoginHolderActivity : AppCompatActivity() {
         setupViewPager(container)
         tabs.setupWithViewPager(container)
 
-        logoTv.setTypeface(Typeface.createFromAsset(assets,"Vazir-Bold.ttf"))
-        introTv.setTypeface(Typeface.createFromAsset(assets,"Vazir-Bold.ttf"))
-        loginBtn.setTypeface(Typeface.createFromAsset(assets,"IRANSansWeb(FaNum)_Bold.ttf"))
-        registerBtn.setTypeface(Typeface.createFromAsset(assets,"IRANSansWeb(FaNum)_Bold.ttf"))
+        logoTv.setTypeface(Typeface.createFromAsset(assets, "Vazir-Bold.ttf"))
+        introTv.setTypeface(Typeface.createFromAsset(assets, "Vazir-Bold.ttf"))
+        loginBtn.setTypeface(Typeface.createFromAsset(assets, "IRANSansWeb(FaNum)_Bold.ttf"))
+        registerBtn.setTypeface(Typeface.createFromAsset(assets, "IRANSansWeb(FaNum)_Bold.ttf"))
 
         /** register btn click **/
         registerBtn.setOnClickListener {
@@ -64,9 +65,10 @@ class RegLoginHolderActivity : AppCompatActivity() {
             // logoLinkerpad.setPadding(30, 30, 30, 30)
             val slideTopAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_top_2)
             logoHolderll1.startAnimation(slideTopAnimation2)
-          //  logoHolderll2.visibility = View.VISIBLE
-          //  logoHolderll1.visibility = View.INVISIBLE
+            //  logoHolderll2.visibility = View.VISIBLE
+            //  logoHolderll1.visibility = View.INVISIBLE
             logoHolderll1.isClickable = true
+            logoPos = 1
 
             container.setCurrentItem(1, true)
 
@@ -104,11 +106,72 @@ class RegLoginHolderActivity : AppCompatActivity() {
             //  logoHolderll2.visibility = View.VISIBLE
             //  logoHolderll1.visibility = View.INVISIBLE
             logoHolderll1.isClickable = true
+            logoPos = 1
 
             container.setCurrentItem(0, true)
         }
 
         logoClickDownll.setOnClickListener {
+
+            if (logoPos == 1) {
+                //go out
+                val slideDownAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_down)
+                slideDownAnimation.fillAfter = true
+                slideDownAnimation.isFillEnabled = true
+                appbar.startAnimation(slideDownAnimation)
+                container.startAnimation(slideDownAnimation)
+
+                //Coming
+                val fadeInAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.fade_in)
+                fadeInAnimation.startOffset = 400
+                introTv.startAnimation(fadeInAnimation)
+                registerBtn.startAnimation(fadeInAnimation)
+                loginBtn.startAnimation(fadeInAnimation)
+                introTv.visibility = View.VISIBLE
+                registerBtn.visibility = View.VISIBLE
+                loginBtn.visibility = View.VISIBLE
+
+                val slideDownAnimation2 = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_down_2)
+                logoHolderll1.startAnimation(slideDownAnimation2)
+                //  logoHolderll2.visibility = View.INVISIBLE
+                /*fadeInAnimation.startOffset = 700
+            logoHolderll1.startAnimation(fadeInAnimation)
+            logoHolderll1.visibility = View.VISIBLE*/
+                logoHolderll1.isClickable = false
+
+                logoPos = 0
+
+                //for hide keyboard
+                val view = this.currentFocus
+                if (view != null) {
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(view.windowToken, 0)
+                }
+
+
+                container.removeAllViews()
+            }
+        }
+
+        var view: View = LayoutInflater.from(this@RegLoginHolderActivity).inflate(R.layout.custom_tab, tabs, false)
+        view.tabTv.setTypeface(Typeface.createFromAsset(assets, "IRANSansWeb(FaNum)_Light.ttf"))
+        tabs.getTabAt(0)!!.setCustomView(view.tabTv)
+
+        tabs.getTabAt(1)!!.setCustomView(view.tabTv)
+
+    }
+
+    private fun setupViewPager(viewPager: ViewPager) {
+        val adapter = RegLoginPagerAdapter(supportFragmentManager)
+        adapter.addFragment(LoginFragment(), "ورود")
+        adapter.addFragment(RegisterFragment(), "ثبت نام")
+        viewPager.adapter = adapter
+    }
+
+    override fun onBackPressed() {
+
+        if (logoPos == 1) {
+            logoPos = 0
 
             //go out
             val slideDownAnimation = AnimationUtils.loadAnimation(this@RegLoginHolderActivity, R.anim.slide_down)
@@ -133,30 +196,23 @@ class RegLoginHolderActivity : AppCompatActivity() {
             /*fadeInAnimation.startOffset = 700
             logoHolderll1.startAnimation(fadeInAnimation)
             logoHolderll1.visibility = View.VISIBLE*/
-            logoHolderll1.isClickable =false
+            logoHolderll1.isClickable = false
+            if (logoPos == 1)
+                logoPos = 0
 
+            //for hide keyboard
             val view = this.currentFocus
             if (view != null) {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
 
+
             container.removeAllViews()
+
+        }else{
+            super.onBackPressed()
         }
-
-        var view:View = LayoutInflater.from(this@RegLoginHolderActivity).inflate(R.layout.custom_tab,tabs , false)
-        view.tabTv.setTypeface(Typeface.createFromAsset(assets , "IRANSansWeb(FaNum)_Light.ttf"))
-        tabs.getTabAt(0)!!.setCustomView(view.tabTv)
-
-        tabs.getTabAt(1)!!.setCustomView(view.tabTv)
-
-    }
-
-    private fun setupViewPager(viewPager: ViewPager) {
-        val adapter = RegLoginPagerAdapter(supportFragmentManager)
-        adapter.addFragment(LoginFragment(), "ورود")
-        adapter.addFragment(RegisterFragment(), "ثبت نام")
-        viewPager.adapter = adapter
     }
 
     override fun attachBaseContext(newBase: Context?) {

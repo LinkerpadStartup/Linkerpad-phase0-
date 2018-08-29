@@ -65,6 +65,7 @@
                         android:fontFamily="@font/iransans_web_light"
                         android:hint="رمز عبور"
                         android:text="123456"
+                        android:gravity="right"
                         android:textColor="@color/white"
                         android:textSize="14dp" />
                 </android.support.design.widget.TextInputLayout>

@@ -31,10 +31,13 @@ class AddMachineryActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
 
-        saveMachineryTv.setOnClickListener {
-            setupProgress()
-            createMachinery(projectId, reportDate)
-
+        saveMachineryTv.setOnClickListener { view ->
+            if (TitleMachineryEdt.text.toString() != "" && countActiveMachineryEdt.text.toString() != "" && countDeactiveMachineryEdt.text.toString() != "" && timeCountMachineryEdt.text.toString() != "") {
+                setupProgress()
+                createMachinery(projectId, reportDate)
+            } else {
+                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+            }
         }
 
 
@@ -95,7 +98,7 @@ class AddMachineryActivity : AppCompatActivity() {
 
                 if (response!!.code() == 200) {
 
-                    Toast.makeText(this@AddMachineryActivity, "ماشین آلات با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddMachineryActivity, "تجهیزات با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)

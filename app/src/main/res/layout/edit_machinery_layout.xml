@@ -52,7 +52,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/iransans_web_light"
                         android:gravity="center_vertical"
-                        android:text="ویرایش ماشین آلات"
+                        android:text="ویرایش تجهیزات"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 

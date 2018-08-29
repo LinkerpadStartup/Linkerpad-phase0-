@@ -17,13 +17,12 @@ class SendCommentsActivity : AppCompatActivity() {
             this@SendCommentsActivity.finish()
         }
 
+        sendCommentRG.check(R.id.suggestionRB)
         sendCommentRG.setOnCheckedChangeListener { radioGroup, checkedId ->
-            if (checkedId == R.id.suggestionRB){
-                Toast.makeText(this@SendCommentsActivity, "Suggestion",Toast.LENGTH_SHORT).show()
-            }else if (checkedId == R.id.reportRB){
-                Toast.makeText(this@SendCommentsActivity, "Report",Toast.LENGTH_SHORT).show()
-            }else {
-                Toast.makeText(this@SendCommentsActivity, "Other",Toast.LENGTH_SHORT).show()
+
+            if (checkedId == R.id.suggestionRB) {
+            } else if (checkedId == R.id.reportRB) {
+            } else {
             }
         }
     }

@@ -25,7 +25,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
 
-     var userRole: Int = 0
+    var userRole: Int = 0
 
     @BindView(R.id.AddMemberEmailEdt)
     @Email
@@ -47,6 +47,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
             this@AddMemberActivity.finish()
         }
 
+        addMemberRG.check(R.id.collaboratorRB)
         addMemberRG.setOnCheckedChangeListener { radioGroup, view ->
             if (view == R.id.adminRB) {
                 userRole = 1
@@ -117,7 +118,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                 } else if (response.code() == 404) {
                     progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
-                            .setMessage("ایمیل وارد شده وجود ندارد.شما میتوانید ایشان را به لینکرپد دعوت کنید!")
+                            .setMessage("عضو مورد نظر کاربر لینکرپد نمی باشد لطفا جهت ثبت نام اولیه با پشتیبانی تماس بگیرید")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             }).setNegativeButton("بعداً", { dialog, view ->

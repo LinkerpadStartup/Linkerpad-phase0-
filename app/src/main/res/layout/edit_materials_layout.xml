@@ -51,7 +51,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/iransans_web_light"
                         android:gravity="center_vertical"
-                        android:text="ویرایش مصالح"
+                        android:text="ویرایش مواد و مصالح"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 
@@ -177,7 +177,7 @@
                     android:focusable="true"
                     android:fontFamily="@font/iransans_web_medium"
                     android:padding="16dp"
-                    android:text="حذف مصالح"
+                    android:text="حذف مواد و مصالح"
                     android:textColor="@color/redA700" />
             </LinearLayout>
         </ScrollView>

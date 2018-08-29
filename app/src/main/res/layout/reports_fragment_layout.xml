@@ -106,9 +106,10 @@
                 android:id="@+id/machineryLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@color/gray200"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
@@ -126,7 +127,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="ماشین آلات"
+                    android:text="تجهیزات"
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
@@ -138,7 +139,7 @@
                 android:id="@+id/materialsLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -159,7 +160,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="مصالح"
+                    android:text="مواد و مصالح"
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
@@ -170,9 +171,9 @@
                 android:id="@+id/notesAndEventsLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:background="@color/gray200"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
@@ -213,7 +214,7 @@
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:padding="8dp"
-        android:text="نمایش/تایید گزارش روزانه"
+        android:text="تایید گزارش"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp" />
 </RelativeLayout>

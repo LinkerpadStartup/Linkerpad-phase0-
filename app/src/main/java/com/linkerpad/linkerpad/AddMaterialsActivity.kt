@@ -90,7 +90,7 @@ class AddMaterialsActivity : AppCompatActivity() {
 
                 if (response!!.code() == 200) {
 
-                    Toast.makeText(this@AddMaterialsActivity, "مصالح با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddMaterialsActivity, "مواد و مصالح با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)

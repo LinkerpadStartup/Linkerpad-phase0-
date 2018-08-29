@@ -89,7 +89,7 @@ class EditMachineryActivity : AppCompatActivity() {
                 progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMachineryActivity, "ماشین آلات با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMachineryActivity, "تجهیزات با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -97,10 +97,10 @@ class EditMachineryActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMachineryActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, ماشین آلات یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش ماشین آلات را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش تجهیزات را ندارید!", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -156,7 +156,7 @@ class EditMachineryActivity : AppCompatActivity() {
                 progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMachineryActivity, "ماشین آلات با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMachineryActivity, "تجهیزات با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -164,10 +164,10 @@ class EditMachineryActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMachineryActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, ماشین آلات یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف ماشین آلات را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف تجهیزات را ندارید!", Snackbar.LENGTH_LONG).show()
 
                 }
 
