@@ -16,8 +16,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
                 android:layout_marginTop="8dp"
+                android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
                 <Space
@@ -26,40 +26,40 @@
                     android:layout_weight="1" />
 
                 <LinearLayout
+                    android:id="@+id/reportDateLL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/reportDateLL"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/dayDateTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iransans_web_light"
-                        android:textColor="@color/gray700"
-                        android:text="2"
-                        android:id="@+id/dayDateTv"
                         android:gravity="center"
+                        android:text="2"
+                        android:textColor="@color/gray700"
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/yearDateTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/iransans_web_medium"
                         android:gravity="center"
                         android:text="1397"
-                        android:id="@+id/yearDateTv"
-                        android:fontFamily="@font/iransans_web_medium"
+                        android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/monthDateTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray800"
+                        android:fontFamily="@font/iransans_web_light"
                         android:gravity="center"
                         android:text="مرداد"
-                        android:id="@+id/monthDateTv"
-                        android:fontFamily="@font/iransans_web_light"
+                        android:textColor="@color/gray800"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -75,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@color/gray200"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -94,7 +95,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="کارهای روزانه انجام شده"
+                    android:text="فعالیت های انجام شده"
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
@@ -106,10 +107,8 @@
                 android:id="@+id/machineryLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:clickable="true"
                 android:focusable="true"
-                android:background="@color/gray200"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
@@ -127,7 +126,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="تجهیزات"
+                    android:text="ماشین آلات و تجهیزات"
                     android:textColor="@color/gray900"
                     android:textSize="18sp" />
 
@@ -139,7 +138,7 @@
                 android:id="@+id/materialsLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@color/gray200"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
@@ -173,7 +172,6 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="@color/gray200"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">

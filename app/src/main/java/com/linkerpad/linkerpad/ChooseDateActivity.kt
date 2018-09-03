@@ -53,6 +53,8 @@ class ChooseDateActivity : AppCompatActivity() {
 
         })
 
+        okChooseDateTv.setOnClickListener { this@ChooseDateActivity.finish() }
+
 
     }
 

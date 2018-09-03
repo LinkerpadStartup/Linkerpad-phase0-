@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
-                    app:srcCompat="@drawable/eye_gray" />
+                    app:srcCompat="@drawable/ic_visibility_off_gray" />
 
             </LinearLayout>
 

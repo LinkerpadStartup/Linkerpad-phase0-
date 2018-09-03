@@ -25,6 +25,12 @@ class TeamActivity : AppCompatActivity() {
         setContentView(R.layout.team_layout)
         setSupportActionBar(toolbar)
 
+        if (this@TeamActivity.checkCallingOrSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            ActivityCompat.requestPermissions(this@TeamActivity, arrayOf(Manifest.permission.CALL_PHONE), 1)
+        }
+
     /*    var i: Int = 0
         cardTestClick.setOnClickListener {
             if (i == 0) {

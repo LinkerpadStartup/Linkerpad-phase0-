@@ -1,11 +1,16 @@
 package com.linkerpad.linkerpad.Adapters
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Build
+import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Base64
 import android.view.Gravity
@@ -27,7 +32,7 @@ import kotlinx.android.synthetic.main.team_items.view.*
 /**
  * Created by alihajiloo on 8/20/18.
  */
-class MembersListAdapter(var context: Context, var data: ArrayList<MemberInformationData>,var projectId:String) : RecyclerView.Adapter<MembersListAdapter.ViewHolder>() {
+class MembersListAdapter(var context: Context, var data: ArrayList<MemberInformationData>, var projectId: String) : RecyclerView.Adapter<MembersListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.team_items, viewGroup, false)
         return ViewHolder(view)
@@ -43,6 +48,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        @SuppressLint("MissingPermission")
         @TargetApi(Build.VERSION_CODES.O)
         fun bindModel(itemModel: MemberInformationData, position: Int) {
             var i: Int = 0
@@ -61,12 +67,27 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                     }
                 }
 
+            itemView.callTeamImv.setOnClickListener {
+
+
+                var phoneIntent: Intent = Intent(Intent.ACTION_CALL)
+                phoneIntent.setData(Uri.parse("tel:${itemModel.mobileNumber}"))
+                context.startActivity(phoneIntent)
+
+            }
+
+            itemView.emailTeamImv.setOnClickListener {
+                var emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "${itemModel.emailAddress}", null))
+
+                context.startActivity(Intent.createChooser(emailIntent, "ارسال ایمیل با ..."))
+            }
             itemView.memberCard.setOnLongClickListener {
 
                 var intent = Intent(context, EditMemberBottomSheetActivity::class.java)
                 //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
                 intent.putExtra("id", data[position].id)
-                intent.putExtra("projectId",projectId )
+                intent.putExtra("projectId", projectId)
                 context.startActivity(intent)
                 return@setOnLongClickListener true
             }
@@ -84,7 +105,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             companyTeamTv.setText(itemModel.company)
             companyTeamTv.setPadding(0, 0, 20, 0)
             companyTeamTv.setTextSize(16f)
-            companyTeamTv.gravity =Gravity.RIGHT
+            companyTeamTv.gravity = Gravity.RIGHT
             companyTeamTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
             itemView.firstTeamLL.addView(companyTeamTv)
 

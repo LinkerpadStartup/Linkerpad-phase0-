@@ -164,7 +164,7 @@ class AddProjectActivity : AppCompatActivity() {
                 if (fixedbitmap != null) {
                     //  val bytes = File(uri.toString()).readBytes()
                     var outputStream = ByteArrayOutputStream()
-                    fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                    fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
                     convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
                 }
 

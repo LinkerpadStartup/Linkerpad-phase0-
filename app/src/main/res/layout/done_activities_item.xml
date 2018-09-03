@@ -13,13 +13,14 @@
     android:paddingTop="8dp">
 
     <TextView
+        android:id="@+id/titleDoneActivityTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/iransans_web_medium"
         android:padding="8dp"
-        android:id="@+id/titleDoneActivityTv"
         android:text="پیمانکار سقف"
-        android:textColor="@color/gray900" />
+        android:textColor="@color/gray900"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,61 +29,73 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/ic_account_circle" />
 
         <TextView
+            android:id="@+id/numberOfCrewDoneActivityTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:id="@+id/numberOfCrewDoneActivityTv"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"
             android:text="5" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+        <!--      <Space
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1" />-->
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
+            android:layout_marginRight="32dp"
             app:srcCompat="@drawable/ic_access_time_gray" />
 
         <TextView
+            android:id="@+id/workHoursDoneActivityTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="4dp"
-            android:id="@+id/workHoursDoneActivityTv"
             android:fontFamily="@font/iransans_web_light"
             android:text="5" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+        <!-- <Space
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1" />-->
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
+            android:layout_marginRight="32dp"
             app:srcCompat="@drawable/ic_assignment_turned_in_gray" />
 
         <TextView
+            android:id="@+id/workLoadsDoneActivityTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:id="@+id/workLoadsDoneActivityTv"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"
             android:text="5" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/descriptionDoneActivityTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:maxLength="40"
+        android:padding="4dp"
+        android:singleLine="true"
+        android:textColor="@color/gray700" />
 
     <TextView
         android:layout_width="match_parent"

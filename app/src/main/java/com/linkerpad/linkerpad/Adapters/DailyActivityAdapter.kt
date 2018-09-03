@@ -43,13 +43,14 @@ class DailyActivityAdapter(var context: Context, var data: ArrayList<DailyActivi
             itemView.numberOfCrewDoneActivityTv.text = itemModel.numberOfCrew.toString()
             itemView.workHoursDoneActivityTv.text = itemModel.workHours.toString()
             itemView.workLoadsDoneActivityTv.text = itemModel.workload.toString()
+            itemView.descriptionDoneActivityTv.text = itemModel.description.toString().substring(0,37) + "..."
 
             itemView.doneActivitesItemLL.setOnClickListener {
                 //item clicked
                 var intent = Intent(context, EditDoneActivitiesActivity::class.java)
                 intent.putExtra("id", itemModel.id)
                 intent.putExtra("projectId", projectId)
-                intent.putExtra("reportDate",itemModel.reportDate)
+                intent.putExtra("reportDate", itemModel.reportDate)
 
                 (context as DoneActivitiesActivity).finish()
 
