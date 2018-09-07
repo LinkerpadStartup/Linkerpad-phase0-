@@ -2,6 +2,7 @@ package com.linkerpad.linkerpad
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -24,13 +25,29 @@ class ConfirmationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.confirmation_layout)
+        setSupportActionBar(toolbar)
 
 
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
 
-        setupProgress()
+       // setupProgress()
         getConfirmationList(projectId, reportDate)
+
+        confirmationBackIcon.setOnClickListener {
+            this@ConfirmationActivity.finish()
+        }
+
+        showConfirmationReportTv.setOnClickListener {
+            var intent = Intent(this@ConfirmationActivity, ShowReportConfimationActivity::class.java)
+            intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
+            this@ConfirmationActivity.finish()
+            startActivity(intent)
+
+        }
+
+
     }
 
     private fun getConfirmationList(projectId: String, reportDate: String = "2020-02-02") {
@@ -45,16 +62,19 @@ class ConfirmationActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ConfirmationListResponse>?, response: Response<ConfirmationListResponse>?) {
 
-                progressDialog.dismiss()
+            //    progressDialog.dismiss()
 
-                var confirmationListResponse = response!!.body()
+                try {
+                    var confirmationListResponse = response!!.body()
 
-                var confirmationList = ArrayList<ConfirmationInformationData>()
-                confirmationList = confirmationListResponse!!.responseObject
+                    var confirmationList = ArrayList<ConfirmationInformationData>()
+                    confirmationList = confirmationListResponse!!.responseObject
 
-                confirmationRecyclerView.layoutManager = LinearLayoutManager(this@ConfirmationActivity)
-                confirmationRecyclerView.adapter = ConfirmationAdapter(this@ConfirmationActivity, confirmationList, projectId, getToken())
+                    confirmationRecyclerView.layoutManager = LinearLayoutManager(this@ConfirmationActivity)
+                    confirmationRecyclerView.adapter = ConfirmationAdapter(this@ConfirmationActivity, confirmationList, projectId, getToken(),reportDate)
+                } catch (e: Exception) {
 
+                }
             }
 
         })

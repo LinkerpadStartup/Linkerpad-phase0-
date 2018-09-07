@@ -26,7 +26,7 @@ import retrofit2.Response
  * Created by alihajiloo on 8/25/18.
  */
 
-class ConfirmationAdapter(var context: Context, var data: ArrayList<ConfirmationInformationData>, var projectId: String, var token: String) : RecyclerView.Adapter<ConfirmationAdapter.ViewHolder>() {
+class ConfirmationAdapter(var context: Context, var data: ArrayList<ConfirmationInformationData>, var projectId: String, var token: String,var reportDate:String) : RecyclerView.Adapter<ConfirmationAdapter.ViewHolder>() {
 
     lateinit var progressDialog: ProgressDialog
 
@@ -48,19 +48,20 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
 
         fun onBind(itemModel: ConfirmationInformationData, position: Int) {
 
-            itemView.confirmationCheckBox.text = itemModel.firstName + " " + itemModel.lastName
+            itemView.confirmationNameTv.text = itemModel.firstName + " " + itemModel.lastName
+            itemView.confirmationRoleTv.text = if (itemModel.userRole.toInt() == 0) "مسئول" else if (itemModel.userRole.toInt() == 1) "مدیر" else if (itemModel.userRole.toInt() == 2) "سرپرست" else "کارشناس"
 
-            itemView.confirmationCheckBox.isChecked = itemModel.confirmationStatus
+            itemView.confirmationCheckBox.isChecked = if (itemModel.confirmationStatus == true ) true else false
 
             itemView.confirmationCheckBox.setOnCheckedChangeListener { compoundButton, b ->
 
-                Toast.makeText(context, "${itemModel.confirmationStatus} - ${compoundButton.isChecked}", Toast.LENGTH_LONG).show()
+                //Toast.makeText(context, "${itemModel.confirmationStatus} - ${compoundButton.isChecked}", Toast.LENGTH_LONG).show()
 
                 if (compoundButton.isChecked) {
-                    setupProgress()
+                    //setupProgress()
                     createConfirmation()
                 } else {
-                    setupProgress()
+                   // setupProgress()
                     deleteConfirmation()
                 }
             }
@@ -70,25 +71,25 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
 
             var service: IUserApi = IWebApi.Factory.create()
 
-            var deleteMaterialBody = ConfirmationViewModel.setDeleteConfirmation(projectId, "2020-02-02")
+            var deleteMaterialBody = ConfirmationViewModel.setDeleteConfirmation(projectId, reportDate)
 
             var call = service.deleteConfirmation(token, deleteMaterialBody)
 
             call.enqueue(object : retrofit2.Callback<ConfirmationResponse> {
                 override fun onFailure(call: Call<ConfirmationResponse>?, t: Throwable?) {
-                    progressDialog.dismiss()
+                  //  progressDialog.dismiss()
                     Toast.makeText(context, "خطا, اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
 
                 }
 
                 override fun onResponse(call: Call<ConfirmationResponse>?, response: Response<ConfirmationResponse>?) {
-                    progressDialog.dismiss()
+                  //  progressDialog.dismiss()
 
                     if (response!!.code() == 200) {
-                        Toast.makeText(context, "با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                       // Toast.makeText(context, "با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
 
                     } else if (response.code() == 409) {
-                        Toast.makeText(context, "قبلا حذف گردیده است!", Toast.LENGTH_LONG).show()
+                      //  Toast.makeText(context, "قبلا حذف گردیده است!", Toast.LENGTH_LONG).show()
 
                     } else {
                         Toast.makeText(context, "خطا، مشکلی هنگام پردازش رخ داده!", Toast.LENGTH_LONG).show()
@@ -105,29 +106,29 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
 
             var service: IUserApi = IWebApi.Factory.create()
 
-            var confirmationBody = ConfirmationViewModel.setCreateConfirmationInformation(projectId, "2020-02-02")
+            var confirmationBody = ConfirmationViewModel.setCreateConfirmationInformation(projectId, reportDate)
 
             var call = service.createConfirmation(token, confirmationBody)
 
             call.enqueue(object : retrofit2.Callback<ConfirmationResponse> {
                 override fun onFailure(call: Call<ConfirmationResponse>?, t: Throwable?) {
-                    progressDialog.dismiss()
+                //    progressDialog.dismiss()
                     Toast.makeText(context, "خطا, اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
 
                 }
 
                 override fun onResponse(call: Call<ConfirmationResponse>?, response: Response<ConfirmationResponse>?) {
 
-                    progressDialog.dismiss()
+                  //  progressDialog.dismiss()
 
                     if (response!!.code() == 200) {
 
-                        Toast.makeText(context, "تایید شد!", Toast.LENGTH_LONG).show()
+                       // Toast.makeText(context, "تایید شد!", Toast.LENGTH_LONG).show()
 
 
                     } else if (response.code() == 409) {
 
-                        Toast.makeText(context, "قبلا تایید شده است!", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(context, "قبلا تایید شده است!", Toast.LENGTH_LONG).show()
 
 
                     } else {

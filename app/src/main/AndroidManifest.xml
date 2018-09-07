@@ -33,89 +33,118 @@
         </activity>
         <activity
             android:name=".AccountInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SendCommentsActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".AddProjectActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ChooseDateActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".ProjectHolderActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddDataRequestActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditDataRequestAcivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TeamActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GalleryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GalleryItemDetailsActivity"
             android:theme="@style/Theme.AppCompat.Translucent" />
         <activity
             android:name=".AboutUSActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ForgetPasswordActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".DoneActivitiesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddDoneActivitiesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditDoneActivitiesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MachineryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddMachineryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditMachineryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MaterialsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".AddMaterialsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditMaterialsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddMemberActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".NotesAndEventsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddNoteAndEventActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditNoteAndEventActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditProjectBottomSheetActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent2" />
         <activity
             android:name=".EditProjectActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditMemberBottomSheetActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent2" />
-        <activity android:name=".ConfirmationActivity"></activity>
+        <activity
+            android:name=".ConfirmationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShowReportConfimationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
