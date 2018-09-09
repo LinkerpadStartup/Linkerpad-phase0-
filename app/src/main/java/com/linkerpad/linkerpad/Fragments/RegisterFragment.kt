@@ -73,10 +73,10 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
     @BindView(R.id.phoneEdt)
     lateinit var phoneEdt: EditText
 
-    @BindView(R.id.companyEdt)
-    lateinit var companyEdt: EditText
+    /* @BindView(R.id.companyEdt)
+     lateinit var companyEdt: EditText*/
 
-    @Password(min = 6, scheme = Password.Scheme.NUMERIC)
+    @Password(min = 6, scheme = Password.Scheme.ANY)
     @BindView(R.id.passwordEdt)
     lateinit var passwordEdt: EditText
 
@@ -148,7 +148,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
         lastNameEdt = view.findViewById(R.id.lastNameEdt) as EditText
         emailEdt = view.findViewById(R.id.emailEdt) as EditText
         phoneEdt = view.findViewById(R.id.phoneEdt) as EditText
-        companyEdt = view.findViewById(R.id.companyEdt) as EditText
+        // companyEdt = view.findViewById(R.id.companyEdt) as EditText
         passwordEdt = view.findViewById(R.id.passwordEdt) as EditText
 
     }
@@ -156,7 +156,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
 
     private fun setupProgress() {
         progressDialog = ProgressDialog(context)
-        progressDialog.setMessage("لطفا شکیبا باشید")
+        progressDialog.setMessage("با لینکرپد پروژه در دستان شماست")
         progressDialog.setCancelable(false)
         progressDialog.isIndeterminate = true
         progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
@@ -169,21 +169,36 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
             val message = error.getCollatedErrorMessage(context)
 
             if (view == nameEdt) {
-                nameEdt.error = "الزامی"
+                if (nameEdt.text.toString() == "")
+                    nameEdt.error = "نام خود را وارد کنید"
+                nameEdt.error = "نام خود را وارد کنید"
             } else if (view == lastNameEdt) {
-                lastNameEdt.error = "نام خانوادگی الزامی"
+                lastNameEdt.error = "نام خانوادگی خود را وارد کنید"
             } else if (view == emailEdt) {
                 if (emailEdt.text.toString() == "")
-                    emailEdt.error = "الزامی"
+                    emailEdt.error = "ایمیل خود را وارد کنید"
                 else
-                    emailEdt.error = "فرمت نادرست"
+                    emailEdt.error = "ایمیل خود را به درستی وارد کنید"
             } else if (view == phoneEdt) {
-                phoneEdt.error = "فرمت نادرست"
+                if (phoneEdt.text.toString() == "")
+                    phoneEdt.error = "تلفن همراه خود را وارد کنید"
+                else
+                    phoneEdt.error = "نمونه صحیح 091xxxxxxxx"
 
-            } else if (view == companyEdt) {
+            } /*else if (view == companyEdt) {
 
-            } else if (view == passwordEdt) {
-                passwordEdt.error = "حداقل ۶ کاراکتر"
+            }*/ else if (view == passwordEdt) {
+                if (passwordEdt.text.toString() == "")
+                    passwordEdt.error = "رمز عبور خود را وارد کنید"
+                else if (passwordEdt.text.length < 6)
+                    passwordEdt.error = "حداقل ۶ کاراکتر"
+                /* else {
+
+                    // passwordEdt.error = "کاراکتر های مجاز و الزامی a-z و 9-1"
+
+                 }*/
+
+
             }
         }
 
@@ -192,72 +207,77 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
 
     override fun onValidationSucceeded() {
 
-        setupProgress()
+        if (passwordEdt.text.toString() == "")
+            passwordEdt.error = "رمز عبور خود را وارد کنید"
+        else if (passwordEdt.text.length < 6)
+            passwordEdt.error = "حداقل ۶ کاراکتر"
+        else {
+            setupProgress()
 
-         var registerBody:RegisterBody = UserInformationViewModel.setRegisterInformation(UserInformationViewModel(
-                 firstName = nameEdt.text.toString(),
-                 lastName = lastNameEdt.text.toString(),
-                 company = companyEdt.text.toString(),
-                 mobileNumber = "98" + phoneEdt.text.toString().substring(1),
-                 emailAddress = emailEdt.text.toString(),
-                 token = "",
-                 profilePicture = null,
-                 expirationDate = "",
-                 message = "",
-                 status = "",
-                 password = passwordEdt.text.toString()))
+            var registerBody: RegisterBody = UserInformationViewModel.setRegisterInformation(UserInformationViewModel(
+                    firstName = nameEdt.text.toString(),
+                    lastName = lastNameEdt.text.toString(),
+                    company = "بدون شرکت",
+                    mobileNumber = "98" + phoneEdt.text.toString().substring(1),
+                    emailAddress = emailEdt.text.toString(),
+                    token = "",
+                    profilePicture = null,
+                    expirationDate = "",
+                    message = "",
+                    status = "",
+                    password = passwordEdt.text.toString()))
 
 
+            // Toast.makeText(context, "98" + phoneEdt.text.toString().substring(1), Toast.LENGTH_SHORT).show()
+            val service: IUserApi = IWebApi.Factory.create()
+            val call = service.register(registerBody = registerBody)
 
-        // Toast.makeText(context, "98" + phoneEdt.text.toString().substring(1), Toast.LENGTH_SHORT).show()
-        val service: IUserApi = IWebApi.Factory.create()
-        val call = service.register(registerBody = registerBody)
-
-        try {
-            call.enqueue(object : retrofit2.Callback<RegisterResponse> {
-                override fun onFailure(call: Call<RegisterResponse>?, t: Throwable?) {
-                    progressDialog.dismiss()
-                    Snackbar.make(this@RegisterFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
-                }
-
-                override fun onResponse(call: Call<RegisterResponse>?, response: Response<RegisterResponse>?) {
-                    progressDialog.dismiss()
-
-                    if (response!!.code() == 200) {
-                        nameEdt.text.clear()
-                        lastNameEdt.text.clear()
-                        emailEdt.text.clear()
-                        phoneEdt.text.clear()
-                        companyEdt.text.clear()
-                        passwordEdt.text.clear()
-
-                        AlertDialog.Builder(context!!, R.style.AlertDialogTheme)
-                                .setMessage("ثبت نام با موفقیت انجام شد.هم اکنون میتوانید با ایمیل خود وارد شوید!")
-                                .setPositiveButton("باشه", { dialog, view ->
-                                    dialog.dismiss()
-
-                                })
-                                .create()
-                                .show()
-
-                        // change view pager within fragment
-                        activity!!.container.setCurrentItem(0)
-                        /*   var registerResponse: RegisterResponse? = response.body()
-                           Toast.makeText(context, "${registerResponse!!.message}", Toast.LENGTH_LONG).show()*/
-
-                    } else if (response.code() == 409) {
-                        Snackbar.make(this@RegisterFragment.view!!, "خطا، ایمیل شما تکراری است.", Snackbar.LENGTH_LONG).show()
-                    } else if (response.code() == 400) {
-                        Snackbar.make(this@RegisterFragment.view!!, "خطا، مقادیر ارسالی صحیح نمی باشد.", Snackbar.LENGTH_LONG).show()
+            try {
+                call.enqueue(object : retrofit2.Callback<RegisterResponse> {
+                    override fun onFailure(call: Call<RegisterResponse>?, t: Throwable?) {
+                        progressDialog.dismiss()
+                        Snackbar.make(this@RegisterFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
                     }
 
+                    override fun onResponse(call: Call<RegisterResponse>?, response: Response<RegisterResponse>?) {
+                        progressDialog.dismiss()
 
-                }
-            })
-        } catch (e: Exception) {
-            Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
+                        if (response!!.code() == 200) {
+                            nameEdt.text.clear()
+                            lastNameEdt.text.clear()
+                            emailEdt.text.clear()
+                            phoneEdt.text.clear()
+                            //companyEdt.text.clear()
+                            passwordEdt.text.clear()
+
+                            AlertDialog.Builder(context!!, R.style.AlertDialogTheme)
+                                    .setMessage("ثبت نام با موفقیت انجام شد.هم اکنون میتوانید با ایمیل خود وارد شوید.")
+                                    .setPositiveButton("باشه", { dialog, view ->
+                                        dialog.dismiss()
+
+                                    })
+                                    .create()
+                                    .show()
+
+                            // change view pager within fragment
+                            activity!!.container.setCurrentItem(0)
+                            /*   var registerResponse: RegisterResponse? = response.body()
+                               Toast.makeText(context, "${registerResponse!!.message}", Toast.LENGTH_LONG).show()*/
+
+                        } else if (response.code() == 409) {
+                            Snackbar.make(this@RegisterFragment.view!!, "شما با این ایمیل قبلا ثبت نام کرده اید.", Snackbar.LENGTH_LONG).show()
+                        } else if (response.code() == 400) {
+                            Snackbar.make(this@RegisterFragment.view!!, "خطا، مقادیر ارسالی صحیح نمی باشد.", Snackbar.LENGTH_LONG).show()
+                        }
+
+
+                    }
+                })
+            } catch (e: Exception) {
+                Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
+            }
+
         }
-
     }
 
 

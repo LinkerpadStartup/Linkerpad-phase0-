@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +52,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
     lateinit var emailEdt: EditText
 
     @NotEmpty
-    @Password(min = 6, scheme = Password.Scheme.NUMERIC)
+    @Password(min = 6, scheme = Password.Scheme.ANY)
     @BindView(R.id.passwordEdt)
     lateinit var passwordEdt: EditText
 
@@ -74,9 +75,18 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
         }
 
         view.forgetPasswordTv.setOnClickListener {
-            var intent = Intent(context, ForgetPasswordActivity::class.java)
-            startActivity(intent)
+            /* var intent = Intent(context, ForgetPasswordActivity::class.java)
+             startActivity(intent)*/
+
+            AlertDialog.Builder(context!!, R.style.AlertDialogTheme)
+                    .setMessage("درخواست خود را به info@linkerpad.com ارسال نمایید.")
+                    .setPositiveButton("باشه", { dialog, view ->
+                        dialog.dismiss()
+                    })
+                    .create()
+                    .show()
         }
+
 
         var visibility = Visibility.InVisible
         passwordEdt.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
@@ -96,6 +106,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
 
         return view
     }
+
 
     private fun setupProgress() {
         progressDialog = ProgressDialog(context)
@@ -118,22 +129,36 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
 
             if (view == emailEdt) {
                 if (emailEdt.text.toString() == "")
-                    emailEdt.error = "الزامی"
+                    emailEdt.error = "ایمیل خود را وارد کنید"
                 else
                     emailEdt.error = "فرمت نادرست"
             } else if (view == passwordEdt) {
-                passwordEdt.error = "حداقل ۶ کاراکتر"
+                if (passwordEdt.text.toString() == "")
+                    passwordEdt.error = "رمز عبور خود را وارد کنید"
+                else if (passwordEdt.text.length < 6)
+                    passwordEdt.error = "حداقل ۶ کاراکتر"
             }
         }
     }
 
     override fun onValidationSucceeded() {
 
-       // setupProgress()
+        // setupProgress()
 
+        if (passwordEdt.text.toString() == "")
+            passwordEdt.error = "رمز عبور خود را وارد کنید"
+        else if (passwordEdt.text.length < 6)
+            passwordEdt.error = "حداقل ۶ کاراکتر"
+        else
+            login(emailEdt.text.toString(),
+                    passwordEdt.text.toString())
+
+
+    }
+
+    private fun login(email: String, password: String) {
         var loginBody: LoginBody = UserInformationViewModel.setUsernamePassword(
-                emailEdt.text.toString(),
-                passwordEdt.text.toString())
+                email, password)
 
         val service: IUserApi = IWebApi.Factory.create()
         val call = service.login(loginBody = loginBody)
@@ -141,18 +166,15 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
         try {
             call.enqueue(object : retrofit2.Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>?, t: Throwable?) {
-                   // progressDialog.dismiss()
+                    // progressDialog.dismiss()
                     //  Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
                     Snackbar.make(this@LoginFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
-                  //  progressDialog.dismiss()
+                    //  progressDialog.dismiss()
 
                     if (response!!.code() == 200) {
-
-                        emailEdt.text.clear()
-                        passwordEdt.text.clear()
 
                         var loginResponse: LoginResponse? = response.body()
 
@@ -169,6 +191,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
                         sharedPreferencesEditor.putString("token", loginOutputData.token)
                         sharedPreferencesEditor.putString("username", loginOutputData.emailAddress)
+                        sharedPreferencesEditor.putString("password", password)
                         sharedPreferencesEditor.putString("firstName", loginOutputData.firstName)
                         sharedPreferencesEditor.putString("lastName", loginOutputData.lastName)
                         sharedPreferencesEditor.putString("email", loginOutputData.emailAddress)
@@ -176,6 +199,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         sharedPreferencesEditor.commit()
 
                         activity!!.finish()
+
 
                         var intent = Intent(context, MainActivity::class.java)
                         startActivity(intent)

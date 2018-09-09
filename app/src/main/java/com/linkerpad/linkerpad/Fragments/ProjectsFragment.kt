@@ -48,10 +48,10 @@ class ProjectsFragment : Fragment() {
 
         var view: View = inflater.inflate(R.layout.projects_fragmant_layout, container, false)
 
-      /*  view.cardTestClick.setOnClickListener {
-            var intent = Intent(context, ProjectHolderActivity::class.java)
-            startActivity(intent)
-        }*/
+        /*  view.cardTestClick.setOnClickListener {
+              var intent = Intent(context, ProjectHolderActivity::class.java)
+              startActivity(intent)
+          }*/
 
         //on swipe to refresh
         view.projectsRefreshLayout.setColorSchemeColors(Color.parseColor("#1E88E5"))
@@ -91,14 +91,15 @@ class ProjectsFragment : Fragment() {
 
                 progressDialog.dismiss()
 
-                var projectListResponse = response!!.body()
+                if(response!!.code() == 200) {
+                    var projectListResponse = response!!.body()
 
-                var projectlist = ArrayList<ProjectInformationData>()
-                projectlist = projectListResponse!!.responseObject
+                    var projectlist = ArrayList<ProjectInformationData>()
+                    projectlist = projectListResponse!!.responseObject
 
-                view!!.projectsRecyclerView.layoutManager = LinearLayoutManager(activity)
-                view!!.projectsRecyclerView.adapter = ProjectsListAdapter(activity!!.applicationContext, projectlist)
-
+                    view!!.projectsRecyclerView.layoutManager = LinearLayoutManager(activity)
+                    view!!.projectsRecyclerView.adapter = ProjectsListAdapter(activity!!.applicationContext, projectlist)
+                }
             }
 
         })
@@ -106,13 +107,12 @@ class ProjectsFragment : Fragment() {
 
     private fun setupProgress() {
         progressDialog = ProgressDialog(context)
-        progressDialog.setMessage("لطفا شکیبا باشید")
+        progressDialog.setMessage("با لینکرپد پروژه در دستان شماست")
         progressDialog.setCancelable(false)
         progressDialog.isIndeterminate = true
         progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
         progressDialog.show()
     }
-
 
 
     private fun getToken(): String {

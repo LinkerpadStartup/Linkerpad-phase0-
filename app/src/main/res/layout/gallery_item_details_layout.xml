@@ -21,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:src="@drawable/back90"
         android:transitionName="image"
         app:zoomage_animateOnReset="true"
         app:zoomage_autoCenter="true"

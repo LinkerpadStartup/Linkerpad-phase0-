@@ -15,29 +15,29 @@ import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import kotlinx.android.synthetic.main.forget_password_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
-class ForgetPasswordActivity : AppCompatActivity(), Validator.ValidationListener {
+class ForgetPasswordActivity : AppCompatActivity()/*, Validator.ValidationListener */ {
 
-    @NotEmpty
+/*    @NotEmpty
     @Email
     @BindView(R.id.forgetPasswordEmailEdt)
-    lateinit var forgetPasswordEmailEdt_: EditText
+    lateinit var forgetPasswordEmailEdt_: EditText*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.forget_password_layout)
 
 
+        // forgetPasswordEmailEdt_ = findViewById(R.id.forgetPasswordEmailEdt) as EditText
 
-        forgetPasswordEmailEdt_ = findViewById(R.id.forgetPasswordEmailEdt) as EditText
-
-        var validator = Validator(this@ForgetPasswordActivity)
-        validator.setValidationListener(this@ForgetPasswordActivity)
+        /*  var validator = Validator(this@ForgetPasswordActivity)
+          validator.setValidationListener(this@ForgetPasswordActivity)*/
 
 
         submitForgetPasswordBtn.setOnClickListener {
 
-            validator.validate()
+            //  validator.validate()
 
+            this@ForgetPasswordActivity.finish()
 
         }
 
@@ -49,7 +49,7 @@ class ForgetPasswordActivity : AppCompatActivity(), Validator.ValidationListener
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
-
+/*
     override fun onValidationFailed(errors: MutableList<ValidationError>?) {
         if (forgetPasswordEmailEdt_.text.toString() == "")
             forgetPasswordEmailEdt_.setError("ایمیل خالی است!")
@@ -68,5 +68,5 @@ class ForgetPasswordActivity : AppCompatActivity(), Validator.ValidationListener
                 .show()
 
 
-    }
+    }*/
 }
