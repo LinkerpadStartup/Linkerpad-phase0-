@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
@@ -24,39 +25,72 @@ import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Data.DateType
 import com.linkerpad.linkerpad.Data.ProjectInformationData
 import com.linkerpad.linkerpad.Models.ProjectInformationViewModel
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import kotlinx.android.synthetic.main.edit_project_layout.*
 import retrofit2.Call
 import retrofit2.Response
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.io.ByteArrayOutputStream
 
-class EditProjectActivity : AppCompatActivity() {
+class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        if (view!!.tag.equals(DATEPICKERSART))
+            projectStartDateEdt.setText("$year/${monthOfYear + 1}/$dayOfMonth")
+        else if (view!!.tag.equals(DATEPICKEREND))
+            projectEndDateEdt.setText("$year/${monthOfYear + 1}/$dayOfMonth")
 
-    lateinit var progressDialog: ProgressDialog
+    }
+
+    private val DATEPICKERSART = "DatePickerDialogStart"
+    private val DATEPICKEREND = "DatePickerDialogEnd"
+
+//    lateinit var progressDialog: ProgressDialog
 
     private val SELECT_IMAGE: Int = 9
     private var convertImage: String = ""
     private var convertedImage: Boolean = false
-    var projectPicture:String = ""
+    var projectPicture: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_project_layout)
         setSupportActionBar(toolbar)
 
-        setupProgress()
+        // setupProgress()
         getProjectInformation(intent.getStringExtra("id"))
 
         startDateCalender.setOnClickListener {
-            var intent = Intent(this@EditProjectActivity, ChooseDateActivity::class.java)
-            intent.putExtra("startOrEndDate", DateType.StartDate.value)
-            startActivityForResult(intent, DateType.StartDate.value)
+            /* var intent = Intent(this@EditProjectActivity, ChooseDateActivity::class.java)
+             intent.putExtra("startOrEndDate", DateType.StartDate.value)
+             startActivityForResult(intent, DateType.StartDate.value)*/
+
+            val now = PersianCalendar()
+            val dpd = DatePickerDialog.newInstance(
+                    this@EditProjectActivity,
+                    now.persianYear,
+                    now.persianMonth,
+                    now.persianDay
+            )
+            //dpd.isThemeDark = modeDarkDate!!.isChecked
+            //dpd.typeface = fontName
+            dpd.show(fragmentManager, DATEPICKERSART)
         }
 
         endDateCalender.setOnClickListener {
-            var intent = Intent(this@EditProjectActivity, ChooseDateActivity::class.java)
-            intent.putExtra("startOrEndDate", DateType.EndDate.value)
-            startActivityForResult(intent, DateType.EndDate.value)
+            /*   var intent = Intent(this@EditProjectActivity, ChooseDateActivity::class.java)
+               intent.putExtra("startOrEndDate", DateType.EndDate.value)
+               startActivityForResult(intent, DateType.EndDate.value)*/
+            val now = PersianCalendar()
+            val dpd = DatePickerDialog.newInstance(
+                    this@EditProjectActivity,
+                    now.persianYear,
+                    now.persianMonth,
+                    now.persianDay
+            )
+            //dpd.isThemeDark = modeDarkDate!!.isChecked
+            //dpd.typeface = fontName
+            dpd.show(fragmentManager, DATEPICKEREND)
         }
 
 
@@ -65,7 +99,7 @@ class EditProjectActivity : AppCompatActivity() {
         }
 
         editProjectTv.setOnClickListener {
-            setupProgress()
+            // setupProgress()
             editProject(intent.getStringExtra("id"))
         }
 
@@ -107,14 +141,16 @@ class EditProjectActivity : AppCompatActivity() {
 
                 val projectDateType = DateType.fromInt(resultCode)
                 if (projectDateType!!.value == DateType.StartDate.value) {
-                    projectStartDateEdt.setText(data?.getStringExtra("date"))
+                    if (data?.getStringExtra("date") != "")
+                        projectStartDateEdt.setText(data?.getStringExtra("date"))
                 } else if (projectDateType.value == DateType.EndDate.value) {
-                    projectEndDateEdt.setText(data?.getStringExtra("date"))
+                    if (data?.getStringExtra("date") != "")
+                        projectEndDateEdt.setText(data?.getStringExtra("date"))
                 }
 
             }
-        }else{
-            convertedImage=true
+        } else {
+            convertedImage = true
             convertImage = ""
             projectPicImg.setImageDrawable(resources.getDrawable(R.drawable.ic_account_circle_blue))
         }
@@ -128,13 +164,13 @@ class EditProjectActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<ProjectInformationResponse> {
             override fun onFailure(call: Call<ProjectInformationResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
 
             }
 
             override fun onResponse(call: Call<ProjectInformationResponse>?, response: Response<ProjectInformationResponse>?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
 
 
                 var projectInformationData: ProjectInformationData = response!!.body()!!.responseObject
@@ -188,12 +224,12 @@ class EditProjectActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<EditProjectResponse> {
             override fun onFailure(call: Call<EditProjectResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditProjectResponse>?, response: Response<EditProjectResponse>?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     Toast.makeText(this@EditProjectActivity, "پروژه با موفقیت ویرایش شد!", Toast.LENGTH_LONG).show()
@@ -202,6 +238,14 @@ class EditProjectActivity : AppCompatActivity() {
                     this@EditProjectActivity.finish()
 
 
+                } else if (response.body()!!.status.equals("MethodNotAllowed")) {
+                    AlertDialog.Builder(this@EditProjectActivity, R.style.AlertDialogTheme)
+                            .setMessage("ویرایش پروژه برای شما امکان پذیر نمی باشد")
+                            .setPositiveButton("باشه", { dialog, view ->
+                                dialog.dismiss()
+                            })
+                            .create()
+                            .show()
                 } else {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش پروژه!", Snackbar.LENGTH_LONG).show()
 
@@ -218,14 +262,14 @@ class EditProjectActivity : AppCompatActivity() {
         return sharedPreferences.getString("token", null)
     }
 
-    private fun setupProgress() {
-        progressDialog = ProgressDialog(this@EditProjectActivity)
-        progressDialog.setMessage("لطفا شکیبا باشید")
-        progressDialog.setCancelable(false)
-        progressDialog.isIndeterminate = true
-        progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
-        progressDialog.show()
-    }
+    /*   private fun setupProgress() {
+           progressDialog = ProgressDialog(this@EditProjectActivity)
+           progressDialog.setMessage("لطفا شکیبا باشید")
+           progressDialog.setCancelable(false)
+           progressDialog.isIndeterminate = true
+           progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
+           progressDialog.show()
+       }*/
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))

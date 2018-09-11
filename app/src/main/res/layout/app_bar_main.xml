@@ -20,27 +20,51 @@
             android:layoutDirection="rtl"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_autorenew"/>
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabs"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabSelectedTextColor="@color/white"
-                android:clickable="true"
-                android:layoutDirection="ltr"
-                android:focusable="true">
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
-            </android.support.design.widget.TabLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="لیست پروژه ها"
+                    android:gravity="right"
+                    android:fontFamily="@font/iransans_web_medium"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="15dp"
+                    android:id="@+id/refreshBtnImv"
+                    android:src="@drawable/ic_autorenew" />
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layoutDirection="ltr"
+                    app:tabIndicatorColor="@color/colorPrimary"
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabTextAppearance="@style/tab_text">
+
+
+                </android.support.design.widget.TabLayout>
+
+
+            </LinearLayout>
         </android.support.v7.widget.Toolbar>
+
 
     </android.support.design.widget.AppBarLayout>
 

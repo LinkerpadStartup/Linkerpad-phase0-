@@ -6,6 +6,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
 
     <application
         android:name=".font"
@@ -17,8 +28,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
         <activity
             android:name=".RegLoginHolderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -41,7 +56,9 @@
         <activity
             android:name=".AddProjectActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".ChooseDateActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
@@ -103,8 +120,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name=".AddMaterialsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditMaterialsActivity"

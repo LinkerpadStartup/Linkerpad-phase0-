@@ -24,6 +24,7 @@ import com.linkerpad.linkerpad.MainActivity
 import com.linkerpad.linkerpad.Models.ProjectInformationViewModel
 import com.linkerpad.linkerpad.ProjectHolderActivity
 import com.linkerpad.linkerpad.R
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.projects_fragmant_layout.*
 import kotlinx.android.synthetic.main.projects_fragmant_layout.view.*
 import kotlinx.android.synthetic.main.projetcs_items.view.*
@@ -57,14 +58,20 @@ class ProjectsFragment : Fragment() {
         view.projectsRefreshLayout.setColorSchemeColors(Color.parseColor("#1E88E5"))
         view.projectsRefreshLayout.setOnRefreshListener {
             // Handler().postDelayed(Runnable { view.projectsRefreshLayout.setRefreshing(false) }, 2000)
-            setupProgress()
+          //  setupProgress()
             getProjectList()
             view.projectsRefreshLayout.isRefreshing = false
 
         }
 
-        setupProgress()
+      //  setupProgress()
         getProjectList()
+
+        activity!!.refreshBtnImv.setOnClickListener {
+          //  setupProgress()
+            getProjectList()
+            view.projectsRefreshLayout.isRefreshing = false
+        }
 
         //on add button clicked
         view.addProjectFab.setOnClickListener {
@@ -83,13 +90,13 @@ class ProjectsFragment : Fragment() {
 
         call.enqueue(object : retrofit2.Callback<ProjectListResponse> {
             override fun onFailure(call: Call<ProjectListResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
-                Snackbar.make(this@ProjectsFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+             //   progressDialog.dismiss()
+                Snackbar.make(this@ProjectsFragment.view!!, "خطا هنگام دریافت اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<ProjectListResponse>?, response: Response<ProjectListResponse>?) {
 
-                progressDialog.dismiss()
+             //   progressDialog.dismiss()
 
                 if(response!!.code() == 200) {
                     var projectListResponse = response!!.body()

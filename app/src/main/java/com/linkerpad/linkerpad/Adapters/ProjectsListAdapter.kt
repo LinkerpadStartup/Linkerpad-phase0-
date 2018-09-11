@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.projects_fragmant_layout.view.*
 import kotlinx.android.synthetic.main.projetcs_items.view.*
 import android.support.v4.app.FragmentActivity
 import android.util.Base64
+import com.linkerpad.linkerpad.EditProjectActivity
 import com.linkerpad.linkerpad.EditProjectBottomSheetActivity
 
 
@@ -87,10 +88,18 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
             }
 
 
-            itemView.cardProjectInformation.setOnLongClickListener {
-                /*   *//*
+        /*    itemView.editProjectImv.setOnClickListener {
+                var intent = Intent(context, EditProjectActivity::class.java)
+                //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
+                intent.putExtra("id", data[position].id)
+                intent.putExtra("userRole", data[position].userRole)
+                context.startActivity(intent)
+            }*/
+
+           /* itemView.cardProjectInformation.setOnLongClickListener {
+                *//*   *//**//*
                 view.projectBottomSheet.startAnimation(slideTopAnimation)
-                view.projectBottomSheet.visibility = View.VISIBLE*//*
+                view.projectBottomSheet.visibility = View.VISIBLE*//**//*
                 var view: View = (context as ProjectsFragment).layoutInflater.inflate(R.layout.project_bottom_sheet, null)
 
                 var dialog:BottomSheetDialog = BottomSheetDialog(context)
@@ -98,7 +107,7 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
                 dialog.show()
 
 
-*/
+*//*
 
                 var intent = Intent(context, EditProjectBottomSheetActivity::class.java)
                 //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
@@ -106,7 +115,7 @@ class ProjectsListAdapter(var context: Context, var data: ArrayList<ProjectInfor
                 intent.putExtra("userRole", data[position].userRole)
                 context.startActivity(intent)
                 return@setOnLongClickListener true
-            }
+            }*/
 
         }
 

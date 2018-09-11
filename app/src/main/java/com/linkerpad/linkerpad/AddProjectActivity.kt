@@ -10,60 +10,132 @@ import android.widget.Toast
 import com.linkerpad.linkerpad.Data.DateType
 import kotlinx.android.synthetic.main.add_project_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import android.R.attr.data
-import android.annotation.TargetApi
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.os.Build
-import android.support.annotation.RequiresApi
+import android.os.Environment
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.util.Base64
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
 import com.linkerpad.linkerpad.ApiData.output.CreateProjectResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Models.ProjectInformationViewModel
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
+import com.mohamadamin.persianmaterialdatetimepicker.multidate.MultiDatePickerDialog
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
+import kotlinx.android.synthetic.main.choose_imgae_layout.view.*
 import retrofit2.Call
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
-import javax.security.auth.callback.Callback
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class AddProjectActivity : AppCompatActivity() {
+class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        if (view!!.tag.equals(DATEPICKERSART))
+            projectStartDateEdt.setText("$year/${monthOfYear + 1}/$dayOfMonth")
+        else if (view!!.tag.equals(DATEPICKEREND))
+            projectEndDateEdt.setText("$year/${monthOfYear + 1}/$dayOfMonth")
+
+    }
 
     private val SELECT_IMAGE: Int = 9
     private var convertImage: String = ""
 
     lateinit var progressDialog: ProgressDialog
 
+    private val DATEPICKERSART = "DatePickerDialogStart"
+    private val DATEPICKEREND = "DatePickerDialogEnd"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_project_layout)
 
         startDateCalender.setOnClickListener {
-            var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
-            intent.putExtra("startOrEndDate", DateType.StartDate.value)
-            startActivityForResult(intent, DateType.StartDate.value)
+            /*  var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
+              intent.putExtra("startOrEndDate", DateType.StartDate.value)
+              startActivityForResult(intent, DateType.StartDate.value)*/
+
+            val now = PersianCalendar()
+            val dpd = DatePickerDialog.newInstance(
+                    this@AddProjectActivity,
+                    now.persianYear,
+                    now.persianMonth,
+                    now.persianDay
+            )
+            //dpd.isThemeDark = modeDarkDate!!.isChecked
+            //dpd.typeface = fontName
+            dpd.show(fragmentManager, DATEPICKERSART)
         }
 
         endDateCalender.setOnClickListener {
-            var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
+            /*var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
             intent.putExtra("startOrEndDate", DateType.EndDate.value)
-            startActivityForResult(intent, DateType.EndDate.value)
+            startActivityForResult(intent, DateType.EndDate.value)*/
+            val now = PersianCalendar()
+            val dpd = DatePickerDialog.newInstance(
+                    this@AddProjectActivity,
+                    now.persianYear,
+                    now.persianMonth,
+                    now.persianDay
+            )
+            //dpd.isThemeDark = modeDarkDate!!.isChecked
+            //dpd.typeface = fontName
+            dpd.show(fragmentManager, DATEPICKEREND)
         }
 
 
         selectProjectPictureFab.setOnClickListener {
-            galleryIntent()
+            // galleryIntent()
+            //captureCamera()
+
+            var layoutInflater: LayoutInflater = this@AddProjectActivity.layoutInflater
+            var view: View = layoutInflater.inflate(R.layout.choose_imgae_layout, null)
+            var dialog: AlertDialog.Builder = AlertDialog.Builder(this@AddProjectActivity, R.style.AlertDialogTheme)
+            dialog.setView(view)
+            dialog.setCancelable(true)
+            /* dialog.setMessage("درخواست خود را به info@linkerpad.com ارسال نمایید.")
+             dialog.setPositiveButton("باشه", { dialog, view ->
+                 dialog.dismiss()
+             })*/
+            dialog.create()
+            var dialog2 = dialog.show()
+            view.galleryChooseImageTv.setOnClickListener {
+                //Toast.makeText(this@AddProjectActivity , "gallery",Toast.LENGTH_LONG).show()
+                galleryIntent()
+                dialog2.dismiss()
+            }
+            view.cameraChooseImageTv.setOnClickListener {
+                //  Toast.makeText(this@AddProjectActivity , "camera",Toast.LENGTH_LONG).show()
+                captureCamera()
+                dialog2.dismiss()
+
+            }
+
+            // dialog.show()
+
+
+            /* if (checkSelfPermission(Manifest.permission.CAMERA)
+                     != PackageManager.PERMISSION_GRANTED) {
+                 requestPermissions(new String[]{Manifest.permission.CAMERA},
+                         MY_CAMERA_PERMISSION_CODE);
+             } else {
+
+             }*/
         }
 
 
         createProjectTv.setOnClickListener { view ->
             if (projectTitleEdt.text.toString() != "" && projectAddressEdt.text.toString() != "" && projectCodeEdt.text.toString() != "") {
                 createProject()
-                setupProgress()
+                //setupProgress()
             } else {
                 Snackbar.make(view, "عنوان پروژه و آدرس و کد پروژه نمی تواند خالی باشد!", Snackbar.LENGTH_LONG).show()
             }
@@ -75,6 +147,11 @@ class AddProjectActivity : AppCompatActivity() {
             startActivity(intent)
             this@AddProjectActivity.finish()
         }
+    }
+
+    private fun captureCamera() {
+        val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, 10)
     }
 
     private fun createProject() {
@@ -99,12 +176,12 @@ class AddProjectActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<CreateProjectResponse> {
             override fun onFailure(call: Call<CreateProjectResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+               // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<CreateProjectResponse>?, response: Response<CreateProjectResponse>?) {
-                progressDialog.dismiss()
+               // progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     Toast.makeText(this@AddProjectActivity, "پروژه با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
@@ -154,22 +231,53 @@ class AddProjectActivity : AppCompatActivity() {
 
 
         if (resultCode != Activity.RESULT_CANCELED) {
-            if (data!!.data != null && requestCode == SELECT_IMAGE) {
+            if (/*data!!.data != null &&*/ requestCode == SELECT_IMAGE || requestCode == 10) {
 
-                val uri = data.getData()
+                if (requestCode == SELECT_IMAGE)
+                    cropImage(data!!.data)
+                else {
 
-                var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                accountPicImg.setImageBitmap(fixedbitmap);
+                    var inImage: Bitmap = data!!.extras.get("data") as Bitmap
 
-                if (fixedbitmap != null) {
-                    //  val bytes = File(uri.toString()).readBytes()
-                    var outputStream = ByteArrayOutputStream()
-                    fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
-                    convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                    val tempUri = getImageUri(applicationContext, inImage)
+
+                    cropImage(tempUri)
                 }
+
+
+                /*  var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                  accountPicImg.setImageBitmap(fixedbitmap);
+
+                  if (fixedbitmap != null) {
+                      //  val bytes = File(uri.toString()).readBytes()
+                      var outputStream = ByteArrayOutputStream()
+                      fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+                      convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                  }*/
 
                 //  onSelectFromGallary(data)
                 //   Toast.makeText(this@AddProjectActivity , "${data.data.toString()}",Toast.LENGTH_LONG).show()
+            } else if (requestCode == 34) {
+
+
+                var extras: Bundle = data!!.getExtras()
+                var selectedBitmap: Bitmap = extras.getParcelable("data")
+                // Set The Bitmap Data To ImageView
+                accountPicImg.setImageBitmap(selectedBitmap);
+                accountPicImg.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                /* val uri = data.getData()
+
+                 var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                 accountPicImg.setImageBitmap(fixedbitmap);
+*/
+                if (selectedBitmap != null) {
+                    //  val bytes = File(uri.toString()).readBytes()
+                    var outputStream = ByteArrayOutputStream()
+                    selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+                    convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                }
+
             } else {
 
                 val projectDateType = DateType.fromInt(resultCode)
@@ -182,11 +290,41 @@ class AddProjectActivity : AppCompatActivity() {
             }
         } else {
             convertImage = ""
-            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.ic_account_circle))
+            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.skyline2))
         }
 
+        if (resultCode != Activity.RESULT_CANCELED) {
+
+        }
 
     }
+
+
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        var timeStamp: String =
+                SimpleDateFormat("yyyyMMdd_HHmmss",
+                        Locale.getDefault()).format(Date())
+        var imageFileName: String = "IMG_" + timeStamp + "_";
+        val path = MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "$imageFileName", null)
+        return Uri.parse(path)
+    }
+
+    private fun cropImage(uri: Uri) {
+
+        val cropIntent = Intent("com.android.camera.action.CROP")
+
+        cropIntent.setDataAndType(uri, "image/*")
+        cropIntent.putExtra("crop", "true")
+        cropIntent.putExtra("aspectX", 1)
+        cropIntent.putExtra("aspectY", 1)
+        cropIntent.putExtra("outputX", 512)
+        cropIntent.putExtra("outputY", 512)
+        cropIntent.putExtra("return-data", true)
+        startActivityForResult(cropIntent, 34)
+    }
+
 
     override fun onBackPressed() {
         super.onBackPressed()

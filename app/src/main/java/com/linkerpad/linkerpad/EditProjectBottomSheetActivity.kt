@@ -32,8 +32,6 @@ class EditProjectBottomSheetActivity : AppCompatActivity() {
             Handler().postDelayed({ this@EditProjectBottomSheetActivity.finish() }, 700)
         }
 
-        ";lrq1  `" +
-                "jv z"
 
         editProjectBottomSheetll.setOnClickListener {
             var intent = Intent(this@EditProjectBottomSheetActivity, EditProjectActivity::class.java)

@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#1565C0</color>
     <color name="colorAccent">#2962FF</color>
 
+    <color name="mdtp_accent_color">#1E88E5</color>
+
     <color name="black60">#99000000</color>
 
     <color name="lightBlue400">#29B6F6</color>

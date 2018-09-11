@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
                 override fun onFailure(call: Call<LoginResponse>?, t: Throwable?) {
                     // progressDialog.dismiss()
                     //  Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
-                    Toast.makeText(this@MainActivity, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
+                   // Toast.makeText(this@MainActivity, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
@@ -210,7 +210,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
-
+            this@MainActivity.finish()
 
         }
 
