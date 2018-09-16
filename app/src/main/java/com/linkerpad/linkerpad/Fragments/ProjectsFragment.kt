@@ -12,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.linkerpad.linkerpad.Adapters.ProjectsListAdapter
@@ -58,18 +60,32 @@ class ProjectsFragment : Fragment() {
         view.projectsRefreshLayout.setColorSchemeColors(Color.parseColor("#1E88E5"))
         view.projectsRefreshLayout.setOnRefreshListener {
             // Handler().postDelayed(Runnable { view.projectsRefreshLayout.setRefreshing(false) }, 2000)
-          //  setupProgress()
+            //  setupProgress()
             getProjectList()
             view.projectsRefreshLayout.isRefreshing = false
 
         }
 
-      //  setupProgress()
+        //  setupProgress()
         getProjectList()
 
         activity!!.refreshBtnImv.setOnClickListener {
-          //  setupProgress()
+            //  setupProgress()
             getProjectList()
+            if (true) {
+                ShowcaseView.Builder(activity)
+                        .setTarget(ViewTarget(R.id.refreshBtnImv, activity))
+                        .withMaterialShowcase()
+                        .setStyle(R.style.CustomShowcaseTheme2)
+                        .setContentText("میتوانید جهت سهولت بیشتر، کلیه موارد این لیست را از روز قبل کپی کرده و متناسب با کارهای امروز آنها را ویرایش نمایید")
+                        .hideOnTouchOutside()
+                        .build()
+                var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
+                var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+                sharedPreferencesEditor.putBoolean("guide", true)
+                sharedPreferencesEditor.apply()
+                sharedPreferencesEditor.commit()
+            }
             view.projectsRefreshLayout.isRefreshing = false
         }
 
@@ -90,15 +106,15 @@ class ProjectsFragment : Fragment() {
 
         call.enqueue(object : retrofit2.Callback<ProjectListResponse> {
             override fun onFailure(call: Call<ProjectListResponse>?, t: Throwable?) {
-             //   progressDialog.dismiss()
+                //   progressDialog.dismiss()
                 Snackbar.make(this@ProjectsFragment.view!!, "خطا هنگام دریافت اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<ProjectListResponse>?, response: Response<ProjectListResponse>?) {
 
-             //   progressDialog.dismiss()
+                //   progressDialog.dismiss()
 
-                if(response!!.code() == 200) {
+                if (response!!.code() == 200) {
                     var projectListResponse = response!!.body()
 
                     var projectlist = ArrayList<ProjectInformationData>()

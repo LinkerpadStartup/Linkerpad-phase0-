@@ -5,17 +5,25 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
+import android.util.Base64
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import butterknife.BindView
 import com.linkerpad.linkerpad.ApiData.output.EditUserResponse
 import com.linkerpad.linkerpad.ApiData.output.GetUserInformationResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
+import com.linkerpad.linkerpad.Data.DateType
 import com.linkerpad.linkerpad.Data.UserInformationOutputData
 import com.linkerpad.linkerpad.Models.UserInformationViewModel
 import com.mobsandgeeks.saripaar.ValidationError
@@ -24,11 +32,15 @@ import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Pattern
 import kotlinx.android.synthetic.main.account_info_layout.*
+import kotlinx.android.synthetic.main.choose_imgae_layout.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
@@ -55,6 +67,9 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
     lateinit var progressDialog: ProgressDialog
 
+    private val SELECT_IMAGE: Int = 9
+    private var convertImage: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_info_layout)
@@ -80,6 +95,137 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
             this@AccountInfoActivity.finish()
         }
 
+        accountPicFab.setOnClickListener {
+            var layoutInflater: LayoutInflater = this@AccountInfoActivity.layoutInflater
+            var view: View = layoutInflater.inflate(R.layout.choose_imgae_layout, null)
+            var dialog: AlertDialog.Builder = AlertDialog.Builder(this@AccountInfoActivity, R.style.AlertDialogTheme)
+            dialog.setView(view)
+            dialog.setCancelable(true)
+            /* dialog.setMessage("درخواست خود را به info@linkerpad.com ارسال نمایید.")
+             dialog.setPositiveButton("باشه", { dialog, view ->
+                 dialog.dismiss()
+             })*/
+            dialog.create()
+            var dialog2 = dialog.show()
+            view.galleryChooseImageTv.setOnClickListener {
+                //Toast.makeText(this@AddProjectActivity , "gallery",Toast.LENGTH_LONG).show()
+                galleryIntent()
+                dialog2.dismiss()
+            }
+            view.cameraChooseImageTv.setOnClickListener {
+                //  Toast.makeText(this@AddProjectActivity , "camera",Toast.LENGTH_LONG).show()
+                captureCamera()
+                dialog2.dismiss()
+
+            }
+        }
+
+    }
+
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        var timeStamp: String =
+                SimpleDateFormat("yyyyMMdd_HHmmss",
+                        Locale.getDefault()).format(Date())
+        var imageFileName: String = "IMG_" + timeStamp + "_";
+        val path = MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "$imageFileName", null)
+        return Uri.parse(path)
+    }
+
+    private fun cropImage(uri: Uri) {
+
+        val cropIntent = Intent("com.android.camera.action.CROP")
+
+        cropIntent.setDataAndType(uri, "image/*")
+        cropIntent.putExtra("crop", "true")
+        cropIntent.putExtra("aspectX", 1)
+        cropIntent.putExtra("aspectY", 1)
+        cropIntent.putExtra("outputX", 512)
+        cropIntent.putExtra("outputY", 512)
+        cropIntent.putExtra("return-data", true)
+        startActivityForResult(cropIntent, 34)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
+        if (resultCode != Activity.RESULT_CANCELED) {
+            if (/*data!!.data != null &&*/ requestCode == SELECT_IMAGE || requestCode == 10) {
+
+                if (requestCode == SELECT_IMAGE)
+                    cropImage(data!!.data)
+                else {
+
+                    var inImage: Bitmap = data!!.extras.get("data") as Bitmap
+
+                    val tempUri = getImageUri(applicationContext, inImage)
+
+                    cropImage(tempUri)
+                }
+
+
+                /*  var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                  accountPicImg.setImageBitmap(fixedbitmap);
+
+                  if (fixedbitmap != null) {
+                      //  val bytes = File(uri.toString()).readBytes()
+                      var outputStream = ByteArrayOutputStream()
+                      fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+                      convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                  }*/
+
+                //  onSelectFromGallary(data)
+                //   Toast.makeText(this@AddProjectActivity , "${data.data.toString()}",Toast.LENGTH_LONG).show()
+            } else if (requestCode == 34) {
+
+
+                var extras: Bundle = data!!.getExtras()
+                var selectedBitmap: Bitmap = extras.getParcelable("data")
+                // Set The Bitmap Data To ImageView
+                accountPicImg.setImageBitmap(selectedBitmap);
+                accountPicImg.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                /* val uri = data.getData()
+
+                 var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                 accountPicImg.setImageBitmap(fixedbitmap);
+*/
+                if (selectedBitmap != null) {
+                    //  val bytes = File(uri.toString()).readBytes()
+                    var outputStream = ByteArrayOutputStream()
+                    selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+                    convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                }
+
+            } else {
+
+
+            }
+        } else {
+            convertImage = ""
+            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.noun_user))
+        }
+
+        if (resultCode != Activity.RESULT_CANCELED) {
+
+        }
+
+    }
+
+    fun galleryIntent() {
+        /*   var intent = Intent()
+           intent.setType("image*//*")
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(Intent.createChooser(intent, "انتخاب تصویر"), SELECT_IMAGE)*/
+
+        val i = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(i, SELECT_IMAGE)
+    }
+
+    private fun captureCamera() {
+        val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, 10)
     }
 
     private fun editUserInformation(firstName: String, lastName: String, company: String, mobileNumber: String) {
@@ -157,6 +303,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 emailEdt.setText("${userInformationOutput.emailAddress}")
                 companyEdt.setText("${userInformationOutput.company}")
                 phoneEdt.setText("${userInformationOutput.mobileNumber.substring(2)}")
+
                 //  Toast.makeText(this@AccountInfoActivity, "${userInformationOutput.firstName}-${userInformationOutput.company}", Toast.LENGTH_LONG).show()
 
             }

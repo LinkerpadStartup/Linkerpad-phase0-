@@ -102,7 +102,7 @@
                     android:fontFamily="@font/iransans_web_light"
                     android:gravity="center"
                     android:paddingBottom="5dp"
-                    android:text="نسخه ۲.۱.۷"
+                    android:text="نسخه آزمایشی"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -117,7 +117,7 @@
                 android:justificationMode="inter_word"
                 android:lineSpacingExtra="4dp"
                 android:padding="16dp"
-                android:text="@string/aboutUS"
+                android:text="@string/aboutLinkerpad"
                 android:textColor="@color/gray900"
                 android:textSize="15sp" />
 

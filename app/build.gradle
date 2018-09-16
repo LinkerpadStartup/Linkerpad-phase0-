@@ -67,4 +67,7 @@ dependencies {
 
     //persian calender
     implementation project(':persianmaterialdatetimepicker')
+
+    //show case
+    implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
 }

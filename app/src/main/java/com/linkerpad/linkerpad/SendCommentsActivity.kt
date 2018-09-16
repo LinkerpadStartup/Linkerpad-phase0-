@@ -25,6 +25,11 @@ class SendCommentsActivity : AppCompatActivity() {
             } else {
             }
         }
+
+        sendCommentBtn.setOnClickListener {
+            Toast.makeText(this@SendCommentsActivity, "پیغام با موفقیت ارسال شد.", Toast.LENGTH_LONG).show()
+            this@SendCommentsActivity.finish()
+        }
     }
 
     override fun attachBaseContext(newBase: Context?) {

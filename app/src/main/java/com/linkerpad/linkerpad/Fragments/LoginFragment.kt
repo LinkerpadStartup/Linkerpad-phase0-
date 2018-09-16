@@ -17,6 +17,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import butterknife.BindView
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.google.gson.Gson
 import com.linkerpad.linkerpad.ApiData.input.LoginBody
 import com.linkerpad.linkerpad.ApiData.output.LoginResponse
@@ -122,6 +124,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
         passwordEdt = view.findViewById(R.id.passwordEdt)
     }
 
+
     override fun onValidationFailed(errors: MutableList<ValidationError>?) {
         for (error: ValidationError in errors!!) {
             val view: View = error.view
@@ -195,6 +198,7 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         sharedPreferencesEditor.putString("firstName", loginOutputData.firstName)
                         sharedPreferencesEditor.putString("lastName", loginOutputData.lastName)
                         sharedPreferencesEditor.putString("email", loginOutputData.emailAddress)
+                        sharedPreferencesEditor.putBoolean("guide", false)
                         sharedPreferencesEditor.apply()
                         sharedPreferencesEditor.commit()
 

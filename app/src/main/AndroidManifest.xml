@@ -64,7 +64,7 @@
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".ProjectHolderActivity"
-            android:screenOrientation="portrait"
+            
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddDataRequestActivity"

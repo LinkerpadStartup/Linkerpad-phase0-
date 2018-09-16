@@ -9,6 +9,8 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.widget.Toast
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.RegLoginPagerAdapter
 import com.linkerpad.linkerpad.ApiData.input.LoginBody
 import com.linkerpad.linkerpad.ApiData.output.LoginResponse
@@ -39,6 +41,10 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
         headerNameTv.setText(getNameLastName())
         headerEmailTv.setText(getEmail())
+
+
+
+
 
         login(getEmail(), getPassword())
 
@@ -74,6 +80,12 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
     }
 
+    private fun getGuide(): Boolean {
+        var sharedPreferences: SharedPreferences = this@MainActivity.getSharedPreferences("userInformation", 0)
+        var first = sharedPreferences.getBoolean("guide", false)
+        return first
+    }
+
     private fun login(email: String, password: String) {
         var loginBody: LoginBody = UserInformationViewModel.setUsernamePassword(
                 email, password)
@@ -86,7 +98,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
                 override fun onFailure(call: Call<LoginResponse>?, t: Throwable?) {
                     // progressDialog.dismiss()
                     //  Toast.makeText(context, "error: ${t!!.message}", Toast.LENGTH_SHORT).show()
-                   // Toast.makeText(this@MainActivity, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
+                    // Toast.makeText(this@MainActivity, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
@@ -180,6 +192,10 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         aboutUs.setOnClickListener {
             var intent = Intent(this@MainActivity, AboutUSActivity::class.java)
             startActivity(intent)
+        }
+
+        strongSettingMenu.setOnClickListener {
+            Toast.makeText(this@MainActivity, "بزودی", Toast.LENGTH_LONG).show()
         }
     }
 

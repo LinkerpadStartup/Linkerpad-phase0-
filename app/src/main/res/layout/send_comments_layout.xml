@@ -79,6 +79,7 @@
                     android:background="@drawable/round_btn_primary"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:text="ارسال"
+                    android:id="@+id/sendCommentBtn"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 

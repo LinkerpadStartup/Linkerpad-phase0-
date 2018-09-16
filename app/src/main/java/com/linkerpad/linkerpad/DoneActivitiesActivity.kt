@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.DailyActivityAdapter
 import com.linkerpad.linkerpad.Adapters.ProjectsListAdapter
 import com.linkerpad.linkerpad.ApiData.output.DailyActivityListResponse
@@ -45,6 +48,22 @@ class DoneActivitiesActivity : AppCompatActivity() {
             this@DoneActivitiesActivity.finish()
         }
 
+        copyDoneActivitiesImv.setOnClickListener {
+      /*      if (getGuide()) {
+                ShowcaseView.Builder(this@DoneActivitiesActivity)
+                        .setTarget(ViewTarget(R.id.copyDoneActivitiesImv, this))
+                        .withMaterialShowcase()
+                        .setContentText("میتوانید جهت سهولت بیشتر، کلیه موارد این لیست را از روز قبل کپی کرده و متناسب با کارهای امروز آنها را ویرایش نمایید")
+                        .hideOnTouchOutside()
+                        .build()
+                var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
+                var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+                sharedPreferencesEditor.putBoolean("guide", true)
+                sharedPreferencesEditor.apply()
+                sharedPreferencesEditor.commit()
+            }*/
+        }
+
         //back clicked
         doneActivitesBackIcon.setOnClickListener { this@DoneActivitiesActivity.finish() }
     }
@@ -78,7 +97,6 @@ class DoneActivitiesActivity : AppCompatActivity() {
     }
 
 
-
     private fun setupProgress() {
         progressDialog = ProgressDialog(this@DoneActivitiesActivity)
         progressDialog.setMessage("لطفا شکیبا باشید")
@@ -92,5 +110,11 @@ class DoneActivitiesActivity : AppCompatActivity() {
         var sharedPreferences: SharedPreferences = this@DoneActivitiesActivity.getSharedPreferences("userInformation", 0)
         var token = sharedPreferences.getString("token", null)
         return token
+    }
+
+    private fun getGuide(): Boolean {
+        var sharedPreferences: SharedPreferences = this@DoneActivitiesActivity.getSharedPreferences("userInformation", 0)
+        var first = sharedPreferences.getBoolean("guide", false)
+        return first
     }
 }
