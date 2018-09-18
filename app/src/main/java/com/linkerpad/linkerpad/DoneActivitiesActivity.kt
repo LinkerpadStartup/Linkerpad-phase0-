@@ -3,6 +3,7 @@ package com.linkerpad.linkerpad
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -36,7 +37,7 @@ class DoneActivitiesActivity : AppCompatActivity() {
         var projectId = getIntent().getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
 
-        setupProgress()
+        //setupProgress()
         getDailyActivityList(projectId, reportDate)
 
 
@@ -49,20 +50,38 @@ class DoneActivitiesActivity : AppCompatActivity() {
         }
 
         copyDoneActivitiesImv.setOnClickListener {
-      /*      if (getGuide()) {
-                ShowcaseView.Builder(this@DoneActivitiesActivity)
-                        .setTarget(ViewTarget(R.id.copyDoneActivitiesImv, this))
-                        .withMaterialShowcase()
-                        .setContentText("میتوانید جهت سهولت بیشتر، کلیه موارد این لیست را از روز قبل کپی کرده و متناسب با کارهای امروز آنها را ویرایش نمایید")
-                        .hideOnTouchOutside()
-                        .build()
-                var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
-                var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-                sharedPreferencesEditor.putBoolean("guide", true)
-                sharedPreferencesEditor.apply()
-                sharedPreferencesEditor.commit()
-            }*/
+            /*      if (getGuide()) {
+                      ShowcaseView.Builder(this@DoneActivitiesActivity)
+                              .setTarget(ViewTarget(R.id.copyDoneActivitiesImv, this))
+                              .withMaterialShowcase()
+                              .setContentText("میتوانید جهت سهولت بیشتر، کلیه موارد این لیست را از روز قبل کپی کرده و متناسب با کارهای امروز آنها را ویرایش نمایید")
+                              .hideOnTouchOutside()
+                              .build()
+                      var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
+                      var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+                      sharedPreferencesEditor.putBoolean("guide", true)
+                      sharedPreferencesEditor.apply()
+                      sharedPreferencesEditor.commit()
+                  }*/
         }
+
+
+        //refreshing
+        doneActivitiesRefresh.setColorSchemeColors(Color.parseColor("#1E88E5"))
+        doneActivitiesRefresh.setOnRefreshListener {
+
+            getDailyActivityList(projectId, reportDate)
+            doneActivitiesRefresh.isRefreshing = false
+
+        }
+
+        //refreshing
+        refreshBtnImv.setOnClickListener {
+
+            getDailyActivityList(projectId, reportDate)
+
+        }
+
 
         //back clicked
         doneActivitesBackIcon.setOnClickListener { this@DoneActivitiesActivity.finish() }
@@ -74,13 +93,13 @@ class DoneActivitiesActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<DailyActivityListResponse> {
             override fun onFailure(call: Call<DailyActivityListResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<DailyActivityListResponse>?, response: Response<DailyActivityListResponse>?) {
 
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
 
                 var dailyActivityListResponse = response!!.body()
 

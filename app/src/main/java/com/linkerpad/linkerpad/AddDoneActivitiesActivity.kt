@@ -35,7 +35,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
             if (sizeUnitDoneActivitiesEdt.text.toString() != "" && TitleDoneActivitiesEdt.text.toString() != "" && countMemberDoneActivitiesEdt.text.toString() != ""
                     && timeCountDoneActivitiesEdt.text.toString() != "" && sizeCountDoneActivitiesEdt.text.toString() != "") {
                 createDailyActivity(intent.getStringExtra("projectId"), reportDate)
-                setupProgress()
+               // setupProgress()
             } else {
                 Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
             }
@@ -93,7 +93,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<CreateDailyActivityResponse> {
             override fun onFailure(call: Call<CreateDailyActivityResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+              //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
 
             }
@@ -102,7 +102,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
 
                 if (response!!.code() == 200) {
 
-                    Toast.makeText(this@AddDoneActivitiesActivity, "فعالیت با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddDoneActivitiesActivity, "آیتم ثبت گردید!", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)

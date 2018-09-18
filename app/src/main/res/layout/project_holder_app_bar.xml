@@ -25,17 +25,35 @@
                 android:layoutDirection="rtl"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <TextView
-                    android:id="@+id/projectTitleTv"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="8dp"
-                    android:gravity="center_vertical"
-                    android:text="لینکرپد"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:orientation="horizontal"
+                    android:translationX="8dp">
 
+                    <TextView
+                        android:id="@+id/projectTitleTv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="لینکرپد"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
+                    <ImageView
+                        android:id="@+id/editProjectInformationImv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="15dp"
+                        app:srcCompat="@drawable/ic_edit_white" />
+
+                </LinearLayout>
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>

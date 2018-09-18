@@ -82,7 +82,7 @@ class ProjectsFragment : Fragment() {
                         .build()
                 var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
                 var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-                sharedPreferencesEditor.putBoolean("guide", true)
+                sharedPreferencesEditor.putBoolean("guide", false)
                 sharedPreferencesEditor.apply()
                 sharedPreferencesEditor.commit()
             }

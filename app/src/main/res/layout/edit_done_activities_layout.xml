@@ -258,7 +258,7 @@
                         android:fontFamily="@font/iransans_web_medium"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:padding="16dp"
-                        android:text="حذف فعالیت"
+                        android:text="حذف این مورد"
                         android:textColor="@color/gray700" />
 
 

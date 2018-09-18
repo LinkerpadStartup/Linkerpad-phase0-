@@ -32,7 +32,7 @@ class MachineryActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
 
-        setupProgress()
+      //  setupProgress()
         getMachineryList(projectId,reportDate)
 
 
@@ -57,13 +57,13 @@ class MachineryActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MachineryListResponse> {
             override fun onFailure(call: Call<MachineryListResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
 
-                progressDialog.dismiss()
+               // progressDialog.dismiss()
 
                 var machineryListResponse = response!!.body()
 

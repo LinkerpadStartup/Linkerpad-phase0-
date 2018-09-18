@@ -33,20 +33,27 @@ data class ProjectInformationViewModel(var status: String, var message: String, 
 
         fun getProjectInformation(projectInformationData: ProjectInformationData): ProjectInformationViewModel {
             var startDate: String = ""
-            if (projectInformationData.startDate.toString() != "") {
-                projectInformationData.startDate = projectInformationData.startDate.replace("T00:00:00", "")
-                var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationData.startDate.toString().split("-")[0].toInt(), projectInformationData.startDate.toString().split("-")[1].toInt(), projectInformationData.startDate.toString().split("-")[2].toInt())
-                var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
-                startDate = jalaliStart.toString().replace("-", "/")
+            var endDate: String = ""
+
+            try {
+                if (projectInformationData.startDate.toString() != "") {
+                    projectInformationData.startDate = projectInformationData.startDate.replace("T00:00:00", "")
+                    var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationData.startDate.toString().split("-")[0].toInt(), projectInformationData.startDate.toString().split("-")[1].toInt(), projectInformationData.startDate.toString().split("-")[2].toInt())
+                    var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
+                    startDate = jalaliStart.toString().replace("-", "/")
+
+                }
+
+                if (projectInformationData.endDate.toString() != "") {
+                    projectInformationData.endDate = projectInformationData.endDate.replace("T00:00:00", "")
+                    var gregorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationData.endDate.toString().split("-")[0].toInt(), projectInformationData.endDate.toString().split("-")[1].toInt(), projectInformationData.endDate.toString().split("-")[2].toInt())
+                    var jalaliEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianEnd)
+                    endDate = jalaliEnd.toString().replace("-", "/")
+                }
+            } catch (e: Exception) {
 
             }
-            var endDate: String = ""
-            if (projectInformationData.endDate.toString() != "") {
-                projectInformationData.endDate = projectInformationData.endDate.replace("T00:00:00", "")
-                var gregorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(projectInformationData.endDate.toString().split("-")[0].toInt(), projectInformationData.endDate.toString().split("-")[1].toInt(), projectInformationData.endDate.toString().split("-")[2].toInt())
-                var jalaliEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianEnd)
-                endDate = jalaliEnd.toString().replace("-", "/")
-            }
+
             return ProjectInformationViewModel("", "", projectInformationData.projectPicture, projectInformationData.id, projectInformationData.name, projectInformationData.code, projectInformationData.address, startDate, endDate, projectInformationData.maximunmMember
             )
         }
@@ -65,7 +72,7 @@ data class ProjectInformationViewModel(var status: String, var message: String, 
                 var grogorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.jalaliToGregorian(jalaliEnd)
                 endDate = grogorianEnd.toString().replace("/", "-") + "T00:00"
             }
-            return EditProjectData.setEditProjectBody(EditProjectData(projectInformationViewModel.id,projectInformationViewModel.projectPicture, projectInformationViewModel.name, projectInformationViewModel.code, projectInformationViewModel.address, startDate, endDate))
+            return EditProjectData.setEditProjectBody(EditProjectData(projectInformationViewModel.id, projectInformationViewModel.projectPicture, projectInformationViewModel.name, projectInformationViewModel.code, projectInformationViewModel.address, startDate, endDate))
         }
     }
 

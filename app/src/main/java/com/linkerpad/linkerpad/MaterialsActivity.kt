@@ -32,7 +32,7 @@ class MaterialsActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
 
-        setupProgress()
+       // setupProgress()
         getMaterialList(projectId,reportDate)
 
         //Add Materials
@@ -55,13 +55,13 @@ class MaterialsActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MaterialListResponse> {
             override fun onFailure(call: Call<MaterialListResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+              //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MaterialListResponse>?, response: Response<MaterialListResponse>?) {
 
-                progressDialog.dismiss()
+               // progressDialog.dismiss()
 
                 var materialListResponse = response!!.body()
 

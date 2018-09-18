@@ -4,201 +4,248 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:elevation="8dp"
                 android:layoutDirection="rtl"
                 android:orientation="horizontal">
+
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="0.8" />
+
+                <ImageView
+                    android:id="@+id/reportDateImv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_date_range" />
 
                 <LinearLayout
                     android:id="@+id/reportDateLL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/dayDateTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/iransans_web_light"
-                        android:gravity="center"
-                        android:text="2"
-                        android:textColor="@color/gray700"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/yearDateTv"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iransans_web_medium"
                         android:gravity="center"
-                        android:text="1397"
-                        android:textColor="@color/black"
+                        android:text="2"
+                        android:textColor="@color/gray900"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/monthDateTv"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/iransans_web_light"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/iransans_web_medium"
                         android:gravity="center"
                         android:text="مرداد"
                         android:textColor="@color/gray800"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/yearDateTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:gravity="center"
+                        android:text="1397"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
 
                 </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="0.8" />
+
+
             </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/doneActivitiesLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/gray200"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/ic_assignment_turned_in_gray" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/doneActivitiesLL"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:text="فعالیت های انجام شده"
-                    android:textColor="@color/gray900"
-                    android:textSize="18sp" />
+                    android:background="@color/gray200"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_assignment_turned_in_gray" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:padding="8dp"
+                        android:text="فعالیت های انجام شده"
+                        android:textColor="@color/gray900"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/machineryLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_build_gray" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:padding="8dp"
+                        android:text="ماشین آلات و تجهیزات"
+                        android:textColor="@color/gray900"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/materialsLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray200"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:src="@drawable/construction_and_tools" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:padding="8dp"
+                        android:text="مواد و مصالح ورودی"
+                        android:textColor="@color/gray900"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/notesAndEventsLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_warning_gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:padding="8dp"
+                        android:text="مشکلات ، موانع و یادداشت ها"
+                        android:textColor="@color/gray900"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/machineryLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
+        </ScrollView>
+    </LinearLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/ic_build_gray" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:text="ماشین آلات و تجهیزات"
-                    android:textColor="@color/gray900"
-                    android:textSize="18sp" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/materialsLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/gray200"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
-
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    app:srcCompat="@drawable/construction_and_tools" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:text="مواد و مصالح"
-                    android:textColor="@color/gray900"
-                    android:textSize="18sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/notesAndEventsLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:textSize="18sp"
-                    app:srcCompat="@drawable/ic_warning_gray" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:text="یادداشت، اتفاقات"
-                    android:textColor="@color/gray900"
-                    android:textSize="18sp" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
     <TextView
         android:id="@+id/confirmationReportTv"
@@ -206,13 +253,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/outline_btn_primary"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:padding="8dp"
-        android:text="تایید گزارش"
+        android:padding="10dp"
+        android:text="تـایید گزارش"
         android:textColor="@color/colorPrimary"
-        android:textSize="14sp" />
+        android:textSize="18sp" /></android.support.v7.widget.CardView>
+
+
 </RelativeLayout>
+

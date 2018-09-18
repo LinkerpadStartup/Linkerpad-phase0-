@@ -103,7 +103,23 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
             editProject(intent.getStringExtra("id"))
         }
 
-        editProjectBackIcon.setOnClickListener { this@EditProjectActivity.finish() }
+        editProjectBackIcon.setOnClickListener {
+            var intent = Intent(this@EditProjectActivity, ProjectHolderActivity::class.java)
+            intent.putExtra("id", getIntent().getStringExtra("id"))
+            startActivity(intent)
+            this@EditProjectActivity.finish()
+        }
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        var intent = Intent(this@EditProjectActivity, ProjectHolderActivity::class.java)
+        intent.putExtra("id", getIntent().getStringExtra("id"))
+        startActivity(intent)
+        this@EditProjectActivity.finish()
+
 
     }
 
@@ -173,9 +189,9 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
                 // progressDialog.dismiss()
 
 
-                var projectInformationData: ProjectInformationData = response!!.body()!!.responseObject
-                var reponseProjectInformation = ProjectInformationViewModel.getProjectInformation(projectInformationData)
                 if (response!!.code() == 200) {
+                    var projectInformationData: ProjectInformationData = response!!.body()!!.responseObject
+                    var reponseProjectInformation = ProjectInformationViewModel.getProjectInformation(projectInformationData)
 
                     projectTitleEdt.setText(reponseProjectInformation.name)
                     projectCodeEdt.setText(reponseProjectInformation.code)
@@ -225,7 +241,7 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         call.enqueue(object : retrofit2.Callback<EditProjectResponse> {
             override fun onFailure(call: Call<EditProjectResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ویرایش اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditProjectResponse>?, response: Response<EditProjectResponse>?) {
@@ -233,19 +249,23 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
 
                 if (response!!.code() == 200) {
                     Toast.makeText(this@EditProjectActivity, "پروژه با موفقیت ویرایش شد!", Toast.LENGTH_LONG).show()
-                    var intent = Intent(this@EditProjectActivity, MainActivity::class.java)
+                    var intent = Intent(this@EditProjectActivity, ProjectHolderActivity::class.java)
+                    intent.putExtra("id", getIntent().getStringExtra("id"))
                     startActivity(intent)
                     this@EditProjectActivity.finish()
 
 
-                } else if (response.body()!!.status.equals("MethodNotAllowed")) {
-                    AlertDialog.Builder(this@EditProjectActivity, R.style.AlertDialogTheme)
-                            .setMessage("ویرایش پروژه برای شما امکان پذیر نمی باشد")
-                            .setPositiveButton("باشه", { dialog, view ->
-                                dialog.dismiss()
-                            })
-                            .create()
-                            .show()
+                } else if (response.code() == 405) {
+
+                    if (response.message() == "Method Not Allowed") {
+                        AlertDialog.Builder(this@EditProjectActivity, R.style.AlertDialogTheme)
+                                .setMessage("ویرایش پروژه برای شما امکان پذیر نمی باشد")
+                                .setPositiveButton("باشه", { dialog, view ->
+                                    dialog.dismiss()
+                                })
+                                .create()
+                                .show()
+                    }
                 } else {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش پروژه!", Snackbar.LENGTH_LONG).show()
 

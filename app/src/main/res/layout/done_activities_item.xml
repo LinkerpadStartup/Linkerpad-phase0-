@@ -92,6 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:fontFamily="@font/iransans_web_light"
         android:maxLength="40"
         android:padding="4dp"
         android:singleLine="true"
