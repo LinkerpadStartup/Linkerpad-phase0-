@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/iransans_web_medium"
         android:padding="8dp"
+        android:gravity="right"
         android:text="پیمانکار سقف"
         android:textColor="@color/gray900"
         android:textSize="16sp" />
@@ -94,6 +95,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/iransans_web_light"
         android:maxLength="40"
+        android:gravity="right"
         android:padding="4dp"
         android:singleLine="true"
         android:textColor="@color/gray700" />

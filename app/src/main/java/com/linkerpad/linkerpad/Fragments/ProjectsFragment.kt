@@ -72,7 +72,9 @@ class ProjectsFragment : Fragment() {
         activity!!.refreshBtnImv.setOnClickListener {
             //  setupProgress()
             getProjectList()
-            if (true) {
+
+            var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
+            if (sharedPreferences.getBoolean("guide",false)) {
                 ShowcaseView.Builder(activity)
                         .setTarget(ViewTarget(R.id.refreshBtnImv, activity))
                         .withMaterialShowcase()
@@ -80,7 +82,7 @@ class ProjectsFragment : Fragment() {
                         .setContentText("میتوانید جهت سهولت بیشتر، کلیه موارد این لیست را از روز قبل کپی کرده و متناسب با کارهای امروز آنها را ویرایش نمایید")
                         .hideOnTouchOutside()
                         .build()
-                var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
+
                 var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
                 sharedPreferencesEditor.putBoolean("guide", false)
                 sharedPreferencesEditor.apply()

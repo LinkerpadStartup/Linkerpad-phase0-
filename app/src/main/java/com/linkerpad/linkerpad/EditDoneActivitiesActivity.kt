@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import com.linkerpad.linkerpad.ApiData.output.DeleteDailyActivityResponse
 import com.linkerpad.linkerpad.ApiData.output.EditDailyActivityResponse
@@ -38,19 +39,31 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         projectId = intent.getStringExtra("projectId")
         reportDate = getIntent().getStringExtra("reportDate")
 
-        setupProgress()
+        // setupProgress()
         getDailyActivityInformation(projectId, dailyActivityId)
 
         removeDailyActivityTv.setOnClickListener {
-            setupProgress()
-            deleteDailyActivity(projectId, dailyActivityId)
+            //   setupProgress()
+
+            AlertDialog.Builder(this@EditDoneActivitiesActivity, R.style.AlertDialogTheme)
+                    .setMessage("از حذف این مورد مطمئن هستید؟")
+                    .setPositiveButton("بله", { dialog, view ->
+                        dialog.dismiss()
+                        deleteDailyActivity(projectId, dailyActivityId)
+                    }).setNegativeButton("خیر", { dialog, view ->
+                        dialog.dismiss()
+                    })
+                    .create()
+                    .show()
+
+
         }
 
         saveEditDailyActivityTv.setOnClickListener { view ->
 
             if (sizeUnitDoneActivitiesEdt.text.toString() != "" && TitleDoneActivitiesEdt.text.toString() != "" && countMemberDoneActivitiesEdt.text.toString() != ""
                     && timeCountDoneActivitiesEdt.text.toString() != "" && sizeCountDoneActivitiesEdt.text.toString() != "") {
-                setupProgress()
+                // setupProgress()
                 editDailyActivity(projectId, dailyActivityId)
             } else {
                 Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
@@ -65,6 +78,64 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
             startActivity(intent)
             this@EditDoneActivitiesActivity.finish()
         }
+
+        countMemberDoneActivitiesEdt.setText("0")
+        //up member count arrow
+        countMemberDoneActivitiesUpArrow.setOnClickListener {
+
+            var count = changePersianIntToEnglishInt(countMemberDoneActivitiesEdt.text.toString()).toInt() + 1
+
+            countMemberDoneActivitiesEdt.setText("${count}")
+
+
+        }
+
+        //down member count arrow
+        countMemberDoneActivitiesDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countMemberDoneActivitiesEdt.text.toString()).toInt() - 1
+
+            countMemberDoneActivitiesEdt.setText("${count}")
+
+        }
+
+        timeCountDoneActivitiesEdt.setText("0.0")
+        //up time count arrow
+        timeCountDoneActivitiesUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(timeCountDoneActivitiesEdt.text.toString()).toDouble() + 0.5
+
+            var solution = remove3Decimal(count)
+
+            timeCountDoneActivitiesEdt.setText("${solution}")
+        }
+
+        //down time count arrow
+        timeCountDoneActivitiesDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(timeCountDoneActivitiesEdt.text.toString()).toDouble() - 0.5
+
+            var solution = remove3Decimal(count)
+
+            timeCountDoneActivitiesEdt.setText("${solution}")
+        }
+
+
+
+        sizeCountDoneActivitiesEdt.setText("0.0")
+        sizeCountDoneActivitiesUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(sizeCountDoneActivitiesEdt.text.toString()).toDouble() + 0.1
+
+            var solution = remove3Decimal(count)
+
+            sizeCountDoneActivitiesEdt.setText("${solution}")
+        }
+
+        sizeCountDoneActivitiesDownArrow.setOnClickListener {
+
+            var count = changePersianIntToEnglishInt(sizeCountDoneActivitiesEdt.text.toString()).toDouble() - 0.1
+
+            var solution = remove3Decimal(count)
+
+            sizeCountDoneActivitiesEdt.setText("${solution}")
+        }
     }
 
     private fun getDailyActivityInformation(projectId: String, dailyActivityId: String) {
@@ -73,12 +144,12 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<GetDailyActivityInformationResponse> {
             override fun onFailure(call: Call<GetDailyActivityInformationResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetDailyActivityInformationResponse>?, response: Response<GetDailyActivityInformationResponse>?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
 
                 var dailyActivityInformation = DailyActivityViewModel.getDailyAcivityInformation(DailyActivityInformationOutput(response!!.body()!!.status, response.body()!!.status, response!!.body()!!.responseObject))
 
@@ -106,12 +177,12 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<DeleteDailyActivityResponse> {
             override fun onFailure(call: Call<DeleteDailyActivityResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<DeleteDailyActivityResponse>?, response: Response<DeleteDailyActivityResponse>?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     Toast.makeText(this@EditDoneActivitiesActivity, "آیتم حذف گردید", Toast.LENGTH_LONG).show()
@@ -148,12 +219,12 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<EditDailyActivityResponse> {
             override fun onFailure(call: Call<EditDailyActivityResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditDailyActivityResponse>?, response: Response<EditDailyActivityResponse>?) {
-                progressDialog.dismiss()
+                //progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     Toast.makeText(this@EditDoneActivitiesActivity, "فعالیت با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
@@ -175,6 +246,29 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
         })
 
+
+    }
+
+    private fun changePersianIntToEnglishInt(number: String): String {
+        return number.replace("۰", "0")
+                .replace("۱", "1")
+                .replace("۲", "2")
+                .replace("۳", "3")
+                .replace("۴", "4")
+                .replace("۵", "5")
+                .replace("۶", "6")
+                .replace("۷", "7")
+                .replace("۸", "8")
+                .replace("۹", "9")
+    }
+
+    private fun remove3Decimal(number: Double): Double {
+        val number: Double = number
+        val number3digits: Double = Math.round(number * 1000.0) / 1000.0
+        val number2digits: Double = Math.round(number3digits * 100.0) / 100.0
+        val solution: Double = Math.round(number2digits * 10.0) / 10.0
+
+        return solution
     }
 
     private fun getToken(): String {

@@ -42,7 +42,7 @@ class DailyActivityAdapter(var context: Context, var data: ArrayList<DailyActivi
             itemView.titleDoneActivityTv.text = itemModel.title
             itemView.numberOfCrewDoneActivityTv.text = itemModel.numberOfCrew.toString()
             itemView.workHoursDoneActivityTv.text = itemModel.workHours.toString()
-            itemView.workLoadsDoneActivityTv.text = itemModel.workload.toString()
+            itemView.workLoadsDoneActivityTv.text = itemModel.workload.toString()+" "+itemModel.workloadUnit
 
             var description = ""
             if (itemModel.description.length > 37) {

@@ -1,15 +1,389 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dummy_layout_for_snackbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".EditDataRequestAcivity">
+    android:orientation="vertical"
+    tools:context="com.linkerpad.linkerpad.EditDoneActivitiesActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:layoutDirection="rtl"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:translationX="8dp">
+
+                <ImageView
+                    android:id="@+id/editDoneActivitesBackIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="15dp"
+                    app:srcCompat="@drawable/ic_arrow_forward" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:gravity="center_vertical"
+                    android:text="ویرایش فعالیت انجام شده"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/saveEditDailyActivityTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_check_black_24dp" />
+
+                <!--<TextView
+                    android:id="@+id/saveDailyActivityTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="ذخیره"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />-->
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:focusedByDefault="true">
+
+                <EditText
+                    android:id="@+id/TitleDoneActivitiesEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:hint="عنوان"
+                    android:inputType="text"
+                    android:maxLength="200"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/iransans_web_light"
+                android:padding="4dp"
+                android:text="مثال: پیمانکار سقف ۱"
+                android:textColor="@color/gray600"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/iransans_web_medium"
+                    android:text="تعداد نفرات"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9" />
+
+                <ImageView
+                    android:id="@+id/countMemberDoneActivitiesUpArrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_drop_up_primary" />
+
+                <EditText
+                    android:id="@+id/countMemberDoneActivitiesEdt"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:gravity="center"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:padding="8dp"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:id="@+id/countMemberDoneActivitiesDownArrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_drop_down_primary" />
+
+                <Space
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
 
-    <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/iransans_web_medium"
+                    android:text="تعداد ساعات کاری"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1" />
+
+                <ImageView
+                    android:id="@+id/timeCountDoneActivitiesUpArrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_drop_up_primary" />
+
+                <EditText
+                    android:id="@+id/timeCountDoneActivitiesEdt"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:gravity="center"
+                    android:hint="0.0"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/timeCountDoneActivitiesDownArrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_drop_down_primary" />
+
+                <Space
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:paddingBottom="0dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:fontFamily="@font/iransans_web_medium"
+                    android:text="حجم کار انجام شده"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.45" />
+
+                <ImageView
+                    android:id="@+id/sizeCountDoneActivitiesUpArrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_drop_up_primary" />
+
+                <EditText
+                    android:id="@+id/sizeCountDoneActivitiesEdt"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:gravity="center"
+                    android:hint="0.0"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/sizeCountDoneActivitiesDownArrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_drop_down_primary" />
+
+                <LinearLayout
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/sizeUnitDoneActivitiesEdt"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:gravity="center"
+                        android:hint="واحد"
+                        android:maxLength="15"
+                        android:padding="8dp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans_web_light"
+                        android:gravity="center"
+                        android:padding="0dp"
+                        android:text="مثال: تن"
+                        android:textColor="@color/gray600"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/desciptionDoneActivitiesEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/iransans_web_light"
+                    android:hint="توضیحات"
+                    android:maxLength="400"
+                    android:padding="8dp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/iransans_web_light"
+                android:padding="4dp"
+                android:text="مثال: آرماتوربندی زون ۲"
+                android:textColor="@color/gray600"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:id="@+id/removeDailyActivityTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_delete_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/iransans_web_medium"
+                    android:padding="16dp"
+                    android:text="حذف این مورد"
+                    android:textColor="@color/gray700" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+<!--    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -266,6 +640,6 @@
             </LinearLayout>
         </ScrollView>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
-</RelativeLayout>
+</LinearLayout>
