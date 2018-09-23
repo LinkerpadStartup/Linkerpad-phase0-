@@ -3,6 +3,7 @@ package com.linkerpad.linkerpad.Fragments
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -15,6 +16,7 @@ import com.linkerpad.linkerpad.Data.DateType
 import com.linkerpad.linkerpad.Data.JalaliCalendar
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
+import kotlinx.android.synthetic.main.project_holder_content.*
 import kotlinx.android.synthetic.main.reports_fragment_layout.*
 import kotlinx.android.synthetic.main.reports_fragment_layout.view.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -276,6 +278,17 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             //dpd.typeface = fontName
             dpd.show(activity!!.fragmentManager, DATEPICKERSART)
         }
+
+        activity!!.editProjectInformationImv.setImageDrawable(resources.getDrawable(R.drawable.ic_edit_white))
+        activity!!.editProjectInformationImv.setOnClickListener {
+            var intent = Intent(context, EditProjectActivity::class.java)
+            var projectId = activity!!.intent.getStringExtra("id")
+            intent.putExtra("id", projectId)
+            context!!.startActivity(intent)
+            activity!!.finish()
+
+        }
+
         return view
     }
 

@@ -27,6 +27,7 @@ import com.linkerpad.linkerpad.Models.ProjectInformationViewModel
 import com.linkerpad.linkerpad.ProjectHolderActivity
 import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.project_holder_content.*
 import kotlinx.android.synthetic.main.projects_fragmant_layout.*
 import kotlinx.android.synthetic.main.projects_fragmant_layout.view.*
 import kotlinx.android.synthetic.main.projetcs_items.view.*
@@ -98,6 +99,7 @@ class ProjectsFragment : Fragment() {
             activity!!.finish()
         }
 
+
         return view
 
     }
@@ -123,7 +125,7 @@ class ProjectsFragment : Fragment() {
                     projectlist = projectListResponse!!.responseObject
 
                     view!!.projectsRecyclerView.layoutManager = LinearLayoutManager(activity)
-                    view!!.projectsRecyclerView.adapter = ProjectsListAdapter(activity!!.applicationContext, projectlist)
+                    view!!.projectsRecyclerView.adapter = ProjectsListAdapter(activity!!, projectlist)
                 }
             }
 

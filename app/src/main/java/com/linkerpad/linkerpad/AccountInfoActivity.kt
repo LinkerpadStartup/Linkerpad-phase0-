@@ -240,13 +240,13 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
         call.enqueue(object : Callback<EditUserResponse> {
             override fun onFailure(call: Call<EditUserResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+              //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditUserResponse>?, response: Response<EditUserResponse>?) {
 
-                progressDialog.dismiss()
+              //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     getUserInformation()
@@ -336,7 +336,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
     }
 
     override fun onValidationSucceeded() {
-        setupProgress()
+      //  setupProgress()
 
         editUserInformation(nameEdt.text.toString(), lastNameEdt.text.toString(), companyEdt.text.toString(), "98" + phoneEdt.text.toString())
     }

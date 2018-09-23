@@ -70,13 +70,13 @@ class ProjectHolderActivity : AppCompatActivity() {
             startActivity(intent)
         }*/
 
-        editProjectInformationImv.setOnClickListener {
+       /* editProjectInformationImv.setOnClickListener {
             var intent = Intent(this@ProjectHolderActivity, EditProjectActivity::class.java)
             var id = getIntent().getStringExtra("id")
             intent.putExtra("id", id)
             startActivity(intent)
             this@ProjectHolderActivity.finish()
-        }
+        }*/
 
         projectHolderBackIcon.setOnClickListener {
             this@ProjectHolderActivity.finish()
@@ -239,6 +239,11 @@ class ProjectHolderActivity : AppCompatActivity() {
             }*/
 
         }
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
     }
 

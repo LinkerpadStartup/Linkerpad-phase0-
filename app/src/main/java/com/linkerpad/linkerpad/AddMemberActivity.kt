@@ -77,7 +77,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
 
     private fun addMemberToProject(projectId: String, userRole: Int) {
         var service: IUserApi = IWebApi.Factory.create()
-        Toast.makeText(this, "$userRole", Toast.LENGTH_LONG).show()
+        // Toast.makeText(this, "$userRole", Toast.LENGTH_LONG).show()
         var addMemberBody = MemberViewModel.setAddMemberToProject(projectId, addMemberEmailEdt.text.toString(), userRole)
         var call = service.addMemberToProject(getToken(), addMemberBody)
 
@@ -89,7 +89,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
 
             override fun onResponse(call: Call<AddMemberResponse>?, response: Response<AddMemberResponse>?) {
                 if (response!!.code() == 200) {
-                    progressDialog.dismiss()
+                    // progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
                             .setMessage("ایمیل حاوی دعوتنامه با موفقیت ارسال شد!")
                             .setPositiveButton("باشه", { dialog, view ->
@@ -98,7 +98,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                             .create()
                             .show()
                 } else if (response.code() == 400) {
-                    progressDialog.dismiss()
+                    //  progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
                             .setMessage("ایمیل وارد شده هم اکنون عضو تیم است!")
                             .setPositiveButton("باشه", { dialog, view ->
@@ -107,7 +107,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                             .create()
                             .show()
                 } else if (response.code() == 405) {
-                    progressDialog.dismiss()
+                    //  progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
                             .setMessage("باعرض پوزش شما امکان افزودن عضو به پروژه را ندارید. از سازنده یا مدیر درخواست کنید!")
                             .setPositiveButton("باشه", { dialog, view ->
@@ -116,7 +116,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                             .create()
                             .show()
                 } else if (response.code() == 404) {
-                    progressDialog.dismiss()
+                    //  progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
                             .setMessage("عضو مورد نظر کاربر لینکرپد نمی باشد لطفا جهت ثبت نام اولیه با پشتیبانی تماس بگیرید")
                             .setPositiveButton("باشه", { dialog, view ->
@@ -141,7 +141,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
 
     override fun onValidationSucceeded() {
 
-        setupProgress()
+        //  setupProgress()
         var id = intent.getStringExtra("id")
 
         addMemberToProject(id, userRole)

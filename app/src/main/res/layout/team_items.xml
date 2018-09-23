@@ -35,8 +35,9 @@
                     android:id="@+id/userProfilePictureImv"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:padding="8dp"
                     android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_account_circle" />
+                    app:srcCompat="@drawable/noun_user" />
 
                 <TextView
                     android:id="@+id/nameLastNameTv"
@@ -44,10 +45,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="right"
-                    android:gravity="center_vertical"
+                    android:gravity="center_vertical|right"
                     android:text="میلاد کارگر"
+                    android:layout_marginRight="8dp"
                     android:textColor="@color/gray900"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/emailTeamImv"
@@ -65,12 +67,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="8dp"
                     app:srcCompat="@drawable/ic_call_primary" />
+
+                <ImageView
+                    android:id="@+id/moreTeamImv"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_expand_more_gray" />
             </LinearLayout>
 
             <LinearLayout
@@ -91,12 +100,48 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"></LinearLayout>
 
-            <TextView
-                android:id="@+id/emailTeamTv"
+            <LinearLayout
+                android:id="@+id/thirdTeamLL"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layoutDirection="rtl"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
                 android:paddingLeft="8dp"
-                android:paddingRight="8dp" />
+                android:gravity="center_vertical"
+                android:paddingRight="8dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/editMemberImv"
+                    android:padding="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_edit"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/deleteMemberImv"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginBottom="4dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_delete_gray"/>
+
+
+                <TextView
+                    android:id="@+id/emailTeamTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp" />
+            </LinearLayout>
+
 
         </LinearLayout>
 

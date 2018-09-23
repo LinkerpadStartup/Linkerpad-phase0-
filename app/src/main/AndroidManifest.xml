@@ -30,10 +30,7 @@
             android:name=".MainActivity"
             android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".RegLoginHolderActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -56,15 +53,12 @@
         <activity
             android:name=".AddProjectActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ChooseDateActivity"
             android:theme="@style/AppTheme.NoActionBar.Dialog" />
         <activity
             android:name=".ProjectHolderActivity"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddDataRequestActivity"
@@ -162,6 +156,9 @@
             android:name=".ShowReportConfimationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CustomAlertDialog"
+            android:theme="@style/AppTheme.NoActionBar.Dialog2" />
     </application>
 
 </manifest>
