@@ -33,13 +33,57 @@ class AddMachineryActivity : AppCompatActivity() {
 
         saveMachineryTv.setOnClickListener { view ->
             if (TitleMachineryEdt.text.toString() != "" && countActiveMachineryEdt.text.toString() != "" && countDeactiveMachineryEdt.text.toString() != "" && timeCountMachineryEdt.text.toString() != "") {
-                setupProgress()
+               // setupProgress()
                 createMachinery(projectId, reportDate)
             } else {
                 Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
             }
         }
 
+
+        countActiveMachineryEdt.setText("0")
+        machineryEnableUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countActiveMachineryEdt.text.toString()).toInt() + 1
+
+            countActiveMachineryEdt.setText("${count}")
+        }
+
+        machineryEnableDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countActiveMachineryEdt.text.toString()).toInt() + -1
+
+            countActiveMachineryEdt.setText("${count}")
+        }
+
+
+        timeCountMachineryEdt.setText("0.0")
+        machineryTimeUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(timeCountMachineryEdt.text.toString()).toDouble() + 0.5
+
+            var solution = remove3Decimal(count)
+
+            timeCountMachineryEdt.setText("${solution}")
+        }
+
+        machineryTimeDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(timeCountMachineryEdt.text.toString()).toDouble() - 0.5
+
+            var solution = remove3Decimal(count)
+
+            timeCountMachineryEdt.setText("${solution}")
+        }
+
+        countDeactiveMachineryEdt.setText("0")
+        machineryDisableUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countDeactiveMachineryEdt.text.toString()).toInt() + 1
+
+            countDeactiveMachineryEdt.setText("${count}")
+        }
+
+        machineryDisableDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countDeactiveMachineryEdt.text.toString()).toInt() + -1
+
+            countDeactiveMachineryEdt.setText("${count}")
+        }
 
         //back clicked
         addMachineryBackIcon.setOnClickListener {
@@ -51,6 +95,29 @@ class AddMachineryActivity : AppCompatActivity() {
             this@AddMachineryActivity.finish()
         }
     }
+
+    private fun changePersianIntToEnglishInt(number: String): String {
+        return number.replace("۰", "0")
+                .replace("۱", "1")
+                .replace("۲", "2")
+                .replace("۳", "3")
+                .replace("۴", "4")
+                .replace("۵", "5")
+                .replace("۶", "6")
+                .replace("۷", "7")
+                .replace("۸", "8")
+                .replace("۹", "9")
+    }
+
+    private fun remove3Decimal(number: Double): Double {
+        val number: Double = number
+        val number3digits: Double = Math.round(number * 1000.0) / 1000.0
+        val number2digits: Double = Math.round(number3digits * 100.0) / 100.0
+        val solution: Double = Math.round(number2digits * 10.0) / 10.0
+
+        return solution
+    }
+
 
     private fun getToken(): String {
         var sharedPreferences: SharedPreferences = this@AddMachineryActivity.getSharedPreferences("userInformation", 0)
@@ -89,7 +156,7 @@ class AddMachineryActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MachineryResponse> {
             override fun onFailure(call: Call<MachineryResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+               // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
 
             }
@@ -98,7 +165,7 @@ class AddMachineryActivity : AppCompatActivity() {
 
                 if (response!!.code() == 200) {
 
-                    Toast.makeText(this@AddMachineryActivity, "تجهیزات با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddMachineryActivity, "آیتم ثبت گردید", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)

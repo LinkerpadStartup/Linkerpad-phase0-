@@ -70,7 +70,7 @@ class DoneActivitiesActivity : AppCompatActivity() {
         doneActivitiesRefresh.setColorSchemeColors(Color.parseColor("#1E88E5"))
         doneActivitiesRefresh.setOnRefreshListener {
 
-            getDailyActivityList(projectId, reportDate)
+            getDailyActivityListUpdate(projectId, reportDate)
             doneActivitiesRefresh.isRefreshing = false
 
         }
@@ -78,13 +78,43 @@ class DoneActivitiesActivity : AppCompatActivity() {
         //refreshing
         refreshBtnImv.setOnClickListener {
 
-            getDailyActivityList(projectId, reportDate)
+            getDailyActivityListUpdate(projectId, reportDate)
 
         }
 
 
         //back clicked
         doneActivitesBackIcon.setOnClickListener { this@DoneActivitiesActivity.finish() }
+    }
+
+    private fun getDailyActivityListUpdate(projectId: String, reportDate: String = "2020-02-02") {
+        var service: IUserApi = IWebApi.Factory.create()
+        var call = service.getProjectDailyActivityList(getToken(), projectId, reportDate)
+
+        call.enqueue(object : retrofit2.Callback<DailyActivityListResponse> {
+            override fun onFailure(call: Call<DailyActivityListResponse>?, t: Throwable?) {
+                //progressDialog.dismiss()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<DailyActivityListResponse>?, response: Response<DailyActivityListResponse>?) {
+
+                //progressDialog.dismiss()
+
+                Toast.makeText(this@DoneActivitiesActivity , "بروزرسانی انجام شد",Toast.LENGTH_LONG).show()
+
+                var dailyActivityListResponse = response!!.body()
+
+                var dailyActivityList = ArrayList<DailyActivityInformationData>()
+                dailyActivityList = dailyActivityListResponse!!.responseObject
+
+                dailyActivityRecyclerView.layoutManager = LinearLayoutManager(this@DoneActivitiesActivity)
+                dailyActivityRecyclerView.adapter = DailyActivityAdapter(this@DoneActivitiesActivity, dailyActivityList, projectId)
+
+            }
+
+        })
+
     }
 
     private fun getDailyActivityList(projectId: String, reportDate: String = "2020-02-02") {
@@ -114,7 +144,6 @@ class DoneActivitiesActivity : AppCompatActivity() {
         })
 
     }
-
 
     private fun setupProgress() {
         progressDialog = ProgressDialog(this@DoneActivitiesActivity)

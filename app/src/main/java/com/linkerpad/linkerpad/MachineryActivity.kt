@@ -4,10 +4,12 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.linkerpad.linkerpad.Adapters.MachineryAdapter
 import com.linkerpad.linkerpad.ApiData.output.MachineryListResponse
 import com.linkerpad.linkerpad.Business.IUserApi
@@ -48,6 +50,22 @@ class MachineryActivity : AppCompatActivity() {
         machineryBackIcon.setOnClickListener {
             this@MachineryActivity.finish()
         }
+
+        //refreshing
+        machineryRefresh.setColorSchemeColors(Color.parseColor("#1E88E5"))
+        machineryRefresh.setOnRefreshListener {
+
+            getMachineryListUpdate(projectId, reportDate)
+            machineryRefresh.isRefreshing = false
+
+        }
+
+        //refreshing
+        refreshBtnImv.setOnClickListener {
+
+            getMachineryListUpdate(projectId, reportDate)
+
+        }
     }
 
 
@@ -64,6 +82,35 @@ class MachineryActivity : AppCompatActivity() {
             override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
 
                // progressDialog.dismiss()
+
+                var machineryListResponse = response!!.body()
+
+                var machineryList = ArrayList<MachineryInformationData>()
+                machineryList = machineryListResponse!!.responseObject
+
+                machineryRecyclerView.layoutManager = LinearLayoutManager(this@MachineryActivity)
+                machineryRecyclerView.adapter = MachineryAdapter(this@MachineryActivity, machineryList, projectId)
+
+            }
+
+        })
+
+    }
+    private fun getMachineryListUpdate(projectId: String, reportDate: String = "2020-02-02") {
+        var service: IUserApi = IWebApi.Factory.create()
+        var call = service.getProjectEquipmentList(getToken(), projectId, reportDate)
+
+        call.enqueue(object : retrofit2.Callback<MachineryListResponse> {
+            override fun onFailure(call: Call<MachineryListResponse>?, t: Throwable?) {
+                //progressDialog.dismiss()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
+
+                Toast.makeText(this@MachineryActivity , "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+
+                // progressDialog.dismiss()
 
                 var machineryListResponse = response!!.body()
 

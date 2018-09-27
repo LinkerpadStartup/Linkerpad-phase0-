@@ -227,7 +227,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
                 //progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditDoneActivitiesActivity, "فعالیت با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditDoneActivitiesActivity, "آیتم ویرایش گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)

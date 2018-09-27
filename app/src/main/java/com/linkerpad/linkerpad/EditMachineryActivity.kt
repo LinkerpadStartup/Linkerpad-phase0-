@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import com.linkerpad.linkerpad.ApiData.output.GetMachineryInformationResponse
 import com.linkerpad.linkerpad.ApiData.output.MachineryResponse
@@ -38,19 +39,76 @@ class EditMachineryActivity : AppCompatActivity() {
 
 
         //get Equipment
-        setupProgress()
+        // setupProgress()
         getMachineryInformation(equipmentId, projectId)
 
         //delete Equipment
         deleteMachineryTv.setOnClickListener {
-            setupProgress()
-            deleteMachinery(projectId, equipmentId)
+            // setupProgress()
+
+            AlertDialog.Builder(this@EditMachineryActivity, R.style.AlertDialogTheme)
+                    .setMessage("از حذف این مورد مطمئن هستید؟")
+                    .setPositiveButton("بله", { dialog, view ->
+                        dialog.dismiss()
+                        deleteMachinery(projectId, equipmentId)
+                    }).setNegativeButton("خیر", { dialog, view ->
+                        dialog.dismiss()
+                    })
+                    .create()
+                    .show()
+
+
         }
 
         //edit Equipment
         saveMachineryTv.setOnClickListener {
-            setupProgress()
+            // setupProgress()
             editMachinery(projectId, equipmentId)
+        }
+
+
+        countActiveMachineryEdt.setText("0")
+        machineryEnableUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countActiveMachineryEdt.text.toString()).toInt() + 1
+
+            countActiveMachineryEdt.setText("${count}")
+        }
+
+        machineryEnableDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countActiveMachineryEdt.text.toString()).toInt() + -1
+
+            countActiveMachineryEdt.setText("${count}")
+        }
+
+
+        timeCountMachineryEdt.setText("0.0")
+        machineryTimeUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(timeCountMachineryEdt.text.toString()).toDouble() + 0.5
+
+            var solution = remove3Decimal(count)
+
+            timeCountMachineryEdt.setText("${solution}")
+        }
+
+        machineryTimeDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(timeCountMachineryEdt.text.toString()).toDouble() - 0.5
+
+            var solution = remove3Decimal(count)
+
+            timeCountMachineryEdt.setText("${solution}")
+        }
+
+        countDeactiveMachineryEdt.setText("0")
+        machineryDisableUpArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countDeactiveMachineryEdt.text.toString()).toInt() + 1
+
+            countDeactiveMachineryEdt.setText("${count}")
+        }
+
+        machineryDisableDownArrow.setOnClickListener {
+            var count = changePersianIntToEnglishInt(countDeactiveMachineryEdt.text.toString()).toInt() + -1
+
+            countDeactiveMachineryEdt.setText("${count}")
         }
 
         //back clicked
@@ -61,6 +119,29 @@ class EditMachineryActivity : AppCompatActivity() {
             startActivity(intent)
             this@EditMachineryActivity.finish()
         }
+    }
+
+
+    private fun changePersianIntToEnglishInt(number: String): String {
+        return number.replace("۰", "0")
+                .replace("۱", "1")
+                .replace("۲", "2")
+                .replace("۳", "3")
+                .replace("۴", "4")
+                .replace("۵", "5")
+                .replace("۶", "6")
+                .replace("۷", "7")
+                .replace("۸", "8")
+                .replace("۹", "9")
+    }
+
+    private fun remove3Decimal(number: Double): Double {
+        val number: Double = number
+        val number3digits: Double = Math.round(number * 1000.0) / 1000.0
+        val number2digits: Double = Math.round(number3digits * 100.0) / 100.0
+        val solution: Double = Math.round(number2digits * 10.0) / 10.0
+
+        return solution
     }
 
     private fun editMachinery(projectId: String, equipmentId: String) {
@@ -81,15 +162,15 @@ class EditMachineryActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MachineryResponse> {
             override fun onFailure(call: Call<MachineryResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MachineryResponse>?, response: Response<MachineryResponse>?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMachineryActivity, "تجهیزات با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMachineryActivity, "آیتم ویرایش گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -116,12 +197,12 @@ class EditMachineryActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<GetMachineryInformationResponse> {
             override fun onFailure(call: Call<GetMachineryInformationResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetMachineryInformationResponse>?, response: Response<GetMachineryInformationResponse>?) {
-                progressDialog.dismiss()
+                //   progressDialog.dismiss()
 
                 var machineryInformationData = MachineryViewModel.getMachineryInformation(MachineryInformationOutput(response!!.body()!!.status, response.body()!!.status, response!!.body()!!.responseObject))
 
@@ -148,15 +229,15 @@ class EditMachineryActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MachineryResponse> {
             override fun onFailure(call: Call<MachineryResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MachineryResponse>?, response: Response<MachineryResponse>?) {
-                progressDialog.dismiss()
+                //   progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMachineryActivity, "تجهیزات با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMachineryActivity, "آیتم حذف گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)

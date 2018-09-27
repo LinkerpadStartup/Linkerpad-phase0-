@@ -44,6 +44,16 @@ class MachineryAdapter(var context: Context, var data: ArrayList<MachineryInform
             itemView.deactiveMachineryTv.text = itemModel.numberOfDeactiveEquipment.toString()
             itemView.workHoursTv.text = itemModel.workHours.toString()
 
+
+            var description = ""
+            if (itemModel.description.length > 37) {
+                description = itemModel.description.toString().substring(0, 37) + "..."
+            }else{
+                description = itemModel.description
+            }
+
+            itemView.descriptionMachineryTv.text = description
+
             itemView.machineryItemLL.setOnClickListener {
                 //item clicked
                 var intent = Intent(context, EditMachineryActivity::class.java)
