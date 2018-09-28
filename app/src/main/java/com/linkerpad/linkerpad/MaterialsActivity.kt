@@ -4,10 +4,12 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.linkerpad.linkerpad.Adapters.MaterialAdapter
 import com.linkerpad.linkerpad.ApiData.output.MaterialListResponse
 import com.linkerpad.linkerpad.Business.IUserApi
@@ -44,6 +46,21 @@ class MaterialsActivity : AppCompatActivity() {
             this@MaterialsActivity.finish()
         }
 
+        //refreshing
+        materialRefresh.setColorSchemeColors(Color.parseColor("#1E88E5"))
+        materialRefresh.setOnRefreshListener {
+
+            getMaterialListUpdate(projectId, reportDate)
+            materialRefresh.isRefreshing = false
+
+        }
+
+        //refreshing
+        refreshBtnImv.setOnClickListener {
+
+            getMaterialListUpdate(projectId, reportDate)
+
+        }
 
         //back clicked
         materialsBackIcon.setOnClickListener { this@MaterialsActivity.finish() }
@@ -62,6 +79,36 @@ class MaterialsActivity : AppCompatActivity() {
             override fun onResponse(call: Call<MaterialListResponse>?, response: Response<MaterialListResponse>?) {
 
                // progressDialog.dismiss()
+
+                var materialListResponse = response!!.body()
+
+                var materialList = ArrayList<MaterialInformationData>()
+                materialList = materialListResponse!!.responseObject
+
+                materialRecyclerView.layoutManager = LinearLayoutManager(this@MaterialsActivity)
+                materialRecyclerView.adapter = MaterialAdapter(this@MaterialsActivity, materialList, projectId)
+
+            }
+
+        })
+
+    }
+
+    private fun getMaterialListUpdate(projectId: String, reportDate: String = "2020-02-02") {
+        var service: IUserApi = IWebApi.Factory.create()
+        var call = service.getProjectMaterialList(getToken(), projectId, reportDate)
+
+        call.enqueue(object : retrofit2.Callback<MaterialListResponse> {
+            override fun onFailure(call: Call<MaterialListResponse>?, t: Throwable?) {
+                //  progressDialog.dismiss()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<MaterialListResponse>?, response: Response<MaterialListResponse>?) {
+
+                // progressDialog.dismiss()
+
+                Toast.makeText(this@MaterialsActivity , "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
 
                 var materialListResponse = response!!.body()
 

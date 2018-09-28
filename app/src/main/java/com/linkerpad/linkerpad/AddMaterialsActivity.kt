@@ -30,8 +30,32 @@ class AddMaterialsActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
 
         saveMaterialTv.setOnClickListener {
-            setupProgress()
+         //   setupProgress()
             createMaterial(projectId, reportDate)
+        }
+
+
+        countMaterialsEdt.setText("0.0")
+        countMaterialsUpArrow.setOnClickListener {
+
+            var count = changePersianIntToEnglishInt(countMaterialsEdt.text.toString()).toDouble() + 0.1
+
+            var solution = remove3Decimal(count)
+
+            countMaterialsEdt.setText("${solution}")
+
+
+        }
+
+        countMaterialsDownArrow.setOnClickListener {
+
+            var count = changePersianIntToEnglishInt(countMaterialsEdt.text.toString()).toDouble() - 0.1
+
+            var solution = remove3Decimal(count)
+
+            countMaterialsEdt.setText("${solution}")
+
+
         }
 
         //back clicked
@@ -81,7 +105,7 @@ class AddMaterialsActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MaterialResponse> {
             override fun onFailure(call: Call<MaterialResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+              //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
 
             }
@@ -90,7 +114,8 @@ class AddMaterialsActivity : AppCompatActivity() {
 
                 if (response!!.code() == 200) {
 
-                    Toast.makeText(this@AddMaterialsActivity, "مواد و مصالح با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
+                  //  Toast.makeText(this@AddMaterialsActivity, "مواد و مصالح با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddMaterialsActivity, "آیتم ثبت گردید", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)
@@ -108,6 +133,28 @@ class AddMaterialsActivity : AppCompatActivity() {
 
     }
 
+
+    private fun changePersianIntToEnglishInt(number: String): String {
+        return number.replace("۰", "0")
+                .replace("۱", "1")
+                .replace("۲", "2")
+                .replace("۳", "3")
+                .replace("۴", "4")
+                .replace("۵", "5")
+                .replace("۶", "6")
+                .replace("۷", "7")
+                .replace("۸", "8")
+                .replace("۹", "9")
+    }
+
+    private fun remove3Decimal(number: Double): Double {
+        val number: Double = number
+        val number3digits: Double = Math.round(number * 1000.0) / 1000.0
+        val number2digits: Double = Math.round(number3digits * 100.0) / 100.0
+        val solution: Double = Math.round(number2digits * 10.0) / 10.0
+
+        return solution
+    }
     override fun onBackPressed() {
         super.onBackPressed()
         var intent = Intent(this@AddMaterialsActivity, MaterialsActivity::class.java)

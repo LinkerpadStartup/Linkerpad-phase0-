@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import com.linkerpad.linkerpad.ApiData.output.GetMaterialInformationResponse
 import com.linkerpad.linkerpad.ApiData.output.MaterialResponse
@@ -36,20 +37,55 @@ class EditMaterialsActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         reportDate = getIntent().getStringExtra("reportDate")
 
-        setupProgress()
+        //   setupProgress()
         getMaterialInformation(projectId, materialId)
 
         //save materials edit
         saveMaterialTv.setOnClickListener {
-            setupProgress()
+            // setupProgress()
             editMaterial(projectId, materialId)
 
         }
 
         deleteMaterialTv.setOnClickListener {
-            setupProgress()
-            deleteMaterial(projectId, materialId)
+            // setupProgress()
+
+            AlertDialog.Builder(this@EditMaterialsActivity, R.style.AlertDialogTheme)
+                    .setMessage("از حذف این مورد مطمئن هستید؟")
+                    .setPositiveButton("بله", { dialog, view ->
+                        dialog.dismiss()
+                        deleteMaterial(projectId, materialId)
+                    }).setNegativeButton("خیر", { dialog, view ->
+                        dialog.dismiss()
+                    })
+                    .create()
+                    .show()
+
         }
+
+        countMaterialsEdt.setText("0.0")
+        countMaterialsUpArrow.setOnClickListener {
+
+            var count = changePersianIntToEnglishInt(countMaterialsEdt.text.toString()).toDouble() + 0.1
+
+            var solution = remove3Decimal(count)
+
+            countMaterialsEdt.setText("${solution}")
+
+
+        }
+
+        countMaterialsDownArrow.setOnClickListener {
+
+            var count = changePersianIntToEnglishInt(countMaterialsEdt.text.toString()).toDouble() - 0.1
+
+            var solution = remove3Decimal(count)
+
+            countMaterialsEdt.setText("${solution}")
+
+
+        }
+
 
         //back clicked
         editMaterialsBackIcon.setOnClickListener {
@@ -61,6 +97,28 @@ class EditMaterialsActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun changePersianIntToEnglishInt(number: String): String {
+        return number.replace("۰", "0")
+                .replace("۱", "1")
+                .replace("۲", "2")
+                .replace("۳", "3")
+                .replace("۴", "4")
+                .replace("۵", "5")
+                .replace("۶", "6")
+                .replace("۷", "7")
+                .replace("۸", "8")
+                .replace("۹", "9")
+    }
+
+    private fun remove3Decimal(number: Double): Double {
+        val number: Double = number
+        val number3digits: Double = Math.round(number * 1000.0) / 1000.0
+        val number2digits: Double = Math.round(number3digits * 100.0) / 100.0
+        val solution: Double = Math.round(number2digits * 10.0) / 10.0
+
+        return solution
+    }
 
     private fun editMaterial(projectId: String, materialId: String) {
 
@@ -87,7 +145,7 @@ class EditMaterialsActivity : AppCompatActivity() {
                 progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMaterialsActivity, "مواد و مصالح با موفقیت ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMaterialsActivity, "آیتم ویرایش گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -153,7 +211,8 @@ class EditMaterialsActivity : AppCompatActivity() {
                 progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMaterialsActivity, "مواد و مصالح با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this@EditMaterialsActivity, "مواد و مصالح با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMaterialsActivity, "آیتم حذف گردید", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
