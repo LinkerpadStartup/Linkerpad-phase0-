@@ -83,6 +83,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="right"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="4dp"
             android:fontFamily="@font/iransans_web_light"

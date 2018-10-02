@@ -19,6 +19,7 @@
         android:fontFamily="@font/iransans_web_medium"
         android:padding="8dp"
         android:gravity="right"
+        android:layout_gravity="right"
         android:text="تاویر کردن"
         android:textColor="@color/gray900"
         android:textSize="16sp"  />

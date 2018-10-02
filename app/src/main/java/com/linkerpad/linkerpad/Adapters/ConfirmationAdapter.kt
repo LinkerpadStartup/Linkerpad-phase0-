@@ -3,12 +3,15 @@ package com.linkerpad.linkerpad.Adapters
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.*
 import com.linkerpad.linkerpad.ApiData.output.ConfirmationResponse
 import com.linkerpad.linkerpad.Business.IUserApi
@@ -26,9 +29,11 @@ import retrofit2.Response
  * Created by alihajiloo on 8/25/18.
  */
 
-class ConfirmationAdapter(var context: Context, var data: ArrayList<ConfirmationInformationData>, var projectId: String, var token: String,var reportDate:String) : RecyclerView.Adapter<ConfirmationAdapter.ViewHolder>() {
+class ConfirmationAdapter(var context: Context, var data: ArrayList<ConfirmationInformationData>, var projectId: String, var token: String, var reportDate: String) : RecyclerView.Adapter<ConfirmationAdapter.ViewHolder>() {
 
     lateinit var progressDialog: ProgressDialog
+
+    var showcaseView: ShowcaseView? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.confirmation_item, viewGroup, false)
@@ -51,7 +56,7 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
             itemView.confirmationNameTv.text = itemModel.firstName + " " + itemModel.lastName
             itemView.confirmationRoleTv.text = if (itemModel.userRole.toInt() == 0) "مسئول" else if (itemModel.userRole.toInt() == 1) "مدیر" else if (itemModel.userRole.toInt() == 2) "سرپرست" else "کارشناس"
 
-            itemView.confirmationCheckBox.isChecked = if (itemModel.confirmationStatus == true ) true else false
+            itemView.confirmationCheckBox.isChecked = if (itemModel.confirmationStatus == true) true else false
 
             itemView.confirmationCheckBox.setOnCheckedChangeListener { compoundButton, b ->
 
@@ -61,11 +66,14 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
                     //setupProgress()
                     createConfirmation()
                 } else {
-                   // setupProgress()
+                    // setupProgress()
                     deleteConfirmation()
                 }
+
+
             }
         }
+
 
         private fun deleteConfirmation() {
 
@@ -77,19 +85,19 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
 
             call.enqueue(object : retrofit2.Callback<ConfirmationResponse> {
                 override fun onFailure(call: Call<ConfirmationResponse>?, t: Throwable?) {
-                  //  progressDialog.dismiss()
+                    //  progressDialog.dismiss()
                     Toast.makeText(context, "خطا, اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
 
                 }
 
                 override fun onResponse(call: Call<ConfirmationResponse>?, response: Response<ConfirmationResponse>?) {
-                  //  progressDialog.dismiss()
+                    //  progressDialog.dismiss()
 
                     if (response!!.code() == 200) {
-                       // Toast.makeText(context, "با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                        // Toast.makeText(context, "با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
 
                     } else if (response.code() == 409) {
-                      //  Toast.makeText(context, "قبلا حذف گردیده است!", Toast.LENGTH_LONG).show()
+                        //  Toast.makeText(context, "قبلا حذف گردیده است!", Toast.LENGTH_LONG).show()
 
                     } else {
                         Toast.makeText(context, "خطا، مشکلی هنگام پردازش رخ داده!", Toast.LENGTH_LONG).show()
@@ -112,18 +120,18 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
 
             call.enqueue(object : retrofit2.Callback<ConfirmationResponse> {
                 override fun onFailure(call: Call<ConfirmationResponse>?, t: Throwable?) {
-                //    progressDialog.dismiss()
+                    //    progressDialog.dismiss()
                     Toast.makeText(context, "خطا, اتصال اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show()
 
                 }
 
                 override fun onResponse(call: Call<ConfirmationResponse>?, response: Response<ConfirmationResponse>?) {
 
-                  //  progressDialog.dismiss()
+                    //  progressDialog.dismiss()
 
                     if (response!!.code() == 200) {
 
-                       // Toast.makeText(context, "تایید شد!", Toast.LENGTH_LONG).show()
+                        // Toast.makeText(context, "تایید شد!", Toast.LENGTH_LONG).show()
 
 
                     } else if (response.code() == 409) {

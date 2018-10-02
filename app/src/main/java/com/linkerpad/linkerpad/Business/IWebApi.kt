@@ -21,7 +21,7 @@ class IWebApi {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://31.184.132.134/")
+                    .baseUrl("http://89.42.211.248/")
                     .build()
 
             return retrofit.create(IUserApi::class.java);

@@ -5,11 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextPaint
 import android.widget.Toast
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.MaterialAdapter
 import com.linkerpad.linkerpad.ApiData.output.MaterialListResponse
 import com.linkerpad.linkerpad.Business.IUserApi
@@ -34,14 +39,14 @@ class MaterialsActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
 
-       // setupProgress()
-        getMaterialList(projectId,reportDate)
+        // setupProgress()
+        getMaterialList(projectId, reportDate)
 
         //Add Materials
         materialsActivityFab.setOnClickListener {
             var intent = Intent(this@MaterialsActivity, AddMaterialsActivity::class.java)
             intent.putExtra("projectId", projectId)
-            intent.putExtra("reportDate" , reportDate)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@MaterialsActivity.finish()
         }
@@ -62,6 +67,58 @@ class MaterialsActivity : AppCompatActivity() {
 
         }
 
+
+        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        textPaint.setColor(Color.WHITE)
+        textPaint.setTextSize(40f)
+        textPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum).ttf"))
+
+        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        titleTextPaint.setColor(Color.parseColor("#1E88E5"))
+        titleTextPaint.setTextSize(50f)
+        titleTextPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
+
+
+        var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
+        if (sharedPreferences.getBoolean("guide6", true)) {
+
+            //showCase font
+
+
+            /*    val target = ViewTarget(R.id.addProjectFab, activity)
+                showcaseView = ShowcaseView.Builder(this.activity)
+                        .setTarget(target)
+                        .withMaterialShowcase()
+                        .setContentTitlePaint(textPaint)
+                        .setContentTextPaint(textPaint)
+                        .setContentText("برای شروع، پروژه جدیدی را اضافه و مشخصات آن را وارد نمایید.")
+                        .setStyle(R.style.CustomShowcaseTheme3)
+                        .build()
+
+                showcaseView!!.setButtonText("بعدی")*/
+
+            var viewTarget: ViewTarget = ViewTarget(R.id.materialsActivityFab, this)
+
+            ShowcaseView.Builder(this)
+                    .setTarget(viewTarget)
+                    .withMaterialShowcase()
+                    .setStyle(R.style.CustomShowcaseTheme3)
+                    .setContentTextPaint(textPaint)
+                    .setContentTitlePaint(titleTextPaint)
+                    .setContentTitle("ثبت کار جدید")
+                    .setContentText("برای ثبت کارهای انجام گرفته، در اینجا مشخصات کار را وارد نمایید. " +
+                            "شما همه موارد ایجاد شده توسط تیم پروژه را در این صفحه مشاهده میکنید اما تنها مجاز به حذف و یا ویرایش موارد خودتان هستید. " +
+                            "(مسئول و مدیر مجاز به حذف و یا ویرایش تمامی موارد می باشند.)")
+                    .hideOnTouchOutside()
+                    .build()
+
+            var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+            sharedPreferencesEditor.putBoolean("guide6", true)
+            sharedPreferencesEditor.apply()
+            sharedPreferencesEditor.commit()
+
+        }
+
         //back clicked
         materialsBackIcon.setOnClickListener { this@MaterialsActivity.finish() }
     }
@@ -72,13 +129,13 @@ class MaterialsActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MaterialListResponse> {
             override fun onFailure(call: Call<MaterialListResponse>?, t: Throwable?) {
-              //  progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MaterialListResponse>?, response: Response<MaterialListResponse>?) {
 
-               // progressDialog.dismiss()
+                // progressDialog.dismiss()
 
                 var materialListResponse = response!!.body()
 
@@ -108,7 +165,7 @@ class MaterialsActivity : AppCompatActivity() {
 
                 // progressDialog.dismiss()
 
-                Toast.makeText(this@MaterialsActivity , "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MaterialsActivity, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
 
                 var materialListResponse = response!!.body()
 

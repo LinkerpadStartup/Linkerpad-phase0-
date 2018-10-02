@@ -43,7 +43,17 @@ class EditMaterialsActivity : AppCompatActivity() {
         //save materials edit
         saveMaterialTv.setOnClickListener {
             // setupProgress()
-            editMaterial(projectId, materialId)
+
+            view ->
+            //   setupProgress()
+
+            if (TitleMaterialEdt.text.toString() != "" && countMaterialsEdt.text.toString() != "" && unitMaterialEdt.text.toString() != "") {
+                // setupProgress()
+                editMaterial(projectId, materialId)
+            } else {
+                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+            }
+
 
         }
 
@@ -137,12 +147,12 @@ class EditMaterialsActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MaterialResponse> {
             override fun onFailure(call: Call<MaterialResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MaterialResponse>?, response: Response<MaterialResponse>?) {
-                progressDialog.dismiss()
+                //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     Toast.makeText(this@EditMaterialsActivity, "آیتم ویرایش گردید", Toast.LENGTH_LONG).show()
@@ -172,12 +182,12 @@ class EditMaterialsActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<GetMaterialInformationResponse> {
             override fun onFailure(call: Call<GetMaterialInformationResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetMaterialInformationResponse>?, response: Response<GetMaterialInformationResponse>?) {
-                progressDialog.dismiss()
+//                progressDialog.dismiss()
 
                 var maaterialInformationData = MaterialViewModel.getMaterialInformation(MaterialInformationOutput(response!!.body()!!.status, response.body()!!.status, response!!.body()!!.responseObject))
 
@@ -203,12 +213,12 @@ class EditMaterialsActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<MaterialResponse> {
             override fun onFailure(call: Call<MaterialResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MaterialResponse>?, response: Response<MaterialResponse>?) {
-                progressDialog.dismiss()
+                // progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     //Toast.makeText(this@EditMaterialsActivity, "مواد و مصالح با موفقیت حذف گردید", Toast.LENGTH_LONG).show()

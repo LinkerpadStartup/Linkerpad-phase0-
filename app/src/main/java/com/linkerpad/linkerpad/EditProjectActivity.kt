@@ -6,8 +6,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -15,9 +14,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
+import android.text.TextPaint
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.ApiData.output.EditProjectResponse
 import com.linkerpad.linkerpad.ApiData.output.ProjectInformationResponse
 import com.linkerpad.linkerpad.Business.IUserApi

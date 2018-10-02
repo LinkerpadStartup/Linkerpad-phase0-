@@ -5,11 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextPaint
 import android.widget.Toast
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.MachineryAdapter
 import com.linkerpad.linkerpad.ApiData.output.MachineryListResponse
 import com.linkerpad.linkerpad.Business.IUserApi
@@ -34,14 +39,14 @@ class MachineryActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
 
-      //  setupProgress()
-        getMachineryList(projectId,reportDate)
+        //  setupProgress()
+        getMachineryList(projectId, reportDate)
 
 
         machineryActivityFab.setOnClickListener {
             var intent = Intent(this@MachineryActivity, AddMachineryActivity::class.java)
             intent.putExtra("projectId", projectId)
-            intent.putExtra("reportDate" , reportDate)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
             this@MachineryActivity.finish()
         }
@@ -59,6 +64,58 @@ class MachineryActivity : AppCompatActivity() {
             machineryRefresh.isRefreshing = false
 
         }
+
+        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        textPaint.setColor(Color.WHITE)
+        textPaint.setTextSize(40f)
+        textPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum).ttf"))
+
+        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        titleTextPaint.setColor(Color.parseColor("#1E88E5"))
+        titleTextPaint.setTextSize(50f)
+        titleTextPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
+
+
+        var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
+        if (sharedPreferences.getBoolean("guide5", true)) {
+
+            //showCase font
+
+
+            /*    val target = ViewTarget(R.id.addProjectFab, activity)
+                showcaseView = ShowcaseView.Builder(this.activity)
+                        .setTarget(target)
+                        .withMaterialShowcase()
+                        .setContentTitlePaint(textPaint)
+                        .setContentTextPaint(textPaint)
+                        .setContentText("برای شروع، پروژه جدیدی را اضافه و مشخصات آن را وارد نمایید.")
+                        .setStyle(R.style.CustomShowcaseTheme3)
+                        .build()
+
+                showcaseView!!.setButtonText("بعدی")*/
+
+            var viewTarget: ViewTarget = ViewTarget(R.id.machineryActivityFab, this)
+
+            ShowcaseView.Builder(this)
+                    .setTarget(viewTarget)
+                    .withMaterialShowcase()
+                    .setStyle(R.style.CustomShowcaseTheme3)
+                    .setContentTextPaint(textPaint)
+                    .setContentTitlePaint(titleTextPaint)
+                    .setContentTitle("ثبت کار جدید")
+                    .setContentText("برای ثبت کارهای انجام گرفته، در اینجا مشخصات کار را وارد نمایید. " +
+                            "شما همه موارد ایجاد شده توسط تیم پروژه را در این صفحه مشاهده میکنید اما تنها مجاز به حذف و یا ویرایش موارد خودتان هستید. " +
+                            "(مسئول و مدیر مجاز به حذف و یا ویرایش تمامی موارد می باشند.)")
+                    .hideOnTouchOutside()
+                    .build()
+
+            var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+            sharedPreferencesEditor.putBoolean("guide5", true)
+            sharedPreferencesEditor.apply()
+            sharedPreferencesEditor.commit()
+
+        }
+
 
         //refreshing
         refreshBtnImv.setOnClickListener {
@@ -81,7 +138,7 @@ class MachineryActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
 
-               // progressDialog.dismiss()
+                // progressDialog.dismiss()
 
                 var machineryListResponse = response!!.body()
 
@@ -96,6 +153,7 @@ class MachineryActivity : AppCompatActivity() {
         })
 
     }
+
     private fun getMachineryListUpdate(projectId: String, reportDate: String = "2020-02-02") {
         var service: IUserApi = IWebApi.Factory.create()
         var call = service.getProjectEquipmentList(getToken(), projectId, reportDate)
@@ -108,7 +166,7 @@ class MachineryActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
 
-                Toast.makeText(this@MachineryActivity , "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MachineryActivity, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
 
                 // progressDialog.dismiss()
 

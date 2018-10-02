@@ -14,13 +14,19 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.os.Environment
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
+import android.text.TextPaint
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.ApiData.output.CreateProjectResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
@@ -29,6 +35,7 @@ import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.multidate.MultiDatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import kotlinx.android.synthetic.main.choose_imgae_layout.view.*
+import kotlinx.android.synthetic.main.projects_fragmant_layout.*
 import retrofit2.Call
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
@@ -54,9 +61,15 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     private val DATEPICKERSART = "DatePickerDialogStart"
     private val DATEPICKEREND = "DatePickerDialogEnd"
 
+    var showcaseView: ShowcaseView? = null
+
+    lateinit var createProjectImv: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_project_layout)
+
+        createProjectImv = findViewById(R.id.createProjectTv)
 
         startDateCalender.setOnClickListener {
             /*  var intent = Intent(this@AddProjectActivity, ChooseDateActivity::class.java)
@@ -141,6 +154,51 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             }
         }
 
+
+        /**Show Case start**/
+
+        //showCase font
+        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        textPaint.setColor(Color.WHITE)
+        textPaint.setTextSize(40f)
+        textPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum).ttf"))
+
+        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        titleTextPaint.setColor(Color.parseColor("#1E88E5"))
+        titleTextPaint.setTextSize(50f)
+        titleTextPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
+
+
+        var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
+        if (sharedPreferences.getBoolean("guide2", true)) {
+
+
+            showcaseView = ShowcaseView.Builder(this)
+                    .setTarget(ViewTarget(R.id.createProjectTv, this))
+                    .withMaterialShowcase()
+                    .setStyle(R.style.CustomShowcaseTheme3)
+                    .setContentTextPaint(textPaint)
+                    .setContentTitlePaint(titleTextPaint)
+                    .setContentTitle("ثبت اطلاعات")
+                    .setContentText("برای ثبت اطلاعات قبل از خروج، آن را ذخیره نمایید.")
+                    .hideOnTouchOutside()
+                    .build()
+
+            showcaseView!!.setButtonText("باشه")
+
+
+            showcaseView!!.overrideButtonClick {
+                showcaseView!!.hide()
+
+            }
+
+
+            var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+            sharedPreferencesEditor.putBoolean("guide2", true)
+            sharedPreferencesEditor.apply()
+            sharedPreferencesEditor.commit()
+        }
+
         //back click
         addProjectBackIcon.setOnClickListener {
             var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
@@ -176,12 +234,12 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
 
         call.enqueue(object : retrofit2.Callback<CreateProjectResponse> {
             override fun onFailure(call: Call<CreateProjectResponse>?, t: Throwable?) {
-               // progressDialog.dismiss()
+                // progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<CreateProjectResponse>?, response: Response<CreateProjectResponse>?) {
-               // progressDialog.dismiss()
+                // progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     Toast.makeText(this@AddProjectActivity, "پروژه با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()

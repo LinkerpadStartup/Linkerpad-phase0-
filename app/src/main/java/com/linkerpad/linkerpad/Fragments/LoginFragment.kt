@@ -198,7 +198,6 @@ class LoginFragment : Fragment(), Validator.ValidationListener {
                         sharedPreferencesEditor.putString("firstName", loginOutputData.firstName)
                         sharedPreferencesEditor.putString("lastName", loginOutputData.lastName)
                         sharedPreferencesEditor.putString("email", loginOutputData.emailAddress)
-                        sharedPreferencesEditor.putBoolean("guide", false)
                         sharedPreferencesEditor.apply()
                         sharedPreferencesEditor.commit()
 

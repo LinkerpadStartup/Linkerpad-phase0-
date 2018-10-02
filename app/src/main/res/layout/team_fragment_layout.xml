@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.linkerpad.linkerpad.TeamActivity">
+
+    <android.support.v4.widget.Space
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:id="@+id/showCaseForMoreOption"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"/>
 <android.support.v4.widget.SwipeRefreshLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

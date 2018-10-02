@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -17,12 +18,15 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextPaint
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.github.amlcurran.showcaseview.ShowcaseView
+import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.MembersListAdapter
 import com.linkerpad.linkerpad.AddMemberActivity
 import com.linkerpad.linkerpad.ApiData.output.MemberListResponse
@@ -41,6 +45,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class TeamFragment : Fragment() {
     lateinit var progressDialog: ProgressDialog
+
+    var showcaseView: ShowcaseView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.team_fragment_layout, container, false)
@@ -73,7 +79,7 @@ class TeamFragment : Fragment() {
         } else {
 
         }
-       // setupProgress()
+        // setupProgress()
         var projetcId = activity!!.intent.getStringExtra("id")
         getMemberList(projetcId)
 
@@ -95,7 +101,7 @@ class TeamFragment : Fragment() {
 
             }
 
-            view.swipeTeam.isRefreshing=false
+            view.swipeTeam.isRefreshing = false
             getMemberList(projetcId)
 
         }
@@ -126,19 +132,88 @@ class TeamFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        textPaint.setColor(Color.WHITE)
+        textPaint.setTextSize(40f)
+        textPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
+
+        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        titleTextPaint.setColor(Color.parseColor("#1E88E5"))
+        titleTextPaint.setTextSize(50f)
+        titleTextPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
+
+
+        var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
+        if (sharedPreferences.getBoolean("guide9", true)) {
+
+            //showCase font
+
+
+            /*    val target = ViewTarget(R.id.addProjectFab, activity)
+                showcaseView = ShowcaseView.Builder(this.activity)
+                        .setTarget(target)
+                        .withMaterialShowcase()
+                        .setContentTitlePaint(textPaint)
+                        .setContentTextPaint(textPaint)
+                        .setContentText("برای شروع، پروژه جدیدی را اضافه و مشخصات آن را وارد نمایید.")
+                        .setStyle(R.style.CustomShowcaseTheme3)
+                        .build()
+
+                showcaseView!!.setButtonText("بعدی")*/
+
+            showcaseView = ShowcaseView.Builder(this.activity)
+                    .setTarget(ViewTarget(R.id.addMemberToProjectFab, activity))
+                    .withMaterialShowcase()
+                    .setStyle(R.style.CustomShowcaseTheme3)
+                    .setContentTextPaint(textPaint)
+                    .setContentTitlePaint(titleTextPaint)
+                    .setContentTitle("افزودن عضو")
+                    .setContentText("افراد مرتبط با پروژه و سطح دسترسی آنها را تعریف نمایید. (این دسترسی برای مسئول و مدیر مجاز است.)")
+                    .hideOnTouchOutside()
+                    .build()
+
+            showcaseView!!.setButtonText("بعدی")
+
+
+            showcaseView!!.overrideButtonClick {
+                showcaseView!!.hide()
+
+                ShowcaseView.Builder(activity)
+                        .setTarget(ViewTarget(R.id.showCaseForMoreOption, activity))
+                        .withMaterialShowcase()
+                        .setStyle(R.style.CustomShowcaseTheme3)
+                        .setContentTextPaint(textPaint)
+                        .setContentTitlePaint(titleTextPaint)
+                        .setContentTitle("اطلاعات بیشتر")
+                        .setContentText("جهت نمایش اطلاعات بیشتر و امکان ویرایش و یا حذف عضو (قابلیت ویرایش و یا حذف برای مسئول و مدیر مجاز است.)")
+                        .hideOnTouchOutside()
+                        .build()
+            }
+
+
+            var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+            sharedPreferencesEditor.putBoolean("guide9", true)
+            sharedPreferencesEditor.apply()
+            sharedPreferencesEditor.commit()
+        }
+    }
+
     private fun getMemberList(projectId: String) {
         var service: IUserApi = IWebApi.Factory.create()
         var call = service.getProjectMemberList(getToken(), projectId)
 
         call.enqueue(object : retrofit2.Callback<MemberListResponse> {
             override fun onFailure(call: Call<MemberListResponse>?, t: Throwable?) {
-              //  progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(this@TeamFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MemberListResponse>?, response: Response<MemberListResponse>?) {
 
-               // progressDialog.dismiss()
+                // progressDialog.dismiss()
 
                 var membersResponse = response!!.body()
 

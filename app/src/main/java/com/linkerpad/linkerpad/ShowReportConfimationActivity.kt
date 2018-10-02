@@ -22,12 +22,12 @@ class ShowReportConfimationActivity : AppCompatActivity() {
 
         // load pdf
         Toast.makeText(this@ShowReportConfimationActivity, "درحال بارگذاری گزارش...", Toast.LENGTH_LONG).show()
-        showConfirmationReportWebView.loadUrl("http://31.184.132.134/v1/report/reportresult?projectId=$projectId&reportdate=${reportDate.replace("/", "-")}")
+        showConfirmationReportWebView.loadUrl("http://89.42.211.248/v1/report/reportresult?projectId=$projectId&reportdate=${reportDate.replace("/", "-")}")
 
 
         // download pdf
         downloadReportConfirmationImv.setOnClickListener {
-            var webpage = Uri.parse("http://31.184.132.134/v1/report/$projectId/${reportDate.replace("/", "-")}")
+            var webpage = Uri.parse("http://89.42.211.248/v1/report/$projectId/${reportDate.replace("/", "-")}")
             var intent = Intent(Intent.ACTION_VIEW, webpage);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_FROM_BACKGROUND)
             startActivity(intent)
@@ -36,7 +36,7 @@ class ShowReportConfimationActivity : AppCompatActivity() {
         shareReportConfirmationImv.setOnClickListener {
             var intent = Intent(android.content.Intent.ACTION_SEND)
             intent.type = "text/plain"
-            intent.putExtra(android.content.Intent.EXTRA_TEXT, "http://31.184.132.134/v1/report/reportresult?projectId=$projectId&reportdate=${reportDate.replace("/", "-")}")
+            intent.putExtra(android.content.Intent.EXTRA_TEXT, "http://89.42.211.248/v1/report/reportresult?projectId=$projectId&reportdate=${reportDate.replace("/", "-")}")
             startActivity(Intent.createChooser(intent, "اشتراک گذاری از طریق..."))
         }
 

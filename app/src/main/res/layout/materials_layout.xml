@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dummy_layout_for_snackbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.linkerpad.linkerpad.MaterialsActivity">
@@ -50,7 +51,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/iransans_web_light"
                         android:gravity="center_vertical"
-                        android:text="مصالح و مواد ورودی"
+                        android:text="مواد و مصالح ورودی"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 

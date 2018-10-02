@@ -29,9 +29,16 @@ class AddMaterialsActivity : AppCompatActivity() {
         var reportDate = getIntent().getStringExtra("reportDate")
         var projectId = intent.getStringExtra("projectId")
 
-        saveMaterialTv.setOnClickListener {
+        saveMaterialTv.setOnClickListener {view->
          //   setupProgress()
-            createMaterial(projectId, reportDate)
+
+            if (TitleMaterialEdt.text.toString() != "" && countMaterialsEdt.text.toString() != "" && unitMaterialEdt.text.toString() != "") {
+                // setupProgress()
+                createMaterial(projectId, reportDate)
+            } else {
+                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+            }
+
         }
 
 
@@ -123,7 +130,7 @@ class AddMaterialsActivity : AppCompatActivity() {
                     this@AddMaterialsActivity.finish()
 
                 } else {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، مشکلی هنگام پردازش رخ داده!", Snackbar.LENGTH_LONG).show()
+                  //  Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، مشکلی هنگام پردازش رخ داده!", Snackbar.LENGTH_LONG).show()
 
                 }
             }

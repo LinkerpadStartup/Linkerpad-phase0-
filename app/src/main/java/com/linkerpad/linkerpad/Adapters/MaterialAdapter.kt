@@ -36,7 +36,17 @@ class MaterialAdapter(var context: Context, var data: ArrayList<MaterialInformat
         fun onBind(itemModel: MaterialInformationData, position: Int) {
 
             itemView.titleMaterialTv.text = itemModel.title
-            itemView.countMaterialTv.text = itemModel.consumedQuantity.toString()
+            itemView.countMaterialTv.text = itemModel.consumedQuantity.toString() +" "+itemModel.consumedQuantityUnit.toString()
+
+
+            var description = ""
+            if (itemModel.description.length > 37) {
+                description = itemModel.description.toString().substring(0, 37) + "..."
+            }else{
+                description = itemModel.description
+            }
+
+            itemView.descriptionMaterialsTv.text = description
 
             itemView.materialsItemLL.setOnClickListener {
                 //item clicked
