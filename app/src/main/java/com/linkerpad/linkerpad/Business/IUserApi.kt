@@ -106,4 +106,20 @@ interface IUserApi {
     @POST("api/confirmation/DeleteConfirmation")
     fun deleteConfirmation(@Header("authorization") authorization: String, @Body deleteConfirmationBody: DeleteConfirmationBody): Call<ConfirmationResponse>
 
+    //Note And Event
+    @POST("api/Note/CreateNote")
+    fun createNote(@Header("authorization") authorization: String, @Body createNoteAndEventBody: CreateNoteAndEventBody): Call<NoteAndEventResponse>
+
+    @GET("api/Note/GetProjectNoteList")
+    fun getProjectNoteList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<NoteAndEventListResponse>
+
+    @GET("api/Note/GetNotes")
+    fun getNotesInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("NoteId") materialId: String): Call<GetNoteAndEventInformationResponse>
+
+    @POST("api/Note/DeleteNote")
+    fun deleteNote(@Header("authorization") authorization: String, @Body deleteNoteAndEventBody: DeleteNoteAndEventBody): Call<NoteAndEventResponse>
+
+    @POST("api/Note/EditNote")
+    fun editNote(@Header("authorization") authorization: String, @Body editNoteAndEventBody: EditNoteAndEventBody): Call<NoteAndEventResponse>
+
 }

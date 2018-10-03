@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/dummy_layout_for_snackbar"
     tools:context="com.linkerpad.linkerpad.AddNoteAndEventActivity">
 
     <ScrollView
@@ -58,7 +59,18 @@
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
-                        <TextView
+                        <ImageView
+                            android:id="@+id/saveNoteAndEventTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:padding="15dp"
+                            android:src="@drawable/ic_check_black_24dp" />
+
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
@@ -70,7 +82,7 @@
                             android:padding="8dp"
                             android:text="ذخیره"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            android:textSize="18sp" />-->
 
                     </LinearLayout>
                 </android.support.v7.widget.Toolbar>

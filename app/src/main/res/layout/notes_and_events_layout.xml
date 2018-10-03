@@ -54,7 +54,7 @@
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 
-                    <ImageView
+                    <!--<ImageView
                         android:id="@+id/copyNotesAndEventsImv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -63,9 +63,9 @@
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:padding="15dp"
-                        app:srcCompat="@drawable/ic_content_copy_white" />
+                        app:srcCompat="@drawable/ic_content_copy_white" />-->
 
-                    <ImageView
+                  <!--  <ImageView
                         android:id="@+id/searchNotesAndEventsImv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -74,7 +74,16 @@
                         android:focusable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:padding="15dp"
-                        app:srcCompat="@drawable/ic_search_white" />
+                        app:srcCompat="@drawable/ic_search_white" />-->
+                    <ImageView
+                        android:id="@+id/refreshBtnImv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="15dp"
+                        android:src="@drawable/ic_autorenew" />
 
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
@@ -82,20 +91,16 @@
         </android.support.design.widget.AppBarLayout>
 
 
-        <include
-            layout="@layout/notes_and_events_item"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/noteAndEventRefresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/notes_and_events_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <include
-            layout="@layout/notes_and_events_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/noteAndEventRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
 
     </LinearLayout>

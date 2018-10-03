@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.linkerpad.linkerpad.TeamActivity">
 
-    <android.support.v4.widget.Space
+    <Space
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:id="@+id/showCaseForMoreOption"

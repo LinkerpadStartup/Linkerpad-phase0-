@@ -70,7 +70,7 @@ class ConfirmationActivity : AppCompatActivity() {
         if (sharedPreferences.getBoolean("guide8", true)) {
 
             showcaseView = ShowcaseView.Builder(this)
-                    .setTarget(ViewTarget(R.id.confirmationTv, this))
+                    .setTarget(ViewTarget(R.id.showCaseForCheckBox, this))
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
                     .setContentTextPaint(textPaint)

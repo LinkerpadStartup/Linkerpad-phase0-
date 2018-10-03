@@ -223,10 +223,11 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
         //Toast.makeText(context, "$todayDate", Toast.LENGTH_LONG).show()
 
+        var projectId = activity!!.intent.getStringExtra("id")
+
         //done activities
         view.doneActivitiesLL.setOnClickListener {
             var intent = Intent(context, DoneActivitiesActivity::class.java)
-            var projectId = activity!!.intent.getStringExtra("id")
             intent.putExtra("projectId", projectId)
             intent.putExtra("reportDate", reportDate)
             startActivity(intent)
@@ -234,7 +235,6 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
         view.machineryLL.setOnClickListener {
             var intent = Intent(context, MachineryActivity::class.java)
-            var projectId = activity!!.intent.getStringExtra("id")
             intent.putExtra("projectId", projectId)
             intent.putExtra("reportDate", reportDate)
             startActivity(intent)
@@ -243,7 +243,6 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
         view.materialsLL.setOnClickListener {
             var intent = Intent(context, MaterialsActivity::class.java)
-            var projectId = activity!!.intent.getStringExtra("id")
             intent.putExtra("projectId", projectId)
             intent.putExtra("reportDate", reportDate)
             startActivity(intent)
@@ -251,12 +250,13 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
         view.notesAndEventsLL.setOnClickListener {
             var intent = Intent(context, NotesAndEventsActivity::class.java)
+            intent.putExtra("projectId", projectId)
+            intent.putExtra("reportDate", reportDate)
             startActivity(intent)
         }
 
         view.confirmationReportTv.setOnClickListener {
             var intent = Intent(context, ConfirmationActivity::class.java)
-            var projectId = activity!!.intent.getStringExtra("id")
             intent.putExtra("projectId", projectId)
             intent.putExtra("reportDate", reportDate)
             startActivity(intent)

@@ -13,13 +13,26 @@
     android:paddingTop="8dp">
 
     <TextView
+        android:id="@+id/titleNoteAndEventTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/iransans_web_medium"
+        android:gravity="right"
         android:padding="8dp"
         android:text="حادثه در کارگاه"
         android:textColor="@color/gray900" />
 
+    <TextView
+        android:id="@+id/descriptionNoteAndEventTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/iransans_web_light"
+        android:gravity="right"
+        android:maxLength="40"
+        android:padding="4dp"
+        android:singleLine="true"
+        android:textColor="@color/gray700" />
 
     <TextView
         android:layout_width="match_parent"
