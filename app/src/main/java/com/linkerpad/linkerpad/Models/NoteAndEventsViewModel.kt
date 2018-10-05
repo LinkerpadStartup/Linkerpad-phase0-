@@ -39,8 +39,8 @@ data class NoteAndEventsViewModel(
             )
         }
 
-        fun setDeleteNoteAndEvent(notelId: String, projectId: String): DeleteNoteAndEventBody {
-            return NoteAndEventInput.setDeleteNoteAndEvent(NoteAndEventInput(notelId, projectId))
+        fun setDeleteNoteAndEvent(noteId: String, projectId: String): DeleteNoteAndEventBody {
+            return NoteAndEventInput.setDeleteNoteAndEvent(NoteAndEventInput(noteId, projectId))
         }
 
         fun setEditNoteAndEvent(materialId: String,

@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dummy_layout_for_snackbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/dummy_layout_for_snackbar"
     tools:context="com.linkerpad.linkerpad.AddNoteAndEventActivity">
 
     <ScrollView
@@ -55,7 +55,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/iransans_web_light"
                             android:gravity="center_vertical"
-                            android:text="افزودن اتفاق، یادداشت"
+                            android:text="افزودن مشکلات،موانع و یادداشت ها "
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -106,14 +106,25 @@
                     android:hint="عنوان"
                     android:inputType="text"
                     android:maxLength="20"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/iransans_web_light"
+                android:padding="4dp"
+                android:text="مثال: مشکلات و موانع"
+                android:textColor="@color/gray600"
+                android:textSize="10sp" />
 
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <EditText
                     android:id="@+id/descriptionNoteAndEventEdt"
@@ -122,10 +133,20 @@
                     android:layout_marginRight="8dp"
                     android:fontFamily="@font/iransans_web_light"
                     android:hint="توضیحات"
-                    android:inputType="text"
                     android:maxLength="400"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:textSize="16sp" />
             </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/iransans_web_light"
+                android:padding="4dp"
+                android:text="مثال: کمبود پیچ و مهره"
+                android:textColor="@color/gray600"
+                android:textSize="10sp" />
         </LinearLayout>
     </ScrollView>
 
