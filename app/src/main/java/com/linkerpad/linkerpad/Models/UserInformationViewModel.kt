@@ -18,11 +18,12 @@ data class UserInformationViewModel(
         var expirationDate: String,
         var firstName: String,
         var lastName: String,
-        var profilePicture: String?=null,
+        var profilePicture: String? = null,
         var emailAddress: String,
         var mobileNumber: String,
         var company: String,
-        var password: String
+        var password: String,
+        var skill: String? = null
 ) {
     companion object {
         fun getUserInformation(loginOutPut: LoginOutputData): UserInformationViewModel {
@@ -73,12 +74,13 @@ data class UserInformationViewModel(
                     expirationDate = "",
                     token = "",
                     password = "",
-                    profilePicture = userInformationOutputData.responseObject.profilePicture
+                    profilePicture = userInformationOutputData.responseObject.profilePicture,
+                    skill = userInformationOutputData.responseObject.skill
             )
         }
 
-        fun setUserEditedInformation(firstName: String, lastName: String, company: String, mobileNumber: String, profilePicture: String?): EditUserBody {
-            return EditUserData.setEditedUserData(EditUserData(firstName, lastName, company, mobileNumber, profilePicture))
+        fun setUserEditedInformation(firstName: String, lastName: String, company: String, mobileNumber: String, profilePicture: String?, skill: String?): EditUserBody {
+            return EditUserData.setEditedUserData(EditUserData(firstName, lastName, company, mobileNumber, profilePicture, skill))
         }
 
     }

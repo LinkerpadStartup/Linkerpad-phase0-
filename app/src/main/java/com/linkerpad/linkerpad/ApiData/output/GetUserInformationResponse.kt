@@ -18,5 +18,6 @@ data class ResponseObjectUserInformation(
         var profilePicture: String,
         var emailAddress: String,
         var mobileNumber: String,
-        var company: String
+        var company: String,
+        var skill:String? = null
 )

@@ -25,7 +25,11 @@ data class EditUserBody(
 
         @SerializedName("ProfilePicture")
         @Expose
-        var profilePicture: String?=null
+        var profilePicture: String?=null,
+
+        @SerializedName("Skill")
+        @Expose
+        var skill: String?=null
 
 
 )

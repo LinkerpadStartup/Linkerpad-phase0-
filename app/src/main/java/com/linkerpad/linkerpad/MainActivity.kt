@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -41,16 +42,18 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        try {
 
-        setupViewPager(mainPager)
-        tabs.setupWithViewPager(mainPager)
-        mainPager.setCurrentItem(1, true)
 
+            setupViewPager(mainPager)
+            tabs.setupWithViewPager(mainPager)
+            mainPager.setCurrentItem(1, true)
+
+        } catch (e: Exception) {
+
+        }
         headerNameTv.setText(getNameLastName())
         headerEmailTv.setText(getEmail())
-
-        //get user Profile picture
-        getUserInformation()
 
         login(getEmail(), getPassword())
 
@@ -176,6 +179,12 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
                           var intent = Intent(this@MainActivity, MainActivity::class.java)
                           startActivity(intent)*/
 
+                        setupViewPager(mainPager)
+                        tabs.setupWithViewPager(mainPager)
+                        mainPager.setCurrentItem(1, true)
+
+                        //get user information for get profilePicture
+                        getUserInformation()
 
                     } else if (response.code() == 409) {
                         //Snackbar.make(this@LoginFragment.view!!, "خطا، ایمیل شما تکراری است.", Snackbar.LENGTH_LONG).show()
@@ -240,6 +249,12 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
         strongSettingMenu.setOnClickListener {
             Toast.makeText(this@MainActivity, "بزودی", Toast.LENGTH_LONG).show()
+        }
+
+        giudMenu.setOnClickListener {
+            var webpage = Uri.parse("http://linkerpad.com/help")
+            var intent = Intent(Intent.ACTION_VIEW, webpage)
+            startActivity(intent)
         }
     }
 

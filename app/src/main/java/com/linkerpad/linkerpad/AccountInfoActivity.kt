@@ -218,7 +218,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         startActivityForResult(cameraIntent, 10)
     }
 
-    private fun editUserInformation(firstName: String, lastName: String, company: String, mobileNumber: String) {
+    private fun editUserInformation(firstName: String, lastName: String, company: String, mobileNumber: String,skill:String) {
 
         if (convertedImage) {
             projectPicture = convertImage
@@ -230,7 +230,8 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 lastName = lastName,
                 company = company,
                 mobileNumber = mobileNumber,
-                profilePicture = projectPicture
+                profilePicture = projectPicture,
+                skill = skill
         ))
 
         call.enqueue(object : Callback<EditUserResponse> {
@@ -245,14 +246,14 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
                 if (response!!.code() == 200) {
                     getUserInformation()
-                    Toast.makeText(this@AccountInfoActivity, "اطلاعات با موفقیت ویرایش شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AccountInfoActivity, "اطلاعات با موفقیت ویرایش شد", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
                     startActivity(intent)
                     this@AccountInfoActivity.finish()
 
 
                 } else {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش اطلاعات!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش اطلاعات", Snackbar.LENGTH_LONG).show()
 
                 }
             }
@@ -301,6 +302,10 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 emailEdt.setText("${userInformationOutput.emailAddress}")
                 companyEdt.setText("${userInformationOutput.company}")
                 phoneEdt.setText("${userInformationOutput.mobileNumber.substring(2)}")
+                if(userInformationOutput.skill == null || userInformationOutput.skill == ""){
+                    skillEdt.setText("بدون تخصص")
+                }
+                skillEdt.setText("${userInformationOutput.skill}")
 
 
                 if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
@@ -343,7 +348,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
     override fun onValidationSucceeded() {
         //  setupProgress()
 
-        editUserInformation(nameEdt.text.toString(), lastNameEdt.text.toString(), companyEdt.text.toString(), "98" + phoneEdt.text.toString())
+        editUserInformation(nameEdt.text.toString(), lastNameEdt.text.toString(), companyEdt.text.toString(), "98" + phoneEdt.text.toString(),skillEdt.text.toString())
     }
 
     override fun attachBaseContext(newBase: Context?) {
