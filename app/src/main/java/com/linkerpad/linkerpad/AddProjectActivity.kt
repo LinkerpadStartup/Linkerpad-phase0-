@@ -24,6 +24,7 @@ import android.text.TextPaint
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
@@ -158,15 +159,20 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         /**Show Case start**/
 
         //showCase font
-        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var textPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         textPaint.setColor(Color.WHITE)
         textPaint.setTextSize(40f)
         textPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum).ttf"))
 
-        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var titleTextPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         titleTextPaint.setColor(Color.parseColor("#1E88E5"))
         titleTextPaint.setTextSize(50f)
         titleTextPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
+
+        var showCaseButton = Button(this)
+        showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
+        showCaseButton.setTextColor( Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
 
 
         var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
@@ -182,6 +188,7 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                     .setContentTitle("ثبت اطلاعات")
                     .setContentText("برای ثبت اطلاعات قبل از خروج، آن را ذخیره نمایید.")
                     .hideOnTouchOutside()
+                    .replaceEndButton(showCaseButton)
                     .build()
 
             showcaseView!!.setButtonText("باشه")
@@ -189,6 +196,7 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
 
             showcaseView!!.overrideButtonClick {
                 showcaseView!!.hide()
+                showcaseView!!.removeAllViews()
 
             }
 

@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextPaint
+import android.widget.Button
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.ConfirmationAdapter
@@ -55,16 +56,20 @@ class ConfirmationActivity : AppCompatActivity() {
 
         }
 
-        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var textPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         textPaint.setColor(Color.WHITE)
         textPaint.setTextSize(40f)
         textPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum).ttf"))
 
-        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var titleTextPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         titleTextPaint.setColor(Color.parseColor("#1E88E5"))
         titleTextPaint.setTextSize(50f)
         titleTextPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
 
+        var showCaseButton = Button(this)
+        showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
+        showCaseButton.setTextColor( Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide8", true)) {
@@ -76,8 +81,9 @@ class ConfirmationActivity : AppCompatActivity() {
                     .setContentTextPaint(textPaint)
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("تایید گزارش")
-                    .setContentText("برای تایید گزارش روزانه خود، تیک مقابل نام خودتان را بزنید.")
+                    .setContentText("برای تایید نهایی گزارش روزانه، تیک خود را بزنید.")
                     .hideOnTouchOutside()
+                    .replaceEndButton(showCaseButton)
                     .build()
 
             showcaseView!!.setButtonText("بعدی")
@@ -85,6 +91,7 @@ class ConfirmationActivity : AppCompatActivity() {
 
             showcaseView!!.overrideButtonClick {
                 showcaseView!!.hide()
+                showcaseView!!.removeAllViews()
 
                 ShowcaseView.Builder(this)
                         .setTarget(ViewTarget(R.id.showConfirmationReportTv, this))
@@ -93,9 +100,10 @@ class ConfirmationActivity : AppCompatActivity() {
                         .setContentTextPaint(textPaint)
                         .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("نمایش گزارش")
-                        .setContentText("جهت نمایش، دریافت و به اشتراک گذاری گزارش روزانه تجمیع شده با فرمت pdf")
+                        .setContentText("جهت نمایش، دانلود و یا به اشتراک گذاری گزارش روزانه، این آیکون را لمس نمایید.")
                         .hideOnTouchOutside()
-                        .build()
+                        .replaceEndButton(showCaseButton)
+                        .build().setButtonText("باشه")
             }
 
 

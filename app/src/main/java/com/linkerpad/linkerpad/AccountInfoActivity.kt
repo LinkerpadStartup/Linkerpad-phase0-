@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -68,7 +70,11 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
     lateinit var progressDialog: ProgressDialog
 
     private val SELECT_IMAGE: Int = 9
+    private val CORPIMAGECODE: Int = 34
     private var convertImage: String = ""
+    private var convertedImage: Boolean = false
+    var projectPicture: String? = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,67 +151,56 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         cropIntent.putExtra("outputY", 512)
         cropIntent.putExtra("return-data", true)
         startActivityForResult(cropIntent, 34)
+      //  convertedImage = true
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
 
-        if (resultCode != Activity.RESULT_CANCELED) {
-            if (/*data!!.data != null &&*/ requestCode == SELECT_IMAGE || requestCode == 10) {
+            if (resultCode != Activity.RESULT_CANCELED) {
+                if (/*data!!.data != null &&*/ requestCode == SELECT_IMAGE || requestCode == 10) {
 
-                if (requestCode == SELECT_IMAGE)
-                    cropImage(data!!.data)
-                else {
+                    if (requestCode == SELECT_IMAGE)
+                        cropImage(data!!.data)
+                    else {
 
-                    var inImage: Bitmap = data!!.extras.get("data") as Bitmap
+                        var inImage: Bitmap = data!!.extras.get("data") as Bitmap
 
-                    val tempUri = getImageUri(applicationContext, inImage)
+                        val tempUri = getImageUri(applicationContext, inImage)
 
-                    cropImage(tempUri)
+                        cropImage(tempUri)
+                    }
+
+
+                } else if (requestCode == 34) {
+
+
+                    var extras: Bundle = data!!.extras
+                //    var selectedBitmap: Bitmap = extras.getParcelable("data")
+                    var selectedBitmap: Bitmap = extras.getParcelable("data") as Bitmap
+                  //  var selectedBitmap: Bitmap =  data!!.extras.get("data") as Bitmap
+                    // Set The Bitmap Data To ImageView
+                    accountPicImg.setImageBitmap(selectedBitmap);
+                    accountPicImg.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
+                    if (selectedBitmap != null) {
+
+                        var outputStream = ByteArrayOutputStream()
+                        selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+                        convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                        convertedImage = true
+                    }
+
+                } else {
+
+
                 }
-
-
-                /*  var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                  accountPicImg.setImageBitmap(fixedbitmap);
-
-                  if (fixedbitmap != null) {
-                      //  val bytes = File(uri.toString()).readBytes()
-                      var outputStream = ByteArrayOutputStream()
-                      fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
-                      convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
-                  }*/
-
-                //  onSelectFromGallary(data)
-                //   Toast.makeText(this@AddProjectActivity , "${data.data.toString()}",Toast.LENGTH_LONG).show()
-            } else if (requestCode == 34) {
-
-
-                var extras: Bundle = data!!.getExtras()
-                var selectedBitmap: Bitmap = extras.getParcelable("data")
-                // Set The Bitmap Data To ImageView
-                accountPicImg.setImageBitmap(selectedBitmap);
-                accountPicImg.setScaleType(ImageView.ScaleType.FIT_XY);
-
-                /* val uri = data.getData()
-
-                 var fixedbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                 accountPicImg.setImageBitmap(fixedbitmap);
-*/
-                if (selectedBitmap != null) {
-                    //  val bytes = File(uri.toString()).readBytes()
-                    var outputStream = ByteArrayOutputStream()
-                    selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
-                    convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
-                }
-
             } else {
-
-
+                convertImage = ""
+                accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.noun_user))
             }
-        } else {
-            convertImage = ""
-            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.noun_user))
-        }
 
         if (resultCode != Activity.RESULT_CANCELED) {
 
@@ -214,11 +209,6 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
     }
 
     fun galleryIntent() {
-        /*   var intent = Intent()
-           intent.setType("image*//*")
-        intent.setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(intent, "انتخاب تصویر"), SELECT_IMAGE)*/
-
         val i = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(i, SELECT_IMAGE)
     }
@@ -230,23 +220,28 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
     private fun editUserInformation(firstName: String, lastName: String, company: String, mobileNumber: String) {
 
+        if (convertedImage) {
+            projectPicture = convertImage
+        }
+
         var service: IUserApi = IWebApi.Factory.create()
         var call = service.editUserInformation(getToken(), UserInformationViewModel.setUserEditedInformation(
                 firstName = firstName,
                 lastName = lastName,
                 company = company,
-                mobileNumber = mobileNumber
+                mobileNumber = mobileNumber,
+                profilePicture = projectPicture
         ))
 
         call.enqueue(object : Callback<EditUserResponse> {
             override fun onFailure(call: Call<EditUserResponse>?, t: Throwable?) {
-              //  progressDialog.dismiss()
+                //  progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditUserResponse>?, response: Response<EditUserResponse>?) {
 
-              //  progressDialog.dismiss()
+                //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
                     getUserInformation()
@@ -276,11 +271,14 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
     }
 
+    //get login token
     private fun getToken(): String {
         var sharedPreferences: SharedPreferences = this@AccountInfoActivity.getSharedPreferences("userInformation", 0)
-        return sharedPreferences.getString("token", null)
+        var token = sharedPreferences.getString("token", null)
+        return token
     }
 
+    //get user Information API
     private fun getUserInformation() {
         var service: IUserApi = IWebApi.Factory.create()
         var call = service.getUserInformation(getToken())
@@ -304,8 +302,15 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 companyEdt.setText("${userInformationOutput.company}")
                 phoneEdt.setText("${userInformationOutput.mobileNumber.substring(2)}")
 
-                //  Toast.makeText(this@AccountInfoActivity, "${userInformationOutput.firstName}-${userInformationOutput.company}", Toast.LENGTH_LONG).show()
 
+                if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
+
+                    val b = Base64.decode(userInformationOutput.profilePicture, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
+                    //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
+                    accountPicImg.setImageDrawable(BitmapDrawable(resources, bitmap))
+                    projectPicture = userInformationOutput.profilePicture
+                }
             }
 
         })
@@ -336,20 +341,10 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
     }
 
     override fun onValidationSucceeded() {
-      //  setupProgress()
+        //  setupProgress()
 
         editUserInformation(nameEdt.text.toString(), lastNameEdt.text.toString(), companyEdt.text.toString(), "98" + phoneEdt.text.toString())
     }
-
-    private fun setupProgress() {
-        progressDialog = ProgressDialog(this@AccountInfoActivity)
-        progressDialog.setMessage("لطفا شکیبا باشید")
-        progressDialog.setCancelable(false)
-        progressDialog.isIndeterminate = true
-        progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
-        progressDialog.show()
-    }
-
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))

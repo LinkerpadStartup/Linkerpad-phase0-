@@ -24,6 +24,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.github.amlcurran.showcaseview.ShowcaseView
@@ -136,16 +137,20 @@ class TeamFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var textPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         textPaint.setColor(Color.WHITE)
         textPaint.setTextSize(40f)
         textPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
 
-        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var titleTextPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         titleTextPaint.setColor(Color.parseColor("#1E88E5"))
         titleTextPaint.setTextSize(50f)
         titleTextPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
 
+        var showCaseButton = Button(activity)
+        showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
+        showCaseButton.setTextColor( Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide9", true)) {
@@ -171,9 +176,10 @@ class TeamFragment : Fragment() {
                     .setStyle(R.style.CustomShowcaseTheme3)
                     .setContentTextPaint(textPaint)
                     .setContentTitlePaint(titleTextPaint)
-                    .setContentTitle("افزودن عضو")
-                    .setContentText("افراد مرتبط با پروژه و سطح دسترسی آنها را تعریف نمایید. (این دسترسی برای مسئول و مدیر مجاز است.)")
+                    .setContentTitle("افزودن فرد به تیم پروژه")
+                    .setContentText("برای این کار ، آیکون را لمس و سطح دسترسی فرد را تعیین نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
                     .hideOnTouchOutside()
+                    .replaceEndButton(showCaseButton)
                     .build()
 
             showcaseView!!.setButtonText("بعدی")
@@ -181,6 +187,7 @@ class TeamFragment : Fragment() {
 
             showcaseView!!.overrideButtonClick {
                 showcaseView!!.hide()
+                showcaseView!!.removeAllViews()
 
                 ShowcaseView.Builder(activity)
                         .setTarget(ViewTarget(R.id.showCaseForMoreOption, activity))
@@ -188,10 +195,11 @@ class TeamFragment : Fragment() {
                         .setStyle(R.style.CustomShowcaseTheme3)
                         .setContentTextPaint(textPaint)
                         .setContentTitlePaint(titleTextPaint)
-                        .setContentTitle("اطلاعات بیشتر")
-                        .setContentText("جهت نمایش اطلاعات بیشتر و امکان ویرایش و یا حذف عضو (قابلیت ویرایش و یا حذف برای مسئول و مدیر مجاز است.)")
+                        .setContentTitle("مشخصات افراد")
+                        .setContentText("برای نمایش جزئیات بیشتر و دسترسی به ویرایش یا حذف فرد از تیم پروژه، این آیکون را لمس نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
                         .hideOnTouchOutside()
-                        .build()
+                        .replaceEndButton(showCaseButton)
+                        .build().setButtonText("باشه")
             }
 
 

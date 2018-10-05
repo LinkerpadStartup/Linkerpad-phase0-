@@ -34,6 +34,7 @@ import android.content.Intent.getIntent
 import android.support.v4.content.ContextCompat.startActivity
 import android.content.Intent.getIntent
 import android.content.SharedPreferences
+import android.graphics.drawable.BitmapDrawable
 import android.support.annotation.NonNull
 import android.widget.Toast
 import com.linkerpad.linkerpad.ApiData.output.RemoveMemberResponse
@@ -96,6 +97,15 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                         i = 0
                     }
                 }
+
+
+            if (itemModel.profilePicture != "") {
+
+                val b = Base64.decode(itemModel.profilePicture, Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
+                //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
+                itemView.userProfilePictureImv.setImageDrawable(BitmapDrawable(context.resources, bitmap))
+            }
 
             itemView.callTeamImv.setOnClickListener {
 

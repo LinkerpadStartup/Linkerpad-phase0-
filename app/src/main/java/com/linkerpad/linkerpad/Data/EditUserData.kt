@@ -5,10 +5,10 @@ import com.linkerpad.linkerpad.ApiData.input.EditUserBody
 /**
  * Created by alihajiloo on 8/19/18.
  */
-data class EditUserData(var firstName: String, var lastName: String, var company: String, var mobileNumber: String) {
+data class EditUserData(var firstName: String, var lastName: String, var company: String, var mobileNumber: String , var profilePicture:String?=null) {
     companion object {
         fun setEditedUserData(editUserData: EditUserData): EditUserBody {
-            return EditUserBody(editUserData.firstName, editUserData.lastName, editUserData.company, editUserData.mobileNumber)
+            return EditUserBody(editUserData.firstName, editUserData.lastName, editUserData.company, editUserData.mobileNumber,editUserData.profilePicture)
         }
     }
 }

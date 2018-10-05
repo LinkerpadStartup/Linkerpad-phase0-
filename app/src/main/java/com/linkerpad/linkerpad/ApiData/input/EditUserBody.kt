@@ -21,7 +21,11 @@ data class EditUserBody(
 
         @SerializedName("MobileNumber")
         @Expose
-        var mobileNumber: String
+        var mobileNumber: String,
+
+        @SerializedName("ProfilePicture")
+        @Expose
+        var profilePicture: String?=null
 
 
 )

@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextPaint
+import android.widget.Button
 import android.widget.Toast
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
@@ -134,16 +135,20 @@ class NotesAndEventsActivity : AppCompatActivity() {
 
     private fun ShowCaseSetup() {
 
-        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var textPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         textPaint.setColor(Color.WHITE)
         textPaint.setTextSize(40f)
         textPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum).ttf"))
 
-        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var titleTextPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         titleTextPaint.setColor(Color.parseColor("#1E88E5"))
         titleTextPaint.setTextSize(50f)
         titleTextPaint.setTypeface(Typeface.createFromAsset(this.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
 
+        var showCaseButton = Button(this)
+        showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
+        showCaseButton.setTextColor( Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide7", true)) {
@@ -158,12 +163,11 @@ class NotesAndEventsActivity : AppCompatActivity() {
                     .setStyle(R.style.CustomShowcaseTheme3)
                     .setContentTextPaint(textPaint)
                     .setContentTitlePaint(titleTextPaint)
-                    .setContentTitle("ثبت کار جدید")
-                    .setContentText("برای ثبت کارهای انجام گرفته، در اینجا مشخصات کار را وارد نمایید. " +
-                            "شما همه موارد ایجاد شده توسط تیم پروژه را در این صفحه مشاهده میکنید اما تنها مجاز به حذف و یا ویرایش موارد خودتان هستید. " +
-                            "(مسئول و مدیر مجاز به حذف و یا ویرایش تمامی موارد می باشند.)")
+                    .setContentTitle("ثبت آیتم های جدید")
+                    .setContentText("برای ثبت، جزئیات هر آیتم را وارد نمایید. \n لیست کل آیتم های روزانه، در این صفحه دیده می شود اما هر فرد می تواند آیتم های خود را ویرایش یا حذف نماید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به ویرایش یا حذف تمامی آیتم ها می باشند)")
                     .hideOnTouchOutside()
-                    .build()
+                    .replaceEndButton(showCaseButton)
+                    .build().setButtonText("باشه")
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
             sharedPreferencesEditor.putBoolean("guide7", true)

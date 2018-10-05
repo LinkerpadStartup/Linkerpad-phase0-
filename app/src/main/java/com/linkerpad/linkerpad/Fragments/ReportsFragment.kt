@@ -16,6 +16,7 @@ import android.text.TextPaint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
@@ -305,17 +306,6 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
 
 
-        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
-        textPaint.setColor(Color.WHITE)
-        textPaint.setTextSize(40f)
-        textPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
-
-        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
-        titleTextPaint.setColor(Color.parseColor("#1E88E5"))
-        titleTextPaint.setTextSize(50f)
-        titleTextPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
-
-
         return view
     }
 
@@ -323,16 +313,20 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         super.onActivityCreated(savedInstanceState)
 
 
-        var textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var textPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         textPaint.setColor(Color.WHITE)
         textPaint.setTextSize(40f)
         textPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
 
-        var titleTextPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
+        var titleTextPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
         titleTextPaint.setColor(Color.parseColor("#1E88E5"))
         titleTextPaint.setTextSize(50f)
         titleTextPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
 
+        var showCaseButton = Button(activity)
+        showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
+        showCaseButton.setTextColor( Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide3", true)) {
@@ -352,17 +346,18 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
                 showcaseView!!.setButtonText("بعدی")*/
 
-            var viewTarget: ViewTarget = ViewTarget(R.id.reportDateLL, activity)
+            var viewTarget: ViewTarget = ViewTarget(R.id.dayDateTv, activity)
 
-            showcaseView = ShowcaseView.Builder(this.activity)
+            showcaseView = ShowcaseView.Builder(this.activity,true)
                     .setTarget(viewTarget)
-                    .withMaterialShowcase()
+                    .withNewStyleShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
                     .setContentTextPaint(textPaint)
                     .setContentTitlePaint(titleTextPaint)
-                    .setContentTitle("تکمیل گزارش")
-                    .setContentText("ابتدا تاریخ روز گزارش را انتخاب و سپس کارهای روزانه خود را با توجه به دسته بندی مشخص شده، ثبت و یا ویرایش نمایید.")
+                    .setContentTitle("ثبت گزارش")
+                    .setContentText("ابتدا تاریخ گزارش را انتخاب کنید. سپس آیتم های خود را با توجه به دسته بندی موجود، ثبت نمایید.")
                     .hideOnTouchOutside()
+                    .replaceEndButton(showCaseButton)
                     .build()
 
             showcaseView!!.setButtonText("بعدی")
@@ -370,16 +365,18 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
             showcaseView!!.overrideButtonClick {
                 showcaseView!!.hide()
+                showcaseView!!.removeAllViews()
 
-                showcaseView2 = ShowcaseView.Builder(activity)
-                        .setTarget(ViewTarget(R.id.editProjectInformationImv, activity))
-                        .withMaterialShowcase()
+                showcaseView2 = ShowcaseView.Builder(activity,true)
+                        .setTarget(ViewTarget(R.id.confirmationReportTv, activity))
+                        .withNewStyleShowcase()
                         .setStyle(R.style.CustomShowcaseTheme3)
                         .setContentTextPaint(textPaint)
                         .setContentTitlePaint(titleTextPaint)
-                        .setContentTitle("ویرایش پروژه")
-                        .setContentText("جهت دسترسی به ویرایش اطلاعات هر پروژه می باشد که این قابلیت برای سطح دسترسی مسئول و مدیر مجاز است.")
+                        .setContentTitle("تایید نهایی گزارش")
+                        .setContentText("پس از تکمیل گزارش خود، آن را تایید نمایید.")
                         .hideOnTouchOutside()
+                        .replaceEndButton(showCaseButton)
                         .build()
 
                 showcaseView2!!.setButtonText("بعدی")
@@ -387,17 +384,19 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
                 showcaseView2!!.overrideButtonClick {
                     showcaseView2!!.hide()
+                    showcaseView2!!.removeAllViews()
 
                     ShowcaseView.Builder(activity)
-                            .setTarget(ViewTarget(R.id.confirmationReportTv, activity))
+                            .setTarget(ViewTarget(R.id.editProjectInformationImv, activity))
                             .withMaterialShowcase()
                             .setStyle(R.style.CustomShowcaseTheme3)
                             .setContentTextPaint(textPaint)
                             .setContentTitlePaint(titleTextPaint)
-                            .setContentTitle("تایید پروژه")
-                            .setContentText("پس از تکمیل گزارش خود، آن را تایید نمایید.")
+                            .setContentTitle("ویرایش پروژه")
+                            .setContentText("برای ویرایش پروژه، این آیکون را لمس نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
                             .hideOnTouchOutside()
-                            .build()
+                            .replaceEndButton(showCaseButton)
+                            .build().setButtonText("باشه")
                 }
             }
 

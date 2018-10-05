@@ -12,4 +12,11 @@ class GetUserInformationResponse : Response() {
     lateinit var responseObject: ResponseObjectUserInformation
 }
 
-data class ResponseObjectUserInformation(var firstName: String, var lastName: String, var profilePicture: Any? = null, var emailAddress: String, var mobileNumber: String, var company: String)
+data class ResponseObjectUserInformation(
+        var firstName: String,
+        var lastName: String,
+        var profilePicture: String,
+        var emailAddress: String,
+        var mobileNumber: String,
+        var company: String
+)

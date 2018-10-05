@@ -221,7 +221,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
                     mobileNumber = "98" + phoneEdt.text.toString().substring(1),
                     emailAddress = emailEdt.text.toString(),
                     token = "",
-                    profilePicture = null,
+                    profilePicture = "",
                     expirationDate = "",
                     message = "",
                     status = "",

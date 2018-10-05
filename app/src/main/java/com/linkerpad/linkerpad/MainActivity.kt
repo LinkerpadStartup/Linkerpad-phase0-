@@ -3,20 +3,26 @@ package com.linkerpad.linkerpad
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
+import android.util.Base64
 import android.widget.Toast
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.RegLoginPagerAdapter
 import com.linkerpad.linkerpad.ApiData.input.LoginBody
+import com.linkerpad.linkerpad.ApiData.output.GetUserInformationResponse
 import com.linkerpad.linkerpad.ApiData.output.LoginResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Data.LoginOutputData
+import com.linkerpad.linkerpad.Data.UserInformationOutputData
 import com.linkerpad.linkerpad.Fragments.ProjectsFragment
 import com.linkerpad.linkerpad.Models.UserInformationViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,6 +30,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -42,9 +49,8 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         headerNameTv.setText(getNameLastName())
         headerEmailTv.setText(getEmail())
 
-
-
-
+        //get user Profile picture
+        getUserInformation()
 
         login(getEmail(), getPassword())
 
@@ -55,6 +61,44 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         onNavigationItemSelected()
         /*  nav_view.setNavigationItemSelectedListener(this)*/
 
+    }
+
+    //get login token
+    private fun getToken(): String {
+        var sharedPreferences: SharedPreferences = this@MainActivity.getSharedPreferences("userInformation", 0)
+        var token = sharedPreferences.getString("token", null)
+        return token
+    }
+
+    //get user Information API
+    private fun getUserInformation() {
+        var service: IUserApi = IWebApi.Factory.create()
+        var call = service.getUserInformation(getToken())
+
+        call.enqueue(object : Callback<GetUserInformationResponse> {
+            override fun onFailure(call: Call<GetUserInformationResponse>?, t: Throwable?) {
+
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<GetUserInformationResponse>?, response: Response<GetUserInformationResponse>?) {
+
+                var userInformation: GetUserInformationResponse? = response!!.body()
+
+                var userInformationOutput = UserInformationViewModel.getUserInformation(UserInformationOutputData(userInformation!!.status,
+                        userInformation.message, userInformation.responseObject))
+
+
+                if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
+
+                    val b = Base64.decode(userInformationOutput.profilePicture, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
+                    //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
+                    drawerImageView.setImageDrawable(BitmapDrawable(resources, bitmap))
+                }
+            }
+
+        })
     }
 
     private fun getNameLastName(): String {
