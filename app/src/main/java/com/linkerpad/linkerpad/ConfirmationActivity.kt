@@ -20,6 +20,7 @@ import com.linkerpad.linkerpad.ApiData.output.ConfirmationListResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
 import com.linkerpad.linkerpad.Data.ConfirmationInformationData
+import com.linkerpad.linkerpad.Data.JalaliCalendar
 import kotlinx.android.synthetic.main.confirmation_layout.*
 import retrofit2.Call
 import retrofit2.Response
@@ -39,6 +40,12 @@ class ConfirmationActivity : AppCompatActivity() {
 
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate")
+
+        var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt())
+        var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
+        var date = jalaliStart.toString().replace("-", "/")
+
+        confirmationDateTv.setText(date)
 
         // setupProgress()
         getConfirmationList(projectId, reportDate)
@@ -68,8 +75,8 @@ class ConfirmationActivity : AppCompatActivity() {
 
         var showCaseButton = Button(this)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
-        showCaseButton.setTextColor( Color.WHITE)
-        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
+        showCaseButton.setTextColor(Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets, "IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide8", true)) {

@@ -32,9 +32,12 @@ class CustomAlertDialog : AppCompatActivity() {
         positiveTv.setText(positive)
         negativeTv.setText(negative)
 
+
+
         positiveTv.setOnClickListener {
-            this@CustomAlertDialog.finish()
-            removeMember(userId, projectId)
+
+           removeMember(userId, projectId)
+
         }
 
         negativeTv.setOnClickListener { this@CustomAlertDialog.finish() }
@@ -66,6 +69,7 @@ class CustomAlertDialog : AppCompatActivity() {
                             .setMessage("عضو با موفقیت حذف گردید!")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
+                                this@CustomAlertDialog.finish()
                             })
                             .create()
                             .show()
@@ -75,6 +79,7 @@ class CustomAlertDialog : AppCompatActivity() {
                             .setMessage("فعالیت غیر مجاز!")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
+                                this@CustomAlertDialog.finish()
                             })
                             .create()
                             .show()
@@ -84,6 +89,7 @@ class CustomAlertDialog : AppCompatActivity() {
                             .setMessage("باعرض پوزش شما امکان حذف عضو از پروژه را ندارید. از سازنده یا مدیر درخواست کنید!")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
+                                this@CustomAlertDialog.finish()
                             })
                             .create()
                             .show()
@@ -93,8 +99,19 @@ class CustomAlertDialog : AppCompatActivity() {
                             .setMessage("ایمیل وارد شده وجود ندارد.شما میتوانید ایشان را به لینکرپد دعوت کنید!")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
+                                this@CustomAlertDialog.finish()
                             }).setNegativeButton("بعداً", { dialog, view ->
                                 dialog.dismiss()
+                                this@CustomAlertDialog.finish()
+                            })
+                            .create()
+                            .show()
+                }else if (response.code() == 406){
+                    AlertDialog.Builder(this@CustomAlertDialog)
+                            .setMessage("این دسترسی مجاز نمی باشد")
+                            .setPositiveButton("باشه", { dialog, view ->
+                                dialog.dismiss()
+                                this@CustomAlertDialog.finish()
                             })
                             .create()
                             .show()

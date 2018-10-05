@@ -27,6 +27,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.MembersListAdapter
@@ -104,7 +105,7 @@ class TeamFragment : Fragment() {
             }
 
             view.swipeTeam.isRefreshing = false
-            getMemberList(projetcId)
+            getMemberListUpdate(projetcId)
 
         }
 
@@ -116,7 +117,7 @@ class TeamFragment : Fragment() {
             } else {
 
             }
-            getMemberList(projetcId)
+            getMemberListUpdate(projetcId)
         }
         return view
     }
@@ -231,6 +232,36 @@ class TeamFragment : Fragment() {
 
                 view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
                 view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, memberList, projectId)
+
+            }
+
+        })
+    }
+
+
+    private fun getMemberListUpdate(projectId: String) {
+        var service: IUserApi = IWebApi.Factory.create()
+        var call = service.getProjectMemberList(getToken(), projectId)
+
+        call.enqueue(object : retrofit2.Callback<MemberListResponse> {
+            override fun onFailure(call: Call<MemberListResponse>?, t: Throwable?) {
+                //  progressDialog.dismiss()
+                Snackbar.make(this@TeamFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<MemberListResponse>?, response: Response<MemberListResponse>?) {
+
+                // progressDialog.dismiss()
+
+                var membersResponse = response!!.body()
+
+                var memberList = ArrayList<MemberInformationData>()
+                memberList = membersResponse!!.responseObject
+
+                view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
+                view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, memberList, projectId)
+
+                Toast.makeText(context, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
 
             }
 

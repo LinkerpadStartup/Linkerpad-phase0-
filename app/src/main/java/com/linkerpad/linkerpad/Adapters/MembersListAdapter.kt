@@ -63,18 +63,18 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bindModel(data[position], position)
 
-       /* viewHolder.itemView.deleteMemberImv.setOnClickListener {
-            AlertDialog.Builder(context)
-                    .setMessage("آیا از حذف این عضو از پروژه مطمئن هستید؟")
-                    .setPositiveButton("حذف شود", { dialog, view ->
-                        dialog.dismiss()
-                        removeMember(data[position].id, projectId)
-                    }).setNegativeButton("خیر", { dialogInterface, i ->
-                        dialogInterface.dismiss()
-                    })
-                    .create()
-                    .show()
-        }*/
+        /* viewHolder.itemView.deleteMemberImv.setOnClickListener {
+             AlertDialog.Builder(context)
+                     .setMessage("آیا از حذف این عضو از پروژه مطمئن هستید؟")
+                     .setPositiveButton("حذف شود", { dialog, view ->
+                         dialog.dismiss()
+                         removeMember(data[position].id, projectId)
+                     }).setNegativeButton("خیر", { dialogInterface, i ->
+                         dialogInterface.dismiss()
+                     })
+                     .create()
+                     .show()
+         }*/
     }
 
 
@@ -99,7 +99,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                 }
 
 
-            if (itemModel.profilePicture != "") {
+            if (itemModel.profilePicture != "" && itemModel.profilePicture != null) {
 
                 val b = Base64.decode(itemModel.profilePicture, Base64.DEFAULT)
                 val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
@@ -140,25 +140,26 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
 
             itemView.deleteMemberImv.setOnClickListener {
                 //   Toast.makeText(context,"${itemModel.firstName}" , Toast.LENGTH_LONG).show()
-             /*  AlertDialog.Builder(context.applicationContext)
-                        .setMessage("حذف این فرد از پروژه را تایید میکنید؟")
-                        .setPositiveButton("بله", { dialog, view ->
-                            dialog.dismiss()
-                            removeMember(data[position].id, projectId)
-                        }).setNegativeButton("خیر", { dialogInterface, i ->
-                            dialogInterface.dismiss()
-                        })
-                        .create()
-                        .show()*/
+                /*  AlertDialog.Builder(context.applicationContext)
+                           .setMessage("حذف این فرد از پروژه را تایید میکنید؟")
+                           .setPositiveButton("بله", { dialog, view ->
+                               dialog.dismiss()
+                               removeMember(data[position].id, projectId)
+                           }).setNegativeButton("خیر", { dialogInterface, i ->
+                               dialogInterface.dismiss()
+                           })
+                           .create()
+                           .show()*/
 
                 var intent = Intent(context, CustomAlertDialog::class.java)
                 //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
                 intent.putExtra("id", data[position].id)
                 intent.putExtra("projectId", projectId)
-                intent.putExtra("message" , "حذف این فرد از پروژه را تایید میکنید؟")
-                intent.putExtra("positive" , "بله")
+                intent.putExtra("message", "حذف این فرد از پروژه را تایید میکنید؟")
+                intent.putExtra("positive", "بله")
                 intent.putExtra("negative", "خیر")
                 context.startActivity(intent)
+
 
             }
 
@@ -264,7 +265,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             return token
         }
 
-        private fun removeMember(userId: String, projectId: String) {
+        /*private fun removeMember(userId: String, projectId: String) {
             var service: IUserApi = IWebApi.Factory.create()
 
             var removeMemberBody = MemberViewModel.removeMember(projectId, userId)
@@ -314,11 +315,19 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                                 })
                                 .create()
                                 .show()
+                    } else if (response.code() == 406) {
+                        AlertDialog.Builder(context)
+                                .setMessage("این دسترسی مجاز نمی باشد")
+                                .setPositiveButton("باشه", { dialog, view ->
+                                    dialog.dismiss()
+                                })
+                                .create()
+                                .show()
                     }
                 }
 
             })
-        }
+        }*/
 
 
     }

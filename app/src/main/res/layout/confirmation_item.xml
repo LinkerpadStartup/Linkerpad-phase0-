@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="4dp">
 
 
         <TextView
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.55"
-            android:gravity="center"
+            android:gravity="right"
             android:padding="8dp"
             android:textColor="@color/gray900"
             android:text="نام و نام خانوادگی" />
@@ -27,14 +27,11 @@
             android:id="@+id/confirmationRoleTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.45"
-            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:layout_weight="0.40"
             android:textColor="@color/gray900"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingRight="8dp"
-            android:paddingLeft="32dp"
+            android:padding="8dp"
             android:text="سطح دسترسی" />
 
         <CheckBox
