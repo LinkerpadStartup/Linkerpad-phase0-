@@ -61,9 +61,14 @@ class EditMachineryActivity : AppCompatActivity() {
         }
 
         //edit Equipment
-        saveMachineryTv.setOnClickListener {
+        saveMachineryTv.setOnClickListener {view ->
             // setupProgress()
-            editMachinery(projectId, equipmentId)
+            if (TitleMachineryEdt.text.toString() != "" /*&& countActiveMachineryEdt.text.toString() != "" && countDeactiveMachineryEdt.text.toString() != "" && timeCountMachineryEdt.text.toString() != ""*/) {
+                // setupProgress()
+                editMachinery(projectId, equipmentId)
+            } else {
+                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
+            }
         }
 
 
@@ -181,7 +186,7 @@ class EditMachineryActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش تجهیزات را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -248,7 +253,7 @@ class EditMachineryActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف تجهیزات را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 

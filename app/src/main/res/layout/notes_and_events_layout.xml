@@ -50,7 +50,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/iransans_web_light"
                         android:gravity="center_vertical"
-                        android:text="یادداشت و اتفاقات"
+                        android:text="مشکلات، اتفاقات و یادداشت ها"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 

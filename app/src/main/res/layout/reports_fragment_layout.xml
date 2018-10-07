@@ -227,7 +227,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_weight="1"
                         android:padding="8dp"
-                        android:text="مشکلات ، موانع و یادداشت ها"
+                        android:text="مشکلات، اتفاقات و یادداشت ها"
                         android:textColor="@color/gray900"
                         android:textSize="18sp" />
 

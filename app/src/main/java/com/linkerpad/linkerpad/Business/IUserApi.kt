@@ -113,8 +113,8 @@ interface IUserApi {
     @GET("api/Note/GetProjectNoteList")
     fun getProjectNoteList(@Header("authorization") authorization: String, @Query("ProjectId") projectId: String, @Query("ReportDate") reportDate: String): Call<NoteAndEventListResponse>
 
-    @GET("api/Note/GetNotes")
-    fun getNotesInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("NoteId") materialId: String): Call<GetNoteAndEventInformationResponse>
+    @GET("api/Note/GetNote")
+    fun getNotesInformation(@Header("authorization") authorization: String, @Query("projectId") projectId: String, @Query("noteId") materialId: String): Call<GetNoteAndEventInformationResponse>
 
     @POST("api/Note/DeleteNote")
     fun deleteNote(@Header("authorization") authorization: String, @Body deleteNoteAndEventBody: DeleteNoteAndEventBody): Call<NoteAndEventResponse>

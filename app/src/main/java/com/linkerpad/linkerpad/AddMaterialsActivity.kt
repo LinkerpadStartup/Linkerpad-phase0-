@@ -32,11 +32,11 @@ class AddMaterialsActivity : AppCompatActivity() {
         saveMaterialTv.setOnClickListener {view->
          //   setupProgress()
 
-            if (TitleMaterialEdt.text.toString() != "" && countMaterialsEdt.text.toString() != "" && unitMaterialEdt.text.toString() != "") {
+            if (TitleMaterialEdt.text.toString() != "" /*&& countMaterialsEdt.text.toString() != "" && unitMaterialEdt.text.toString() != ""*/) {
                 // setupProgress()
                 createMaterial(projectId, reportDate)
             } else {
-                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
             }
 
         }

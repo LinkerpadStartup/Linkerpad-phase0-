@@ -13,12 +13,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Environment
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
 import android.text.TextPaint
 import android.util.Base64
@@ -123,13 +125,23 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             var dialog2 = dialog.show()
             view.galleryChooseImageTv.setOnClickListener {
                 //Toast.makeText(this@AddProjectActivity , "gallery",Toast.LENGTH_LONG).show()
-                galleryIntent()
-                dialog2.dismiss()
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    galleryIntent()
+                    dialog2.dismiss()
+                } else {
+                    ActivityCompat.requestPermissions(this@AddProjectActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+
+                }
+
             }
             view.cameraChooseImageTv.setOnClickListener {
                 //  Toast.makeText(this@AddProjectActivity , "camera",Toast.LENGTH_LONG).show()
-                captureCamera()
-                dialog2.dismiss()
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    captureCamera()
+                    dialog2.dismiss()
+                } else {
+                    ActivityCompat.requestPermissions(this@AddProjectActivity, arrayOf(android.Manifest.permission.CAMERA), 2)
+                }
 
             }
 
@@ -147,11 +159,11 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
 
 
         createProjectTv.setOnClickListener { view ->
-            if (projectTitleEdt.text.toString() != "" && projectAddressEdt.text.toString() != "" && projectCodeEdt.text.toString() != "") {
+            if (projectTitleEdt.text.toString() != ""  /*&&projectAddressEdt.text.toString() != "" && projectCodeEdt.text.toString() != ""*/) {
                 createProject()
                 //setupProgress()
             } else {
-                Snackbar.make(view, "عنوان پروژه و آدرس و کد پروژه نمی تواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
             }
         }
 
@@ -187,7 +199,6 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت اطلاعات")
                     .setContentText("برای ثبت اطلاعات قبل از خروج، آن را ذخیره نمایید.")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build()
 
@@ -215,6 +226,22 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         }
     }
 
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                galleryIntent()
+            } else {
+            }
+        } else if (requestCode == 2) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                captureCamera()
+            } else {
+            }
+
+        }
+    }
     private fun captureCamera() {
         val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, 10)

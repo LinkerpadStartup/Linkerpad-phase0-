@@ -111,7 +111,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
 
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                     var phoneIntent: Intent = Intent(Intent.ACTION_CALL)
-                    phoneIntent.setData(Uri.parse("tel:${itemModel.mobileNumber}"))
+                    phoneIntent.setData(Uri.parse("tel:0${itemModel.mobileNumber.substring(2)}"))
                     context.startActivity(phoneIntent)
 
 
@@ -199,6 +199,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             accessLevelTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
             itemView.firstTeamLL.addView(accessLevelTv)
 
+
             /** first LinearLayout Views added 👆 **/
 
 
@@ -214,6 +215,43 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             itemView.firstTeamLL.addView(companyTeamTv)
 
 
+
+            if (itemModel.skill != null) {
+                if (itemModel.skill != "null") {
+
+
+                    /** skill TextView **/
+                    var skillTvParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+                    val skillTv: TextView = TextView(context)
+                    skillTv.layoutParams = skillTvParams
+
+                    if (itemModel.skill != null) {
+                        skillTv.setText("${itemModel.skill}")
+                    }
+                    if (itemModel.skill != "null") {
+                        skillTv.setText("${itemModel.skill}")
+                    }
+                    skillTv.setText("${itemModel.skill}")
+
+                    if (itemModel.skill == null) {
+                        itemModel.skill = "بدون تخصص"
+                        skillTv.setText("${itemModel.skill}")
+                    }
+                    if (itemModel.skill == "null") {
+                        itemModel.skill = "بدون تخصص"
+                        skillTv.setText("${itemModel.skill}")
+
+                    }
+
+                    skillTv.setPadding(35, 10, 20, 10)
+                    skillTv.setTextSize(16f)
+                    skillTv.gravity = Gravity.RIGHT
+                    skillTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
+                    itemView.secondTeamLL.addView(skillTv)
+                } else {
+
+                }
+            }
             /** phone number TextView **/
             var phoneNumberTvParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             val phoneNumberTv: TextView = TextView(context)
@@ -224,6 +262,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             phoneNumberTv.gravity = Gravity.LEFT
             phoneNumberTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
             itemView.secondTeamLL.addView(phoneNumberTv)
+
 
             var llParamsWrap: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             var llParams2: LinearLayout.LayoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)

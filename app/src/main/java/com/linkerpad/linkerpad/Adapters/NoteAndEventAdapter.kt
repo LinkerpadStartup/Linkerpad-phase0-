@@ -49,7 +49,7 @@ class NoteAndEventAdapter(var context: Context, var data: ArrayList<NoteAndEvent
 
             itemView.descriptionNoteAndEventTv.text = description
 
-            itemView.materialsItemLL.setOnClickListener {
+            itemView.noteAndEventsItemLL.setOnClickListener {
                 //item clicked
                 var intent = Intent(context, EditNoteAndEventActivity::class.java)
                 intent.putExtra("id", data[position].id)

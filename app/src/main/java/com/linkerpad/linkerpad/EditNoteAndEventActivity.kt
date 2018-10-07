@@ -47,7 +47,7 @@ class EditNoteAndEventActivity : AppCompatActivity() {
                 // setupProgress()
                 editNote(projectId, noteId)
             } else {
-                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
             }
 
 
@@ -106,7 +106,7 @@ class EditNoteAndEventActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مشکلات،موانع و یادداشت ها یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش مشکلات،موانع و یادداشت ها را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -117,21 +117,26 @@ class EditNoteAndEventActivity : AppCompatActivity() {
     }
 
     private fun getNoteInformation(projectId: String, noteId: String) {
+
         var service: IUserApi = IWebApi.Factory.create()
         var call = service.getNotesInformation(getToken(), projectId, noteId)
 
         call.enqueue(object : Callback<GetNoteAndEventInformationResponse> {
             override fun onFailure(call: Call<GetNoteAndEventInformationResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+
+                var s = ""
+
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!${t.toString()}", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetNoteAndEventInformationResponse>?, response: Response<GetNoteAndEventInformationResponse>?) {
 //                progressDialog.dismiss()
 
-                var noteInformationData = NoteAndEventsViewModel.getNoteAndEventInformation(NoteAndEventInformationOutput(response!!.body()!!.status, response.body()!!.status, response!!.body()!!.responseObject))
 
                 if (response!!.code() == 200) {
+
+                    var noteInformationData = NoteAndEventsViewModel.getNoteAndEventInformation(NoteAndEventInformationOutput(response!!.body()!!.status, response.body()!!.status, response!!.body()!!.responseObject))
                     TitleNoteAndEventEdt.setText(noteInformationData.title)
                     descriptionNoteAndEventEdt.setText(noteInformationData.description)
                 }
@@ -171,7 +176,7 @@ class EditNoteAndEventActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مشکلات،موانع و یادداشت ها یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش مشکلات،موانع و یادداشت ها را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 

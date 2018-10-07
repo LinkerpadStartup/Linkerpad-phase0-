@@ -25,7 +25,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
 
-    var userRole: Int = 0
+    var userRole: Int = 3
 
     @BindView(R.id.AddMemberEmailEdt)
     @Email
@@ -91,7 +91,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                 if (response!!.code() == 200) {
                     // progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
-                            .setMessage("ایمیل حاوی دعوتنامه با موفقیت ارسال شد!")
+                            .setMessage("فرد مورد نظر با موفقیت به پروژه افزوده شد")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             })
@@ -100,7 +100,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                 } else if (response.code() == 400) {
                     //  progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
-                            .setMessage("ایمیل وارد شده هم اکنون عضو تیم است!")
+                            .setMessage("این فرد قبلا به تیم پروژه اضافه شده است.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             })
@@ -109,7 +109,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                 } else if (response.code() == 405) {
                     //  progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
-                            .setMessage("باعرض پوزش شما امکان افزودن عضو به پروژه را ندارید. از سازنده یا مدیر درخواست کنید!")
+                            .setMessage("باعرض پوزش شما امکان افزودن عضو به پروژه را ندارید. از سازنده یا مدیر درخواست کنید.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             })
@@ -118,7 +118,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                 } else if (response.code() == 404) {
                     //  progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
-                            .setMessage("عضو مورد نظر کاربر لینکرپد نمی باشد لطفا جهت ثبت نام اولیه با پشتیبانی تماس بگیرید")
+                            .setMessage("کاربری با این ایمیل موجود نمی باشد. قبل از افزودن فرد به تیم پروژه، از او بخواهید در لینکرپد ثبت نام نماید.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             }).setNegativeButton("بعداً", { dialog, view ->

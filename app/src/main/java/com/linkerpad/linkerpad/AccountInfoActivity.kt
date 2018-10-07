@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
 import android.util.Base64
 import android.view.LayoutInflater
@@ -102,6 +104,8 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         }
 
         accountPicFab.setOnClickListener {
+
+
             var layoutInflater: LayoutInflater = this@AccountInfoActivity.layoutInflater
             var view: View = layoutInflater.inflate(R.layout.choose_imgae_layout, null)
             var dialog: AlertDialog.Builder = AlertDialog.Builder(this@AccountInfoActivity, R.style.AlertDialogTheme)
@@ -115,17 +119,42 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
             var dialog2 = dialog.show()
             view.galleryChooseImageTv.setOnClickListener {
                 //Toast.makeText(this@AddProjectActivity , "gallery",Toast.LENGTH_LONG).show()
-                galleryIntent()
-                dialog2.dismiss()
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    galleryIntent()
+                    dialog2.dismiss()
+                } else {
+                    ActivityCompat.requestPermissions(this@AccountInfoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+
+                }
             }
             view.cameraChooseImageTv.setOnClickListener {
                 //  Toast.makeText(this@AddProjectActivity , "camera",Toast.LENGTH_LONG).show()
-                captureCamera()
-                dialog2.dismiss()
 
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    captureCamera()
+                    dialog2.dismiss()
+                } else {
+                    ActivityCompat.requestPermissions(this@AccountInfoActivity, arrayOf(android.Manifest.permission.CAMERA), 2)
+                }
             }
         }
 
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                galleryIntent()
+            } else {
+            }
+        } else if (requestCode == 2) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                captureCamera()
+            } else {
+            }
+
+        }
     }
 
     fun getImageUri(inContext: Context, inImage: Bitmap): Uri {
@@ -151,56 +180,56 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         cropIntent.putExtra("outputY", 512)
         cropIntent.putExtra("return-data", true)
         startActivityForResult(cropIntent, 34)
-      //  convertedImage = true
+        //  convertedImage = true
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
 
-            if (resultCode != Activity.RESULT_CANCELED) {
-                if (/*data!!.data != null &&*/ requestCode == SELECT_IMAGE || requestCode == 10) {
+        if (resultCode != Activity.RESULT_CANCELED) {
+            if (/*data!!.data != null &&*/ requestCode == SELECT_IMAGE || requestCode == 10) {
 
-                    if (requestCode == SELECT_IMAGE)
-                        cropImage(data!!.data)
-                    else {
+                if (requestCode == SELECT_IMAGE)
+                    cropImage(data!!.data)
+                else {
 
-                        var inImage: Bitmap = data!!.extras.get("data") as Bitmap
+                    var inImage: Bitmap = data!!.extras.get("data") as Bitmap
 
-                        val tempUri = getImageUri(applicationContext, inImage)
+                    val tempUri = getImageUri(applicationContext, inImage)
 
-                        cropImage(tempUri)
-                    }
-
-
-                } else if (requestCode == 34) {
-
-
-                    var extras: Bundle = data!!.extras
-                //    var selectedBitmap: Bitmap = extras.getParcelable("data")
-                    var selectedBitmap: Bitmap = extras.getParcelable("data") as Bitmap
-                  //  var selectedBitmap: Bitmap =  data!!.extras.get("data") as Bitmap
-                    // Set The Bitmap Data To ImageView
-                    accountPicImg.setImageBitmap(selectedBitmap);
-                    accountPicImg.setScaleType(ImageView.ScaleType.FIT_XY);
-
-
-                    if (selectedBitmap != null) {
-
-                        var outputStream = ByteArrayOutputStream()
-                        selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
-                        convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
-                        convertedImage = true
-                    }
-
-                } else {
-
-
+                    cropImage(tempUri)
                 }
+
+
+            } else if (requestCode == 34) {
+
+
+                var extras: Bundle = data!!.extras
+                //    var selectedBitmap: Bitmap = extras.getParcelable("data")
+                var selectedBitmap: Bitmap = extras.getParcelable("data") as Bitmap
+                //  var selectedBitmap: Bitmap =  data!!.extras.get("data") as Bitmap
+                // Set The Bitmap Data To ImageView
+                accountPicImg.setImageBitmap(selectedBitmap);
+                accountPicImg.setScaleType(ImageView.ScaleType.FIT_XY);
+
+
+                if (selectedBitmap != null) {
+
+                    var outputStream = ByteArrayOutputStream()
+                    selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+                    convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                    convertedImage = true
+                }
+
             } else {
-                convertImage = ""
-                accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.noun_user))
+
+
             }
+        } else {
+            convertImage = ""
+            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.noun_user))
+        }
 
         if (resultCode != Activity.RESULT_CANCELED) {
 
@@ -218,7 +247,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         startActivityForResult(cameraIntent, 10)
     }
 
-    private fun editUserInformation(firstName: String, lastName: String, company: String, mobileNumber: String,skill:String) {
+    private fun editUserInformation(firstName: String, lastName: String, company: String, mobileNumber: String, skill: String) {
 
         if (convertedImage) {
             projectPicture = convertImage
@@ -247,8 +276,8 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 if (response!!.code() == 200) {
                     getUserInformation()
                     Toast.makeText(this@AccountInfoActivity, "اطلاعات با موفقیت ویرایش شد", Toast.LENGTH_LONG).show()
-                    var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
-                    startActivity(intent)
+                   /* var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
+                    startActivity(intent)*/
                     this@AccountInfoActivity.finish()
 
 
@@ -302,7 +331,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 emailEdt.setText("${userInformationOutput.emailAddress}")
                 companyEdt.setText("${userInformationOutput.company}")
                 phoneEdt.setText("${userInformationOutput.mobileNumber.substring(2)}")
-                if(userInformationOutput.skill == null || userInformationOutput.skill == ""){
+                if (userInformationOutput.skill == null || userInformationOutput.skill == "") {
                     skillEdt.setText("بدون تخصص")
                 }
                 skillEdt.setText("${userInformationOutput.skill}")
@@ -348,7 +377,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
     override fun onValidationSucceeded() {
         //  setupProgress()
 
-        editUserInformation(nameEdt.text.toString(), lastNameEdt.text.toString(), companyEdt.text.toString(), "98" + phoneEdt.text.toString(),skillEdt.text.toString())
+        editUserInformation(nameEdt.text.toString(), lastNameEdt.text.toString(), companyEdt.text.toString(), "98" + phoneEdt.text.toString(), skillEdt.text.toString())
     }
 
     override fun attachBaseContext(newBase: Context?) {

@@ -159,14 +159,20 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
           val month   = todayDate.split("/")[1].toInt()
           val day   = todayDate.split("/")[2].toInt()*/
 
+
         var gregorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(todayDate.toString().split("-")[0].toInt(), todayDate.toString().split("-")[1].toInt(), todayDate.toString().split("-")[2].toInt())
         var jalaliEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianEnd)
 
+        val now = PersianCalendar()
+/*
+        Toast.makeText(context,"${now.persianDay}",Toast.LENGTH_LONG).show()
+*/
 
-        view.dayDateTv.setText("${jalaliEnd.date + 1}")
+
+        view.dayDateTv.text = "${now.persianDay}"
 
         var monthName = ""
-        when (jalaliEnd.month) {
+        when (now.persianMonth+1) {
             1 -> {
 
                 monthName = "فروردین"
@@ -215,11 +221,9 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
                 monthName = "اسفند"
             }
-
-
         }
-        view.monthDateTv.setText(monthName)
-        view.yearDateTv.setText("${jalaliEnd.year}")
+        view.monthDateTv.text = monthName
+        view.yearDateTv.text = "${now.persianYear}"
         reportDate = "$todayDate"
 
         //Toast.makeText(context, "$todayDate", Toast.LENGTH_LONG).show()
@@ -269,7 +273,6 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             intent.putExtra("startOrEndDate", DateType.StartDate.value)
             startActivityForResult(intent, DateType.StartDate.value)*/
 
-            val now = PersianCalendar()
             val dpd = DatePickerDialog.newInstance(
                     this,
                     now.persianYear,
@@ -356,7 +359,6 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت گزارش")
                     .setContentText("ابتدا تاریخ گزارش را انتخاب کنید. سپس آیتم های خود را با توجه به دسته بندی موجود، ثبت نمایید.")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build()
 
@@ -375,7 +377,6 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                         .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("تایید نهایی گزارش")
                         .setContentText("پس از تکمیل گزارش خود، آن را تایید نمایید.")
-                        .hideOnTouchOutside()
                         .replaceEndButton(showCaseButton)
                         .build()
 
@@ -393,8 +394,7 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                             .setContentTextPaint(textPaint)
                             .setContentTitlePaint(titleTextPaint)
                             .setContentTitle("ویرایش پروژه")
-                            .setContentText("برای ویرایش پروژه، این آیکون را لمس نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
-                            .hideOnTouchOutside()
+                            .setContentText("برای ویرایش پروژه، این آیکون را لمس نمایید.\n(افراد با سطح دسترسی «مسئول» ، مجاز به انجام این کار هستند.)")
                             .replaceEndButton(showCaseButton)
                             .build().setButtonText("باشه")
                 }

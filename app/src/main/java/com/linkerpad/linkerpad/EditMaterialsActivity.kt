@@ -47,11 +47,11 @@ class EditMaterialsActivity : AppCompatActivity() {
             view ->
             //   setupProgress()
 
-            if (TitleMaterialEdt.text.toString() != "" && countMaterialsEdt.text.toString() != "" && unitMaterialEdt.text.toString() != "") {
+            if (TitleMaterialEdt.text.toString() != ""/* && countMaterialsEdt.text.toString() != "" && unitMaterialEdt.text.toString() != ""*/) {
                 // setupProgress()
                 editMaterial(projectId, materialId)
             } else {
-                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
             }
 
 
@@ -166,7 +166,7 @@ class EditMaterialsActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش مواد و مصالح را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -233,7 +233,7 @@ class EditMaterialsActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف مواد و مصالح را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 

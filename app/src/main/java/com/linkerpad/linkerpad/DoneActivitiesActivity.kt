@@ -1,6 +1,7 @@
 package com.linkerpad.linkerpad
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -28,6 +29,7 @@ import kotlinx.android.synthetic.main.done_activities_item.*
 import kotlinx.android.synthetic.main.done_activities_layout.*
 import retrofit2.Call
 import retrofit2.Response
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class DoneActivitiesActivity : AppCompatActivity() {
 
@@ -53,21 +55,21 @@ class DoneActivitiesActivity : AppCompatActivity() {
             this@DoneActivitiesActivity.finish()
         }
 
-        copyDoneActivitiesImv.setOnClickListener {
-            /*      if (getGuide()) {
+        /*  copyDoneActivitiesImv.setOnClickListener {
+              *//*      if (getGuide()) {
                       ShowcaseView.Builder(this@DoneActivitiesActivity)
                               .setTarget(ViewTarget(R.id.copyDoneActivitiesImv, this))
                               .withMaterialShowcase()
                               .setContentText("میتوانید جهت سهولت بیشتر، کلیه موارد این لیست را از روز قبل کپی کرده و متناسب با کارهای امروز آنها را ویرایش نمایید")
-                              .hideOnTouchOutside()
+
                               .build()
                       var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
                       var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
                       sharedPreferencesEditor.putBoolean("guide", true)
                       sharedPreferencesEditor.apply()
                       sharedPreferencesEditor.commit()
-                  }*/
-        }
+                  }*//*
+        }*/
 
 
         //refreshing
@@ -98,8 +100,8 @@ class DoneActivitiesActivity : AppCompatActivity() {
 
         var showCaseButton = Button(this)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
-        showCaseButton.setTextColor( Color.WHITE)
-        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
+        showCaseButton.setTextColor(Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets, "IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide4", true)) {
@@ -129,7 +131,6 @@ class DoneActivitiesActivity : AppCompatActivity() {
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت آیتم های جدید")
                     .setContentText("برای ثبت، جزئیات هر آیتم را وارد نمایید. \n لیست کل آیتم های روزانه، در این صفحه دیده می شود اما هر فرد می تواند آیتم های خود را ویرایش یا حذف نماید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به ویرایش یا حذف تمامی آیتم ها می باشند)")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build().setButtonText("باشه")
 
@@ -215,6 +216,10 @@ class DoneActivitiesActivity : AppCompatActivity() {
         var sharedPreferences: SharedPreferences = this@DoneActivitiesActivity.getSharedPreferences("userInformation", 0)
         var token = sharedPreferences.getString("token", null)
         return token
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
 }

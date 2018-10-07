@@ -61,8 +61,8 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
 
         saveEditDailyActivityTv.setOnClickListener { view ->
 
-            if (sizeUnitDoneActivitiesEdt.text.toString() != "" && TitleDoneActivitiesEdt.text.toString() != "" && countMemberDoneActivitiesEdt.text.toString() != ""
-                    && timeCountDoneActivitiesEdt.text.toString() != "" && sizeCountDoneActivitiesEdt.text.toString() != "") {
+            if (/*sizeUnitDoneActivitiesEdt.text.toString() != "" &&*/ TitleDoneActivitiesEdt.text.toString() != ""/* && countMemberDoneActivitiesEdt.text.toString() != ""
+                    && timeCountDoneActivitiesEdt.text.toString() != "" && sizeCountDoneActivitiesEdt.text.toString() != ""*/) {
                 // setupProgress()
                 editDailyActivity(projectId, dailyActivityId)
             } else {
@@ -196,7 +196,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان حذف فعالیت را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -238,7 +238,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
                     Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد!", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "با عرض پوزش ، شما امکان ویرایش فعالیت را ندارید!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
 
                 }
 

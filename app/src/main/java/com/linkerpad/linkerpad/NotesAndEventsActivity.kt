@@ -88,14 +88,15 @@ class NotesAndEventsActivity : AppCompatActivity() {
 
                 // progressDialog.dismiss()
 
-                var NoteAndEventListResponse = response!!.body()
+                if(response!!.code() ==200) {
+                    var NoteAndEventListResponse = response!!.body()
 
-                var NoteAndEventList = ArrayList<NoteAndEventInformationData>()
-                NoteAndEventList = NoteAndEventListResponse!!.responseObject
+                    var NoteAndEventList = ArrayList<NoteAndEventInformationData>()
+                    NoteAndEventList = NoteAndEventListResponse!!.responseObject
 
-                noteAndEventRecycler.layoutManager = LinearLayoutManager(this@NotesAndEventsActivity)
-                noteAndEventRecycler.adapter = NoteAndEventAdapter(this@NotesAndEventsActivity, NoteAndEventList, projectId)
-
+                    noteAndEventRecycler.layoutManager = LinearLayoutManager(this@NotesAndEventsActivity)
+                    noteAndEventRecycler.adapter = NoteAndEventAdapter(this@NotesAndEventsActivity, NoteAndEventList, projectId)
+                }
             }
 
         })
@@ -165,7 +166,6 @@ class NotesAndEventsActivity : AppCompatActivity() {
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت آیتم های جدید")
                     .setContentText("برای ثبت، جزئیات هر آیتم را وارد نمایید. \n لیست کل آیتم های روزانه، در این صفحه دیده می شود اما هر فرد می تواند آیتم های خود را ویرایش یا حذف نماید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به ویرایش یا حذف تمامی آیتم ها می باشند)")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build().setButtonText("باشه")
 

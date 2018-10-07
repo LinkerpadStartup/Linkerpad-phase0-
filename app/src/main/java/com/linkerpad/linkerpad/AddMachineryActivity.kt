@@ -32,11 +32,11 @@ class AddMachineryActivity : AppCompatActivity() {
         var reportDate = getIntent().getStringExtra("reportDate")
 
         saveMachineryTv.setOnClickListener { view ->
-            if (TitleMachineryEdt.text.toString() != "" && countActiveMachineryEdt.text.toString() != "" && countDeactiveMachineryEdt.text.toString() != "" && timeCountMachineryEdt.text.toString() != "") {
+            if (TitleMachineryEdt.text.toString() != "" /*&& countActiveMachineryEdt.text.toString() != "" && countDeactiveMachineryEdt.text.toString() != "" && timeCountMachineryEdt.text.toString() != ""*/) {
                // setupProgress()
                 createMachinery(projectId, reportDate)
             } else {
-                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
             }
         }
 

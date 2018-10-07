@@ -179,7 +179,6 @@ class TeamFragment : Fragment() {
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("افزودن فرد به تیم پروژه")
                     .setContentText("برای این کار ، آیکون را لمس و سطح دسترسی فرد را تعیین نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build()
 
@@ -198,7 +197,6 @@ class TeamFragment : Fragment() {
                         .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("مشخصات افراد")
                         .setContentText("برای نمایش جزئیات بیشتر و دسترسی به ویرایش یا حذف فرد از تیم پروژه، این آیکون را لمس نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
-                        .hideOnTouchOutside()
                         .replaceEndButton(showCaseButton)
                         .build().setButtonText("باشه")
             }
@@ -218,7 +216,7 @@ class TeamFragment : Fragment() {
         call.enqueue(object : retrofit2.Callback<MemberListResponse> {
             override fun onFailure(call: Call<MemberListResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(this@TeamFragment.view!!, "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(this@TeamFragment.view!!, "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MemberListResponse>?, response: Response<MemberListResponse>?) {

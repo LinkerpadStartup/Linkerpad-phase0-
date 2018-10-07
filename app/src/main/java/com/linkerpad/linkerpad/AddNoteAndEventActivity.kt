@@ -38,7 +38,7 @@ class AddNoteAndEventActivity : AppCompatActivity() {
                 // setupProgress()
                 createNoteAndEvent(projectId, reportDate)
             } else {
-                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
             }
 
         }

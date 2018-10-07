@@ -9,6 +9,7 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
@@ -42,20 +43,18 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        try {
 
-
-            setupViewPager(mainPager)
-            tabs.setupWithViewPager(mainPager)
-            mainPager.setCurrentItem(1, true)
-
-        } catch (e: Exception) {
-
-        }
         headerNameTv.setText(getNameLastName())
         headerEmailTv.setText(getEmail())
 
         login(getEmail(), getPassword())
+
+        ActivityCompat.requestPermissions(this@MainActivity, arrayOf(
+                android.Manifest.permission.CALL_PHONE,
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.CALL_PHONE
+        ), 1)
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)

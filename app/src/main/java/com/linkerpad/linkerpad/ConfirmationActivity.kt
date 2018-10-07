@@ -39,7 +39,7 @@ class ConfirmationActivity : AppCompatActivity() {
 
 
         var projectId = intent.getStringExtra("projectId")
-        var reportDate = getIntent().getStringExtra("reportDate")
+        var reportDate = getIntent().getStringExtra("reportDate").replace("/", "-")
 
         var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt())
         var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
@@ -89,7 +89,6 @@ class ConfirmationActivity : AppCompatActivity() {
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("تایید گزارش")
                     .setContentText("برای تایید نهایی گزارش روزانه، تیک خود را بزنید.")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build()
 
@@ -100,15 +99,14 @@ class ConfirmationActivity : AppCompatActivity() {
                 showcaseView!!.hide()
                 showcaseView!!.removeAllViews()
 
-                ShowcaseView.Builder(this)
+                ShowcaseView.Builder(this, true)
                         .setTarget(ViewTarget(R.id.showConfirmationReportTv, this))
-                        .withMaterialShowcase()
+                        .withNewStyleShowcase()
                         .setStyle(R.style.CustomShowcaseTheme3)
                         .setContentTextPaint(textPaint)
                         .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("نمایش گزارش")
                         .setContentText("جهت نمایش، دانلود و یا به اشتراک گذاری گزارش روزانه، این آیکون را لمس نمایید.")
-                        .hideOnTouchOutside()
                         .replaceEndButton(showCaseButton)
                         .build().setButtonText("باشه")
             }
@@ -136,17 +134,18 @@ class ConfirmationActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ConfirmationListResponse>?, response: Response<ConfirmationListResponse>?) {
 
                 //    progressDialog.dismiss()
+                if (response!!.code() == 200) {
+                    try {
+                        var confirmationListResponse = response!!.body()
 
-                try {
-                    var confirmationListResponse = response!!.body()
+                        var confirmationList = ArrayList<ConfirmationInformationData>()
+                        confirmationList = confirmationListResponse!!.responseObject
 
-                    var confirmationList = ArrayList<ConfirmationInformationData>()
-                    confirmationList = confirmationListResponse!!.responseObject
+                        confirmationRecyclerView.layoutManager = LinearLayoutManager(this@ConfirmationActivity)
+                        confirmationRecyclerView.adapter = ConfirmationAdapter(this@ConfirmationActivity, confirmationList, projectId, getToken(), reportDate)
+                    } catch (e: Exception) {
 
-                    confirmationRecyclerView.layoutManager = LinearLayoutManager(this@ConfirmationActivity)
-                    confirmationRecyclerView.adapter = ConfirmationAdapter(this@ConfirmationActivity, confirmationList, projectId, getToken(), reportDate)
-                } catch (e: Exception) {
-
+                    }
                 }
             }
 

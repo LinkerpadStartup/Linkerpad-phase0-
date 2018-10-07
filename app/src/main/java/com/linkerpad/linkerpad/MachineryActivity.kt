@@ -109,7 +109,6 @@ class MachineryActivity : AppCompatActivity() {
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت آیتم های جدید")
                     .setContentText("برای ثبت، جزئیات هر آیتم را وارد نمایید. \n لیست کل آیتم های روزانه، در این صفحه دیده می شود اما هر فرد می تواند آیتم های خود را ویرایش یا حذف نماید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به ویرایش یا حذف تمامی آیتم ها می باشند)")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build().setButtonText("باشه")
 

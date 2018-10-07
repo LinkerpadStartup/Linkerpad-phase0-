@@ -55,7 +55,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/iransans_web_light"
                             android:gravity="center_vertical"
-                            android:text="ویرایش مشکلات،موانع و یادداشت ها "
+                            android:text="ویرایش مشکل، اتفاق و ... "
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 

@@ -29,6 +29,7 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.view.MotionEvent
 import android.widget.Button
+import android.widget.Toast
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener
 
 
@@ -74,7 +75,7 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
         view.projectsRefreshLayout.setOnRefreshListener {
             // Handler().postDelayed(Runnable { view.projectsRefreshLayout.setRefreshing(false) }, 2000)
             //  setupProgress()
-            getProjectList()
+            getProjectListUpdate()
             view.projectsRefreshLayout.isRefreshing = false
 
         }
@@ -87,7 +88,7 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
 
         activity!!.refreshBtnImv.setOnClickListener {
             //  setupProgress()
-            getProjectList()
+            getProjectListUpdate()
 
             view.projectsRefreshLayout.isRefreshing = false
         }
@@ -121,8 +122,8 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
 
         var showCaseButton = Button(activity)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
-        showCaseButton.setTextColor( Color.WHITE)
-        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
+        showCaseButton.setTextColor(Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets, "IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide1", true)) {
@@ -150,7 +151,6 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
                     .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("پروژه جدید")
                     .setContentText("برای شروع، پروژه جدیدی را اضافه و مشخصات آن را وارد نمایید.")
-                    .hideOnTouchOutside()
                     .replaceEndButton(showCaseButton)
                     .build()
 
@@ -169,7 +169,6 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
                         .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("بروز رسانی")
                         .setContentText("جهت بروز رسانی لیست پروژه ها، این آیکون را لمس نموده یا صفحه را به سمت پایین بکشید.")
-                        .hideOnTouchOutside()
                         .replaceEndButton(showCaseButton)
                         .build().setButtonText("باشه")
             }
@@ -210,15 +209,36 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
         })
     }
 
-    private fun setupProgress() {
-        progressDialog = ProgressDialog(context)
-        progressDialog.setMessage("با لینکرپد پروژه در دستان شماست")
-        progressDialog.setCancelable(false)
-        progressDialog.isIndeterminate = true
-        progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
-        progressDialog.show()
-    }
+    private fun getProjectListUpdate() {
+        var service: IUserApi = IWebApi.Factory.create()
+        var call = service.getProjectList(getToken())
 
+        call.enqueue(object : retrofit2.Callback<ProjectListResponse> {
+            override fun onFailure(call: Call<ProjectListResponse>?, t: Throwable?) {
+                //   progressDialog.dismiss()
+                Snackbar.make(this@ProjectsFragment.view!!, "خطا هنگام دریافت اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<ProjectListResponse>?, response: Response<ProjectListResponse>?) {
+
+                //   progressDialog.dismiss()
+
+                if (response!!.code() == 200) {
+                    var projectListResponse = response.body()
+
+                    var projectlist = ArrayList<ProjectInformationData>()
+                    projectlist = projectListResponse!!.responseObject
+
+                    view!!.projectsRecyclerView.layoutManager = LinearLayoutManager(activity)
+                    view!!.projectsRecyclerView.adapter = ProjectsListAdapter(activity!!, projectlist)
+
+                    Toast.makeText(context, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+
+                }
+            }
+
+        })
+    }
 
     private fun getToken(): String {
         var sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("userInformation", 0)

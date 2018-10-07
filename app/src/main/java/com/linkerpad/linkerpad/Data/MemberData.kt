@@ -13,7 +13,8 @@ data class MemberInformationData(var userRole: Int,
                                  var profilePicture: String,
                                  var emailAddress: String,
                                  var mobileNumber: String,
-                                 var company: String)
+                                 var company: String,
+                                 var skill:String?)
 
 data class MemberData(var id:String,var projectId: String, var emailAddress: String, var userRole: Int) {
     companion object {
