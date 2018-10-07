@@ -8,13 +8,13 @@
     tools:context="com.linkerpad.linkerpad.ConfirmationActivity">
 
     <Space
+        android:id="@+id/showCaseForCheckBox"
         android:layout_width="1dp"
         android:layout_height="1dp"
-        android:id="@+id/showCaseForCheckBox"
-        android:layout_marginTop="134dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="24dp"/>
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="134dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,16 +60,26 @@
                         android:text="تایید گزارش"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
+
                     <TextView
+                        android:id="@+id/confirmationDateTv"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
                         android:layout_weight="1"
-                        android:id="@+id/confirmationDateTv"
                         android:gravity="center_vertical|right"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 
+                    <ImageView
+                        android:id="@+id/refreshBtnImv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="15dp"
+                        android:src="@drawable/ic_autorenew" />
 
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
@@ -112,27 +122,35 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/confirmationTv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.15"
                         android:gravity="left|center_vertical"
-                        android:paddingRight="8dp"
-                        android:id="@+id/confirmationTv"
-                        android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp"
                         android:text="تایید"
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/confirmationRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
             </LinearLayout>
         </ScrollView>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/confirmationSwapRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/confirmationRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

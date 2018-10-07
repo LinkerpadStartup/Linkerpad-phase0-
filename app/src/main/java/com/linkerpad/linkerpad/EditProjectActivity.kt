@@ -148,7 +148,7 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
                 if (fixedbitmap != null) {
                     //  val bytes = File(uri.toString()).readBytes()
                     var outputStream = ByteArrayOutputStream()
-                    fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                    fixedbitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream);
                     convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
                     convertedImage = true
                 }
@@ -170,7 +170,8 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         } else {
             convertedImage = true
             convertImage = ""
-            projectPicImg.setImageDrawable(resources.getDrawable(R.drawable.ic_account_circle_blue))
+            projectPicImg.setImageDrawable(resources.getDrawable(R.drawable.skyline2))
+
         }
 
 

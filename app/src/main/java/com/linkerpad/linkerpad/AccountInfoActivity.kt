@@ -217,7 +217,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 if (selectedBitmap != null) {
 
                     var outputStream = ByteArrayOutputStream()
-                    selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
+                    selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream);
                     convertImage = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
                     convertedImage = true
                 }

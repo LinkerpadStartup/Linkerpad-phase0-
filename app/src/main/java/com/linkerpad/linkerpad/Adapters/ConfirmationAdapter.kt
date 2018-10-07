@@ -83,6 +83,7 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
 
             var call = service.deleteConfirmation(token, deleteMaterialBody)
 
+          //  Toast.makeText(context, "درحال حذف!", Toast.LENGTH_LONG).show()
             call.enqueue(object : retrofit2.Callback<ConfirmationResponse> {
                 override fun onFailure(call: Call<ConfirmationResponse>?, t: Throwable?) {
                     //  progressDialog.dismiss()
@@ -94,10 +95,10 @@ class ConfirmationAdapter(var context: Context, var data: ArrayList<Confirmation
                     //  progressDialog.dismiss()
 
                     if (response!!.code() == 200) {
-                        // Toast.makeText(context, "با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
+                         Toast.makeText(context, "با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
 
                     } else if (response.code() == 409) {
-                        //  Toast.makeText(context, "قبلا حذف گردیده است!", Toast.LENGTH_LONG).show()
+                          Toast.makeText(context, "قبلا حذف گردیده است!", Toast.LENGTH_LONG).show()
 
                     } else {
                         Toast.makeText(context, "خطا، مشکلی هنگام پردازش رخ داده!", Toast.LENGTH_LONG).show()

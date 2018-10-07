@@ -13,6 +13,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextPaint
 import android.widget.Button
+import android.widget.Toast
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.linkerpad.linkerpad.Adapters.ConfirmationAdapter
@@ -41,7 +42,7 @@ class ConfirmationActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate").replace("/", "-")
 
-        var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt())
+        var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt()-1)
         var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
         var date = jalaliStart.toString().replace("-", "/")
 
@@ -119,6 +120,22 @@ class ConfirmationActivity : AppCompatActivity() {
         }
 
 
+        //refresh
+        refreshBtnImv.setOnClickListener {
+            getConfirmationListUpdate(projectId, reportDate)
+        }
+
+        confirmationSwapRefresh.setColorSchemeColors(Color.parseColor("#1E88E5"))
+        confirmationSwapRefresh.setOnRefreshListener {
+
+            getConfirmationListUpdate(projectId, reportDate)
+            confirmationSwapRefresh.isRefreshing = false
+
+        }
+
+        //end refresh
+
+
     }
 
     private fun getConfirmationList(projectId: String, reportDate: String = "2020-02-02") {
@@ -127,7 +144,7 @@ class ConfirmationActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<ConfirmationListResponse> {
             override fun onFailure(call: Call<ConfirmationListResponse>?, t: Throwable?) {
-                progressDialog.dismiss()
+          //      progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 
@@ -153,6 +170,40 @@ class ConfirmationActivity : AppCompatActivity() {
 
     }
 
+    private fun getConfirmationListUpdate(projectId: String, reportDate: String = "2020-02-02") {
+        var service: IUserApi = IWebApi.Factory.create()
+        var call = service.getProjectConfirmationList(getToken(), projectId, reportDate)
+
+        call.enqueue(object : retrofit2.Callback<ConfirmationListResponse> {
+            override fun onFailure(call: Call<ConfirmationListResponse>?, t: Throwable?) {
+                //      progressDialog.dismiss()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<ConfirmationListResponse>?, response: Response<ConfirmationListResponse>?) {
+
+                //    progressDialog.dismiss()
+                if (response!!.code() == 200) {
+                    try {
+
+                        Toast.makeText(this@ConfirmationActivity, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+
+                        var confirmationListResponse = response!!.body()
+
+                        var confirmationList = ArrayList<ConfirmationInformationData>()
+                        confirmationList = confirmationListResponse!!.responseObject
+
+                        confirmationRecyclerView.layoutManager = LinearLayoutManager(this@ConfirmationActivity)
+                        confirmationRecyclerView.adapter = ConfirmationAdapter(this@ConfirmationActivity, confirmationList, projectId, getToken(), reportDate)
+                    } catch (e: Exception) {
+
+                    }
+                }
+            }
+
+        })
+
+    }
 
     private fun setupProgress() {
         progressDialog = ProgressDialog(this@ConfirmationActivity)

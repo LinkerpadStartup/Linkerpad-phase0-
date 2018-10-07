@@ -300,6 +300,7 @@
                         android:fontFamily="@font/iransans_web_light"
                         android:hint="عنوان"
                         android:inputType="text"
+                        android:textColorHint="@color/gray600"
                         android:maxLength="200"
                         android:padding="8dp" />
                 </android.support.design.widget.TextInputLayout>
@@ -484,6 +485,7 @@
                         android:layout_marginRight="8dp"
                         android:fontFamily="@font/iransans_web_light"
                         android:hint="توضیحات"
+                        android:textColorHint="@color/gray600"
                         android:maxLength="400"
                         android:padding="8dp" />
                 </android.support.design.widget.TextInputLayout>
