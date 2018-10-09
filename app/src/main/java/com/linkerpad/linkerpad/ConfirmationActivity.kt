@@ -42,7 +42,7 @@ class ConfirmationActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate").replace("/", "-")
 
-        var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt()-1)
+        var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt())
         var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
         var date = jalaliStart.toString().replace("-", "/")
 
@@ -186,7 +186,7 @@ class ConfirmationActivity : AppCompatActivity() {
                 if (response!!.code() == 200) {
                     try {
 
-                        Toast.makeText(this@ConfirmationActivity, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ConfirmationActivity, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
                         var confirmationListResponse = response!!.body()
 

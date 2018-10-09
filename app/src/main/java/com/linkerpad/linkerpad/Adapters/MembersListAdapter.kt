@@ -216,8 +216,6 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
 
 
 
-            if (itemModel.skill != null) {
-                if (itemModel.skill != "null") {
 
 
                     /** skill TextView **/
@@ -225,7 +223,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                     val skillTv: TextView = TextView(context)
                     skillTv.layoutParams = skillTvParams
 
-                    if (itemModel.skill != null) {
+               /*     if (itemModel.skill != null) {
                         skillTv.setText("${itemModel.skill}")
                     }
                     if (itemModel.skill != "null") {
@@ -241,6 +239,12 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                         itemModel.skill = "بدون تخصص"
                         skillTv.setText("${itemModel.skill}")
 
+                    }*/
+
+                    if (itemModel.skill == null || itemModel.skill.toString().equals("") || itemModel.skill.toString().equals("null")) {
+                        skillTv.setText("بدون تخصص")
+                    } else {
+                        skillTv.setText("${itemModel.skill}")
                     }
 
                     skillTv.setPadding(35, 10, 20, 10)
@@ -248,10 +252,8 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
                     skillTv.gravity = Gravity.RIGHT
                     skillTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
                     itemView.secondTeamLL.addView(skillTv)
-                } else {
 
-                }
-            }
+
             /** phone number TextView **/
             var phoneNumberTvParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             val phoneNumberTv: TextView = TextView(context)

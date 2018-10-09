@@ -184,7 +184,7 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         call.enqueue(object : retrofit2.Callback<ProjectInformationResponse> {
             override fun onFailure(call: Call<ProjectInformationResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
 
             }
 
@@ -244,14 +244,14 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         call.enqueue(object : retrofit2.Callback<EditProjectResponse> {
             override fun onFailure(call: Call<EditProjectResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ویرایش اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ویرایش اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditProjectResponse>?, response: Response<EditProjectResponse>?) {
                 //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditProjectActivity, "پروژه با موفقیت ویرایش شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditProjectActivity, "پروژه با موفقیت ویرایش شد.", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@EditProjectActivity, ProjectHolderActivity::class.java)
                     intent.putExtra("id", getIntent().getStringExtra("id"))
                     startActivity(intent)
@@ -262,7 +262,7 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
 
                     if (response.message() == "Method Not Allowed") {
                         AlertDialog.Builder(this@EditProjectActivity, R.style.AlertDialogTheme)
-                                .setMessage("ویرایش پروژه برای شما امکان پذیر نمی باشد")
+                                .setMessage("ویرایش پروژه برای شما امکان پذیر نمی باشد.")
                                 .setPositiveButton("باشه", { dialog, view ->
                                     dialog.dismiss()
                                 })
@@ -270,7 +270,7 @@ class EditProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
                                 .show()
                     }
                 } else {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش پروژه!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش پروژه.", Snackbar.LENGTH_LONG).show()
 
                 }
             }

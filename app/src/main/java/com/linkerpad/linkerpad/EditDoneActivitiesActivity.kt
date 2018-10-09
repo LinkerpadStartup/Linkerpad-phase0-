@@ -66,7 +66,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
                 // setupProgress()
                 editDailyActivity(projectId, dailyActivityId)
             } else {
-                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "فقط توضیحات میتواند خالی باشد.", Snackbar.LENGTH_LONG).show()
             }
 
         }
@@ -145,7 +145,7 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         call.enqueue(object : Callback<GetDailyActivityInformationResponse> {
             override fun onFailure(call: Call<GetDailyActivityInformationResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetDailyActivityInformationResponse>?, response: Response<GetDailyActivityInformationResponse>?) {
@@ -178,14 +178,14 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<DeleteDailyActivityResponse> {
             override fun onFailure(call: Call<DeleteDailyActivityResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<DeleteDailyActivityResponse>?, response: Response<DeleteDailyActivityResponse>?) {
                 //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditDoneActivitiesActivity, "آیتم حذف گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditDoneActivitiesActivity, "آیتم حذف گردید.", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -193,10 +193,10 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditDoneActivitiesActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد.", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید.", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -220,14 +220,14 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<EditDailyActivityResponse> {
             override fun onFailure(call: Call<EditDailyActivityResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditDailyActivityResponse>?, response: Response<EditDailyActivityResponse>?) {
                 //progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditDoneActivitiesActivity, "آیتم ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditDoneActivitiesActivity, "آیتم ویرایش گردید.", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -235,10 +235,10 @@ class EditDoneActivitiesActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditDoneActivitiesActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, فعالیت یافت نشد.", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید.", Snackbar.LENGTH_LONG).show()
 
                 }
 

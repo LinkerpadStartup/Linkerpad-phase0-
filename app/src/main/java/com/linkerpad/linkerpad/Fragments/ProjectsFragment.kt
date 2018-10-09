@@ -232,7 +232,7 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
                     view!!.projectsRecyclerView.layoutManager = LinearLayoutManager(activity)
                     view!!.projectsRecyclerView.adapter = ProjectsListAdapter(activity!!, projectlist)
 
-                    Toast.makeText(context, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
                 }
             }

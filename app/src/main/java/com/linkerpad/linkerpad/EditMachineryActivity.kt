@@ -168,14 +168,14 @@ class EditMachineryActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<MachineryResponse> {
             override fun onFailure(call: Call<MachineryResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MachineryResponse>?, response: Response<MachineryResponse>?) {
                 // progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMachineryActivity, "آیتم ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMachineryActivity, "آیتم ویرایش گردید.", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -183,10 +183,10 @@ class EditMachineryActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMachineryActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد.", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید.", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -203,7 +203,7 @@ class EditMachineryActivity : AppCompatActivity() {
         call.enqueue(object : Callback<GetMachineryInformationResponse> {
             override fun onFailure(call: Call<GetMachineryInformationResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetMachineryInformationResponse>?, response: Response<GetMachineryInformationResponse>?) {
@@ -235,14 +235,14 @@ class EditMachineryActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<MachineryResponse> {
             override fun onFailure(call: Call<MachineryResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MachineryResponse>?, response: Response<MachineryResponse>?) {
                 //   progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMachineryActivity, "آیتم حذف گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMachineryActivity, "آیتم حذف گردید.", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -250,10 +250,10 @@ class EditMachineryActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMachineryActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, تجهیزات یافت نشد.", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید.", Snackbar.LENGTH_LONG).show()
 
                 }
 

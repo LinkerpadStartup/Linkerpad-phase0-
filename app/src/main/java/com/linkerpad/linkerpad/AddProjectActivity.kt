@@ -163,7 +163,7 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 createProject()
                 //setupProgress()
             } else {
-                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود.", Snackbar.LENGTH_LONG).show()
             }
         }
 
@@ -270,21 +270,21 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         call.enqueue(object : retrofit2.Callback<CreateProjectResponse> {
             override fun onFailure(call: Call<CreateProjectResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا هنگام ورود اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<CreateProjectResponse>?, response: Response<CreateProjectResponse>?) {
                 // progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@AddProjectActivity, "پروژه با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddProjectActivity, "پروژه با موفقیت ثبت شد.", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddProjectActivity, MainActivity::class.java)
                     startActivity(intent)
                     this@AddProjectActivity.finish()
 
 
                 } else {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ثبت پروژه!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ثبت پروژه.", Snackbar.LENGTH_LONG).show()
 
                 }
             }

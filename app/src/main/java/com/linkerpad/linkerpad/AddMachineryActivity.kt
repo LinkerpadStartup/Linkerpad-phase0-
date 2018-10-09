@@ -165,7 +165,7 @@ class AddMachineryActivity : AppCompatActivity() {
 
                 if (response!!.code() == 200) {
 
-                    Toast.makeText(this@AddMachineryActivity, "آیتم ثبت گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddMachineryActivity, "آیتم ثبت گردید.", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddMachineryActivity, MachineryActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)

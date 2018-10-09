@@ -266,7 +266,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         call.enqueue(object : Callback<EditUserResponse> {
             override fun onFailure(call: Call<EditUserResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<EditUserResponse>?, response: Response<EditUserResponse>?) {
@@ -275,14 +275,14 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
                 if (response!!.code() == 200) {
                     getUserInformation()
-                    Toast.makeText(this@AccountInfoActivity, "اطلاعات با موفقیت ویرایش شد", Toast.LENGTH_LONG).show()
-                   /* var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
-                    startActivity(intent)*/
+                    Toast.makeText(this@AccountInfoActivity, "اطلاعات با موفقیت ویرایش شد.", Toast.LENGTH_LONG).show()
+                    /* var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
+                     startActivity(intent)*/
                     this@AccountInfoActivity.finish()
 
 
                 } else {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش اطلاعات", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا در ویرایش اطلاعات.", Snackbar.LENGTH_LONG).show()
 
                 }
             }
@@ -316,7 +316,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
         call.enqueue(object : Callback<GetUserInformationResponse> {
             override fun onFailure(call: Call<GetUserInformationResponse>?, t: Throwable?) {
 
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<GetUserInformationResponse>?, response: Response<GetUserInformationResponse>?) {
@@ -331,11 +331,11 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 emailEdt.setText("${userInformationOutput.emailAddress}")
                 companyEdt.setText("${userInformationOutput.company}")
                 phoneEdt.setText("${userInformationOutput.mobileNumber.substring(2)}")
-                if (userInformationOutput.skill == null || userInformationOutput.skill == "") {
+                if (userInformationOutput.skill == null || userInformationOutput.skill.equals("") || userInformationOutput.skill.equals("null")) {
                     skillEdt.setText("بدون تخصص")
+                } else {
+                    skillEdt.setText("${userInformationOutput.skill}")
                 }
-                skillEdt.setText("${userInformationOutput.skill}")
-
 
                 if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
 

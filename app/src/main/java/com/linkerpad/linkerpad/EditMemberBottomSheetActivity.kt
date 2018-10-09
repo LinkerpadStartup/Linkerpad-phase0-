@@ -79,14 +79,14 @@ class EditMemberBottomSheetActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<RemoveMemberResponse> {
             override fun onFailure(call: Call<RemoveMemberResponse>?, t: Throwable?) {
                 progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<RemoveMemberResponse>?, response: Response<RemoveMemberResponse>?) {
                 if (response!!.code() == 200) {
                     progressDialog.dismiss()
                     AlertDialog.Builder(this@EditMemberBottomSheetActivity)
-                            .setMessage("عضو با موفقیت حذف گردید!")
+                            .setMessage("عضو با موفقیت حذف گردید.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             })
@@ -95,7 +95,7 @@ class EditMemberBottomSheetActivity : AppCompatActivity() {
                 } else if (response.code() == 400) {
                     progressDialog.dismiss()
                     AlertDialog.Builder(this@EditMemberBottomSheetActivity)
-                            .setMessage("ایمیل وارد شده هم اکنون عضو تیم است!")
+                            .setMessage("ایمیل وارد شده هم اکنون عضو تیم است.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             })
@@ -104,7 +104,7 @@ class EditMemberBottomSheetActivity : AppCompatActivity() {
                 } else if (response.code() == 405) {
                     progressDialog.dismiss()
                     AlertDialog.Builder(this@EditMemberBottomSheetActivity)
-                            .setMessage("باعرض پوزش شما امکان حذف عضو از پروژه را ندارید. از سازنده یا مدیر درخواست کنید!")
+                            .setMessage("باعرض پوزش شما امکان حذف عضو از پروژه را ندارید. از سازنده یا مدیر درخواست کنید.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             })
@@ -113,7 +113,7 @@ class EditMemberBottomSheetActivity : AppCompatActivity() {
                 } else if (response.code() == 404) {
                     progressDialog.dismiss()
                     AlertDialog.Builder(this@EditMemberBottomSheetActivity)
-                            .setMessage("ایمیل وارد شده وجود ندارد.شما میتوانید ایشان را به لینکرپد دعوت کنید!")
+                            .setMessage("ایمیل وارد شده وجود ندارد.شما میتوانید ایشان را به لینکرپد دعوت کنید.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             }).setNegativeButton("بعداً", { dialog, view ->

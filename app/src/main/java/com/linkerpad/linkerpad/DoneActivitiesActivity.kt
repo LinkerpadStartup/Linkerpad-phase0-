@@ -152,14 +152,14 @@ class DoneActivitiesActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<DailyActivityListResponse> {
             override fun onFailure(call: Call<DailyActivityListResponse>?, t: Throwable?) {
                 //progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<DailyActivityListResponse>?, response: Response<DailyActivityListResponse>?) {
 
                 //progressDialog.dismiss()
 
-                Toast.makeText(this@DoneActivitiesActivity, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@DoneActivitiesActivity, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
                 var dailyActivityListResponse = response!!.body()
 
@@ -182,7 +182,7 @@ class DoneActivitiesActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<DailyActivityListResponse> {
             override fun onFailure(call: Call<DailyActivityListResponse>?, t: Throwable?) {
                 //progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<DailyActivityListResponse>?, response: Response<DailyActivityListResponse>?) {

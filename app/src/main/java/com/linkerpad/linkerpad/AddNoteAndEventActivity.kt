@@ -74,7 +74,7 @@ class AddNoteAndEventActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<NoteAndEventResponse> {
             override fun onFailure(call: Call<NoteAndEventResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
 
             }
 
@@ -83,7 +83,7 @@ class AddNoteAndEventActivity : AppCompatActivity() {
                 if (response!!.code() == 200) {
 
                     //  Toast.makeText(this@AddNoteAndEventsActivity, "مواد و مصالح با موفقیت ثبت شد!", Toast.LENGTH_LONG).show()
-                    Toast.makeText(this@AddNoteAndEventActivity, "آیتم ثبت گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddNoteAndEventActivity, "آیتم ثبت گردید.", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddNoteAndEventActivity, NotesAndEventsActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)

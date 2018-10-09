@@ -148,14 +148,14 @@ class EditMaterialsActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<MaterialResponse> {
             override fun onFailure(call: Call<MaterialResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MaterialResponse>?, response: Response<MaterialResponse>?) {
                 //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    Toast.makeText(this@EditMaterialsActivity, "آیتم ویرایش گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMaterialsActivity, "آیتم ویرایش گردید.", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -163,10 +163,10 @@ class EditMaterialsActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMaterialsActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد.", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید.", Snackbar.LENGTH_LONG).show()
 
                 }
 
@@ -214,7 +214,7 @@ class EditMaterialsActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<MaterialResponse> {
             override fun onFailure(call: Call<MaterialResponse>?, t: Throwable?) {
                 // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MaterialResponse>?, response: Response<MaterialResponse>?) {
@@ -222,7 +222,7 @@ class EditMaterialsActivity : AppCompatActivity() {
 
                 if (response!!.code() == 200) {
                     //Toast.makeText(this@EditMaterialsActivity, "مواد و مصالح با موفقیت حذف گردید", Toast.LENGTH_LONG).show()
-                    Toast.makeText(this@EditMaterialsActivity, "آیتم حذف گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@EditMaterialsActivity, "آیتم حذف گردید.", Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@EditMaterialsActivity, MaterialsActivity::class.java)
                     intent.putExtra("projectId", projectId)
@@ -230,10 +230,10 @@ class EditMaterialsActivity : AppCompatActivity() {
                     startActivity(intent)
                     this@EditMaterialsActivity.finish()
                 } else if (response.code() == 404) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا, مواد و مصالح یافت نشد.", Snackbar.LENGTH_LONG).show()
 
                 } else if (response.code() == 405) {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "شما مجاز به انجام این کار نمی باشید.", Snackbar.LENGTH_LONG).show()
 
                 }
 

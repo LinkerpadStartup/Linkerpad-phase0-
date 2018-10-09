@@ -162,14 +162,14 @@ class MaterialsActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<MaterialListResponse> {
             override fun onFailure(call: Call<MaterialListResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MaterialListResponse>?, response: Response<MaterialListResponse>?) {
 
                 // progressDialog.dismiss()
 
-                Toast.makeText(this@MaterialsActivity, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MaterialsActivity, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
                 var materialListResponse = response!!.body()
 

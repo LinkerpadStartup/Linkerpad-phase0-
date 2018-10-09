@@ -91,7 +91,7 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                 if (response!!.code() == 200) {
                     // progressDialog.dismiss()
                     AlertDialog.Builder(this@AddMemberActivity)
-                            .setMessage("فرد مورد نظر با موفقیت به پروژه افزوده شد")
+                            .setMessage("فرد مورد نظر با موفقیت به پروژه افزوده شد.")
                             .setPositiveButton("باشه", { dialog, view ->
                                 dialog.dismiss()
                             })
@@ -120,8 +120,6 @@ class AddMemberActivity : AppCompatActivity(), Validator.ValidationListener {
                     AlertDialog.Builder(this@AddMemberActivity)
                             .setMessage("کاربری با این ایمیل موجود نمی باشد. قبل از افزودن فرد به تیم پروژه، از او بخواهید در لینکرپد ثبت نام نماید.")
                             .setPositiveButton("باشه", { dialog, view ->
-                                dialog.dismiss()
-                            }).setNegativeButton("بعداً", { dialog, view ->
                                 dialog.dismiss()
                             })
                             .create()

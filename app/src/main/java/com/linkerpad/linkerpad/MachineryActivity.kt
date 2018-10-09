@@ -136,7 +136,7 @@ class MachineryActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<MachineryListResponse> {
             override fun onFailure(call: Call<MachineryListResponse>?, t: Throwable?) {
                 //progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
@@ -164,12 +164,12 @@ class MachineryActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<MachineryListResponse> {
             override fun onFailure(call: Call<MachineryListResponse>?, t: Throwable?) {
                 //progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
 
-                Toast.makeText(this@MachineryActivity, "بروزرسانی انجام شد", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MachineryActivity, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
                 // progressDialog.dismiss()
 

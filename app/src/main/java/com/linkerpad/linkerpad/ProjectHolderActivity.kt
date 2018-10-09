@@ -110,7 +110,7 @@ class ProjectHolderActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<ProjectInformationResponse> {
             override fun onFailure(call: Call<ProjectInformationResponse>?, t: Throwable?) {
                // progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
 
             }
 

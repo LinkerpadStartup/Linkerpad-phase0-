@@ -274,7 +274,7 @@ class RegisterFragment : Fragment(), Validator.ValidationListener {
                     }
                 })
             } catch (e: Exception) {
-                Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
+               // Toast.makeText(context, "${e.printStackTrace().toString()}", Toast.LENGTH_LONG).show()
             }
 
         }

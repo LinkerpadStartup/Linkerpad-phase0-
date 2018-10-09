@@ -53,11 +53,11 @@ class EditDataRequestAcivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        Toast.makeText(this@EditDataRequestAcivity, "Nothing Selected", Toast.LENGTH_SHORT).show()
+      //  Toast.makeText(this@EditDataRequestAcivity, "Nothing Selected", Toast.LENGTH_SHORT).show()
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
-        Toast.makeText(this@EditDataRequestAcivity, "Selected position: #$position", Toast.LENGTH_SHORT).show()
+     //   Toast.makeText(this@EditDataRequestAcivity, "Selected position: #$position", Toast.LENGTH_SHORT).show()
     }
 
     fun spinnerSetup() {

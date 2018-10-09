@@ -40,7 +40,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
                 createDailyActivity(intent.getStringExtra("projectId"), reportDate)
                 // setupProgress()
             } else {
-                Snackbar.make(view, "عنوان وارد شود!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(view, "عنوان وارد شود.", Snackbar.LENGTH_LONG).show()
             }
 
         }
@@ -176,14 +176,14 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<CreateDailyActivityResponse> {
             override fun onFailure(call: Call<CreateDailyActivityResponse>?, t: Throwable?) {
                 //  progressDialog.dismiss()
-                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید.", Snackbar.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<CreateDailyActivityResponse>?, response: Response<CreateDailyActivityResponse>?) {
 
                 if (response!!.code() == 200) {
 
-                    Toast.makeText(this@AddDoneActivitiesActivity, "آیتم ثبت گردید", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@AddDoneActivitiesActivity, "آیتم ثبت گردید.", Toast.LENGTH_LONG).show()
                     var intent = Intent(this@AddDoneActivitiesActivity, DoneActivitiesActivity::class.java)
                     intent.putExtra("projectId", projectId)
                     intent.putExtra("reportDate", reportDate)
@@ -191,7 +191,7 @@ class AddDoneActivitiesActivity : AppCompatActivity() {
                     this@AddDoneActivitiesActivity.finish()
 
                 } else {
-                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، مشکلی هنگام پردازش رخ داده!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، مشکلی هنگام پردازش رخ داده.", Snackbar.LENGTH_LONG).show()
 
                 }
             }
