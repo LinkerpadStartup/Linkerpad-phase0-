@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:paddingRight="8dp"
-                        android:text="ارسال نظرات" />
+                        android:text="پشتیبانی" />
 
                 </LinearLayout>
 

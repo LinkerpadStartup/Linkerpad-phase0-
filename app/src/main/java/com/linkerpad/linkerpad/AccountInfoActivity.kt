@@ -120,22 +120,25 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
             view.galleryChooseImageTv.setOnClickListener {
                 //Toast.makeText(this@AddProjectActivity , "gallery",Toast.LENGTH_LONG).show()
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    galleryIntent()
+                    ActivityCompat.requestPermissions(this@AccountInfoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
                     dialog2.dismiss()
                 } else {
-                    ActivityCompat.requestPermissions(this@AccountInfoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-
+                    galleryIntent()
+                    dialog2.dismiss()
                 }
             }
             view.cameraChooseImageTv.setOnClickListener {
                 //  Toast.makeText(this@AddProjectActivity , "camera",Toast.LENGTH_LONG).show()
 
-                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    captureCamera()
+                if ((ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) || (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+                    ActivityCompat.requestPermissions(this@AccountInfoActivity, arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 2)
+
                     dialog2.dismiss()
                 } else {
-                    ActivityCompat.requestPermissions(this@AccountInfoActivity, arrayOf(android.Manifest.permission.CAMERA), 2)
+                    captureCamera()
+                    dialog2.dismiss()
                 }
+
             }
         }
 
@@ -149,7 +152,7 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
             } else {
             }
         } else if (requestCode == 2) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults.isNotEmpty() && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 captureCamera()
             } else {
             }
@@ -227,10 +230,11 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
 
             }
         } else {
-            convertImage = ""
-            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.noun_user))
+            if (projectPicture == "" || projectPicture == null) {
+                convertImage = ""
+                accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.noun_user))
+            }
         }
-
         if (resultCode != Activity.RESULT_CANCELED) {
 
         }
@@ -274,10 +278,22 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
                 //  progressDialog.dismiss()
 
                 if (response!!.code() == 200) {
-                    getUserInformation()
+                    // getUserInformation()
                     Toast.makeText(this@AccountInfoActivity, "اطلاعات با موفقیت ویرایش شد.", Toast.LENGTH_LONG).show()
                     /* var intent = Intent(this@AccountInfoActivity, MainActivity::class.java)
                      startActivity(intent)*/
+
+                    var sharedPreferences: SharedPreferences = this@AccountInfoActivity.getSharedPreferences("userInformation", 0)
+                    var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
+                    sharedPreferencesEditor.putString("firstName", firstName)
+                    sharedPreferencesEditor.putString("lastName", lastName)
+                    sharedPreferencesEditor.apply()
+                    sharedPreferencesEditor.commit()
+
+                    val returnIntent = Intent()
+                    setResult(Activity.RESULT_OK, returnIntent)
+
+
                     this@AccountInfoActivity.finish()
 
 
@@ -320,30 +336,31 @@ class AccountInfoActivity : AppCompatActivity(), Validator.ValidationListener {
             }
 
             override fun onResponse(call: Call<GetUserInformationResponse>?, response: Response<GetUserInformationResponse>?) {
+                if (response!!.code() == 200) {
+                    var userInformation: GetUserInformationResponse? = response!!.body()
 
-                var userInformation: GetUserInformationResponse? = response!!.body()
+                    var userInformationOutput = UserInformationViewModel.getUserInformation(UserInformationOutputData(userInformation!!.status,
+                            userInformation.message, userInformation.responseObject))
 
-                var userInformationOutput = UserInformationViewModel.getUserInformation(UserInformationOutputData(userInformation!!.status,
-                        userInformation.message, userInformation.responseObject))
+                    nameEdt.setText("${userInformationOutput.firstName}")
+                    lastNameEdt.setText("${userInformationOutput.lastName}")
+                    emailEdt.setText("${userInformationOutput.emailAddress}")
+                    companyEdt.setText("${userInformationOutput.company}")
+                    phoneEdt.setText("${userInformationOutput.mobileNumber.substring(2)}")
+                    if (userInformationOutput.skill == null || userInformationOutput.skill.equals("") || userInformationOutput.skill.equals("null")) {
+                        skillEdt.setText("بدون تخصص")
+                    } else {
+                        skillEdt.setText("${userInformationOutput.skill}")
+                    }
 
-                nameEdt.setText("${userInformationOutput.firstName}")
-                lastNameEdt.setText("${userInformationOutput.lastName}")
-                emailEdt.setText("${userInformationOutput.emailAddress}")
-                companyEdt.setText("${userInformationOutput.company}")
-                phoneEdt.setText("${userInformationOutput.mobileNumber.substring(2)}")
-                if (userInformationOutput.skill == null || userInformationOutput.skill.equals("") || userInformationOutput.skill.equals("null")) {
-                    skillEdt.setText("بدون تخصص")
-                } else {
-                    skillEdt.setText("${userInformationOutput.skill}")
-                }
+                    if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
 
-                if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
-
-                    val b = Base64.decode(userInformationOutput.profilePicture, Base64.DEFAULT)
-                    val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
-                    //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
-                    accountPicImg.setImageDrawable(BitmapDrawable(resources, bitmap))
-                    projectPicture = userInformationOutput.profilePicture
+                        val b = Base64.decode(userInformationOutput.profilePicture, Base64.DEFAULT)
+                        val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
+                        //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
+                        accountPicImg.setImageDrawable(BitmapDrawable(resources, bitmap))
+                        projectPicture = userInformationOutput.profilePicture
+                    }
                 }
             }
 

@@ -1,5 +1,6 @@
 package com.linkerpad.linkerpad
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -13,7 +14,9 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.util.Base64
+import android.view.View
 import android.widget.Toast
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.ViewTarget
@@ -29,6 +32,7 @@ import com.linkerpad.linkerpad.Fragments.ProjectsFragment
 import com.linkerpad.linkerpad.Models.UserInformationViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.choose_support_layout.view.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import retrofit2.Call
@@ -49,12 +53,11 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
         login(getEmail(), getPassword())
 
-        ActivityCompat.requestPermissions(this@MainActivity, arrayOf(
-                android.Manifest.permission.CALL_PHONE,
-                android.Manifest.permission.CAMERA,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.CALL_PHONE
-        ), 1)
+        /*     ActivityCompat.requestPermissions(this@MainActivity, arrayOf(
+                     android.Manifest.permission.CALL_PHONE,
+                     android.Manifest.permission.CAMERA,
+                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+             ), 1)*/
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -85,18 +88,20 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
             override fun onResponse(call: Call<GetUserInformationResponse>?, response: Response<GetUserInformationResponse>?) {
 
-                var userInformation: GetUserInformationResponse? = response!!.body()
+                if (response!!.code() == 200) {
+                    var userInformation: GetUserInformationResponse? = response!!.body()
 
-                var userInformationOutput = UserInformationViewModel.getUserInformation(UserInformationOutputData(userInformation!!.status,
-                        userInformation.message, userInformation.responseObject))
+                    var userInformationOutput = UserInformationViewModel.getUserInformation(UserInformationOutputData(userInformation!!.status,
+                            userInformation.message, userInformation.responseObject))
 
 
-                if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
+                    if (userInformationOutput.profilePicture != "" && userInformationOutput.profilePicture != null) {
 
-                    val b = Base64.decode(userInformationOutput.profilePicture, Base64.DEFAULT)
-                    val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
-                    //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
-                    drawerImageView.setImageDrawable(BitmapDrawable(resources, bitmap))
+                        val b = Base64.decode(userInformationOutput.profilePicture, Base64.DEFAULT)
+                        val bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
+                        //  var profileBitmap:Bitmap = BitmapFactory.decodeByteArray(Base64.getDecoder().decode(itemModel.projectPicture), 0, Base64.getDecoder().decode(itemModel.projectPicture).size)
+                        drawerImageView.setImageDrawable(BitmapDrawable(resources, bitmap))
+                    }
                 }
             }
 
@@ -124,12 +129,6 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         adapter.addFragment(ProjectsFragment(), "لیست پروژه ها")
         viewPager.adapter = adapter
 
-    }
-
-    private fun getGuide(): Boolean {
-        var sharedPreferences: SharedPreferences = this@MainActivity.getSharedPreferences("userInformation", 0)
-        var first = sharedPreferences.getBoolean("guide", false)
-        return first
     }
 
     private fun login(email: String, password: String) {
@@ -214,7 +213,7 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
         accountInfoMenu.setOnClickListener {
             var intent = Intent(this@MainActivity, AccountInfoActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
 
         exitMenu.setOnClickListener {
@@ -237,8 +236,35 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
         }
 
         commentsMenu.setOnClickListener {
-            var intent = Intent(this@MainActivity, SendCommentsActivity::class.java)
-            startActivity(intent)
+
+            var layoutInflater = this@MainActivity.layoutInflater
+            var view: View = layoutInflater.inflate(R.layout.choose_support_layout, null)
+            var dialog: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity, R.style.AlertDialogTheme)
+            dialog.setView(view)
+            dialog.setCancelable(true)
+
+            dialog.create()
+            var dialog2 = dialog.show()
+
+            view.telegramChooseSupportTv.setOnClickListener {
+
+                dialog2.dismiss()
+
+                val telegram = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/linkerpadsupport"))
+                startActivity(telegram)
+            }
+
+            view.emailChooseSupportTv.setOnClickListener {
+
+                dialog2.dismiss()
+                var emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "support@linkerpad.com", null))
+
+                startActivity(Intent.createChooser(emailIntent, "ارسال ایمیل با ..."))
+            }
+
+            /* var intent = Intent(this@MainActivity, SendCommentsActivity::class.java)
+             startActivity(intent)*/
         }
 
         aboutUs.setOnClickListener {
@@ -288,6 +314,19 @@ class MainActivity : AppCompatActivity()/*, NavigationView.OnNavigationItemSelec
 
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                headerNameTv.setText(getNameLastName())
+                headerEmailTv.setText(getEmail())
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
     }
 
     override fun attachBaseContext(newBase: Context?) {

@@ -127,15 +127,15 @@ class DoneActivitiesActivity : AppCompatActivity() {
                     .setTarget(viewTarget)
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                    // .setContentTextPaint(textPaint)
+                    //  .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت آیتم های جدید")
                     .setContentText("برای ثبت، جزئیات هر آیتم را وارد نمایید. \n لیست کل آیتم های روزانه، در این صفحه دیده می شود اما هر فرد می تواند آیتم های خود را ویرایش یا حذف نماید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به ویرایش یا حذف تمامی آیتم ها می باشند)")
                     .replaceEndButton(showCaseButton)
                     .build().setButtonText("باشه")
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide4", true)
+            sharedPreferencesEditor.putBoolean("guide4", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
 
@@ -159,16 +159,19 @@ class DoneActivitiesActivity : AppCompatActivity() {
 
                 //progressDialog.dismiss()
 
-                Toast.makeText(this@DoneActivitiesActivity, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
+                if (response!!.code() == 200) {
 
-                var dailyActivityListResponse = response!!.body()
+                    Toast.makeText(this@DoneActivitiesActivity, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
-                var dailyActivityList = ArrayList<DailyActivityInformationData>()
-                dailyActivityList = dailyActivityListResponse!!.responseObject
+                    var dailyActivityListResponse = response!!.body()
 
-                dailyActivityRecyclerView.layoutManager = LinearLayoutManager(this@DoneActivitiesActivity)
-                dailyActivityRecyclerView.adapter = DailyActivityAdapter(this@DoneActivitiesActivity, dailyActivityList, projectId)
+                    var dailyActivityList = ArrayList<DailyActivityInformationData>()
+                    dailyActivityList = dailyActivityListResponse!!.responseObject
 
+                    dailyActivityRecyclerView.layoutManager = LinearLayoutManager(this@DoneActivitiesActivity)
+                    dailyActivityRecyclerView.adapter = DailyActivityAdapter(this@DoneActivitiesActivity, dailyActivityList, projectId)
+
+                }
             }
 
         })
@@ -188,15 +191,16 @@ class DoneActivitiesActivity : AppCompatActivity() {
             override fun onResponse(call: Call<DailyActivityListResponse>?, response: Response<DailyActivityListResponse>?) {
 
                 //progressDialog.dismiss()
+                if (response!!.code() == 200) {
+                    var dailyActivityListResponse = response!!.body()
 
-                var dailyActivityListResponse = response!!.body()
+                    var dailyActivityList = ArrayList<DailyActivityInformationData>()
+                    dailyActivityList = dailyActivityListResponse!!.responseObject
 
-                var dailyActivityList = ArrayList<DailyActivityInformationData>()
-                dailyActivityList = dailyActivityListResponse!!.responseObject
+                    dailyActivityRecyclerView.layoutManager = LinearLayoutManager(this@DoneActivitiesActivity)
+                    dailyActivityRecyclerView.adapter = DailyActivityAdapter(this@DoneActivitiesActivity, dailyActivityList, projectId)
 
-                dailyActivityRecyclerView.layoutManager = LinearLayoutManager(this@DoneActivitiesActivity)
-                dailyActivityRecyclerView.adapter = DailyActivityAdapter(this@DoneActivitiesActivity, dailyActivityList, projectId)
-
+                }
             }
 
         })

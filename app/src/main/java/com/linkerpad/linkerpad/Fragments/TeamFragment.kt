@@ -111,12 +111,12 @@ class TeamFragment : Fragment() {
 
         activity!!.editProjectInformationImv.setImageDrawable(resources.getDrawable(R.drawable.ic_autorenew))
         activity!!.editProjectInformationImv.setOnClickListener {
-            if (ActivityCompat.checkSelfPermission(context!!, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            /*      if (ActivityCompat.checkSelfPermission(context!!, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
-                ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
-            } else {
+                      ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
+                  } else {
 
-            }
+                  }*/
             getMemberListUpdate(projetcId)
         }
         return view
@@ -150,8 +150,8 @@ class TeamFragment : Fragment() {
 
         var showCaseButton = Button(activity)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
-        showCaseButton.setTextColor( Color.WHITE)
-        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
+        showCaseButton.setTextColor(Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets, "IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide9", true)) {
@@ -175,8 +175,8 @@ class TeamFragment : Fragment() {
                     .setTarget(ViewTarget(R.id.addMemberToProjectFab, activity))
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                    // .setContentTextPaint(textPaint)
+                    // .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("افزودن فرد به تیم پروژه")
                     .setContentText("برای این کار ، آیکون را لمس و سطح دسترسی فرد را تعیین نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
                     .replaceEndButton(showCaseButton)
@@ -193,8 +193,8 @@ class TeamFragment : Fragment() {
                         .setTarget(ViewTarget(R.id.showCaseForMoreOption, activity))
                         .withMaterialShowcase()
                         .setStyle(R.style.CustomShowcaseTheme3)
-                        .setContentTextPaint(textPaint)
-                        .setContentTitlePaint(titleTextPaint)
+                        // .setContentTextPaint(textPaint)
+                        // .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("مشخصات افراد")
                         .setContentText("برای نمایش جزئیات بیشتر و دسترسی به ویرایش یا حذف فرد از تیم پروژه، این آیکون را لمس نمایید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به انجام این کار هستند.)")
                         .replaceEndButton(showCaseButton)
@@ -203,7 +203,7 @@ class TeamFragment : Fragment() {
 
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide9", true)
+            sharedPreferencesEditor.putBoolean("guide9", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
         }
@@ -223,14 +223,16 @@ class TeamFragment : Fragment() {
 
                 // progressDialog.dismiss()
 
-                var membersResponse = response!!.body()
+                if (response!!.code() == 200) {
 
-                var memberList = ArrayList<MemberInformationData>()
-                memberList = membersResponse!!.responseObject
+                    var membersResponse = response!!.body()
 
-                view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
-                view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, memberList, projectId)
+                    var memberList = ArrayList<MemberInformationData>()
+                    memberList = membersResponse!!.responseObject
 
+                    view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
+                    view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, activity!!, memberList, projectId)
+                }
             }
 
         })
@@ -250,37 +252,37 @@ class TeamFragment : Fragment() {
             override fun onResponse(call: Call<MemberListResponse>?, response: Response<MemberListResponse>?) {
 
                 // progressDialog.dismiss()
+                if (response!!.code() == 200) {
+                    var membersResponse = response!!.body()
 
-                var membersResponse = response!!.body()
+                    var memberList = ArrayList<MemberInformationData>()
+                    memberList = membersResponse!!.responseObject
 
-                var memberList = ArrayList<MemberInformationData>()
-                memberList = membersResponse!!.responseObject
+                    view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
+                    view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, activity!!, memberList, projectId)
 
-                view!!.membersListRecyclerView.layoutManager = LinearLayoutManager(activity)
-                view!!.membersListRecyclerView.adapter = MembersListAdapter(activity!!.applicationContext, memberList, projectId)
+                    Toast.makeText(context, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
-                Toast.makeText(context, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
-
+                }
             }
-
         })
     }
 
 
-    @SuppressLint("MissingPermission")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when (requestCode) {
-            1 -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    var phoneIntent: Intent = Intent(Intent.ACTION_CALL)
-                    phoneIntent.setData(Uri.parse("tel:09120981288"))
-                    startActivity(phoneIntent)
-                }
+    /*   @SuppressLint("MissingPermission")
+       override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+           when (requestCode) {
+               1 -> {
+                   if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                       var phoneIntent: Intent = Intent(Intent.ACTION_CALL)
+                       phoneIntent.setData(Uri.parse("tel:09120981288"))
+                       startActivity(phoneIntent)
+                   }
 
-                return
-            }
-        }
-    }
+                   return
+               }
+           }
+       }*/
 
     private fun getToken(): String {
         var sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("userInformation", 0)

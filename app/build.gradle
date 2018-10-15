@@ -70,4 +70,5 @@ dependencies {
 
     //show case
     implementation 'com.github.amlcurran.showcaseview:library:5.4.3'
+    //implementation 'com.github.faruktoptas:FancyShowCaseView:1.0.1'
 }

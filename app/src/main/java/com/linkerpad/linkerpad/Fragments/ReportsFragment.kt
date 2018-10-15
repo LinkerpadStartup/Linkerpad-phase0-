@@ -96,11 +96,14 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         monthDateTv.setText(monthName)
         yearDateTv.setText("$year")
 
-        reportDate = jalaliToGrogorian("$year-${monthOfYear + 1}-$dayOfMonth")
-
+       // reportDate = jalaliToGrogorian("$year-${monthOfYear + 1}-$dayOfMonth")
+        reportDatePersianPicked = "$year-${monthOfYear}-$dayOfMonth"
+        reportDate = jalaliToGrogorian("$year-${monthOfYear + 1}-${dayOfMonth+1}")
     }
 
     var reportDate = ""
+    var reportDatePersianPicked = ""
+    var reportDatePicked = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,20 +162,18 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
           val month   = todayDate.split("/")[1].toInt()
           val day   = todayDate.split("/")[2].toInt()*/
 
-
-        var gregorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(todayDate.toString().split("-")[0].toInt(), todayDate.toString().split("-")[1].toInt(), todayDate.toString().split("-")[2].toInt())
-        var jalaliEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianEnd)
+       // var gregorianEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(todayDate.toString().split("-")[0].toInt(), todayDate.toString().split("-")[1].toInt(), todayDate.toString().split("-")[2].toInt())
+      //  var jalaliEnd: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianEnd)
 
         val now = PersianCalendar()
 /*
         Toast.makeText(context,"${now.persianDay}",Toast.LENGTH_LONG).show()
 */
 
-
         view.dayDateTv.text = "${now.persianDay}"
 
         var monthName = ""
-        when (now.persianMonth+1) {
+        when (now.persianMonth + 1) {
             1 -> {
 
                 monthName = "فروردین"
@@ -230,6 +231,61 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
         var projectId = activity!!.intent.getStringExtra("id")
 
+
+        view.reportDateLL.setOnClickListener {
+
+            /*var intent = Intent(context, ChooseDateActivity::class.java)
+            intent.putExtra("startOrEndDate", DateType.StartDate.value)
+            startActivityForResult(intent, DateType.StartDate.value)*/
+            var dpd: DatePickerDialog? = null
+
+            if (reportDatePersianPicked == "") {
+                dpd = DatePickerDialog.newInstance(
+                        this,
+                        now.persianYear,
+                        now.persianMonth,
+                        now.persianDay
+                )
+            } else {
+
+                dpd = DatePickerDialog.newInstance(
+                        this,
+                        reportDatePersianPicked.split("-")[0].toInt(),
+                        reportDatePersianPicked.split("-")[1].toInt(),
+                        reportDatePersianPicked.split("-")[2].toInt()
+                )
+            }
+            //dpd.isThemeDark = modeDarkDate!!.isChecked
+            //dpd.typeface = fontName
+            dpd!!.show(activity!!.fragmentManager, DATEPICKERSART)
+        }
+
+        view.reportDateImv.setOnClickListener {
+
+            var dpd: DatePickerDialog? = null
+
+            if (reportDatePersianPicked == "") {
+                dpd = DatePickerDialog.newInstance(
+                        this,
+                        now.persianYear,
+                        now.persianMonth,
+                        now.persianDay
+                )
+            } else {
+
+
+                dpd = DatePickerDialog.newInstance(
+                        this,
+                        reportDatePersianPicked.split("-")[0].toInt(),
+                        reportDatePersianPicked.split("-")[1].toInt(),
+                        reportDatePersianPicked.split("-")[2].toInt()
+                )
+            }
+            //dpd.isThemeDark = modeDarkDate!!.isChecked
+            //dpd.typeface = fontName
+            dpd!!.show(activity!!.fragmentManager, DATEPICKERSART)
+        }
+
         //done activities
         view.doneActivitiesLL.setOnClickListener {
             var intent = Intent(context, DoneActivitiesActivity::class.java)
@@ -264,39 +320,10 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             var intent = Intent(context, ConfirmationActivity::class.java)
             intent.putExtra("projectId", projectId)
             intent.putExtra("reportDate", reportDate)
+            intent.putExtra("persianDate" , "${yearDateTv.text.toString()}/${if (reportDatePersianPicked == "")now.persianMonth else reportDatePersianPicked.split("-")[1].toInt()}/${dayDateTv.text.toString()}")
             startActivity(intent)
         }
 
-        view.reportDateLL.setOnClickListener {
-
-            /*var intent = Intent(context, ChooseDateActivity::class.java)
-            intent.putExtra("startOrEndDate", DateType.StartDate.value)
-            startActivityForResult(intent, DateType.StartDate.value)*/
-
-            val dpd = DatePickerDialog.newInstance(
-                    this,
-                    now.persianYear,
-                    now.persianMonth,
-                    now.persianDay
-            )
-            //dpd.isThemeDark = modeDarkDate!!.isChecked
-            //dpd.typeface = fontName
-            dpd.show(activity!!.fragmentManager, DATEPICKERSART)
-        }
-
-        view.reportDateImv.setOnClickListener {
-
-            val now = PersianCalendar()
-            val dpd = DatePickerDialog.newInstance(
-                    this,
-                    now.persianYear,
-                    now.persianMonth,
-                    now.persianDay
-            )
-            //dpd.isThemeDark = modeDarkDate!!.isChecked
-            //dpd.typeface = fontName
-            dpd.show(activity!!.fragmentManager, DATEPICKERSART)
-        }
 
         activity!!.editProjectInformationImv.setImageDrawable(resources.getDrawable(R.drawable.ic_edit_white))
         activity!!.editProjectInformationImv.setOnClickListener {
@@ -328,8 +355,8 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
         var showCaseButton = Button(activity)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
-        showCaseButton.setTextColor( Color.WHITE)
-        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
+        showCaseButton.setTextColor(Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets, "IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = context!!.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide3", true)) {
@@ -351,12 +378,12 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
             var viewTarget: ViewTarget = ViewTarget(R.id.dayDateTv, activity)
 
-            showcaseView = ShowcaseView.Builder(this.activity,true)
+            showcaseView = ShowcaseView.Builder(this.activity, true)
                     .setTarget(viewTarget)
                     .withNewStyleShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                   // .setContentTextPaint(textPaint)
+                   // .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت گزارش")
                     .setContentText("ابتدا تاریخ گزارش را انتخاب کنید. سپس آیتم های خود را با توجه به دسته بندی موجود، ثبت نمایید.")
                     .replaceEndButton(showCaseButton)
@@ -369,12 +396,12 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                 showcaseView!!.hide()
                 showcaseView!!.removeAllViews()
 
-                showcaseView2 = ShowcaseView.Builder(activity,true)
+                showcaseView2 = ShowcaseView.Builder(activity, true)
                         .setTarget(ViewTarget(R.id.confirmationReportTv, activity))
                         .withNewStyleShowcase()
                         .setStyle(R.style.CustomShowcaseTheme3)
-                        .setContentTextPaint(textPaint)
-                        .setContentTitlePaint(titleTextPaint)
+                       // .setContentTextPaint(textPaint)
+                       // .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("تایید نهایی گزارش")
                         .setContentText("پس از تکمیل گزارش خود، آن را تایید نمایید.")
                         .replaceEndButton(showCaseButton)
@@ -391,8 +418,8 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                             .setTarget(ViewTarget(R.id.editProjectInformationImv, activity))
                             .withMaterialShowcase()
                             .setStyle(R.style.CustomShowcaseTheme3)
-                            .setContentTextPaint(textPaint)
-                            .setContentTitlePaint(titleTextPaint)
+                           // .setContentTextPaint(textPaint)
+                           // .setContentTitlePaint(titleTextPaint)
                             .setContentTitle("ویرایش پروژه")
                             .setContentText("برای ویرایش پروژه، این آیکون را لمس نمایید.\n(افراد با سطح دسترسی «مسئول» ، مجاز به انجام این کار هستند.)")
                             .replaceEndButton(showCaseButton)
@@ -402,7 +429,7 @@ class ReportsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide3", true)
+            sharedPreferencesEditor.putBoolean("guide3", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
         }

@@ -23,9 +23,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.linkerpad.linkerpad.Data.MemberInformationData
 import com.linkerpad.linkerpad.Data.ProjectInformationData
-import com.linkerpad.linkerpad.EditMemberBottomSheetActivity
-import com.linkerpad.linkerpad.ProjectHolderActivity
-import com.linkerpad.linkerpad.R
 import kotlinx.android.synthetic.main.projetcs_items.view.*
 import kotlinx.android.synthetic.main.team_items.*
 import kotlinx.android.synthetic.main.team_items.view.*
@@ -36,11 +33,12 @@ import android.content.Intent.getIntent
 import android.content.SharedPreferences
 import android.graphics.drawable.BitmapDrawable
 import android.support.annotation.NonNull
+import android.support.v4.app.FragmentActivity
 import android.widget.Toast
+import com.linkerpad.linkerpad.*
 import com.linkerpad.linkerpad.ApiData.output.RemoveMemberResponse
 import com.linkerpad.linkerpad.Business.IUserApi
 import com.linkerpad.linkerpad.Business.IWebApi
-import com.linkerpad.linkerpad.CustomAlertDialog
 import com.linkerpad.linkerpad.Models.MemberViewModel
 import com.linkerpad.linkerpad.Models.MemberViewModel.Companion.removeMember
 import retrofit2.Call
@@ -50,7 +48,7 @@ import retrofit2.Response
 /**
  * Created by alihajiloo on 8/20/18.
  */
-class MembersListAdapter(var context: Context, var data: ArrayList<MemberInformationData>, var projectId: String) : RecyclerView.Adapter<MembersListAdapter.ViewHolder>() {
+class MembersListAdapter(var context: Context,var activity:FragmentActivity, var data: ArrayList<MemberInformationData>, var projectId: String) : RecyclerView.Adapter<MembersListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.team_items, viewGroup, false)
         return ViewHolder(view)
@@ -116,7 +114,7 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
 
 
                 } else {
-
+                    ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
                 }
 
 
@@ -165,6 +163,13 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
 
             itemView.editMemberImv.setOnClickListener {
                 //Toast.makeText(context,"${itemModel.lastName}" , Toast.LENGTH_LONG).show()
+                var intent = Intent(context, EditMemberActivity::class.java)
+                //    var option: ActivityOptions = ActivityOptions.makeCustomAnimation(context,R.anim.slide_top , R.anim.abc_fade_out)
+                intent.putExtra("userId", data[position].id)
+                intent.putExtra("projectId", projectId)
+                intent.putExtra("email", data[position].emailAddress)
+                intent.putExtra("userRole",data[position].userRole)
+                context.startActivity(intent)
             }
         }
 
@@ -215,43 +220,40 @@ class MembersListAdapter(var context: Context, var data: ArrayList<MemberInforma
             itemView.firstTeamLL.addView(companyTeamTv)
 
 
+            /** skill TextView **/
+            var skillTvParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            val skillTv: TextView = TextView(context)
+            skillTv.layoutParams = skillTvParams
 
+            /*     if (itemModel.skill != null) {
+                     skillTv.setText("${itemModel.skill}")
+                 }
+                 if (itemModel.skill != "null") {
+                     skillTv.setText("${itemModel.skill}")
+                 }
+                 skillTv.setText("${itemModel.skill}")
 
+                 if (itemModel.skill == null) {
+                     itemModel.skill = "بدون تخصص"
+                     skillTv.setText("${itemModel.skill}")
+                 }
+                 if (itemModel.skill == "null") {
+                     itemModel.skill = "بدون تخصص"
+                     skillTv.setText("${itemModel.skill}")
 
-                    /** skill TextView **/
-                    var skillTvParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-                    val skillTv: TextView = TextView(context)
-                    skillTv.layoutParams = skillTvParams
+                 }*/
 
-               /*     if (itemModel.skill != null) {
-                        skillTv.setText("${itemModel.skill}")
-                    }
-                    if (itemModel.skill != "null") {
-                        skillTv.setText("${itemModel.skill}")
-                    }
-                    skillTv.setText("${itemModel.skill}")
+            if (itemModel.skill == null || itemModel.skill.toString().equals("") || itemModel.skill.toString().equals("null")) {
+                skillTv.setText("بدون تخصص")
+            } else {
+                skillTv.setText("${itemModel.skill}")
+            }
 
-                    if (itemModel.skill == null) {
-                        itemModel.skill = "بدون تخصص"
-                        skillTv.setText("${itemModel.skill}")
-                    }
-                    if (itemModel.skill == "null") {
-                        itemModel.skill = "بدون تخصص"
-                        skillTv.setText("${itemModel.skill}")
-
-                    }*/
-
-                    if (itemModel.skill == null || itemModel.skill.toString().equals("") || itemModel.skill.toString().equals("null")) {
-                        skillTv.setText("بدون تخصص")
-                    } else {
-                        skillTv.setText("${itemModel.skill}")
-                    }
-
-                    skillTv.setPadding(35, 10, 20, 10)
-                    skillTv.setTextSize(16f)
-                    skillTv.gravity = Gravity.RIGHT
-                    skillTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
-                    itemView.secondTeamLL.addView(skillTv)
+            skillTv.setPadding(35, 10, 20, 10)
+            skillTv.setTextSize(16f)
+            skillTv.gravity = Gravity.RIGHT
+            skillTv.setTypeface(Typeface.createFromAsset(context!!.assets, "IRANSansWeb(FaNum).ttf"))
+            itemView.secondTeamLL.addView(skillTv)
 
 
             /** phone number TextView **/

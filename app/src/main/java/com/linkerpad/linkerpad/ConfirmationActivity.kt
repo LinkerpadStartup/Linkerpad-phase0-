@@ -42,11 +42,11 @@ class ConfirmationActivity : AppCompatActivity() {
         var projectId = intent.getStringExtra("projectId")
         var reportDate = getIntent().getStringExtra("reportDate").replace("/", "-")
 
-        var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt())
-        var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
-        var date = jalaliStart.toString().replace("-", "/")
+        /* var gregorianStart: JalaliCalendar.YearMonthDate = JalaliCalendar.YearMonthDate(reportDate.toString().split("-")[0].toInt(), reportDate.toString().split("-")[1].toInt(), reportDate.toString().split("-")[2].toInt()-1)
+         var jalaliStart: JalaliCalendar.YearMonthDate = JalaliCalendar.gregorianToJalali(gregorianStart)
+         var date = jalaliStart.toString().replace("-", "/")*/
 
-        confirmationDateTv.setText(date)
+        confirmationDateTv.setText(getIntent().getStringExtra("persianDate"))
 
         // setupProgress()
         getConfirmationList(projectId, reportDate)
@@ -86,8 +86,8 @@ class ConfirmationActivity : AppCompatActivity() {
                     .setTarget(ViewTarget(R.id.showCaseForCheckBox, this))
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                    // .setContentTextPaint(textPaint)
+                    //.setContentTitlePaint(titleTextPaint)
                     .setContentTitle("تایید گزارش")
                     .setContentText("برای تایید نهایی گزارش روزانه، تیک خود را بزنید.")
                     .replaceEndButton(showCaseButton)
@@ -104,8 +104,8 @@ class ConfirmationActivity : AppCompatActivity() {
                         .setTarget(ViewTarget(R.id.showConfirmationReportTv, this))
                         .withNewStyleShowcase()
                         .setStyle(R.style.CustomShowcaseTheme3)
-                        .setContentTextPaint(textPaint)
-                        .setContentTitlePaint(titleTextPaint)
+                        //  .setContentTextPaint(textPaint)
+                        //  .setContentTitlePaint(titleTextPaint)
                         .setContentTitle("نمایش گزارش")
                         .setContentText("جهت نمایش، دانلود و یا به اشتراک گذاری گزارش روزانه، این آیکون را لمس نمایید.")
                         .replaceEndButton(showCaseButton)
@@ -114,7 +114,7 @@ class ConfirmationActivity : AppCompatActivity() {
 
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide8", true)
+            sharedPreferencesEditor.putBoolean("guide8", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
         }
@@ -144,7 +144,7 @@ class ConfirmationActivity : AppCompatActivity() {
 
         call.enqueue(object : retrofit2.Callback<ConfirmationListResponse> {
             override fun onFailure(call: Call<ConfirmationListResponse>?, t: Throwable?) {
-          //      progressDialog.dismiss()
+                //      progressDialog.dismiss()
                 Snackbar.make(findViewById(R.id.dummy_layout_for_snackbar), "خطا، اتصال اینترنت خود را بررسی کنید!", Snackbar.LENGTH_LONG).show()
             }
 

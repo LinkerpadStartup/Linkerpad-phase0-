@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.send_comments_layout.*
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import android.content.Intent
+import android.net.Uri
+
 
 class SendCommentsActivity : AppCompatActivity() {
 
@@ -27,8 +30,11 @@ class SendCommentsActivity : AppCompatActivity() {
         }
 
         sendCommentBtn.setOnClickListener {
-            Toast.makeText(this@SendCommentsActivity, "پیغام با موفقیت ارسال شد.", Toast.LENGTH_LONG).show()
-            this@SendCommentsActivity.finish()
+          /*  Toast.makeText(this@SendCommentsActivity, "پیغام با موفقیت ارسال شد.", Toast.LENGTH_LONG).show()
+            this@SendCommentsActivity.finish()*/
+
+            val telegram = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/linkerpadsupport"))
+            startActivity(telegram)
         }
     }
 

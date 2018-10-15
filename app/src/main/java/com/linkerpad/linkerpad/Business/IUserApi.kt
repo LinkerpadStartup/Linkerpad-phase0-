@@ -34,17 +34,21 @@ interface IUserApi {
     @GET("api/project/GetProjectInformation")
     fun getProjectInforamtion(@Header("authorization") authorization: String, @Query("projectId") projectId: String): Call<ProjectInformationResponse>
 
+    @POST("api/project/EditProject")
+    fun editProject(@Header("authorization") authorization: String, @Body editProjectBody: EditProjectBody): Call<EditProjectResponse>
+
+    //Member of team
     @POST("api/ProjectTeam/AddMemberToProject")
     fun addMemberToProject(@Header("authorization") authorization: String, @Body addMemberBody: AddMemberBody): Call<AddMemberResponse>
 
     @GET("api/ProjectTeam/GetProjectMemberList")
     fun getProjectMemberList(@Header("authorization") authorization: String, @Query("projectId") projectId: String): Call<MemberListResponse>
 
-    @POST("api/project/EditProject")
-    fun editProject(@Header("authorization") authorization: String, @Body editProjectBody: EditProjectBody): Call<EditProjectResponse>
-
     @POST("api/projectTeam/RemoveMemberFromProject")
     fun removeMember(@Header("authorization") authorization: String, @Body removeMemberBody: RemoveMemberBody): Call<RemoveMemberResponse>
+
+    @POST("api/projectTeam/ChangeUserRoleInProject")
+    fun editUserRoleMember(@Header("authorization") authorization: String, @Body changeUserRoleBody: ChangeUserRoleBody): Call<MemberResponse>
 
 
     //Daily Activity

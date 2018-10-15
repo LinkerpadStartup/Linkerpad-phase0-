@@ -126,21 +126,25 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             view.galleryChooseImageTv.setOnClickListener {
                 //Toast.makeText(this@AddProjectActivity , "gallery",Toast.LENGTH_LONG).show()
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                     dialog2.dismiss()
+                    ActivityCompat.requestPermissions(this@AddProjectActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+
+                } else {
                     galleryIntent()
                     dialog2.dismiss()
-                } else {
-                    ActivityCompat.requestPermissions(this@AddProjectActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
 
                 }
 
             }
             view.cameraChooseImageTv.setOnClickListener {
                 //  Toast.makeText(this@AddProjectActivity , "camera",Toast.LENGTH_LONG).show()
-                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    captureCamera()
+                if ((ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) || (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+                    ActivityCompat.requestPermissions(this@AddProjectActivity, arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 2)
+
                     dialog2.dismiss()
                 } else {
-                    ActivityCompat.requestPermissions(this@AddProjectActivity, arrayOf(android.Manifest.permission.CAMERA), 2)
+                    captureCamera()
+                    dialog2.dismiss()
                 }
 
             }
@@ -183,8 +187,8 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
 
         var showCaseButton = Button(this)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
-        showCaseButton.setTextColor( Color.WHITE)
-        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
+        showCaseButton.setTextColor(Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets, "IRANSansWeb(FaNum)_Light.ttf")
 
 
         var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
@@ -195,8 +199,8 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                     .setTarget(ViewTarget(R.id.createProjectTv, this))
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                    //.setContentTextPaint(textPaint)
+                    //.setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت اطلاعات")
                     .setContentText("برای ثبت اطلاعات قبل از خروج، آن را ذخیره نمایید.")
                     .replaceEndButton(showCaseButton)
@@ -213,7 +217,7 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
 
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide2", true)
+            sharedPreferencesEditor.putBoolean("guide2", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
         }
@@ -235,13 +239,15 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             } else {
             }
         } else if (requestCode == 2) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults.isNotEmpty() && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 captureCamera()
             } else {
             }
 
+
         }
     }
+
     private fun captureCamera() {
         val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, 10)
@@ -294,14 +300,14 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     }
 
 
-    private fun setupProgress() {
+/*    private fun setupProgress() {
         progressDialog = ProgressDialog(this@AddProjectActivity)
         progressDialog.setMessage("لطفا شکیبا باشید")
         progressDialog.setCancelable(false)
         progressDialog.isIndeterminate = true
         progressDialog.setIndeterminateDrawable(resources.getDrawable(R.drawable.progress_dialog))
         progressDialog.show()
-    }
+    }*/
 
     fun galleryIntent() {
         /*   var intent = Intent()
@@ -383,7 +389,7 @@ class AddProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             }
         } else {
             convertImage = ""
-            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.skyline2))
+            accountPicImg.setImageDrawable(resources.getDrawable(R.drawable.skyline))
         }
 
         if (resultCode != Activity.RESULT_CANCELED) {

@@ -109,15 +109,15 @@ class MaterialsActivity : AppCompatActivity() {
                     .setTarget(viewTarget)
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                  //  .setContentTextPaint(textPaint)
+                  //  .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت آیتم های جدید")
                     .setContentText("برای ثبت، جزئیات هر آیتم را وارد نمایید. \n لیست کل آیتم های روزانه، در این صفحه دیده می شود اما هر فرد می تواند آیتم های خود را ویرایش یا حذف نماید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به ویرایش یا حذف تمامی آیتم ها می باشند)")
                     .replaceEndButton(showCaseButton)
                     .build().setButtonText("باشه")
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide6", true)
+            sharedPreferencesEditor.putBoolean("guide6", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
 

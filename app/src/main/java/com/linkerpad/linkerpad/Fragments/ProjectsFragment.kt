@@ -110,15 +110,6 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        var textPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
-        textPaint.setColor(Color.WHITE)
-        textPaint.setTextSize(40f)
-        textPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum).ttf"))
-
-        var titleTextPaint = TextPaint(Paint.LINEAR_TEXT_FLAG)
-        titleTextPaint.setColor(Color.parseColor("#1E88E5"))
-        titleTextPaint.setTextSize(50f)
-        titleTextPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "IRANSansWeb(FaNum)_Medium.ttf"))
 
         var showCaseButton = Button(activity)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
@@ -143,19 +134,21 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
 
                 showcaseView!!.setButtonText("بعدی")*/
 
+            var textPaint = TextPaint(TextPaint.ANTI_ALIAS_FLAG)
+            textPaint.setTypeface(Typeface.createFromAsset(activity!!.assets, "iransanse.ttf"))
+
             showcaseView = ShowcaseView.Builder(this.activity)
                     .setTarget(ViewTarget(R.id.addProjectFab, activity))
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                   // .setContentTextPaint(textPaint)
+                   // .setContentTitlePaint(textPaint)
                     .setContentTitle("پروژه جدید")
                     .setContentText("برای شروع، پروژه جدیدی را اضافه و مشخصات آن را وارد نمایید.")
                     .replaceEndButton(showCaseButton)
                     .build()
 
             showcaseView!!.setButtonText("بعدی")
-
 
             showcaseView!!.overrideButtonClick {
                 showcaseView!!.hide()
@@ -165,8 +158,8 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
                         .setTarget(ViewTarget(R.id.refreshBtnImv, activity))
                         .withMaterialShowcase()
                         .setStyle(R.style.CustomShowcaseTheme3)
-                        .setContentTextPaint(textPaint)
-                        .setContentTitlePaint(titleTextPaint)
+                       // .setContentTextPaint(textPaint)
+                       // .setContentTitlePaint(textPaint)
                         .setContentTitle("بروز رسانی")
                         .setContentText("جهت بروز رسانی لیست پروژه ها، این آیکون را لمس نموده یا صفحه را به سمت پایین بکشید.")
                         .replaceEndButton(showCaseButton)
@@ -175,7 +168,7 @@ class ProjectsFragment : Fragment(), OnShowcaseEventListener {
 
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide1", true)
+            sharedPreferencesEditor.putBoolean("guide1", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
         }

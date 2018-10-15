@@ -136,7 +136,6 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
         </ScrollView>
 
@@ -154,6 +153,7 @@
 
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/showConfirmationReportTv"
         android:layout_width="wrap_content"
@@ -162,14 +162,14 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/round_btn_primary"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/outline_btn_primary"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:padding="10dp"
+        android:padding="8dp"
         android:text="نمایش گزارش"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
 
 </RelativeLayout>

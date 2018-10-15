@@ -78,8 +78,8 @@ class MachineryActivity : AppCompatActivity() {
 
         var showCaseButton = Button(this)
         showCaseButton.background = resources.getDrawable(R.drawable.round_btn_primary)
-        showCaseButton.setTextColor( Color.WHITE)
-        showCaseButton.typeface = Typeface.createFromAsset(resources.assets,"IRANSansWeb(FaNum)_Light.ttf")
+        showCaseButton.setTextColor(Color.WHITE)
+        showCaseButton.typeface = Typeface.createFromAsset(resources.assets, "IRANSansWeb(FaNum)_Light.ttf")
 
         var sharedPreferences: SharedPreferences = this.getSharedPreferences("userInformation", 0)
         if (sharedPreferences.getBoolean("guide5", true)) {
@@ -105,15 +105,15 @@ class MachineryActivity : AppCompatActivity() {
                     .setTarget(viewTarget)
                     .withMaterialShowcase()
                     .setStyle(R.style.CustomShowcaseTheme3)
-                    .setContentTextPaint(textPaint)
-                    .setContentTitlePaint(titleTextPaint)
+                    // .setContentTextPaint(textPaint)
+                    // .setContentTitlePaint(titleTextPaint)
                     .setContentTitle("ثبت آیتم های جدید")
                     .setContentText("برای ثبت، جزئیات هر آیتم را وارد نمایید. \n لیست کل آیتم های روزانه، در این صفحه دیده می شود اما هر فرد می تواند آیتم های خود را ویرایش یا حذف نماید.\n(افراد با سطح دسترسی «مسئول» یا «مدیر»، مجاز به ویرایش یا حذف تمامی آیتم ها می باشند)")
                     .replaceEndButton(showCaseButton)
                     .build().setButtonText("باشه")
 
             var sharedPreferencesEditor: SharedPreferences.Editor = sharedPreferences.edit()
-            sharedPreferencesEditor.putBoolean("guide5", true)
+            sharedPreferencesEditor.putBoolean("guide5", false)
             sharedPreferencesEditor.apply()
             sharedPreferencesEditor.commit()
 
@@ -142,15 +142,16 @@ class MachineryActivity : AppCompatActivity() {
             override fun onResponse(call: Call<MachineryListResponse>?, response: Response<MachineryListResponse>?) {
 
                 // progressDialog.dismiss()
+                if (response!!.code() == 200) {
+                    var machineryListResponse = response!!.body()
 
-                var machineryListResponse = response!!.body()
+                    var machineryList = ArrayList<MachineryInformationData>()
+                    machineryList = machineryListResponse!!.responseObject
 
-                var machineryList = ArrayList<MachineryInformationData>()
-                machineryList = machineryListResponse!!.responseObject
+                    machineryRecyclerView.layoutManager = LinearLayoutManager(this@MachineryActivity)
+                    machineryRecyclerView.adapter = MachineryAdapter(this@MachineryActivity, machineryList, projectId)
 
-                machineryRecyclerView.layoutManager = LinearLayoutManager(this@MachineryActivity)
-                machineryRecyclerView.adapter = MachineryAdapter(this@MachineryActivity, machineryList, projectId)
-
+                }
             }
 
         })
@@ -172,15 +173,16 @@ class MachineryActivity : AppCompatActivity() {
                 Toast.makeText(this@MachineryActivity, "بروزرسانی انجام شد.", Toast.LENGTH_LONG).show()
 
                 // progressDialog.dismiss()
+                if (response!!.code() == 200) {
+                    var machineryListResponse = response!!.body()
 
-                var machineryListResponse = response!!.body()
+                    var machineryList = ArrayList<MachineryInformationData>()
+                    machineryList = machineryListResponse!!.responseObject
 
-                var machineryList = ArrayList<MachineryInformationData>()
-                machineryList = machineryListResponse!!.responseObject
+                    machineryRecyclerView.layoutManager = LinearLayoutManager(this@MachineryActivity)
+                    machineryRecyclerView.adapter = MachineryAdapter(this@MachineryActivity, machineryList, projectId)
 
-                machineryRecyclerView.layoutManager = LinearLayoutManager(this@MachineryActivity)
-                machineryRecyclerView.adapter = MachineryAdapter(this@MachineryActivity, machineryList, projectId)
-
+                }
             }
 
         })

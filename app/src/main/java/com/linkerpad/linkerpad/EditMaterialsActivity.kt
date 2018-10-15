@@ -188,10 +188,10 @@ class EditMaterialsActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<GetMaterialInformationResponse>?, response: Response<GetMaterialInformationResponse>?) {
 //                progressDialog.dismiss()
-
-                var maaterialInformationData = MaterialViewModel.getMaterialInformation(MaterialInformationOutput(response!!.body()!!.status, response.body()!!.status, response!!.body()!!.responseObject))
-
                 if (response!!.code() == 200) {
+                    var maaterialInformationData = MaterialViewModel.getMaterialInformation(MaterialInformationOutput(response!!.body()!!.status, response.body()!!.status, response!!.body()!!.responseObject))
+
+
                     TitleMaterialEdt.setText(maaterialInformationData.title)
                     countMaterialsEdt.setText(maaterialInformationData.consumedQuantity.toString())
                     unitMaterialEdt.setText(maaterialInformationData.consumedQuantityUnit)

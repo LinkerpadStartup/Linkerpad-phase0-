@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="110dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp">
@@ -11,7 +11,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardProjectInformation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="4dp"
         android:clickable="true"
         android:focusable="true"
@@ -21,12 +21,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layoutDirection="ltr"
                 android:orientation="horizontal">
 
@@ -44,9 +44,9 @@
                     android:src="@drawable/ic_edit" />
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="0.7"
                     android:orientation="vertical">
@@ -55,95 +55,55 @@
                         android:id="@+id/projectNameItemTv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:padding="16dp"
+                        android:gravity="right|top"
+                        android:layout_marginRight="8dp"
                         android:text=""
+                        android:layout_marginTop="8dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
-                    <!--
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingRight="10dp"
-                                            android:paddingLeft="10dp"
-                                            android:text="تاریخ شروع"
-                                            android:gravity="right"
-                                            android:id="@+id/projectStartDateItemTv"
-                                            android:textColor="@color/blue_gray700"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold" />
 
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:paddingRight="10dp"
-                                            android:paddingTop="5dp"
-                                            android:paddingLeft="10dp"
-                                            android:gravity="right"
-                                            android:id="@+id/projectEndDateItemTv"
-                                            android:text="تاریخ پایان"
-                                            android:textColor="@color/blue_gray700"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold" />-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layoutDirection="rtl"
-                        android:orientation="horizontal">
 
 
                         <TextView
                             android:id="@+id/userRoleProjectItems"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_gravity="right"
                             android:layout_marginBottom="4dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
                             android:background="@drawable/rounded_back_gray"
                             android:paddingBottom="2dp"
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp"
+                            android:gravity="center"
                             android:paddingTop="2dp"
                             android:text="سرپرست"
                             android:textColor="@color/white"
-                            android:textSize="11sp" />
-                    </LinearLayout>
+                            android:textSize="10sp" />
 
 
-                </LinearLayout>
 
+                </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical">
 
 
                     <ImageView
                         android:id="@+id/projectPictureItemImv"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:layout_marginLeft="4dp"
                         android:layout_marginRight="4dp"
                         android:layout_marginTop="4dp"
-                        android:layout_weight="1"
                         android:src="@drawable/skyline" />
 
-                    <!--    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.3"
-                            android:layout_gravity="center"
-                            android:gravity="bottom"
-                            android:padding="8dp"
-                            android:text="رایگان" />-->
-                </LinearLayout>
+
             </LinearLayout>
 
 

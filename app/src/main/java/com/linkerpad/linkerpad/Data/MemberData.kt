@@ -1,7 +1,9 @@
 package com.linkerpad.linkerpad.Data
 
 import com.linkerpad.linkerpad.ApiData.input.AddMemberBody
+import com.linkerpad.linkerpad.ApiData.input.ChangeUserRoleBody
 import com.linkerpad.linkerpad.ApiData.input.RemoveMemberBody
+import com.linkerpad.linkerpad.EditMemberActivity
 
 /**
  * Created by alihajiloo on 8/20/18.
@@ -21,6 +23,11 @@ data class MemberData(var id:String,var projectId: String, var emailAddress: Str
         fun setAddMemberBody(memberData: MemberData): AddMemberBody {
             return AddMemberBody(memberData.projectId, memberData.emailAddress, memberData.userRole)
         }
+
+        fun setEditMemberBody(memberData: MemberData): ChangeUserRoleBody {
+            return ChangeUserRoleBody(memberData.id, memberData.projectId, memberData.userRole)
+        }
+
 
         fun setRemoveMemberBody(memberData: MemberData): RemoveMemberBody {
             return RemoveMemberBody(memberData.id, memberData.projectId)
